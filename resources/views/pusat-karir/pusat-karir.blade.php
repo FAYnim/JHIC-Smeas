@@ -23,6 +23,29 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+
+        /* Navbar hover underline effect */
+        .nav-hover-link {
+            position: relative;
+        }
+
+        .nav-hover-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #fbbf24; /* amber-400 */
+            border-radius: 9999px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-hover-link:hover::after {
+            transform: scaleX(1);
+        }
     </style>
 </head>
 
@@ -34,37 +57,36 @@
 
                 <!-- Logo & Branding (Image Asset) -->
                 <a href="#" class="flex items-center group">
-                    <img src="{{ asset('images/logo-smkn1.png') }}" alt="Logo SMKN 1 Surabaya" class="h-11 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105">
+                    <img src="{{ asset('images/logo-smkn1.png') }}" alt="Logo SMKN 1 Surabaya"
+                        class="h-11 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105">
                 </a>
 
                 <!-- Desktop Navigation Links -->
                 <nav class="hidden md:flex items-center gap-7">
                     <a href="#"
-                        class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
                         Beranda
                     </a>
                     <a href="#"
-                        class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
                         Profil
                     </a>
                     <a href="#"
-                        class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
                         Jurusan
                     </a>
                     <a href="#"
-                        class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
                         Informasi
                     </a>
 
-                    <!-- Active Menu Item: Pusat Karir -->
-                    <a href="#" class="relative text-sm font-bold text-slate-900 py-2 group">
+                    <a href="#"
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
                         Pusat Karir
-                        <!-- Yellow indicator underline matching design -->
-                        <span class="absolute bottom-0 left-0 w-full h-1 bg-amber-400 rounded-full shadow-xs"></span>
                     </a>
 
                     <a href="#"
-                        class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
                         BLUD
                     </a>
 

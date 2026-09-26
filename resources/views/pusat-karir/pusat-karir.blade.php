@@ -60,12 +60,17 @@
             min-height: calc(80vh - 80px - 1.25rem);
             display: flex;
             align-items: center;
+            background-color: #061d36;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Background image layer */
+        /* Background image layer (posisi di kanan) */
         .hero-section__bg {
             position: absolute;
-            inset: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 58%;
             z-index: 0;
         }
 
@@ -73,14 +78,26 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
         }
 
-        /* Dark overlay on top of the image */
+        /* Dark overlay / horizontal shadow gradient on top of the image */
         .hero-section__overlay {
             position: absolute;
             inset: 0;
             z-index: 1;
-            background: linear-gradient(135deg, rgba(15, 23, 52, 0.92) 0%, rgba(20, 40, 80, 0.82) 100%);
+            background: 
+                linear-gradient(90deg, 
+                    #061d36 0%, 
+                    #061d36 40%, 
+                    rgba(6, 29, 54, 0.85) 55%, 
+                    rgba(6, 29, 54, 0.4) 70%, 
+                    rgba(6, 29, 54, 0) 88%
+                ),
+                linear-gradient(0deg, 
+                    rgba(6, 29, 54, 0.4) 0%, 
+                    rgba(6, 29, 54, 0) 25%
+                );
         }
 
         /* Content sits above overlay */
@@ -207,6 +224,21 @@
 
             .hero-section__content {
                 padding: 3.5rem 3rem 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section__bg {
+                width: 100%;
+                left: 0;
+            }
+
+            .hero-section__overlay {
+                background: linear-gradient(180deg, 
+                    #061d36 0%, 
+                    rgba(6, 29, 54, 0.92) 65%, 
+                    rgba(6, 29, 54, 0.75) 100%
+                );
             }
         }
 
@@ -337,7 +369,7 @@
             <!-- Background Image (placeholder, ganti src saat asset tersedia) -->
             <div class="hero-section__bg">
                 <!-- background sementara -->
-                <img src="{{ asset('images/logo-smkn1.png') }}" alt="Background Pusat Karir">
+                <img src="{{ asset('images/smkn1.png') }}" alt="Background Pusat Karir">
             </div>
 
             <!-- Dark Overlay -->
@@ -377,8 +409,18 @@
 
         <!-- ===== section peluang unggulan ===== -->
         @php
-            // Data dummy — diset kosong [] sampai backend & dashboard admin selesai
-            $peluangUnggulan = $peluangUnggulan ?? [];
+            // Map data lowongan dari database ke format card peluang unggulan
+            $peluangUnggulan = isset($lowongans) ? $lowongans->map(function($l) {
+                return [
+                    'id'       => $l->id,
+                    'company'  => $l->company_name,
+                    'title'    => $l->title,
+                    'location' => $l->location,
+                    'type'     => 'Magang',
+                    'url'      => route('pusat-karir.detail', $l->slug),
+                    'logo'     => null,
+                ];
+            })->toArray() : [];
         @endphp
 
         <section class="w-full px-5 mt-12 mb-16" id="peluang-unggulan">

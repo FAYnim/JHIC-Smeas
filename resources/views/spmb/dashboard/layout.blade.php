@@ -268,61 +268,47 @@
             display: block;
         }
 
-        /* ===== Upload boxes ===== */
-        .upload-box {
-            position: relative;
-            width: 2.75rem;
-            aspect-ratio: 3 / 4;
-            border: 1px dashed #93c5fd;
-            background: #ffffff;
-            border-radius: 0.375rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #2563eb;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .upload-box input {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .upload-box svg {
-            width: 1.5rem;
-            height: 1.5rem;
-        }
-
-        .upload-box img {
-            position: absolute;
-            inset: 0;
+        /* ===== File input ===== */
+        .file-input {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            border: 1.5px dashed #93c5fd;
+            border-radius: 0.375rem;
+            background: #f8fafc;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #334155;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: border-color 0.15s ease, background 0.15s ease;
         }
 
-        .upload-box__meta {
-            margin-top: 0.375rem;
+        .file-input:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
         }
 
-        .upload-box__hint {
-            font-size: 0.7rem;
+        .file-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .file-input::file-selector-button {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: #dc2626;
-            margin-bottom: 0.375rem;
+            color: #ffffff;
+            background: #2563eb;
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.375rem 0.75rem;
+            margin-inline-end: 0.625rem;
+            cursor: pointer;
+            transition: background 0.15s ease;
         }
 
-        .upload-doc {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #dc2626;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            margin-top: 0.375rem;
+        .file-input::file-selector-button:hover {
+            background: #1d4ed8;
         }
 
         /* ===== Biodata progress + CTA ===== */
@@ -377,27 +363,10 @@
             height: 1rem;
         }
 
-        /* ===== Dokumen progress bar ===== */
-        .doc-progress {
-            height: 0.75rem;
-            background: #f3c010;
-            border-radius: 9999px;
-            overflow: hidden;
-        }
-
-        .doc-progress__label {
-            position: absolute;
-            top: -1.75rem;
-            right: 0;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #dc2626;
-        }
-
         .doc-row__hint {
             font-size: 0.7rem;
             font-weight: 600;
-            color: #dc2626;
+            color: #6b7280;
         }
 
         .doc-row__name {

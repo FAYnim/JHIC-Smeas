@@ -546,6 +546,11 @@
                 <x-lucide-lightbulb />
                 Bantuan
             </a>
+            {{-- ponytail: beranda belum ada — arahkan ke pusat karir; swap href ke route beranda saat tersedia --}}
+            <a href="{{ route('pusat-karir.index') }}" class="dash-nav-item">
+                <x-lucide-log-out />
+                Keluar
+            </a>
         </nav>
     </aside>
 

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPMB SMKN 1 Surabaya</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Vite Styles & Scripts with Fallback -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <script src="https://cdn.tailwindcss.com"></script>
+    @endif
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Navbar hover underline effect */
+        .nav-hover-link {
+            position: relative;
+        }
+
+        .nav-hover-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #fbbf24;
+            /* amber-400 */
+            border-radius: 9999px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-hover-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* ===== SPMB Login ===== */
+        .spmb-stage {
+            position: relative;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 1rem;
+            overflow: hidden;
+        }
+
+        .spmb-stage__bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .spmb-stage__bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .spmb-stage__overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: rgba(11, 47, 102, 0.55);
+        }
+
+        .spmb-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 40rem;
+            background: #ffffff;
+            border-radius: 1.25rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            padding: 2.25rem 2rem;
+            text-align: center;
+        }
+
+        .spmb-card__title {
+            font-size: 1.125rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .spmb-card form input {
+            width: 100%;
+            background: #e5eaf5;
+            border: none;
+            outline: none;
+            border-radius: 0.5rem;
+            padding: 0.875rem 1rem;
+            font-size: 0.95rem;
+            color: #1f2937;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .spmb-card form input::placeholder {
+            color: #94a3b8;
+        }
+
+        .spmb-card form input:focus {
+            background: #dde5f5;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+
+        .spmb-card form input.input-error {
+            background: #fee2e2;
+        }
+
+        .spmb-card form input.input-error:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+        }
+
+        .spmb-card__submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.25rem;
+            min-width: 8.5rem;
+            padding: 0.75rem 2.25rem;
+            border: none;
+            border-radius: 0.625rem;
+            background: #1e3a8a;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background 0.2s ease;
+        }
+
+        .spmb-card__submit:hover {
+            background: #172554;
+        }
+
+        .spmb-error {
+            margin-top: 0.875rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #dc2626;
+        }
+
+        .spmb-notice {
+            margin-top: 0.875rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #16a34a;
+        }
+
+        @media (max-width: 480px) {
+            .spmb-card {
+                padding: 1.75rem 1.25rem;
+            }
+
+            .spmb-card__title {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Navbar Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-xs border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Logo & Branding (Image Asset) -->
+                <a href="{{ url('/') }}" class="flex items-center group">
+                    <img src="{{ asset('images/logo-smkn1.png') }}" alt="Logo SMKN 1 Surabaya"
+                        class="h-11 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105">
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-7">
+                    <a href="{{ url('/') }}"
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        Beranda
+                    </a>
+                    <a href="#"
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        Profil
+                    </a>
+                    <a href="#"
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        Jurusan
+                    </a>
+                    <a href="#"
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        Informasi
+                    </a>
+
+                    <a href="{{ route('pusat-karir.index') }}"
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        Pusat Karir
+                    </a>
+
+                    <a href="#"
+                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
+                        BLUD
+                    </a>
+
+                    <!-- SPMB Button (active) -->
+                    <span
+                        class="ml-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-white bg-blue-800 rounded-lg shadow-sm cursor-default">
+                        SPMB
+                    </span>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden items-center">
+                    <button type="button" id="mobile-menu-btn" aria-label="Toggle Navigation"
+                        class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 shadow-lg">
+            <div class="flex flex-col space-y-3">
+                <a href="{{ url('/') }}"
+                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                    Beranda
+                </a>
+                <a href="#"
+                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                    Profil
+                </a>
+                <a href="#"
+                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                    Jurusan
+                </a>
+                <a href="#"
+                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                    Informasi
+                </a>
+                <a href="{{ route('pusat-karir.index') }}"
+                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                    Pusat Karir
+                </a>
+                <a href="#"
+                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                    BLUD
+                </a>
+                <div class="pt-2">
+                    <span class="w-full inline-flex items-center justify-center px-5 py-2.5 text-base font-bold text-white bg-blue-800 rounded-lg">
+                        SPMB
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== SPMB Login Section ===== -->
+    <main class="spmb-stage">
+        <!-- Background image + dark blue overlay -->
+        <div class="spmb-stage__bg">
+            <img src="{{ asset('images/smkn1.png') }}" alt="Gedung SMKN 1 Surabaya">
+        </div>
+        <div class="spmb-stage__overlay"></div>
+
+        <!-- NISN Login Card -->
+        <section class="spmb-card">
+            <h1 class="spmb-card__title">Silahkan masukkan NISN untuk melanjutkan proses pendaftaran</h1>
+
+            <form method="POST" action="{{ route('spmb.login') }}" class="spmb-card__form">
+                @csrf
+                <input type="text" name="nisn" id="nisn-input" inputmode="numeric" autocomplete="off"
+                    maxlength="10" placeholder="Contoh: 1234567890" value="{{ old('nisn') }}"
+                    @error('nisn') class="input-error" @enderror>
+                @error('nisn')
+                    <p class="spmb-error">{{ $message }}</p>
+                @enderror
+                @if (session('spmb_success'))
+                    <p class="spmb-notice">{{ session('spmb_success') }}</p>
+                @endif
+                <button type="submit" class="spmb-card__submit">Masuk</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            });
+        }
+
+        // NISN: digits only, max 10
+        const nisnInput = document.getElementById('nisn-input');
+        if (nisnInput) {
+            nisnInput.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                e.target.classList.remove('input-error');
+                const errEl = e.target.parentElement.querySelector('.spmb-error');
+                if (errEl) errEl.remove();
+            });
+        }
+    </script>
+</body>
+
+</html>

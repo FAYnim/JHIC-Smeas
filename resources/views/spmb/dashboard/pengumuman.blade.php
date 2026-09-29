@@ -8,10 +8,7 @@
         <div class="dash-card text-center py-12">
             <div
                 class="w-16 h-16 rounded-full bg-[#1d5fa8]/10 text-[#1d5fa8] flex items-center justify-center mx-auto">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <x-lucide-clock class="w-8 h-8" />
             </div>
 
             <h2 class="text-xl font-extrabold text-slate-900 mt-5">Pengumuman Belum Diterbitkan</h2>

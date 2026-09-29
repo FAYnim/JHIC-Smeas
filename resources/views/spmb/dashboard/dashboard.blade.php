@@ -61,11 +61,7 @@
                             @if ($step['done'])
                                 <div
                                     class="w-[1.875rem] h-[1.875rem] rounded-lg bg-[#1d5fa8] text-white flex items-center justify-center shrink-0 z-10">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
+                                    <x-lucide-check class="w-4 h-4" stroke-width="3" />
                                 </div>
                             @else
                                 <div
@@ -91,24 +87,15 @@
         <div class="dash-card lg:col-span-5">
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 py-1">
                 <a href="{{ route('spmb.biodata') }}" class="btn-navy">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15.75 6a3.75 3.75 0 11-4.5 4.5m4.5 0v2.25m-6.75 4.5308-1.0261-.3413m11.026 3.7397a.75.75 0 11-.7286 1.2883m4.6873-3.4712a.75.75 0 11.7286-1.2883M6.75 18.75h4.5l-.72-3.27m8.7 2.545-1.305 1.305M6.75 18.75H4.5A2.25 2.25 0 012.25 16.5V15m10.5 1.5H13.5m-7.5-3V9.75a2.25 2.25 0 012.25-2.25h3a2.25 2.25 0 012.25 2.25v1.5m-6-4.5V6a.75.75 0 01.75-.75h.5a.75.75 0 01.75.75v3.75h4.5V12" />
-                    </svg>
+                    <x-lucide-user-plus />
                     Lengkapi Biodata
                 </a>
                 <a href="{{ route('spmb.dokumen') }}" class="btn-navy">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                    </svg>
+                    <x-lucide-upload />
                     Upload Dokumen
                 </a>
                 <a href="{{ route('spmb.bantuan') }}" class="btn-navy">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.903.055-1.073.468l-.97 2.257c-.163.384-.563.614-.983.58L4.99 18.723a.75.75 0 01-.747-.615L2.25 6.75z" />
-                    </svg>
+                    <x-lucide-message-circle />
                     Hubungi Panitia
                 </a>
             </div>

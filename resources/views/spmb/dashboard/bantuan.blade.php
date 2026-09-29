@@ -22,10 +22,7 @@
             <div class="flex flex-col gap-4 mt-4">
                 <div class="flex items-start gap-3">
                     <div class="w-9 h-9 rounded-lg bg-[#1d5fa8] text-white flex items-center justify-center shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                        </svg>
+                        <x-lucide-mail class="w-4 h-4" />
                     </div>
                     <div>
                         <p class="text-sm font-bold text-slate-900">Email</p>
@@ -35,10 +32,7 @@
 
                 <div class="flex items-start gap-3">
                     <div class="w-9 h-9 rounded-lg bg-[#1d5fa8] text-white flex items-center justify-center shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.903.055-1.073.468l-.97 2.257c-.163.384-.563.614-.983.58L4.99 18.723a.75.75 0 01-.747-.615L2.25 6.75z" />
-                        </svg>
+                        <x-lucide-phone class="w-4 h-4" />
                     </div>
                     <div>
                         <p class="text-sm font-bold text-slate-900">WhatsApp / Telepon</p>
@@ -48,10 +42,7 @@
 
                 <div class="flex items-start gap-3">
                     <div class="w-9 h-9 rounded-lg bg-[#1d5fa8] text-white flex items-center justify-center shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        <x-lucide-clock class="w-4 h-4" />
                     </div>
                     <div>
                         <p class="text-sm font-bold text-slate-900">Jam Pelayanan</p>
@@ -71,11 +62,8 @@
                         <summary
                             class="flex items-center justify-between cursor-pointer text-sm font-bold text-slate-900 list-none group-open:text-[#1d5fa8]">
                             {{ $item['q'] }}
-                            <svg class="w-4 h-4 text-slate-400 transition-transform group-open:rotate-180 shrink-0"
-                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
+                            <x-lucide-chevron-down
+                                class="w-4 h-4 text-slate-400 transition-transform group-open:rotate-180 shrink-0" />
                         </summary>
                         <p class="text-xs font-medium text-slate-500 leading-relaxed mt-2 pr-6">{{ $item['a'] }}</p>
                     </details>

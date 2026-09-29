@@ -420,6 +420,31 @@
             background: #22c55e;
         }
 
+        .btn-navy {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #1d5fa8;
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background 0.15s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .btn-navy:hover {
+            background: #0f3d7a;
+        }
+
+        .btn-navy svg {
+            width: 1.125rem;
+            height: 1.125rem;
+        }
+
         .checkbox-label {
             display: flex;
             align-items: flex-start;

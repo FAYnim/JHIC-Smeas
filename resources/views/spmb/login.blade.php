@@ -229,16 +229,8 @@
                 <div class="flex md:hidden items-center">
                     <button type="button" id="mobile-menu-btn" aria-label="Toggle Navigation"
                         class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        <x-lucide-menu id="menu-icon-open" class="w-6 h-6" />
+                        <x-lucide-x id="menu-icon-close" class="w-6 h-6 hidden" />
                     </button>
                 </div>
 

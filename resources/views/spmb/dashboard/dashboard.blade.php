@@ -5,12 +5,12 @@
 @php
     // ponytail: static step status until DB-backed progress exists.
     $steps = [
-        ['no' => 1, 'name' => 'Biodata', 'desc' => 'Identitas dan data diri peserta', 'done' => true],
-        ['no' => 2, 'name' => 'Orang Tua', 'desc' => 'Data ayah dan ibu / wali', 'done' => true],
-        ['no' => 3, 'name' => 'Dokumen', 'desc' => 'Unggah berkas persyaratan', 'done' => false],
-        ['no' => 4, 'name' => 'Formulir', 'desc' => 'Isi formulir pendaftaran', 'done' => false],
-        ['no' => 5, 'name' => 'Verifikasi', 'desc' => 'Periksa ulang data Anda', 'done' => false],
-        ['no' => 6, 'name' => 'Pengumuman', 'desc' => 'Pantau hasil seleksi', 'done' => false],
+        ['no' => 1, 'name' => 'Biodata', 'desc' => 'Identitas dan data diri peserta', 'done' => true, 'route' => 'spmb.biodata'],
+        ['no' => 2, 'name' => 'Orang Tua', 'desc' => 'Data ayah dan ibu / wali', 'done' => true, 'route' => 'spmb.orang-tua'],
+        ['no' => 3, 'name' => 'Dokumen', 'desc' => 'Unggah berkas persyaratan', 'done' => false, 'route' => 'spmb.dokumen'],
+        ['no' => 4, 'name' => 'Formulir', 'desc' => 'Isi formulir pendaftaran', 'done' => false, 'route' => 'spmb.formulir'],
+        ['no' => 5, 'name' => 'Verifikasi', 'desc' => 'Periksa ulang data Anda', 'done' => false, 'route' => 'spmb.verifikasi'],
+        ['no' => 6, 'name' => 'Pengumuman', 'desc' => 'Pantau hasil seleksi', 'done' => false, 'route' => 'spmb.pengumuman'],
     ];
     $doneCount = count(array_filter($steps, fn ($s) => $s['done']));
     $percent = (int) round($doneCount / count($steps) * 100);
@@ -56,7 +56,8 @@
 
                 <div class="flex flex-col gap-5 sm:gap-6">
                     @foreach ($steps as $step)
-                        <div class="relative flex items-start gap-4">
+                        <a href="{{ route($step['route']) }}"
+                            class="relative flex items-start gap-4 no-underline hover:bg-slate-50 rounded-lg -mx-2 px-2 py-1 transition-colors">
                             @if ($step['done'])
                                 <div
                                     class="w-[1.875rem] h-[1.875rem] rounded-lg bg-[#1d5fa8] text-white flex items-center justify-center shrink-0 z-10">
@@ -80,7 +81,7 @@
                                 class="text-xs font-bold {{ $step['done'] ? 'text-[#1d5fa8]' : 'text-slate-400' }} shrink-0">
                                 {{ $step['done'] ? 'Sudah terisi' : 'Belum terisi' }}
                             </span>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -103,7 +104,7 @@
                     </svg>
                     Upload Dokumen
                 </a>
-                <a href="#" class="btn-navy">
+                <a href="{{ route('spmb.bantuan') }}" class="btn-navy">
                     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.903.055-1.073.468l-.97 2.257c-.163.384-.563.614-.983.58L4.99 18.723a.75.75 0 01-.747-.615L2.25 6.75z" />

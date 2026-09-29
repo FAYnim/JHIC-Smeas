@@ -551,21 +551,21 @@
                 </svg>
                 Formulir
             </a>
-            <a href="#" class="dash-nav-item">
+            <a href="{{ route('spmb.verifikasi') }}" class="dash-nav-item {{ request()->routeIs('spmb.verifikasi') ? 'dash-nav-item--active' : '' }}">
                 <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 Verifikasi
             </a>
-            <a href="#" class="dash-nav-item">
+            <a href="{{ route('spmb.pengumuman') }}" class="dash-nav-item {{ request()->routeIs('spmb.pengumuman') ? 'dash-nav-item--active' : '' }}">
                 <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M10.34 15.84c-.688-.06-1.386-.06-2.09.015-2.18.228-4.758 1.88-5.16 2.308-.494.51-.484.444-.496.452-1.112.785.927 1.012.927 1.012 2.327.23 5.346-1.032 5.346-1.032 1.114.298 2.37.326 3.03.275M18.5 3l-5 2.437L10.75 3M15.25 6.437L10.75 8.637M13.5 12.25l-2.5-1.375L5.5 10.5M5.5 10.5L13.5 12.25M5.5 10.5L4.5 17.5" />
                 </svg>
                 Pengumuman
             </a>
-            <a href="#" class="dash-nav-item">
+            <a href="{{ route('spmb.bantuan') }}" class="dash-nav-item {{ request()->routeIs('spmb.bantuan') ? 'dash-nav-item--active' : '' }}">
                 <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9.879 7.519c1.171-1.505 3.175-2.01 4.59-1.132a3.0001 3.0001 0 011.132 4.59L10.5 21M15.5 3L14 5.25M14.25 9.75L12 14.25" />

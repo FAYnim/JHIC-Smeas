@@ -61,6 +61,21 @@ class SpmbController extends Controller
         return view('spmb.dashboard.formulir');
     }
 
+    public function verifikasi()
+    {
+        return view('spmb.dashboard.verifikasi');
+    }
+
+    public function pengumuman()
+    {
+        return view('spmb.dashboard.pengumuman');
+    }
+
+    public function bantuan()
+    {
+        return view('spmb.dashboard.bantuan');
+    }
+
     /** ===== Form saves (flash + back, DB hookup pending) ===== */
 
     public function saveBiodata(Request $request)

@@ -3,17 +3,6 @@
 @section('page-title', 'Biodata')
 
 @section('content')
-    {{-- Progress strip --}}
-    <div class="mb-6">
-        <div class="flex items-center justify-between mb-2">
-            <span class="progress-label">Progres Pendaftaran</span>
-            <span class="progress-label">Tahap 1 dari 6</span>
-        </div>
-        <div class="progress-track">
-            <div class="progress-fill" style="width:16.6%"></div>
-        </div>
-    </div>
-
     <div class="dash-card max-w-5xl">
         <form method="POST" action="{{ route('spmb.save-biodata') }}">
             @csrf

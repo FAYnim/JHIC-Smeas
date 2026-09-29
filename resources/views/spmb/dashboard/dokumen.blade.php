@@ -22,17 +22,6 @@
 
 @section('content')
     <div class="dash-card max-w-3xl">
-        {{-- Upload progress strip --}}
-        <div class="mb-6">
-            <div class="flex items-center justify-between mb-2">
-                <span class="progress-label">Berkas Terverifikasi</span>
-                <span class="progress-label">0 dari 12</span>
-            </div>
-            <div class="progress-track">
-                <div class="progress-fill" style="width:0%"></div>
-            </div>
-        </div>
-
         <form method="POST" action="{{ route('spmb.save-dokumen') }}" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-col gap-6">

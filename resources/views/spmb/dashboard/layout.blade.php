@@ -311,25 +311,7 @@
             background: #1d4ed8;
         }
 
-        /* ===== Biodata progress + CTA ===== */
-        .progress-track {
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 9999px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #2563eb;
-        }
-
-        .progress-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #475569;
-        }
-
+        /* ===== CTA ===== */
         .declaration-box {
             background: #f8fafc;
             border: 1px solid #e2e8f0;

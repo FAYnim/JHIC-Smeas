@@ -286,6 +286,173 @@
 
         .btn-secondary:hover { background: #eff6ff; }
 
+        .success-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 1.5rem;
+        }
+
+        .success-modal {
+            position: relative;
+            width: min(100%, 560px);
+            background: #f3f4f6;
+            border: 1px solid #dfe7ee;
+            border-radius: 0;
+            padding: 2.25rem 2rem 1.5rem;
+            box-shadow: 0 24px 80px rgba(15, 23, 42, 0.18);
+            text-align: center;
+        }
+
+        .success-close {
+            position: absolute;
+            top: 0.9rem;
+            right: 1rem;
+            border: none;
+            background: transparent;
+            color: #475569;
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .success-checkmark {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #22c55e;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
+        }
+
+        .success-checkmark svg {
+            width: 38px;
+            height: 38px;
+        }
+
+        .success-title {
+            font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+            line-height: 1.2;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0 0 1.4rem;
+        }
+
+        .success-registry-box {
+            background: #dbeefe;
+            border: 1px solid #b9d8f6;
+            border-radius: 0.85rem;
+            padding: 0.9rem 1rem 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-registry-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #1d4ed8;
+            text-align: left;
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.02em;
+        }
+
+        .success-registry-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .success-registry-code {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .success-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.35rem 0.7rem;
+            border-radius: 0.5rem;
+            border: 1px solid #f5d48e;
+        }
+
+        .success-detail-grid {
+            background: #dbeefe;
+            border: 1px solid #b9d8f6;
+            border-radius: 0.8rem;
+            overflow: hidden;
+        }
+
+        .success-detail-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .success-detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .success-detail-row span {
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .success-detail-row strong {
+            color: #0f172a;
+            font-weight: 800;
+            text-align: right;
+        }
+
+        .success-wa-btn {
+            display: block;
+            margin-top: 1.3rem;
+            width: 100%;
+            background: #22c55e;
+            color: white;
+            border-radius: 0.7rem;
+            padding: 0.9rem 1rem;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+
+        .success-wa-btn:hover {
+            background: #16a34a;
+        }
+
+        .success-download-btn {
+            width: 100%;
+            margin-top: 1rem;
+            background: transparent;
+            border: 2px solid #0f172a;
+            color: #0f172a;
+            border-radius: 0.7rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+        }
+
         .info-label {
             font-size: 0.7rem;
             color: #94a3b8;
@@ -458,6 +625,58 @@
             <span class="text-slate-500 font-medium">{{ $lowongan->company_short }} - {{ $lowongan->title }}</span>
         </nav>
 
+        @if (session('lamaran_success'))
+            @php $lamaran = session('lamaran_success'); @endphp
+            <div id="success-popup" class="success-overlay" style="display: flex;">
+                <div class="success-modal">
+                    <button type="button" class="success-close" aria-label="Tutup popup" onclick="document.getElementById('success-popup').style.display='none'">×</button>
+
+                    <div class="success-checkmark">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+
+                    <h2 class="success-title">Pengajuan magang terkirim</h2>
+
+                    <div class="success-registry-box">
+                        <div class="success-registry-label">Nomor Registrasi PKL</div>
+                        <div class="success-registry-row">
+                            <span class="success-registry-code">#{{ $lamaran['registration_code'] }}</span>
+                            <span class="success-badge">Tahap Verifikasi</span>
+                        </div>
+                    </div>
+
+                    <div class="success-detail-grid">
+                        <div class="success-detail-row">
+                            <span>Nama Siswa</span>
+                            <strong>Siswa SMKN 1 Surabaya</strong>
+                        </div>
+                        <div class="success-detail-row">
+                            <span>NISN</span>
+                            <strong>{{ $lamaran['nisn'] }}</strong>
+                        </div>
+                        <div class="success-detail-row">
+                            <span>Posisi Magang</span>
+                            <strong>{{ $lowongan->title }}</strong>
+                        </div>
+                        <div class="success-detail-row">
+                            <span>Mitra Industri</span>
+                            <strong>{{ $lowongan->company_name }}</strong>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/{{ $lowongan->pokja_wa ?? '6281234567890' }}" target="_blank" class="success-wa-btn">
+                        Konfirmasi ke WhatsApp Pak Alip
+                    </a>
+
+                    <button type="button" class="success-download-btn">
+                        Unduh Bukti Pengajuan (PDF)
+                    </button>
+                </div>
+            </div>
+        @endif
+
         <!-- Top Header Job Banner Card (Dark Blue) -->
         <div class="detail-header-banner">
             <div class="flex flex-col md:flex-row items-start md:items-center gap-5">
@@ -580,9 +799,9 @@
                 <div class="sidebar-card">
 
                     <!-- Primary Action Button -->
-                    <button class="btn-primary">
+                    <a href="{{ route('pusat-karir.lamar', $lowongan->slug) }}" class="btn-primary">
                         Ajukan Magang Sekarang
-                    </button>
+                    </a>
 
                     <!-- Secondary Action Buttons -->
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">

@@ -9,3 +9,6 @@ Route::get('/', function () {
 
 Route::get('/pusat-karir', [LowonganController::class, 'index'])->name('pusat-karir.index');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
+Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
+Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');
+

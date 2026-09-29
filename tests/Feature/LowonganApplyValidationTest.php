@@ -1,0 +1,88 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\Lowongan;
+use App\Models\MagangApplication;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class LowonganApplyValidationTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_non_numeric_nisn_is_rejected(): void
+    {
+        $lowongan = $this->makeLowongan();
+
+        $response = $this->from(route('pusat-karir.lamar', $lowongan->slug))
+            ->post(route('pusat-karir.store-lamar', $lowongan->slug), [
+                'nisn' => 'ABC123',
+                'consent' => 'on',
+            ]);
+
+        $response->assertSessionHasErrors('nisn');
+        $response->assertRedirect();
+    }
+
+    public function test_numeric_nisn_is_accepted(): void
+    {
+        $lowongan = $this->makeLowongan();
+
+        $response = $this->from(route('pusat-karir.lamar', $lowongan->slug))
+            ->post(route('pusat-karir.store-lamar', $lowongan->slug), [
+                'nisn' => '1234567890',
+                'consent' => 'on',
+            ]);
+
+        $response->assertRedirect(route('pusat-karir.detail', $lowongan->slug));
+        $response->assertSessionHasNoErrors();
+    }
+
+    public function test_application_is_saved_with_unique_registration_code(): void
+    {
+        $lowongan = $this->makeLowongan();
+
+        $this->post(route('pusat-karir.store-lamar', $lowongan->slug), [
+            'nisn' => '1234567890',
+            'consent' => 'on',
+        ]);
+
+        $this->assertDatabaseHas('magang_applications', [
+            'lowongan_id' => $lowongan->id,
+            'nisn' => '1234567890',
+        ]);
+
+        $code = MagangApplication::query()->value('registration_code');
+
+        $this->assertMatchesRegularExpression('/^PKL-[A-Z0-9-]+$/', $code);
+        $this->assertNotSame('', $code);
+    }
+
+    protected function makeLowongan(): Lowongan
+    {
+        return Lowongan::create([
+            'company_name' => 'PT Telkom Indonesia',
+            'company_short' => 'Telkom Indonesia',
+            'is_mitra_dudi' => true,
+            'title' => 'Software Engineer Intern (PKL)',
+            'slug' => 'telkom-software-engineer-intern',
+            'location' => 'Surabaya, Jatim',
+            'duration' => '6 Bulan (Jan - Jun)',
+            'jurusan' => 'Khusus RPL & SIJA',
+            'kuota' => 2,
+            'metode_kerja' => 'On-site (Surabaya)',
+            'deskripsi' => 'Deskripsi contoh untuk testing.',
+            'tanggung_jawab' => ['Mengerjakan tugas harian'],
+            'kualifikasi' => ['Siswa aktif'],
+            'dokumen' => [['name' => 'CV.pdf', 'desc' => 'Dokumen', 'type' => 'pdf']],
+            'benefits' => ['Uang saku'],
+            'batas_pendaftaran' => '2026-08-15',
+            'durasi_pelaksanaan' => '6 Bulan',
+            'status_kuota' => 'Tersedia',
+            'pokja_nama' => 'Pokja PKL',
+            'pokja_koordinator' => 'Bpk. Test',
+            'pokja_wa' => '6281234567890',
+        ]);
+    }
+}

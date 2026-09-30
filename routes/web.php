@@ -29,7 +29,7 @@ Route::get('/jurusan', function () {
 })->name('jurusan');
 
 Route::get('/jurusan/{slug}', function ($slug) {
-    return view('jurusan-detail', ['slug' => $slug]);
+    return view("jurusan.{$slug}");
 })->name('jurusan.detail');
 
 Route::get('/informasi', function () {

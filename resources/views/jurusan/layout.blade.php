@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akuntansi — SMK Negeri 1 Surabaya</title>
+    <title>@yield('title') — SMK Negeri 1 Surabaya</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,7 +63,7 @@
                 <span>/</span>
                 <a href="{{ route('jurusan') }}" class="hover:text-blue-600 transition-colors">Jurusan</a>
                 <span>/</span>
-                <span class="text-slate-900 font-bold">Akuntansi</span>
+                <span class="text-slate-900 font-bold">@yield('nama')</span>
             </nav>
         </div>
 
@@ -72,160 +72,21 @@
             <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 {{-- Jurusan Logo --}}
                 <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-[#023775] flex items-center justify-center shadow-lg shrink-0">
-                    <span class="text-white font-black text-4xl sm:text-5xl tracking-tighter">ML</span>
+                    <span class="text-white font-black text-4xl sm:text-5xl tracking-tighter">@yield('kode')</span>
                 </div>
 
                 {{-- Jurusan Info --}}
                 <div>
                     <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-1">
-                        Akuntansi
+                        @yield('nama')
                     </h1>
-                    <p class="text-sm sm:text-base text-slate-500">
-                        Ketua Program Keahlian: <span class="font-bold text-slate-700">Yourini Erawati, S.Pd., M.M.</span>
-                    </p>
                 </div>
             </div>
         </section>
 
         {{-- Main Content: 2 Column Layout --}}
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-                {{-- Left Column (2/3) --}}
-                <div class="lg:col-span-2 space-y-8">
-
-                    {{-- Tentang Jurusan --}}
-                    <div class="bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 shadow-xs">
-                        <h2 class="text-xl font-extrabold text-[#023775] mb-4">Tentang Jurusan</h2>
-                        <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-6">
-                            Kompetensi keahlian akuntansi di SMK Negeri 1 Surabaya meliputi pembelajaran Akuntansi Manual dan Akuntansi Komputer (MYOB). Kompetensi Keahlian Akuntansi di SMK Negeri 1 Surabaya bertujuan agar siswa dapat mengetahui Akuntansi baik untuk perusahaan jasa, perusahaan dagang, dan perusahaan manufaktur. Siswa kompetensi Keahlian Akuntansi diharapkan dapat melakukan Siklus Akuntansi minimal bagi dirinya sendiri dan perusahaan pada umumnya dan sekaligus mampu menerapkan Sistem Perpajakan di Indonesia. Kompetensi Keahlian Akuntansi belajar mengenai Siklus Akuntansi, maka tidak ada karya yang bersifat riiil atau produk nyata yang bisa di pamerkan. Tapi Laporan Keuangan merupakan produk jasa akuntansi
-                        </p>
-
-                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Kompetensi Yang Dipelajari</h3>
-                        <ul class="space-y-2">
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Pengantar Ekonomi dan Bisnis
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Pengantar Administrasi Perkantoran
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Akuntansi Keuangan
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Akuntansi Perusahaan Dagang
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Akuntansi Manufaktur
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Komputer Akuntansi (MYOB &amp; Accurate)
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Administrasi Pajak
-                            </li>
-                        </ul>
-                    </div>
-
-                    {{-- Prestasi Siswa --}}
-                    <div class="bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 shadow-xs">
-                        <h2 class="text-xl font-extrabold text-[#023775] mb-4">Prestasi Siswa</h2>
-                        <ul class="space-y-2">
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0"></span>
-                                Juara 1 LKS Akuntansi Tingkat Kota Surabaya
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0"></span>
-                                Juara 1 Accounting Competition &ndash; UNESA
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0"></span>
-                                Juara 1 Akuntansi MYOB &ndash; STIE Perbanas Surabaya
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0"></span>
-                                Juara 1 SAC &ndash; Univ. Wijaya Putra
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-
-                {{-- Right Column (1/3) --}}
-                <div class="space-y-8">
-
-                    {{-- Prospek Karier --}}
-                    <div class="bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 shadow-xs">
-                        <h2 class="text-xl font-extrabold text-[#023775] mb-4">Prospek Karier</h2>
-                        <ul class="space-y-2">
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Staf Akuntansi / Pembukuan
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Kasir &amp; Teller
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Juru Penggajian (Payroll)
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-slate-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0"></span>
-                                Operator Mesin Hitung / Kasir Digital
-                            </li>
-                        </ul>
-                    </div>
-
-                    {{-- Tempat Magang --}}
-                    <div class="bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 shadow-xs">
-                        <h2 class="text-xl font-extrabold text-[#023775] mb-4">Tempat Magang</h2>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">
-                                Kantor Akuntan Publik (KAP) mitra sekolah
-                            </span>
-                            <span class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">
-                                Perusahaan dagang &amp; manufaktur lokal
-                            </span>
-                            <span class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">
-                                Koperasi &amp; BUMDes
-                            </span>
-                            <span class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">
-                                Instansi pemerintah bidang keuangan
-                            </span>
-                        </div>
-                    </div>
-
-                    {{-- Sertifikasi --}}
-                    <div class="bg-[#023775] rounded-2xl p-7 sm:p-8 shadow-lg text-white">
-                        <h2 class="text-xl font-extrabold text-amber-400 mb-4">Sertifikasi</h2>
-                        <ul class="space-y-2">
-                            <li class="flex items-start gap-2 text-sm text-blue-100">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
-                                Uji Kompetensi Keahlian (UKK) Akuntansi
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-blue-100">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
-                                Sertifikasi LSP P1 SMKN 1 Surabaya
-                            </li>
-                            <li class="flex items-start gap-2 text-sm text-blue-100">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0"></span>
-                                Sertifikasi Aplikasi MYOB / Accurate
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-
-            </div>
+            @yield('content')
         </section>
 
     </main>

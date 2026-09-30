@@ -308,7 +308,7 @@
         <!-- ===== section peluang unggulan ===== -->
         @php
             // Map data lowongan dari database ke format card peluang unggulan
-            $peluangUnggulan = isset($lowongans) ? $lowongans->map(function($l) {
+            $peluangUnggulan = isset($lowongans) ? $lowongans->take(3)->map(function($l) {
                 return [
                     'id'       => $l->id,
                     'company'  => $l->company_name,
@@ -495,9 +495,26 @@
 
             <!-- ===== Lowongan / Magang / Artikel Terbaru ===== -->
             @php
-                // Data dummy — diset kosong [] sampai backend & dashboard admin selesai
-                $lowonganTerbaru = $lowonganTerbaru ?? [];
-                $magangTerbaru = $magangTerbaru ?? [];
+                $lowonganTerbaru = isset($lowongans) ? $lowongans->where('jenis', 'lowongan')->take(3)->map(function($l) {
+                    return [
+                        'title'       => $l->title,
+                        'company'     => $l->company_name,
+                        'location'    => $l->location,
+                        'posted_ago'   => $l->created_at->diffForHumans(),
+                        'type'        => 'Lowongan',
+                        'type_color'  => 'blue',
+                    ];
+                })->toArray() : [];
+                $magangTerbaru = isset($lowongans) ? $lowongans->where('jenis', 'magang')->take(3)->map(function($l) {
+                    return [
+                        'title'       => $l->title,
+                        'company'     => $l->company_name,
+                        'location'    => $l->location,
+                        'posted_ago'   => $l->created_at->diffForHumans(),
+                        'type'        => 'Magang',
+                        'type_color'  => 'purple',
+                    ];
+                })->toArray() : [];
                 $artikelTerbaru = $artikelTerbaru ?? [];
             @endphp
 

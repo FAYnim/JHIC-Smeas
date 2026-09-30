@@ -17,6 +17,7 @@ class Lowongan extends Model
         'jurusan',
         'kuota',
         'metode_kerja',
+        'jenis',
         'deskripsi',
         'tanggung_jawab',
         'kualifikasi',

@@ -10,17 +10,17 @@ class LowonganSeeder extends Seeder
     public function run(): void
     {
         Lowongan::create([
-            'company_name'  => 'PT Telkom Indonesia (Regional Jawa Timur)',
+            'company_name' => 'PT Telkom Indonesia (Regional Jawa Timur)',
             'company_short' => 'Telkom Indonesia',
             'is_mitra_dudi' => true,
-            'title'         => 'Software Engineer Intern (PKL)',
-            'slug'          => 'telkom-software-engineer-intern',
-            'location'      => 'Surabaya, Jatim',
-            'duration'      => '6 Bulan (Jan - Jun)',
-            'jurusan'       => 'Khusus RPL & SIJA',
-            'kuota'         => 2,
-            'metode_kerja'  => 'On-site (Surabaya)',
-            'deskripsi'     => 'Program Praktek Kerja Lapangan (PKL) di PT Telkom Indonesia Regional Jawa Timur dirancang khusus untuk membekali siswa dengan pengalaman kerja nyata pada industri digital nasional. Magang ini bertempat di divisi IT Solution, berfokus pada pengembangan produk web internal, pengujian kualitas fungsional aplikasi enterprise, serta kolaborasi aktif menggunakan standar clean code dan metodologi Agile yang berlaku di industri modern.',
+            'title' => 'Software Engineer Intern (PKL)',
+            'slug' => 'telkom-software-engineer-intern',
+            'location' => 'Surabaya, Jatim',
+            'duration' => '6 Bulan (Jan - Jun)',
+            'jurusan' => 'Khusus RPL & SIJA',
+            'kuota' => 2,
+            'metode_kerja' => 'On-site (Surabaya)',
+            'deskripsi' => 'Program Praktek Kerja Lapangan (PKL) di PT Telkom Indonesia Regional Jawa Timur dirancang khusus untuk membekali siswa dengan pengalaman kerja nyata pada industri digital nasional. Magang ini bertempat di divisi IT Solution, berfokus pada pengembangan produk web internal, pengujian kualitas fungsional aplikasi enterprise, serta kolaborasi aktif menggunakan standar clean code dan metodologi Agile yang berlaku di industri modern.',
             'tanggung_jawab' => [
                 'Slicing desain UI/UX menjadi komponen frontend berbasis React & Tailwind CSS',
                 'Melakukan pengujian Manual QA serta menyusun dokumentasi laporan bug',
@@ -42,12 +42,12 @@ class LowonganSeeder extends Seeder
                 'Sertifikat Resmi Industri',
                 'Pembimbing Khusus (1-on-1)',
             ],
-            'batas_pendaftaran'  => '2026-08-15',
+            'batas_pendaftaran' => '2026-08-15',
             'durasi_pelaksanaan' => '6 Bulan (1 Semester)',
-            'status_kuota'       => 'Tersedia (2 Kursi)',
-            'pokja_nama'         => 'Pokja PKL SMKN 1 Surabaya',
-            'pokja_koordinator'  => 'Bpk. Aris Santoso, S.Kom',
-            'pokja_wa'           => '6281234567890',
+            'status_kuota' => 'Tersedia (2 Kursi)',
+            'pokja_nama' => 'Pokja PKL SMKN 1 Surabaya',
+            'pokja_koordinator' => 'Bpk. Aris Santoso, S.Kom',
+            'pokja_wa' => '6281234567890',
         ]);
     }
 }

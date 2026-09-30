@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('location');                         // cth. "Surabaya, Jatim"
             $table->string('duration');                         // cth. "6 Bulan (Jan - Jun)"
-            $table->string('jurusan');                          //cth. "Khusus RPL & TKJ"
+            $table->string('jurusan');                          // cth. "Khusus RPL & TKJ"
             $table->integer('kuota')->default(0);
             $table->string('metode_kerja')->default('On-site'); // On-site / Remote / Hybrid
 

@@ -33,11 +33,11 @@ class Lowongan extends Model
     protected function casts(): array
     {
         return [
-            'is_mitra_dudi'    => 'boolean',
-            'tanggung_jawab'   => 'array',
-            'kualifikasi'      => 'array',
-            'dokumen'          => 'array',
-            'benefits'         => 'array',
+            'is_mitra_dudi' => 'boolean',
+            'tanggung_jawab' => 'array',
+            'kualifikasi' => 'array',
+            'dokumen' => 'array',
+            'benefits' => 'array',
             'batas_pendaftaran' => 'date',
         ];
     }

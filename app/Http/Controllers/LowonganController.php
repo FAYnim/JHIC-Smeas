@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
+use App\Models\Webinar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -19,7 +20,15 @@ class LowonganController extends Controller
 
         $artikels = Artikel::latest('published_at')->take(3)->get();
 
-        return view('pusat-karir.pusat-karir', compact('lowongans', 'artikels'));
+        $webinars = Webinar::where('is_published', true)->latest('start_date')->get();
+
+        // Card "Upcoming Webinar" menampilkan satu webinar terdekat dari tanggal sekarang.
+        $upcomingWebinar = $webinars
+            ->filter(fn (Webinar $w) => $w->start_date->isFuture())
+            ->sortBy('start_date')
+            ->first();
+
+        return view('pusat-karir.pusat-karir', compact('lowongans', 'artikels', 'webinars', 'upcomingWebinar'));
     }
 
     /**

@@ -813,7 +813,7 @@
                             class="inline-block text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-2">Upcoming
                             Webinar</span>
                         <h3 class="text-lg font-bold text-slate-900 mb-2.5">
-                            {{ $upcomingWebinar['title'] }}
+                            {{ $upcomingWebinar->title }}
                         </h3>
                         <p class="text-sm text-slate-500 mb-5 flex items-center gap-1.5">
                             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor"
@@ -821,9 +821,11 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                             </svg>
-                            {{ $upcomingWebinar['date'] }} · {{ $upcomingWebinar['time'] }}
+                            {{ $upcomingWebinar->start_date->format('d F Y') }} ·
+                            {{ substr($upcomingWebinar->start_time, 0, 5) }} WIB
                         </p>
-                        <a href="{{ url('pusat-karir/webinar/' . $upcomingWebinar['slug']) }}"
+                        <p class="text-xs text-slate-500 mb-4">Pembicara: {{ $upcomingWebinar->speaker }}</p>
+                        <a href="{{ $upcomingWebinar->registration_url ?: '#' }}"
                             class="inline-flex items-center justify-center w-full px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-lg shadow-sm transition-all duration-200">
                             Register Now
                         </a>
@@ -844,6 +846,69 @@
                     @endif
                 </div>
 
+            </div>
+
+            <!-- ===== Katalog Bimbingan Karir ===== -->
+            @php
+                // Data dummy — nantinya diganti dari controller (BimbinganKarir + BimbinganKategori)
+                $bimbinganKatalog = $bimbinganKatalog ?? [
+                    ['title' => 'Cara Membuat CV Menarik untuk Fresh Graduate', 'kategori' => 'tips-cv', 'kategori_label' => 'Tips CV', 'type' => 'Artikel', 'url' => '#'],
+                    ['title' => 'Contoh CV Kreatif untuk Jurusan DKV', 'kategori' => 'tips-cv', 'kategori_label' => 'Tips CV', 'type' => 'Template', 'url' => '#'],
+                    ['title' => 'Pertanyaan Wajib Interview & Cara Menjawabnya', 'kategori' => 'tips-interview', 'kategori_label' => 'Tips Interview', 'type' => 'Artikel', 'url' => '#'],
+                    ['title' => 'Simulasi Interview Bersama HRD Mitra', 'kategori' => 'tips-interview', 'kategori_label' => 'Tips Interview', 'type' => 'Workshop', 'url' => '#'],
+                    ['title' => 'Roadmap Karir Teknik Komputer & Informatika', 'kategori' => 'roadmap-karir', 'kategori_label' => 'Roadmap Karir', 'type' => 'Infografis', 'url' => '#'],
+                    ['title' => 'Menjelajah Karir di Dunia Otomotif', 'kategori' => 'roadmap-karir', 'kategori_label' => 'Roadmap Karir', 'type' => 'Artikel', 'url' => '#'],
+                    ['title' => 'Sertifikasi BNSP: Apa yang Perlu Disiapkan?', 'kategori' => 'sertifikasi', 'kategori_label' => 'Sertifikasi', 'type' => 'Panduan', 'url' => '#'],
+                    ['title' => 'Daftar Skema Sertifikasi untuk Lulusan SMK', 'kategori' => 'sertifikasi', 'kategori_label' => 'Sertifikasi', 'type' => 'Referensi', 'url' => '#'],
+                ];
+            @endphp
+
+            <div class="mt-12">
+                <div class="flex items-center justify-between mb-5">
+                    <h3 class="text-xl font-bold text-slate-800">Katalog Bimbingan</h3>
+                </div>
+
+                @if (!empty($bimbinganKatalog) && count($bimbinganKatalog) > 0)
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="bimbingan-katalog">
+                        @foreach ($bimbinganKatalog as $item)
+                            <a href="{{ $item['url'] ?? '#' }}"
+                                class="bimbingan-katalog-item group bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-200 p-5 flex flex-col"
+                                data-kategori="{{ $item['kategori'] }}">
+
+                                <div class="flex items-center justify-between mb-3">
+                                    <span
+                                        class="inline-block px-2.5 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold rounded">{{ $item['kategori_label'] }}</span>
+                                    <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">{{ $item['type'] }}</span>
+                                </div>
+
+                                <h4
+                                    class="text-sm font-bold text-slate-900 leading-snug group-hover:text-blue-600 transition-colors">
+                                    {{ $item['title'] }}
+                                </h4>
+
+                                <div
+                                    class="mt-auto pt-4 flex items-center gap-1.5 text-xs font-semibold text-blue-600 group-hover:gap-2.5 transition-all duration-200">
+                                    Lihat Detail
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+
+                    {{-- Empty state saat filter tidak ada hasil --}}
+                    <div id="bimbingan-katalog-empty" class="hidden bg-white rounded-xl border border-slate-100 shadow-sm p-8 text-center">
+                        <p class="text-sm font-semibold text-slate-600 mb-1">Belum ada katalog pada kategori ini</p>
+                        <p class="text-xs text-slate-400">Coba pilih kategori lain.</p>
+                    </div>
+                @else
+                    <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-8 text-center">
+                        <p class="text-sm font-semibold text-slate-600 mb-1">Belum ada katalog bimbingan</p>
+                        <p class="text-xs text-slate-400">Katalog akan ditampilkan di sini setelah dicantumkan melalui dashboard.</p>
+                    </div>
+                @endif
             </div>
         </section>
 
@@ -995,6 +1060,20 @@
                 });
                 btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
                 btn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+
+                // Filter katalog bimbingan
+                const filter = btn.dataset.filter;
+                const katalogItems = document.querySelectorAll('.bimbingan-katalog-item');
+                const emptyState = document.getElementById('bimbingan-katalog-empty');
+                if (katalogItems.length === 0) return;
+
+                let visible = 0;
+                katalogItems.forEach(item => {
+                    const show = filter === 'semua' || item.dataset.kategori === filter;
+                    item.classList.toggle('hidden', !show);
+                    if (show) visible++;
+                });
+                if (emptyState) emptyState.classList.toggle('hidden', visible > 0);
             });
         }
     </script>

@@ -5,8 +5,36 @@ use App\Http\Controllers\SpmbController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('beranda');
+
+Route::get('/visi-misi', function () {
+    return view('visi-misi');
+})->name('visi-misi');
+
+Route::get('/struktur-organisasi', function () {
+    return view('struktur-organisasi');
+})->name('struktur-organisasi');
+
+Route::get('/guru-dan-tenaga-kependidikan', function () {
+    return view('guru-dan-tenaga-kependidikan');
+})->name('guru-dan-tenaga-kependidikan');
+
+Route::get('/sarana-dan-prasarana', function () {
+    return view('sarana-dan-prasarana');
+})->name('sarana-dan-prasarana');
+
+Route::get('/jurusan', function () {
+    return view('jurusan');
+})->name('jurusan');
+
+Route::get('/jurusan/{slug}', function ($slug) {
+    return view('jurusan-detail', ['slug' => $slug]);
+})->name('jurusan.detail');
+
+Route::get('/informasi', function () {
+    return view('informasi');
+})->name('informasi');
 
 Route::get('/pusat-karir', [LowonganController::class, 'index'])->name('pusat-karir.index');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
@@ -14,6 +42,11 @@ Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pu
 // Pusat Karir - Lamar
 Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
 Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');
+
+// BLUD - Marketplace produk & jasa jurusan
+Route::get('/blud', function () {
+    return view('blud.index');
+})->name('blud.index');
 
 // SPMB Routes
 Route::get('/spmb', [SpmbController::class, 'index'])->name('spmb.index');

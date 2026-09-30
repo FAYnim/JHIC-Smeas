@@ -2,15 +2,22 @@
     $activePage   = $activePage   ?? '';
     $spmbClickable = $spmbClickable ?? true;
     $logoUrl      = $logoUrl      ?? route('pusat-karir.index');
-    $berandaUrl   = $berandaUrl   ?? '#';
+    $berandaUrl   = $berandaUrl   ?? route('beranda');
+
+    $profilDropdown = [
+        ['label' => 'Visi & Misi',                 'url' => route('visi-misi'),                    'key' => 'profil'],
+        ['label' => 'Struktur Organisasi',         'url' => route('struktur-organisasi'),          'key' => 'profil'],
+        ['label' => 'Guru & Tenaga Kependidikan',  'url' => route('guru-dan-tenaga-kependidikan'),  'key' => 'profil'],
+        ['label' => 'Sarana & Prasarana',          'url' => route('sarana-dan-prasarana'),         'key' => 'profil'],
+    ];
 
     $navLinks = [
         ['label' => 'Beranda',     'url' => $berandaUrl,                'key' => 'beranda'],
-        ['label' => 'Profil',      'url' => '#',                        'key' => 'profil'],
-        ['label' => 'Jurusan',     'url' => '#',                        'key' => 'jurusan'],
-        ['label' => 'Informasi',   'url' => '#',                        'key' => 'informasi'],
+        ['label' => 'Profil',      'url' => route('visi-misi'),         'key' => 'profil'],
+        ['label' => 'Jurusan',     'url' => route('jurusan'),           'key' => 'jurusan'],
+        ['label' => 'Informasi',   'url' => route('informasi'),           'key' => 'informasi'],
         ['label' => 'Pusat Karir', 'url' => route('pusat-karir.index'), 'key' => 'pusat-karir'],
-        ['label' => 'BLUD',        'url' => '#',                        'key' => 'blud'],
+        ['label' => 'BLUD',        'url' => route('blud.index'),        'key' => 'blud'],
     ];
 
     $isActive = fn(string $key) => $activePage === $key;
@@ -30,10 +37,32 @@
             {{-- Desktop Nav --}}
             <nav class="hidden md:flex items-center gap-7">
                 @foreach ($navLinks as $link)
-                    <a href="{{ $link['url'] }}"
-                        class="nav-hover-link text-sm {{ $isActive($link['key']) ? 'font-bold text-slate-900 border-b-2 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900' }} transition-colors py-2">
-                        {{ $link['label'] }}
-                    </a>
+                    @if ($link['key'] === 'profil')
+                        {{-- Dropdown Profil --}}
+                        <div class="relative" id="desktop-profil-dropdown">
+                            <button type="button" id="desktop-profil-btn"
+                                class="nav-hover-link text-sm {{ $isActive($link['key']) ? 'font-bold text-slate-900 border-b-2 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900' }} transition-colors py-2 inline-flex items-center gap-1 cursor-pointer">
+                                {{ $link['label'] }}
+                                <svg class="w-3.5 h-3.5 transition-transform duration-200" id="desktop-profil-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                            <div id="desktop-profil-menu"
+                                class="absolute left-0 top-full mt-0 w-64 bg-white rounded-xl shadow-lg border border-slate-100 py-2 z-50 hidden opacity-0 -translate-y-1 transition-all duration-150">
+                                @foreach ($profilDropdown as $item)
+                                    <a href="{{ $item['url'] }}"
+                                        class="block px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+                                        {{ $item['label'] }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @else
+                        <a href="{{ $link['url'] }}"
+                            class="nav-hover-link text-sm {{ $isActive($link['key']) ? 'font-bold text-slate-900 border-b-2 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900' }} transition-colors py-2">
+                            {{ $link['label'] }}
+                        </a>
+                    @endif
                 @endforeach
 
                 {{-- SPMB Button --}}
@@ -66,10 +95,31 @@
     <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 shadow-lg">
         <div class="flex flex-col space-y-3">
             @foreach ($navLinks as $link)
-                <a href="{{ $link['url'] }}"
-                    class="px-3 py-2 rounded-md text-base {{ $isActive($link['key']) ? 'font-bold text-slate-900 bg-amber-50 border-l-4 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50' }} transition-colors">
-                    {{ $link['label'] }}
-                </a>
+                @if ($link['key'] === 'profil')
+                    {{-- Mobile Dropdown Profil --}}
+                    <div>
+                        <button type="button" data-mobile-profil-toggle
+                            class="w-full flex items-center justify-between px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                            {{ $link['label'] }}
+                            <svg class="w-4 h-4 transition-transform duration-200" data-mobile-profil-chevron fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div data-mobile-profil-menu class="hidden pl-4 mt-1 space-y-1">
+                            @foreach ($profilDropdown as $item)
+                                <a href="{{ $item['url'] }}"
+                                    class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                                    {{ $item['label'] }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @else
+                    <a href="{{ $link['url'] }}"
+                        class="px-3 py-2 rounded-md text-base {{ $isActive($link['key']) ? 'font-bold text-slate-900 bg-amber-50 border-l-4 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50' }} transition-colors">
+                        {{ $link['label'] }}
+                    </a>
+                @endif
             @endforeach
 
             <div class="pt-2">
@@ -89,19 +139,51 @@
     </div>
 </header>
 
-{{-- Mobile menu toggle script --}}
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // Mobile menu toggle
         const btn    = document.getElementById('mobile-menu-btn');
         const menu   = document.getElementById('mobile-menu');
         const iconOn = document.getElementById('menu-icon-open');
         const iconOf = document.getElementById('menu-icon-close');
-        if (!btn || !menu) return;
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                const open = menu.classList.toggle('hidden');
+                if (iconOn) iconOn.classList.toggle('hidden', !open);
+                if (iconOf) iconOf.classList.toggle('hidden', open);
+            });
+        }
 
-        btn.addEventListener('click', () => {
-            const open = menu.classList.toggle('hidden');
-            if (iconOn) iconOn.classList.toggle('hidden', !open);
-            if (iconOf) iconOf.classList.toggle('hidden', open);
-        });
+        // Desktop Profil dropdown (hover)
+        const ddWrap  = document.getElementById('desktop-profil-dropdown');
+        const ddMenu  = document.getElementById('desktop-profil-menu');
+        const ddChev  = document.getElementById('desktop-profil-chevron');
+        if (ddWrap && ddMenu) {
+            let hideTimer;
+            ddWrap.addEventListener('mouseenter', () => {
+                clearTimeout(hideTimer);
+                ddMenu.classList.remove('hidden', 'opacity-0', '-translate-y-1');
+                ddMenu.classList.add('opacity-100', 'translate-y-0');
+                if (ddChev) ddChev.classList.add('rotate-180');
+            });
+            ddWrap.addEventListener('mouseleave', () => {
+                hideTimer = setTimeout(() => {
+                    ddMenu.classList.add('hidden', 'opacity-0', '-translate-y-1');
+                    ddMenu.classList.remove('opacity-100', 'translate-y-0');
+                    if (ddChev) ddChev.classList.remove('rotate-180');
+                }, 120);
+            });
+        }
+
+        // Mobile Profil dropdown (tap)
+        const mToggle = document.querySelector('[data-mobile-profil-toggle]');
+        const mMenu   = document.querySelector('[data-mobile-profil-menu]');
+        const mChev   = document.querySelector('[data-mobile-profil-chevron]');
+        if (mToggle && mMenu) {
+            mToggle.addEventListener('click', () => {
+                mMenu.classList.toggle('hidden');
+                if (mChev) mChev.classList.toggle('rotate-180');
+            });
+        }
     });
 </script>

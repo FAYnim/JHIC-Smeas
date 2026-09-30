@@ -5,7 +5,7 @@ use App\Http\Controllers\SpmbController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/visi-misi', function () {
@@ -15,6 +15,10 @@ Route::get('/visi-misi', function () {
 Route::get('/jurusan', function () {
     return view('jurusan');
 })->name('jurusan');
+
+Route::get('/jurusan/{slug}', function ($slug) {
+    return view('jurusan-detail', ['slug' => $slug]);
+})->name('jurusan.detail');
 
 Route::get('/informasi', function () {
     return view('informasi');

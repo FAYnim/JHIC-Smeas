@@ -179,7 +179,7 @@
             <section id="jurusan-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
 
                 {{-- 01. Akuntansi --}}
-                <div class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs" data-category="bisnis">
+                <a href="{{ route('jurusan.detail', 'akuntansi') }}" class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs block" data-category="bisnis">
                     <div>
                         <div class="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-blue-200 transition-colors mb-4">
                             01
@@ -200,10 +200,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </div>
-                </div>
+                </a>
 
                 {{-- 02. Bisnis Daring dan Pemasaran --}}
-                <div class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs" data-category="bisnis">
+                <a href="{{ route('jurusan.detail', 'bisnis-daring-dan-pemasaran') }}" class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs block" data-category="bisnis">
                     <div>
                         <div class="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-blue-200 transition-colors mb-4">
                             02
@@ -224,10 +224,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </div>
-                </div>
+                </a>
 
                 {{-- 03. Manajemen Perkantoran --}}
-                <div class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs" data-category="bisnis">
+                <a href="{{ route('jurusan.detail', 'manajemen-perkantoran') }}" class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs block" data-category="bisnis">
                     <div>
                         <div class="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-blue-200 transition-colors mb-4">
                             03
@@ -248,10 +248,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </div>
-                </div>
+                </a>
 
                 {{-- 04. Manajemen Logistik --}}
-                <div class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs" data-category="bisnis">
+                <a href="{{ route('jurusan.detail', 'manajemen-logistik') }}" class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs block" data-category="bisnis">
                     <div>
                         <div class="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-blue-200 transition-colors mb-4">
                             04
@@ -272,10 +272,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </div>
-                </div>
+                </a>
 
                 {{-- 05. Rekayasa Perangkat Lunak --}}
-                <div class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs" data-category="teknologi">
+                <a href="{{ route('jurusan.detail', 'rekayasa-perangkat-lunak') }}" class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs block" data-category="teknologi">
                     <div>
                         <div class="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-blue-200 transition-colors mb-4">
                             05
@@ -296,10 +296,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </div>
-                </div>
+                </a>
 
                 {{-- 06. Teknik Komputer dan Jaringan --}}
-                <div class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs" data-category="teknologi">
+                <a href="{{ route('jurusan.detail', 'teknik-komputer-dan-jaringan') }}" class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs block" data-category="teknologi">
                     <div>
                         <div class="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-blue-200 transition-colors mb-4">
                             06
@@ -320,10 +320,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </div>
-                </div>
+                </a>
 
                 {{-- 07. Desain Komunikasi Visual --}}
-                <div class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs" data-category="kreatif">
+                <a href="{{ route('jurusan.detail', 'desain-komunikasi-visual') }}" class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs block" data-category="kreatif">
                     <div>
                         <div class="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-blue-200 transition-colors mb-4">
                             07
@@ -344,10 +344,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </div>
-                </div>
+                </a>
 
                 {{-- 08. Produksi Siaran Program Pertelevisian --}}
-                <div class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs" data-category="kreatif">
+                <a href="{{ route('jurusan.detail', 'produksi-siaran-program-pertelevisian') }}" class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs block" data-category="kreatif">
                     <div>
                         <div class="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-blue-200 transition-colors mb-4">
                             08
@@ -368,10 +368,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </div>
-                </div>
+                </a>
 
                 {{-- 09. Perhotelan --}}
-                <div class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs" data-category="pariwisata">
+                <a href="{{ route('jurusan.detail', 'perhotelan') }}" class="jurusan-card group bg-white rounded-2xl border border-slate-200/80 p-7 sm:p-8 flex flex-col justify-between shadow-xs block" data-category="pariwisata">
                     <div>
                         <div class="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-blue-200 transition-colors mb-4">
                             09
@@ -392,7 +392,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                     </div>
-                </div>
+                </a>
 
             </section>
         </div>

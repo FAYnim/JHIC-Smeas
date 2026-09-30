@@ -178,101 +178,12 @@
 </head>
 
 <body class="antialiased">
-    <!-- Navbar Header -->
-    <header class="sticky top-0 z-50 bg-white shadow-xs border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-
-                <!-- Logo & Branding (Image Asset) -->
-                <a href="{{ url('/') }}" class="flex items-center group">
-                    <img src="{{ asset('images/logo-smkn1.png') }}" alt="Logo SMKN 1 Surabaya"
-                        class="h-11 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105">
-                </a>
-
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex items-center gap-7">
-                    <a href="{{ url('/') }}"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        Beranda
-                    </a>
-                    <a href="#"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        Profil
-                    </a>
-                    <a href="#"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        Jurusan
-                    </a>
-                    <a href="#"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        Informasi
-                    </a>
-
-                    <a href="{{ route('pusat-karir.index') }}"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        Pusat Karir
-                    </a>
-
-                    <a href="#"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        BLUD
-                    </a>
-
-                    <!-- SPMB Button (active) -->
-                    <span
-                        class="ml-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-white bg-blue-800 rounded-lg shadow-sm cursor-default">
-                        SPMB
-                    </span>
-                </nav>
-
-                <!-- Mobile Menu Button -->
-                <div class="flex md:hidden items-center">
-                    <button type="button" id="mobile-menu-btn" aria-label="Toggle Navigation"
-                        class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                        <x-lucide-menu id="menu-icon-open" class="w-6 h-6" />
-                        <x-lucide-x id="menu-icon-close" class="w-6 h-6 hidden" />
-                    </button>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu"
-            class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 shadow-lg">
-            <div class="flex flex-col space-y-3">
-                <a href="{{ url('/') }}"
-                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
-                    Beranda
-                </a>
-                <a href="#"
-                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
-                    Profil
-                </a>
-                <a href="#"
-                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
-                    Jurusan
-                </a>
-                <a href="#"
-                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
-                    Informasi
-                </a>
-                <a href="{{ route('pusat-karir.index') }}"
-                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
-                    Pusat Karir
-                </a>
-                <a href="#"
-                    class="px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
-                    BLUD
-                </a>
-                <div class="pt-2">
-                    <span class="w-full inline-flex items-center justify-center px-5 py-2.5 text-base font-bold text-white bg-blue-800 rounded-lg">
-                        SPMB
-                    </span>
-                </div>
-            </div>
-        </div>
-    </header>
+    @include('partials.navbar', [
+        'activePage'    => '',
+        'spmbClickable' => false,
+        'logoUrl'       => url('/'),
+        'berandaUrl'    => url('/'),
+    ])
 
     <!-- ===== SPMB Login Section ===== -->
     <main class="spmb-stage">

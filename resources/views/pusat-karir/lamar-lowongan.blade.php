@@ -286,63 +286,7 @@
 
 <body>
 
-    <!-- Navbar Header -->
-    <header class="sticky top-0 z-50 bg-white shadow-xs border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-
-                <!-- Logo & Branding -->
-                <a href="{{ route('pusat-karir.index') }}" class="flex items-center group">
-                    <img src="{{ asset('images/logo-smkn1.png') }}" alt="Logo SMKN 1 Surabaya"
-                        class="h-11 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105">
-                </a>
-
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex items-center gap-7">
-                    <a href="#"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        Beranda
-                    </a>
-                    <a href="#"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        Profil
-                    </a>
-                    <a href="#"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        Jurusan
-                    </a>
-                    <a href="#"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        Informasi
-                    </a>
-                    <a href="{{ route('pusat-karir.index') }}"
-                        class="nav-hover-link text-sm font-bold text-slate-900 border-b-2 border-amber-400 transition-colors py-2">
-                        Pusat Karir
-                    </a>
-                    <a href="#"
-                        class="nav-hover-link text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors py-2">
-                        BLUD
-                    </a>
-                </nav>
-
-                <!-- Action Button -->
-                <div class="hidden md:flex items-center">
-                    <a href="#"
-                        class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-all duration-200 hover:shadow">
-                        SPMB
-                    </a>
-                </div>
-
-                <!-- Mobile Hamburger -->
-                <button class="md:hidden p-2 text-slate-600 hover:text-slate-900" aria-label="Menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </header>
+    @include('partials.navbar', ['activePage' => 'pusat-karir'])
 
     <!-- Main Container -->
     <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">

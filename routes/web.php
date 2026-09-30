@@ -36,6 +36,14 @@ Route::get('/informasi', function () {
     return view('informasi');
 })->name('informasi');
 
+Route::get('/informasi/prestasi', function () {
+    return view('informasi-prestasi');
+})->name('informasi.prestasi');
+
+Route::get('/informasi/akademik', function () {
+    return view('informasi-akademik');
+})->name('informasi.akademik');
+
 Route::get('/pusat-karir', [LowonganController::class, 'index'])->name('pusat-karir.index');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
 

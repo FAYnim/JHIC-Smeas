@@ -177,44 +177,7 @@
             height: 20px;
         }
 
-        /* Filter buttons */
-        .hero-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.625rem;
-        }
 
-        .hero-filter-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.5rem 1.375rem;
-            border-radius: 0.5rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-            background: transparent;
-            color: #ffffff;
-        }
-
-        .hero-filter-btn:hover {
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .hero-filter-btn--active {
-            background: #eab308;
-            color: #1c1917;
-            border-color: #eab308;
-        }
-
-        .hero-filter-btn--active:hover {
-            background: #facc15;
-            border-color: #facc15;
-        }
 
         /* Responsive */
         @media (min-width: 768px) {
@@ -294,14 +257,7 @@
                     </button>
                 </form>
 
-                <!-- Filter Buttons -->
-                <div class="hero-filters" id="hero-filters">
-                    <button type="button" class="hero-filter-btn hero-filter-btn--active"
-                        data-filter="semua">Semua</button>
-                    <button type="button" class="hero-filter-btn" data-filter="magang">Magang</button>
-                    <button type="button" class="hero-filter-btn" data-filter="full-time">Full-time</button>
-                    <button type="button" class="hero-filter-btn" data-filter="part-time">Part time</button>
-                </div>
+
             </div>
         </section>
 
@@ -1024,19 +980,7 @@
             });
         }
 
-        // Hero Filter Buttons Toggle
-        const filterContainer = document.getElementById('hero-filters');
-        if (filterContainer) {
-            filterContainer.addEventListener('click', (e) => {
-                const btn = e.target.closest('.hero-filter-btn');
-                if (!btn) return;
 
-                filterContainer.querySelectorAll('.hero-filter-btn').forEach(b => {
-                    b.classList.remove('hero-filter-btn--active');
-                });
-                btn.classList.add('hero-filter-btn--active');
-            });
-        }
 
         // Bimbingan Karir Filter Toggle
         const bimbinganContainer = document.getElementById('bimbingan-filters');

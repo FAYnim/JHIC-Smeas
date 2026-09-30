@@ -41,4 +41,9 @@ class Lowongan extends Model
             'batas_pendaftaran' => 'date',
         ];
     }
+
+    public function applications()
+    {
+        return $this->hasMany(MagangApplication::class);
+    }
 }

@@ -16,15 +16,15 @@ return new class extends Migration
 
             // Company info
             $table->string('company_name');
-            $table->string('company_short')->nullable();       // e.g. "Telkom Indonesia"
+            $table->string('company_short')->nullable();       // cth. "Telkom Indonesia"
             $table->boolean('is_mitra_dudi')->default(false);
 
             // Job info
-            $table->string('title');                            // e.g. "Software Engineer Intern (PKL)"
+            $table->string('title');                            // cth. "Software Engineer Intern (PKL)"
             $table->string('slug')->unique();
-            $table->string('location');                         // e.g. "Surabaya, Jatim"
-            $table->string('duration');                         // e.g. "6 Bulan (Jan - Jun)"
-            $table->string('jurusan');                          // e.g. "Khusus RPL & SIJA"
+            $table->string('location');                         // cth. "Surabaya, Jatim"
+            $table->string('duration');                         // cth. "6 Bulan (Jan - Jun)"
+            $table->string('jurusan');                          //cth. "Khusus RPL & TKJ"
             $table->integer('kuota')->default(0);
             $table->string('metode_kerja')->default('On-site'); // On-site / Remote / Hybrid
 
@@ -37,7 +37,7 @@ return new class extends Migration
 
             // Registration info
             $table->date('batas_pendaftaran');
-            $table->string('durasi_pelaksanaan');               // e.g. "6 Bulan (1 Semester)"
+            $table->string('durasi_pelaksanaan');               // cth. "6 Bulan (1 Semester)"
             $table->string('status_kuota')->default('Tersedia');
 
             // Contact

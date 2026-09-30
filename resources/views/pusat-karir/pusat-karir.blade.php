@@ -86,16 +86,16 @@
             position: absolute;
             inset: 0;
             z-index: 1;
-            background: 
-                linear-gradient(90deg, 
-                    #061d36 0%, 
-                    #061d36 40%, 
-                    rgba(6, 29, 54, 0.85) 55%, 
-                    rgba(6, 29, 54, 0.4) 70%, 
+            background:
+                linear-gradient(90deg,
+                    #061d36 0%,
+                    #061d36 40%,
+                    rgba(6, 29, 54, 0.85) 55%,
+                    rgba(6, 29, 54, 0.4) 70%,
                     rgba(6, 29, 54, 0) 88%
                 ),
-                linear-gradient(0deg, 
-                    rgba(6, 29, 54, 0.4) 0%, 
+                linear-gradient(0deg,
+                    rgba(6, 29, 54, 0.4) 0%,
                     rgba(6, 29, 54, 0) 25%
                 );
         }
@@ -234,9 +234,9 @@
             }
 
             .hero-section__overlay {
-                background: linear-gradient(180deg, 
-                    #061d36 0%, 
-                    rgba(6, 29, 54, 0.92) 65%, 
+                background: linear-gradient(180deg,
+                    #061d36 0%,
+                    rgba(6, 29, 54, 0.92) 65%,
                     rgba(6, 29, 54, 0.75) 100%
                 );
             }
@@ -471,7 +471,7 @@
                             </div>
                             <div class="border-t border-slate-100 px-5 py-3 mt-auto">
                                 <a href="{{ $item['url'] ?? '#' }}"
-                                    class="block text-center text-xs font-semibold text-slate-600 hover:text-blue-600 transition-colors">Selengkapnya</a>
+                                    class="block text-center text-xs font-semibold text-slate-600 hover:text-blue-600 transition-colors">Lihat Detail &amp; Ajukan</a>
                             </div>
                         </div>
                     @endforeach

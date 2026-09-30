@@ -11,6 +11,11 @@ Route::get('/', function () {
 Route::get('/pusat-karir', [LowonganController::class, 'index'])->name('pusat-karir.index');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
 
+// Pusat Karir - Lamar
+Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
+Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');
+
+// SPMB Routes
 Route::get('/spmb', [SpmbController::class, 'index'])->name('spmb.index');
 Route::post('/spmb/login', [SpmbController::class, 'login'])->name('spmb.login');
 

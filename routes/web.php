@@ -12,6 +12,18 @@ Route::get('/visi-misi', function () {
     return view('visi-misi');
 })->name('visi-misi');
 
+Route::get('/struktur-organisasi', function () {
+    return view('struktur-organisasi');
+})->name('struktur-organisasi');
+
+Route::get('/guru-dan-tenaga-kependidikan', function () {
+    return view('guru-dan-tenaga-kependidikan');
+})->name('guru-dan-tenaga-kependidikan');
+
+Route::get('/sarana-dan-prasarana', function () {
+    return view('sarana-dan-prasarana');
+})->name('sarana-dan-prasarana');
+
 Route::get('/jurusan', function () {
     return view('jurusan');
 })->name('jurusan');

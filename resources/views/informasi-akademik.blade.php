@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informasi — SMK Negeri 1 Surabaya</title>
+    <title>Info Akademik — SMK Negeri 1 Surabaya</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,13 +72,8 @@
             border-left-color: #fbbf24;
         }
 
-        .event-card {
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .event-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+        .agenda-row:last-child {
+            border-bottom: none;
         }
 
         .berita-card {
@@ -145,8 +140,8 @@
                     <div class="lg:w-64 shrink-0">
                         <div class="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
                             {{-- Agenda Sekolah --}}
-                            <button type="button" data-category="agenda"
-                                class="category-tab active flex items-center gap-3 px-4 py-3 rounded-xl text-left min-w-[160px] lg:min-w-0">
+                            <a href="{{ route('informasi') }}"
+                                class="category-tab flex items-center gap-3 px-4 py-3 rounded-xl text-left min-w-[160px] lg:min-w-0">
                                 <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
@@ -156,7 +151,7 @@
                                     <div class="text-sm font-bold text-slate-900">Agenda Sekolah</div>
                                     <div class="text-xs text-slate-500">Jadwal kegiatan & event terbaru.</div>
                                 </div>
-                            </button>
+                            </a>
 
                             {{-- Prestasi --}}
                             <a href="{{ route('informasi.prestasi') }}"
@@ -173,7 +168,7 @@
                             </a>
 
                             {{-- Pengumuman --}}
-                            <button type="button" data-category="pengumuman"
+                            <a href="{{ route('informasi') }}#pengumuman"
                                 class="category-tab flex items-center gap-3 px-4 py-3 rounded-xl text-left min-w-[160px] lg:min-w-0">
                                 <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -184,11 +179,11 @@
                                     <div class="text-sm font-bold text-slate-900">Pengumuman</div>
                                     <div class="text-xs text-slate-500">Info resmi & hasil seleksi.</div>
                                 </div>
-                            </button>
+                            </a>
 
                             {{-- Info Akademik --}}
                             <a href="{{ route('informasi.akademik') }}"
-                                class="category-tab flex items-center gap-3 px-4 py-3 rounded-xl text-left min-w-[160px] lg:min-w-0">
+                                class="category-tab active flex items-center gap-3 px-4 py-3 rounded-xl text-left min-w-[160px] lg:min-w-0">
                                 <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
@@ -202,55 +197,88 @@
                         </div>
                     </div>
 
-                    {{-- Event List --}}
+                    {{-- Info Akademik Content --}}
                     <div class="flex-1 space-y-4">
-                        {{-- Event 1 --}}
-                        <div class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
-                                <span class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none">18</span>
-                                <span class="text-[10px] sm:text-xs font-bold text-blue-600 uppercase tracking-wider">OKT</span>
-                            </div>
+
+                        {{-- Kalender PDF --}}
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-4 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50">
                             <div class="flex-1 min-w-0">
-                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1">Lomba Debat Bahasa Inggris Antar Kelas</h3>
-                                <p class="text-xs sm:text-sm text-slate-500">Aula Utama &middot; 08.00</p>
+                                <h3 class="text-sm sm:text-base font-bold text-slate-900 mb-0.5">Kalender Akademik 2026/2027</h3>
+                                <p class="text-xs sm:text-sm text-slate-500">Unduh versi lengkap dalam format PDF</p>
+                            </div>
+                            <a href="#"
+                                class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-sm transition-colors shrink-0">
+                                Unduh PDF
+                            </a>
+                        </div>
+
+                        {{-- Agenda Penting --}}
+                        <div class="rounded-xl border border-slate-200/80 bg-slate-50/50 overflow-hidden">
+                            <div class="px-4 sm:px-5 py-4 border-b border-slate-200/80 bg-white">
+                                <h3 class="text-sm sm:text-base font-bold text-slate-900">Agenda Penting Semester</h3>
+                            </div>
+                            <div class="bg-white divide-y divide-slate-100">
+                                <div class="agenda-row flex items-start gap-4 px-4 sm:px-5 py-3.5">
+                                    <span class="text-xs sm:text-sm font-bold text-blue-600 w-28 sm:w-36 shrink-0">11 Jul 2026</span>
+                                    <span class="text-xs sm:text-sm text-slate-600">Awal Tahun Ajaran 2026/2027</span>
+                                </div>
+                                <div class="agenda-row flex items-start gap-4 px-4 sm:px-5 py-3.5">
+                                    <span class="text-xs sm:text-sm font-bold text-blue-600 w-28 sm:w-36 shrink-0">15–19 Sep 2026</span>
+                                    <span class="text-xs sm:text-sm text-slate-600">Penilaian Tengah Semester Ganjil</span>
+                                </div>
+                                <div class="agenda-row flex items-start gap-4 px-4 sm:px-5 py-3.5">
+                                    <span class="text-xs sm:text-sm font-bold text-blue-600 w-28 sm:w-36 shrink-0">01–12 Des 2026</span>
+                                    <span class="text-xs sm:text-sm text-slate-600">Penilaian Akhir Semester Ganjil</span>
+                                </div>
+                                <div class="agenda-row flex items-start gap-4 px-4 sm:px-5 py-3.5">
+                                    <span class="text-xs sm:text-sm font-bold text-blue-600 w-28 sm:w-36 shrink-0">22 Des 2026</span>
+                                    <span class="text-xs sm:text-sm text-slate-600">Pembagian Rapor Semester Ganjil</span>
+                                </div>
+                                <div class="agenda-row flex items-start gap-4 px-4 sm:px-5 py-3.5">
+                                    <span class="text-xs sm:text-sm font-bold text-blue-600 w-28 sm:w-36 shrink-0">05 Jan 2027</span>
+                                    <span class="text-xs sm:text-sm text-slate-600">Awal Semester Genap</span>
+                                </div>
+                                <div class="agenda-row flex items-start gap-4 px-4 sm:px-5 py-3.5">
+                                    <span class="text-xs sm:text-sm font-bold text-blue-600 w-28 sm:w-36 shrink-0">15–26 Mar 2027</span>
+                                    <span class="text-xs sm:text-sm text-slate-600">Ujian Kompetensi Keahlian (UKK)</span>
+                                </div>
                             </div>
                         </div>
 
-                        {{-- Event 2 --}}
-                        <div class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
-                                <span class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none">22</span>
-                                <span class="text-[10px] sm:text-xs font-bold text-blue-600 uppercase tracking-wider">OKT</span>
+                        {{-- Jam Belajar + Bantuan --}}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="rounded-xl border border-slate-200/80 bg-white overflow-hidden">
+                                <div class="px-4 sm:px-5 py-4 border-b border-slate-100">
+                                    <h3 class="text-sm sm:text-base font-bold text-slate-900">Jam Belajar</h3>
+                                </div>
+                                <div class="divide-y divide-slate-100">
+                                    <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3">
+                                        <span class="text-xs sm:text-sm font-semibold text-slate-700">Senin–Kamis</span>
+                                        <span class="text-xs sm:text-sm text-slate-500">07.00 – 15.00</span>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3">
+                                        <span class="text-xs sm:text-sm font-semibold text-slate-700">Jumat</span>
+                                        <span class="text-xs sm:text-sm text-slate-500">07.00 – 14.00</span>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3">
+                                        <span class="text-xs sm:text-sm font-semibold text-slate-700">Sabtu (menyesuaikan)</span>
+                                        <span class="text-xs sm:text-sm text-slate-500">Kegiatan Ekstrakurikuler</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1">Kunjungan Industri Jurusan RPL ke Perusahaan Teknologi</h3>
-                                <p class="text-xs sm:text-sm text-slate-500">Offsite &middot; 07.30</p>
+
+                            <div class="bg-[#024089] rounded-xl p-5 text-white flex flex-col shadow-[0_10px_28px_-8px_rgba(2,64,137,0.35)]">
+                                <h3 class="text-sm sm:text-base font-bold text-amber-400 mb-2">Butuh Bantuan?</h3>
+                                <p class="text-xs sm:text-sm text-blue-100/90 leading-relaxed mb-5 flex-1">
+                                    Tanyakan kepada SMEAS.AI untuk informasi lengkap seputar jadwal pembelajaran.
+                                </p>
+                                <a href="#"
+                                    class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-[#024089] text-sm font-bold shadow-sm transition-colors self-start">
+                                    SMEAS.AI
+                                </a>
                             </div>
                         </div>
 
-                        {{-- Event 3 --}}
-                        <div class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
-                                <span class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none">29</span>
-                                <span class="text-[10px] sm:text-xs font-bold text-blue-600 uppercase tracking-wider">OKT</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1">Seminar Karier &amp; Persiapan Dunia Kerja</h3>
-                                <p class="text-xs sm:text-sm text-slate-500">Aula Utama &middot; 09.00</p>
-                            </div>
-                        </div>
-
-                        {{-- Event 4 --}}
-                        <div class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
-                                <span class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none">05</span>
-                                <span class="text-[10px] sm:text-xs font-bold text-blue-600 uppercase tracking-wider">NOV</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1">Pentas Seni &amp; Pameran Karya Siswa</h3>
-                                <p class="text-xs sm:text-sm text-slate-500">Lapangan Sekolah &middot; 13.00</p>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -402,19 +430,6 @@
             </div>
         </div>
     </footer>
-
-    {{-- Category tab switching --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabs = document.querySelectorAll('.category-tab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                });
-            });
-        });
-    </script>
 
 </body>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artikel;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ class LowonganController extends Controller
     {
         $lowongans = Lowongan::latest()->get();
 
-        return view('pusat-karir.pusat-karir', compact('lowongans'));
+        $artikels = Artikel::latest('published_at')->take(3)->get();
+
+        return view('pusat-karir.pusat-karir', compact('lowongans', 'artikels'));
     }
 
     /**
@@ -71,7 +74,7 @@ class LowonganController extends Controller
         $prefix = strtoupper(Str::substr(preg_replace('/[^A-Za-z]/', '', $companyShort) ?: 'TELKOM', 0, 5));
 
         do {
-            $code = 'PKL-' . $prefix . '-' . now()->format('Ymd') . '-' . strtoupper(Str::random(8));
+            $code = 'PKL-'.$prefix.'-'.now()->format('Ymd').'-'.strtoupper(Str::random(8));
         } while (MagangApplication::where('registration_code', $code)->exists());
 
         return $code;

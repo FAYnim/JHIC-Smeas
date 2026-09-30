@@ -542,7 +542,13 @@
                         'type_color'  => 'purple',
                     ];
                 })->toArray() : [];
-                $artikelTerbaru = $artikelTerbaru ?? [];
+                $artikelTerbaru = isset($artikels) ? $artikels->map(function($a) {
+                    return [
+                        'title'   => $a->title,
+                        'slug'    => $a->slug,
+                        'excerpt' => $a->excerpt,
+                    ];
+                })->toArray() : [];
             @endphp
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
@@ -690,7 +696,7 @@
                         <div class="divide-y divide-slate-100 flex flex-col flex-1">
                             @foreach ($artikelTerbaru as $artikel)
                                 <a href="{{ url('pusat-karir/artikel/' . ($artikel['slug'] ?? '')) }}"
-                                    class="px-5 py-5 flex items-center gap-4 hover:bg-slate-50 transition-colors flex-1"
+                                    class="px-5 py-5 flex items-center gap-4 hover:bg-slate-50 transition-colors flex-1 group"
                                     data-artikel-item>
                                     <div
                                         class="w-20 h-14 bg-slate-200 rounded-lg flex items-center justify-center text-slate-400 shrink-0">
@@ -701,10 +707,13 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <h4
-                                        class="text-sm font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
-                                        {{ $artikel['title'] }}
-                                    </h4>
+                                    <div class="flex-1 min-w-0">
+                                        <h4
+                                            class="text-sm font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
+                                            {{ $artikel['title'] }}
+                                        </h4>
+                                        <p class="text-[11px] text-slate-400 mt-1">{{ $artikel['excerpt'] }}</p>
+                                    </div>
                                 </a>
                             @endforeach
                         </div>

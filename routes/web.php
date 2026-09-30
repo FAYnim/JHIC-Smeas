@@ -8,6 +8,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/visi-misi', function () {
+    return view('visi-misi');
+})->name('visi-misi');
+
+Route::get('/jurusan', function () {
+    return view('jurusan');
+})->name('jurusan');
+
 Route::get('/pusat-karir', [LowonganController::class, 'index'])->name('pusat-karir.index');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
 

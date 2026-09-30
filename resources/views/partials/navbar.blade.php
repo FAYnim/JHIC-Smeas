@@ -6,8 +6,8 @@
 
     $navLinks = [
         ['label' => 'Beranda',     'url' => $berandaUrl,                'key' => 'beranda'],
-        ['label' => 'Profil',      'url' => '#',                        'key' => 'profil'],
-        ['label' => 'Jurusan',     'url' => '#',                        'key' => 'jurusan'],
+        ['label' => 'Profil',      'url' => route('visi-misi'),         'key' => 'profil'],
+        ['label' => 'Jurusan',     'url' => route('jurusan'),           'key' => 'jurusan'],
         ['label' => 'Informasi',   'url' => '#',                        'key' => 'informasi'],
         ['label' => 'Pusat Karir', 'url' => route('pusat-karir.index'), 'key' => 'pusat-karir'],
         ['label' => 'BLUD',        'url' => '#',                        'key' => 'blud'],

@@ -80,6 +80,11 @@
                     <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-1">
                         @yield('nama')
                     </h1>
+                    @hasSection('ketua')
+                        <p class="text-sm sm:text-base text-slate-500">
+                            Ketua Program Keahlian: <span class="font-bold text-slate-700">@yield('ketua')</span>
+                        </p>
+                    @endif
                 </div>
             </div>
         </section>

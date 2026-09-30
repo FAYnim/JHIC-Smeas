@@ -3,6 +3,7 @@
 @section('title', 'Akuntansi')
 @section('kode', 'AK')
 @section('nama', 'Akuntansi')
+@section('ketua', 'Yourini Erawati, S.Pd., M.M.')
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">

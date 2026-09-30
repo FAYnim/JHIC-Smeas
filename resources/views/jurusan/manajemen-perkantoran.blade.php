@@ -3,6 +3,7 @@
 @section('title', 'Manajemen Perkantoran')
 @section('kode', 'MP')
 @section('nama', 'Manajemen Perkantoran')
+@section('ketua', 'Dra. Nur Ainiyah, MM.')
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">

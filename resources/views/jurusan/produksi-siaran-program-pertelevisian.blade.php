@@ -3,6 +3,7 @@
 @section('title', 'Produksi Siaran Program Pertelevisian')
 @section('kode', 'PSPT')
 @section('nama', 'Produksi Siaran Program Pertelevisian')
+@section('ketua', 'Retno Ariyani, S.Pd., MM.')
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -187,9 +187,6 @@
                         <h2 class="text-xl sm:text-2xl font-black text-[#023775] mb-2 group-hover:text-blue-700 transition-colors">
                             Akuntansi
                         </h2>
-                        <h3 class="text-xs sm:text-sm font-bold text-amber-600 mb-4 leading-snug">
-                            Cermat menghitung, tepat mengambil keputusan.
-                        </h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             Kuasai pencatatan keuangan, perpajakan, hingga aplikasi akuntansi modern untuk menjadi tenaga keuangan yang teliti dan dipercaya.
                         </p>
@@ -211,9 +208,6 @@
                         <h2 class="text-xl sm:text-2xl font-black text-[#023775] mb-2 group-hover:text-blue-700 transition-colors">
                             Bisnis Daring dan Pemasaran
                         </h2>
-                        <h3 class="text-xs sm:text-sm font-bold text-amber-600 mb-4 leading-snug">
-                            Dari ide menjadi bisnis yang bertumbuh.
-                        </h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             Pelajari strategi pemasaran digital, pengelolaan toko online, dan kewirausahaan untuk berkembang di era ekonomi digital.
                         </p>
@@ -235,9 +229,6 @@
                         <h2 class="text-xl sm:text-2xl font-black text-[#023775] mb-2 group-hover:text-blue-700 transition-colors">
                             Manajemen Perkantoran
                         </h2>
-                        <h3 class="text-xs sm:text-sm font-bold text-amber-600 mb-4 leading-snug">
-                            Rapi, sigap, profesional.
-                        </h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             Latih keterampilan administrasi, komunikasi bisnis, dan pengelolaan dokumen berbasis teknologi.
                         </p>
@@ -259,9 +250,6 @@
                         <h2 class="text-xl sm:text-2xl font-black text-[#023775] mb-2 group-hover:text-blue-700 transition-colors">
                             Manajemen Logistik
                         </h2>
-                        <h3 class="text-xs sm:text-sm font-bold text-amber-600 mb-4 leading-snug">
-                            Menggerakkan bisnis, menjaga rantai pasok.
-                        </h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             Pahami pergudangan, distribusi, dan pengelolaan persediaan barang yang dibutuhkan setiap industri.
                         </p>
@@ -283,9 +271,6 @@
                         <h2 class="text-xl sm:text-2xl font-black text-[#023775] mb-2 group-hover:text-blue-700 transition-colors">
                             Rekayasa Perangkat Lunak
                         </h2>
-                        <h3 class="text-xs sm:text-sm font-bold text-amber-600 mb-4 leading-snug">
-                            Tulis kode, ciptakan solusi.
-                        </h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             Kembangkan aplikasi web, mobile, dan sistem digital melalui proyek nyata bersama calon inovator teknologi.
                         </p>
@@ -307,9 +292,6 @@
                         <h2 class="text-xl sm:text-2xl font-black text-[#023775] mb-2 group-hover:text-blue-700 transition-colors">
                             Teknik Komputer dan Jaringan
                         </h2>
-                        <h3 class="text-xs sm:text-sm font-bold text-amber-600 mb-4 leading-snug">
-                            Membangun koneksi, menjaga dunia digital.
-                        </h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             Kuasai perakitan komputer, infrastruktur jaringan, dan keamanan sistem untuk peran teknisi dan administrator jaringan.
                         </p>
@@ -331,9 +313,6 @@
                         <h2 class="text-xl sm:text-2xl font-black text-[#023775] mb-2 group-hover:text-blue-700 transition-colors">
                             Desain Komunikasi Visual
                         </h2>
-                        <h3 class="text-xs sm:text-sm font-bold text-amber-600 mb-4 leading-snug">
-                            Ide yang bicara lewat visual.
-                        </h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             Asah kreativitas lewat desain grafis, ilustrasi, branding, dan konten visual yang punya pesan dan nilai.
                         </p>
@@ -355,9 +334,6 @@
                         <h2 class="text-xl sm:text-2xl font-black text-[#023775] mb-2 group-hover:text-blue-700 transition-colors">
                             Produksi Siaran Program Pertelevisian
                         </h2>
-                        <h3 class="text-xs sm:text-sm font-bold text-amber-600 mb-4 leading-snug">
-                            Di balik layar, di balik cerita.
-                        </h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             Belajar menulis naskah, mengoperasikan kamera, menyunting video, hingga menyiarkan program.
                         </p>
@@ -379,9 +355,6 @@
                         <h2 class="text-xl sm:text-2xl font-black text-[#023775] mb-2 group-hover:text-blue-700 transition-colors">
                             Perhotelan
                         </h2>
-                        <h3 class="text-xs sm:text-sm font-bold text-amber-600 mb-4 leading-snug">
-                            Melayani dengan hati, berkarier tanpa batas.
-                        </h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                             Kembangkan keahlian layanan tamu, tata graha, dan tata hidang berstandar industri hotel dan pariwisata.
                         </p>

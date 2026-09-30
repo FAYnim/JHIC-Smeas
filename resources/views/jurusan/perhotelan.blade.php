@@ -3,6 +3,7 @@
 @section('title', 'Perhotelan')
 @section('kode', 'PH')
 @section('nama', 'Perhotelan')
+@section('ketua', "Drs. M. Na'im Hadi, M.Pd.")
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">

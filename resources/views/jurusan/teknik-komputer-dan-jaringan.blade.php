@@ -3,6 +3,7 @@
 @section('title', 'Teknik Komputer dan Jaringan')
 @section('kode', 'TKJ')
 @section('nama', 'Teknik Komputer dan Jaringan')
+@section('ketua', 'Wiyono, S.Pd., S.ST, MM.')
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -3,6 +3,7 @@
 @section('title', 'Desain Komunikasi Visual')
 @section('kode', 'DKV')
 @section('nama', 'Desain Komunikasi Visual')
+@section('ketua', 'Iqbal Hakam Syah Pahlevi, S.Ds.')
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -3,6 +3,7 @@
 @section('title', 'Bisnis Daring dan Pemasaran')
 @section('kode', 'BDP')
 @section('nama', 'Bisnis Daring dan Pemasaran')
+@section('ketua', 'Lilik Kurniati, S.Pd., MM.')
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">

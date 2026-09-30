@@ -17,7 +17,7 @@
         ['label' => 'Jurusan',     'url' => route('jurusan'),           'key' => 'jurusan'],
         ['label' => 'Informasi',   'url' => route('informasi'),           'key' => 'informasi'],
         ['label' => 'Pusat Karir', 'url' => route('pusat-karir.index'), 'key' => 'pusat-karir'],
-        ['label' => 'BLUD',        'url' => '#',                        'key' => 'blud'],
+        ['label' => 'BLUD',        'url' => route('blud.index'),        'key' => 'blud'],
     ];
 
     $isActive = fn(string $key) => $activePage === $key;

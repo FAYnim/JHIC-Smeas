@@ -43,6 +43,11 @@ Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pu
 Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
 Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');
 
+// BLUD - Marketplace produk & jasa jurusan
+Route::get('/blud', function () {
+    return view('blud.index');
+})->name('blud.index');
+
 // SPMB Routes
 Route::get('/spmb', [SpmbController::class, 'index'])->name('spmb.index');
 Route::get('/spmb/login', [SpmbController::class, 'index'])->name('spmb.login-page');

@@ -16,6 +16,10 @@ Route::get('/jurusan', function () {
     return view('jurusan');
 })->name('jurusan');
 
+Route::get('/informasi', function () {
+    return view('informasi');
+})->name('informasi');
+
 Route::get('/pusat-karir', [LowonganController::class, 'index'])->name('pusat-karir.index');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
 

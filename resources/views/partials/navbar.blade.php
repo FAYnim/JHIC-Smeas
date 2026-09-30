@@ -2,7 +2,7 @@
     $activePage   = $activePage   ?? '';
     $spmbClickable = $spmbClickable ?? true;
     $logoUrl      = $logoUrl      ?? route('pusat-karir.index');
-    $berandaUrl   = $berandaUrl   ?? '#';
+    $berandaUrl   = $berandaUrl   ?? route('beranda');
 
     $navLinks = [
         ['label' => 'Beranda',     'url' => $berandaUrl,                'key' => 'beranda'],

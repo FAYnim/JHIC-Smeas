@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('beranda');
 
 Route::get('/visi-misi', function () {
     return view('visi-misi');

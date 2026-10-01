@@ -66,6 +66,14 @@ Route::post('/blud/{slug}/komentar', [BludController::class, 'storeKomentar'])
     ->where('slug', '[a-z0-9\-]+')
     ->middleware('throttle:10,1')
     ->name('blud.komentar.store');
+Route::post('/blud/{slug}/penawaran', [BludController::class, 'storePenawaran'])
+    ->where('slug', '[a-z0-9\-]+')
+    ->middleware('throttle:10,1')
+    ->name('blud.penawaran.store');
+Route::post('/blud/{slug}/laporkan', [BludController::class, 'storeLaporkan'])
+    ->where('slug', '[a-z0-9\-]+')
+    ->middleware('throttle:10,1')
+    ->name('blud.laporkan.store');
 
 // SPMB Routes
 Route::get('/spmb', [SpmbController::class, 'index'])->name('spmb.index');

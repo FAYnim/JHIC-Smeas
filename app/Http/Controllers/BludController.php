@@ -59,4 +59,35 @@ class BludController extends Controller
 
         return redirect()->route('blud.detail', $slug)->with('success', 'Komentar terkirim.');
     }
+
+    public function storePenawaran(Request $request, string $slug): RedirectResponse
+    {
+        $produk = ProdukBlud::where('slug', $slug)->where('is_published', true)->firstOrFail();
+
+        $validated = $request->validate([
+            'nama' => ['required', 'string', 'max:80'],
+            'kontak' => ['required', 'string', 'max:100'],
+            'pesan' => ['required', 'string', 'max:2000'],
+        ]);
+
+        $produk->penawarans()->create($validated);
+
+        return redirect()->route('blud.detail', $slug)
+            ->with('success', 'Permintaan penawaran Anda telah terkirim.');
+    }
+
+    public function storeLaporkan(Request $request, string $slug): RedirectResponse
+    {
+        $produk = ProdukBlud::where('slug', $slug)->where('is_published', true)->firstOrFail();
+
+        $validated = $request->validate([
+            'kategori' => ['required', 'in:Spam,Konten Tidak Pantas,Hak Cipta,Lainnya'],
+            'deskripsi' => ['required', 'string', 'max:2000'],
+        ]);
+
+        $produk->laporans()->create($validated);
+
+        return redirect()->route('blud.detail', $slug)
+            ->with('success', 'Laporan Anda telah terkirim. Kami akan segera meninjau.');
+    }
 }

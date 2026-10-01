@@ -379,4 +379,70 @@
         font-weight: 600;
         font-size: 0.9rem;
     }
+
+    .blud-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.4);
+        backdrop-filter: blur(4px);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        animation: blud-modal-fade 0.2s ease-out;
+    }
+
+    .blud-modal-overlay[hidden] {
+        display: none;
+    }
+
+    .blud-modal {
+        background: #fff;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 28rem;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+        animation: blud-modal-scale 0.2s ease-out;
+    }
+
+    .blud-modal-close {
+        background: #f1f5f9;
+        border: 0;
+        border-radius: 9999px;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: #475569;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .blud-modal-close:hover {
+        background: #e2e8f0;
+        color: #0f172a;
+    }
+
+    .blud-modal-label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 0.35rem;
+    }
+
+    @keyframes blud-modal-fade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes blud-modal-scale {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
 </style>

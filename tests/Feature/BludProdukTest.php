@@ -123,4 +123,56 @@ class BludProdukTest extends TestCase
         $response->assertSee('Produk Lain dari Desain Komunikasi Visual');
         $response->assertSee('Jasa Desain Logo');
     }
+
+    public function test_post_penawaran_creates_row_and_redirects(): void
+    {
+        $response = $this->post(route('blud.penawaran.store', 'cheeseroll'), [
+            'nama' => 'Pembeli',
+            'kontak' => '081234567890',
+            'pesan' => 'Butuh 20 pcs untuk acara sekolah.',
+        ]);
+
+        $response->assertRedirect(route('blud.detail', 'cheeseroll'));
+        $response->assertSessionHas('success', 'Permintaan penawaran Anda telah terkirim.');
+
+        $this->assertDatabaseHas('produk_blud_penawarans', [
+            'nama' => 'Pembeli',
+            'kontak' => '081234567890',
+            'pesan' => 'Butuh 20 pcs untuk acara sekolah.',
+        ]);
+    }
+
+    public function test_post_penawaran_missing_fields_fails_validation(): void
+    {
+        $response = $this->from(route('blud.detail', 'cheeseroll'))
+            ->post(route('blud.penawaran.store', 'cheeseroll'), []);
+
+        $response->assertSessionHasErrors(['nama', 'kontak', 'pesan']);
+    }
+
+    public function test_post_laporkan_creates_row_and_redirects(): void
+    {
+        $response = $this->post(route('blud.laporkan.store', 'website-sekolah'), [
+            'kategori' => 'Spam',
+            'deskripsi' => 'Deskripsi produk mengandung tautan spam.',
+        ]);
+
+        $response->assertRedirect(route('blud.detail', 'website-sekolah'));
+        $response->assertSessionHas('success', 'Laporan Anda telah terkirim. Kami akan segera meninjau.');
+
+        $this->assertDatabaseHas('produk_blud_laporans', [
+            'kategori' => 'Spam',
+            'deskripsi' => 'Deskripsi produk mengandung tautan spam.',
+        ]);
+    }
+
+    public function test_post_laporkan_invalid_kategori_fails_validation(): void
+    {
+        $response = $this->post(route('blud.laporkan.store', 'website-sekolah'), [
+            'kategori' => 'Bukan Kategori',
+            'deskripsi' => 'Test.',
+        ]);
+
+        $response->assertSessionHasErrors(['kategori']);
+    }
 }

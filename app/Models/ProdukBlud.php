@@ -61,4 +61,14 @@ class ProdukBlud extends Model
     {
         return $this->hasMany(ProdukBludKomentar::class, 'produk_blud_id')->latest();
     }
+
+    public function penawarans(): HasMany
+    {
+        return $this->hasMany(ProdukBludPenawaran::class, 'produk_blud_id')->latest();
+    }
+
+    public function laporans(): HasMany
+    {
+        return $this->hasMany(ProdukBludLaporkan::class, 'produk_blud_id')->latest();
+    }
 }

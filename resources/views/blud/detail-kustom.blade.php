@@ -65,7 +65,7 @@
                     <div class="relative">
                         <button type="button"
                             class="detail-laporkan absolute top-0 right-0"
-                            onclick="alert('Terima kasih. Laporan Anda akan kami tinjau.')">
+                            data-open-modal="modal-laporkan">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
                                 aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -196,6 +196,8 @@
     <footer class="w-full bg-blue-700 text-white text-center py-4 text-sm font-semibold mt-auto">
         Dibuat dengan <span class="text-red-500">❤️</span> oleh Chicken Noodles Team
     </footer>
+
+    @include('blud.partials.modal-penawaran-laporkan', ['produk' => $produk])
 </body>
 
 </html>

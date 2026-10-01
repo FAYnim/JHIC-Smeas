@@ -93,3 +93,8 @@ Route::get('/spmb/formulir/unduh', [SpmbController::class, 'unduhFormulir'])->na
 Route::get('/spmb/verifikasi', [SpmbController::class, 'verifikasi'])->name('spmb.verifikasi');
 Route::get('/spmb/pengumuman', [SpmbController::class, 'pengumuman'])->name('spmb.pengumuman');
 Route::get('/spmb/bantuan', [SpmbController::class, 'bantuan'])->name('spmb.bantuan');
+
+if (app()->runningUnitTests()) {
+    require __DIR__.'/testing.php';
+}
+

@@ -51,6 +51,9 @@ Route::get('/pusat-karir/mitra', [LowonganController::class, 'katalogMitra'])->n
 Route::get('/pusat-karir/mitra/{slug}', [LowonganController::class, 'detailMitra'])->name('pusat-karir.detail-mitra');
 Route::get('/pusat-karir/artikel', [LowonganController::class, 'artikel'])->name('pusat-karir.artikel');
 Route::get('/pusat-karir/artikel/{slug}', [LowonganController::class, 'detailArtikel'])->name('pusat-karir.detail-artikel');
+Route::get('/pusat-karir/study-tracer', [LowonganController::class, 'studyTracer'])->name('pusat-karir.study-tracer');
+Route::get('/pusat-karir/study-tracer/kuesioner', [LowonganController::class, 'formKuesioner'])->name('pusat-karir.study-tracer.kuesioner');
+Route::post('/pusat-karir/study-tracer/kuesioner', [LowonganController::class, 'storeKuesioner'])->name('pusat-karir.study-tracer.store');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
 Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
 Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');

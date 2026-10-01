@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumni;
 use App\Models\Artikel;
+use App\Models\KuesionerTracer;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
 use App\Models\MitraPerusahaan;
+use App\Models\TracerMitraAlumnus;
+use App\Models\TracerSetting;
+use App\Models\TracerStatusLulusan;
 use App\Models\Webinar;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class LowonganController extends Controller
 {
@@ -64,7 +71,7 @@ class LowonganController extends Controller
                 'icon' => 'chart-bar',
                 'count' => 1,
                 'unit' => 'program',
-                'url' => '#',
+                'url' => route('pusat-karir.study-tracer'),
             ],
         ];
 
@@ -358,6 +365,98 @@ class LowonganController extends Controller
         $other = Artikel::where('id', '!=', $artikel->id)->latest('published_at')->take(2)->get();
 
         return view('pusat-karir.detail-artikel', compact('artikel', 'other'));
+    }
+
+    public function studyTracer(): View
+    {
+        return view('pusat-karir.study-tracer', [
+            'setting' => TracerSetting::first(),
+            'statuses' => TracerStatusLulusan::orderBy('urutan')->get(),
+            'mitras' => TracerMitraAlumnus::orderBy('urutan')->get(),
+        ]);
+    }
+
+    public function formKuesioner(Request $request): View|RedirectResponse
+    {
+        if ($request->filled('nisn') && $request->filled('tahun_lulus')) {
+            $nisn = $request->string('nisn')->toString();
+            $tahunLulus = (int) $request->input('tahun_lulus');
+
+            $alumni = null;
+            if (preg_match('/^\d{10}$/', $nisn)) {
+                $alumni = Alumni::where('nisn', $nisn)
+                    ->where('tahun_lulus', $tahunLulus)
+                    ->first();
+            }
+
+            if (! $alumni) {
+                return back()->withErrors([
+                    'nisn' => 'Data alumni tidak ditemukan. Periksa NISN dan tahun kelulusan.',
+                ]);
+            }
+
+            session(['tracer_verified' => [
+                'alumnis_id' => $alumni->id,
+                'nisn' => $alumni->nisn,
+                'nama' => $alumni->nama,
+                'jurusan' => $alumni->jurusan,
+                'tahun_lulus' => $alumni->tahun_lulus,
+            ]]);
+
+            return view('pusat-karir.kuesioner-tracer', [
+                'alumni' => $alumni,
+                'verified' => session('tracer_verified'),
+            ]);
+        }
+
+        return view('pusat-karir.kuesioner-tracer', [
+            'alumni' => null,
+            'verified' => session('tracer_verified'),
+        ]);
+    }
+
+    public function storeKuesioner(Request $request): RedirectResponse
+    {
+        $verified = session('tracer_verified', []);
+
+        $validated = $request->validate([
+            'alumnis_id' => ['nullable', 'integer'],
+            'nisn' => ['required', 'string', 'digits:10'],
+            'nama' => ['required', 'string', 'max:255'],
+            'jurusan' => ['required', 'string', 'max:255'],
+            'tahun_lulus' => ['required', 'integer'],
+            'status_pekerjaan' => ['required', 'in:Bekerja,Melanjutkan Kuliah,Wirausaha,Mencari kerja'],
+            'nama_perusahaan' => ['nullable', 'string', 'max:255'],
+            'posisi' => ['nullable', 'string', 'max:255'],
+            'masa_tunggu' => ['nullable', 'string', 'max:255'],
+            'rentang_gaji' => ['nullable', 'string', 'max:255'],
+            'relevansi' => ['required', 'in:Relevan,Cukup Relevan,Tidak Relevan'],
+            'saran' => ['nullable', 'string'],
+            'is_konfirmasi' => ['required', 'accepted'],
+        ]);
+
+        $alumnisId = $validated['alumnis_id'] ?? ($verified['alumnis_id'] ?? null);
+
+        KuesionerTracer::create([
+            'alumnis_id' => $alumnisId,
+            'nisn' => $validated['nisn'],
+            'nama' => $validated['nama'],
+            'jurusan' => $validated['jurusan'],
+            'tahun_lulus' => $validated['tahun_lulus'],
+            'status_pekerjaan' => $validated['status_pekerjaan'],
+            'nama_perusahaan' => $validated['nama_perusahaan'] ?? null,
+            'posisi' => $validated['posisi'] ?? null,
+            'masa_tunggu' => $validated['masa_tunggu'] ?? null,
+            'rentang_gaji' => $validated['rentang_gaji'] ?? null,
+            'relevansi' => $validated['relevansi'],
+            'saran' => $validated['saran'] ?? null,
+            'is_konfirmasi' => true,
+        ]);
+
+        session()->forget('tracer_verified');
+
+        return redirect()->route('pusat-karir.study-tracer')
+            ->with('success', 'Terima kasih! Data kuesioner Anda telah tersimpan.');
     }
 
     protected function generateRegistrationCode(string $companyShort): string

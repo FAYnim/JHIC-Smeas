@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BimbinganKarir extends Model
 {
+    protected $fillable = [
+        'bimbingan_kategori_id',
+        'title',
+        'slug',
+        'description',
+        'image_url',
+        'external_url',
+        'is_published',
+    ];
+
     protected function casts(): array
     {
         return [

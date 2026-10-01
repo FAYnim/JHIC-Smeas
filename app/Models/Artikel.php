@@ -13,6 +13,8 @@ class Artikel extends Model
         'content',
         'kategori',
         'published_at',
+        'image_url',
+        'reading_time',
     ];
 
     protected function casts(): array

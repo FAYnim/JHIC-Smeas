@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Lowongan extends Model
 {
@@ -29,22 +30,37 @@ class Lowongan extends Model
         'pokja_nama',
         'pokja_koordinator',
         'pokja_wa',
+        'gaji_min',
+        'gaji_max',
+        'tipe_pekerjaan',
+        'pengalaman',
+        'bidang_industri',
+        'jenjang_pendidikan',
+        'fresh_graduate_ok',
+        'logo_color',
+        'mitra_id',
     ];
 
     protected function casts(): array
     {
         return [
-            'is_mitra_dudi'    => 'boolean',
-            'tanggung_jawab'   => 'array',
-            'kualifikasi'      => 'array',
-            'dokumen'          => 'array',
-            'benefits'         => 'array',
+            'is_mitra_dudi' => 'boolean',
+            'tanggung_jawab' => 'array',
+            'kualifikasi' => 'array',
+            'dokumen' => 'array',
+            'benefits' => 'array',
             'batas_pendaftaran' => 'date',
+            'fresh_graduate_ok' => 'boolean',
         ];
     }
 
     public function applications()
     {
         return $this->hasMany(MagangApplication::class);
+    }
+
+    public function mitra(): BelongsTo
+    {
+        return $this->belongsTo(MitraPerusahaan::class, 'mitra_id');
     }
 }

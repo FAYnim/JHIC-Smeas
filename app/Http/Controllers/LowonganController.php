@@ -5,15 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
+use App\Models\MitraPerusahaan;
 use App\Models\Webinar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class LowonganController extends Controller
 {
-    /**
-     * Halaman utama Pusat Karir — kirim semua lowongan ke view.
-     */
     public function index()
     {
         $lowongans = Lowongan::latest()->get();
@@ -22,18 +20,63 @@ class LowonganController extends Controller
 
         $webinars = Webinar::where('is_published', true)->latest('start_date')->get();
 
-        // Card "Upcoming Webinar" menampilkan satu webinar terdekat dari tanggal sekarang.
         $upcomingWebinar = $webinars
             ->filter(fn (Webinar $w) => $w->start_date->isFuture())
             ->sortBy('start_date')
             ->first();
 
-        return view('pusat-karir.pusat-karir', compact('lowongans', 'artikels', 'webinars', 'upcomingWebinar'));
+        $categories = [
+            [
+                'name' => 'Magang/Internship',
+                'slug' => 'magang',
+                'icon' => 'briefcase',
+                'count' => Lowongan::where('jenis', 'magang')->count(),
+                'unit' => 'program',
+                'url' => route('pusat-karir.katalog-magang'),
+            ],
+            [
+                'name' => 'Lowongan Kerja',
+                'slug' => 'lowongan',
+                'icon' => 'briefcase',
+                'count' => Lowongan::where('jenis', 'lowongan')->count(),
+                'unit' => 'lowongan',
+                'url' => route('pusat-karir.katalog-lowongan'),
+            ],
+            [
+                'name' => 'Mitra Perusahaan',
+                'slug' => 'mitra',
+                'icon' => 'building-office',
+                'count' => MitraPerusahaan::where('is_mou_active', true)->count(),
+                'unit' => 'mitra',
+                'url' => route('pusat-karir.katalog-mitra'),
+            ],
+            [
+                'name' => 'Bimbingan Karir',
+                'slug' => 'bimbingan-karir',
+                'icon' => 'academic-cap',
+                'count' => 5,
+                'unit' => 'kategori',
+                'url' => '#bimbingan-karir',
+            ],
+            [
+                'name' => 'Study Tracer',
+                'slug' => 'study-tracer',
+                'icon' => 'chart-bar',
+                'count' => 1,
+                'unit' => 'program',
+                'url' => '#',
+            ],
+        ];
+
+        return view('pusat-karir.pusat-karir', compact(
+            'lowongans',
+            'artikels',
+            'webinars',
+            'upcomingWebinar',
+            'categories'
+        ));
     }
 
-    /**
-     * Halaman detail lowongan berdasarkan slug.
-     */
     public function show(string $slug)
     {
         $lowongan = Lowongan::where('slug', $slug)->firstOrFail();
@@ -41,9 +84,6 @@ class LowonganController extends Controller
         return view('pusat-karir.detail-lowongan', compact('lowongan'));
     }
 
-    /**
-     * Halaman formulir verifikasi & ajuan magang.
-     */
     public function apply(string $slug)
     {
         $lowongan = Lowongan::where('slug', $slug)->firstOrFail();
@@ -51,9 +91,6 @@ class LowonganController extends Controller
         return view('pusat-karir.lamar-lowongan', compact('lowongan'));
     }
 
-    /**
-     * Proses kirim lamaran magang.
-     */
     public function storeApply(Request $request, string $slug)
     {
         $lowongan = Lowongan::where('slug', $slug)->firstOrFail();
@@ -76,6 +113,250 @@ class LowonganController extends Controller
 
         return redirect()->route('pusat-karir.detail', $slug)
             ->with('success', 'Ajuan lamaran magang Anda berhasil dikirim!');
+    }
+
+    public function katalogLowongan(Request $request)
+    {
+        $tipeOptions = [
+            'Full-time (Purnawaktu)',
+            'Part-time (Paruhwaktu)',
+            'Kontrak (PKWT)',
+            'Freelance / Proyek',
+        ];
+        $pengalamanOptions = [
+            'Fresh Graduate Welcome',
+            'Minimal 1-2 Tahun',
+            'Berbasis Portofolio Proyek',
+        ];
+        $bidangOptions = [
+            'Software & IT Solusi',
+            'Desain Kreatif & Media',
+            'Jaringan & Infrastruktur',
+            'Administrasi & Keuangan',
+        ];
+        $jenjangOptions = [
+            'SMK / MAK Sederajat',
+            'Terbuka D3 / S1 (Lanjutan)',
+        ];
+        $gajiOptions = [
+            'semua' => 'Semua Rentang',
+            'umk' => '≥ UMK Surabaya (Rp 4,7 Jt)',
+            'tampil' => 'Gaji Ditampilkan Saja',
+        ];
+
+        $query = Lowongan::where('jenis', 'lowongan');
+
+        if ($request->filled('q')) {
+            $q = $request->string('q')->toString();
+            $query->where(function ($builder) use ($q) {
+                $builder->where('title', 'like', "%{$q}%")
+                    ->orWhere('company_name', 'like', "%{$q}%");
+            });
+        }
+
+        $selectedTipe = $request->input('tipe');
+        if (is_array($selectedTipe)) {
+            $query->whereIn('tipe_pekerjaan', $selectedTipe);
+        }
+
+        $selectedPengalaman = $request->input('pengalaman');
+        if (is_array($selectedPengalaman)) {
+            $query->whereIn('pengalaman', $selectedPengalaman);
+        }
+
+        $selectedBidang = $request->input('bidang');
+        if (is_array($selectedBidang)) {
+            $query->whereIn('bidang_industri', $selectedBidang);
+        }
+
+        $selectedJenjang = $request->input('jenjang');
+        if (is_array($selectedJenjang)) {
+            $query->whereIn('jenjang_pendidikan', $selectedJenjang);
+        }
+
+        $gajiFilter = $request->input('gaji');
+        if ($gajiFilter === 'umk') {
+            $query->where('gaji_min', '>=', 4700000);
+        } elseif ($gajiFilter === 'tampil') {
+            $query->whereNotNull('gaji_min');
+        }
+
+        if ($request->input('urut') === 'gaji_desc') {
+            $query->orderByDesc('gaji_max')->orderByDesc('gaji_min');
+        } else {
+            $query->latest();
+        }
+
+        $lowongans = $query->paginate(8)->withQueryString();
+
+        return view('pusat-karir.katalog-lowongan', [
+            'lowongans' => $lowongans,
+            'tipeOptions' => $tipeOptions,
+            'pengalamanOptions' => $pengalamanOptions,
+            'bidangOptions' => $bidangOptions,
+            'jenjangOptions' => $jenjangOptions,
+            'gajiOptions' => $gajiOptions,
+            'selected' => [
+                'tipe' => $selectedTipe ?: [],
+                'pengalaman' => $selectedPengalaman ?: [],
+                'bidang' => $selectedBidang ?: [],
+                'jenjang' => $selectedJenjang ?: [],
+                'gaji' => $gajiFilter,
+                'q' => $request->input('q'),
+                'urut' => $request->input('urut'),
+            ],
+        ]);
+    }
+
+    public function katalogMagang(Request $request)
+    {
+        $jurusanOptions = [
+            'Rekayasa Perangkat Lunak',
+            'Sist. Inform., Jar. & Apl (SIJA)',
+            'Desain Komunikasi Visual',
+            'Animasi & 3D',
+            'Akuntansi & Keuangan',
+            'Bisnis Daring & Pemasaran',
+        ];
+        $skemaOptions = [
+            'On-site (Surabaya)',
+            'Hybrid',
+        ];
+        $durasiOptions = [
+            '6 Bulan (1 Semester Penuh)',
+            '3 Bulan (Fase Pendek)',
+        ];
+        $fasilitasOptions = [
+            'Uang Saku Bulanan',
+            'Sertifikat Resmi Industri',
+            'Mentoring 1-on-1',
+        ];
+
+        $query = Lowongan::where('jenis', 'magang');
+
+        if ($request->filled('q')) {
+            $q = $request->string('q')->toString();
+            $query->where(function ($builder) use ($q) {
+                $builder->where('title', 'like', "%{$q}%")
+                    ->orWhere('company_name', 'like', "%{$q}%");
+            });
+        }
+
+        $selectedJurusan = $request->input('jurusan');
+        if (is_array($selectedJurusan)) {
+            $query->where(function ($builder) use ($selectedJurusan) {
+                foreach ($selectedJurusan as $j) {
+                    $builder->orWhere('jurusan', 'like', '%'.$j.'%');
+                }
+            });
+        }
+
+        $skema = $request->input('skema');
+        if ($skema) {
+            $query->where(function ($builder) use ($skema) {
+                $builder->where('metode_kerja', 'like', '%'.$skema.'%')
+                    ->orWhere('metode_kerja', 'like', '%Hybrid%');
+                if (str_contains(strtolower($skema), 'on-site')) {
+                    $builder->orWhere('metode_kerja', 'like', '%On-site%');
+                }
+            });
+        }
+
+        $durasi = $request->input('durasi');
+        if ($durasi) {
+            $query->where('durasi_pelaksanaan', 'like', '%'.Str::before($durasi, ' ').'%');
+        }
+
+        $selectedFasilitas = $request->input('fasilitas');
+        if (is_array($selectedFasilitas)) {
+            $query->where(function ($builder) use ($selectedFasilitas) {
+                foreach ($selectedFasilitas as $f) {
+                    $builder->orWhere('benefits', 'like', '%'.$f.'%');
+                }
+            });
+        }
+
+        if ($request->boolean('kuota')) {
+            $query->where('kuota', '>', 0);
+        }
+
+        $query->latest();
+
+        $lowongans = $query->paginate(8)->withQueryString();
+
+        return view('pusat-karir.katalog-magang', [
+            'lowongans' => $lowongans,
+            'jurusanOptions' => $jurusanOptions,
+            'skemaOptions' => $skemaOptions,
+            'durasiOptions' => $durasiOptions,
+            'fasilitasOptions' => $fasilitasOptions,
+            'selected' => [
+                'jurusan' => $selectedJurusan ?: [],
+                'skema' => $skema,
+                'durasi' => $durasi,
+                'fasilitas' => $selectedFasilitas ?: [],
+                'kuota' => $request->boolean('kuota'),
+                'q' => $request->input('q'),
+            ],
+        ]);
+    }
+
+    public function katalogMitra(Request $request)
+    {
+        $query = MitraPerusahaan::query();
+
+        if ($request->filled('q')) {
+            $q = $request->string('q')->toString();
+            $query->where(function ($builder) use ($q) {
+                $builder->where('name', 'like', "%{$q}%")
+                    ->orWhere('city', 'like', "%{$q}%");
+            });
+        }
+
+        $sector = $request->input('sector');
+        if ($sector) {
+            $query->where('sector', $sector);
+        }
+
+        $program = $request->input('program');
+        if ($program) {
+            $query->where('programs', 'like', '%'.$program.'%');
+        }
+
+        $mitras = $query->latest()->paginate(6)->withQueryString();
+
+        return view('pusat-karir.katalog-mitra', [
+            'mitras' => $mitras,
+            'totalMitra' => MitraPerusahaan::where('is_mou_active', true)->count(),
+            'totalSiswa' => Lowongan::where('jenis', 'magang')->sum('kuota') + 400,
+            'totalKelas' => MitraPerusahaan::where('kelas_industri', 'like', '%jurusan_sasaran%')->count(),
+        ]);
+    }
+
+    public function detailMitra(string $slug)
+    {
+        $mitra = MitraPerusahaan::where('slug', $slug)->with('lowongans')->firstOrFail();
+
+        return view('pusat-karir.detail-mitra', compact('mitra'));
+    }
+
+    public function artikel()
+    {
+        $artikels = Artikel::latest('published_at')->paginate(9);
+
+        return view('pusat-karir.artikel', [
+            'artikels' => $artikels,
+            'featured' => $artikels->items()[0] ?? null,
+        ]);
+    }
+
+    public function detailArtikel(string $slug)
+    {
+        $artikel = Artikel::where('slug', $slug)->firstOrFail();
+
+        $other = Artikel::where('id', '!=', $artikel->id)->latest('published_at')->take(2)->get();
+
+        return view('pusat-karir.detail-artikel', compact('artikel', 'other'));
     }
 
     protected function generateRegistrationCode(string $companyShort): string

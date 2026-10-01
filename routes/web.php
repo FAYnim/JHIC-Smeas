@@ -45,9 +45,13 @@ Route::get('/informasi/akademik', function () {
 })->name('informasi.akademik');
 
 Route::get('/pusat-karir', [LowonganController::class, 'index'])->name('pusat-karir.index');
+Route::get('/pusat-karir/lowongan', [LowonganController::class, 'katalogLowongan'])->name('pusat-karir.katalog-lowongan');
+Route::get('/pusat-karir/magang', [LowonganController::class, 'katalogMagang'])->name('pusat-karir.katalog-magang');
+Route::get('/pusat-karir/mitra', [LowonganController::class, 'katalogMitra'])->name('pusat-karir.katalog-mitra');
+Route::get('/pusat-karir/mitra/{slug}', [LowonganController::class, 'detailMitra'])->name('pusat-karir.detail-mitra');
+Route::get('/pusat-karir/artikel', [LowonganController::class, 'artikel'])->name('pusat-karir.artikel');
+Route::get('/pusat-karir/artikel/{slug}', [LowonganController::class, 'detailArtikel'])->name('pusat-karir.detail-artikel');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
-
-// Pusat Karir - Lamar
 Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
 Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');
 

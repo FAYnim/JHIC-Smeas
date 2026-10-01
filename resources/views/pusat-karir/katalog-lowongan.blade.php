@@ -46,6 +46,12 @@
         .filter-check {
             accent-color: #2563eb;
         }
+
+        .filter-check:hover,
+        .filter-check:active {
+            box-shadow: 0 0 0 2px #2563eb;
+            border-color: #2563eb;
+        }
     </style>
 </head>
 
@@ -200,7 +206,7 @@
                                     $gajiText = 'Rp ' . number_format($l->gaji_min, 0, ',', '.') . ' – ' . number_format($l->gaji_max ?: $l->gaji_min, 0, ',', '.');
                                 }
                             @endphp
-                            <div class="bg-white rounded-xl border {{ $isFeatured ? 'border-blue-500 ring-1 ring-blue-500' : 'border-slate-200' }} shadow-sm flex flex-col">
+                            <div class="group bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col hover:border-blue-500 hover:ring-1 hover:ring-blue-500 transition-colors">
                                 <div class="p-5 flex items-start justify-between gap-3">
                                     <div class="flex items-center gap-3">
                                         <div class="w-12 h-12 rounded-lg flex items-center justify-center text-white text-[10px] font-black tracking-wide shrink-0" style="background-color: {{ $logoColor }}">
@@ -256,7 +262,7 @@
                                         Batas Lamaran: <span class="font-bold text-red-600">{{ $l->batas_pendaftaran->translatedFormat('d M Y') }}</span>
                                     </p>
                                     <a href="{{ route('pusat-karir.detail', $l->slug) }}"
-                                        class="block text-center text-sm font-bold py-2.5 rounded-lg transition-colors {{ $isFeatured ? 'bg-blue-700 text-white hover:bg-blue-800' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                                        class="block text-center text-sm font-bold py-2.5 rounded-lg transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200 group-hover:bg-blue-700 group-hover:text-white">
                                         Lihat Detail &amp; Lamar →
                                     </a>
                                 </div>

@@ -7,8 +7,8 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
+use Illuminate\Validation\Rule;
 
 class SpmbController extends Controller
 {
@@ -98,7 +98,7 @@ class SpmbController extends Controller
             'nama' => 'required',
             'jenis_kelamin' => 'required|in:Pria,Wanita',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required|date|before_or_equal:' . now()->subYears(15)->format('Y-m-d'),
+            'tanggal_lahir' => 'required|date|before_or_equal:'.now()->subYears(15)->format('Y-m-d'),
             'alamat' => 'required',
             'wa' => 'required',
             'email' => 'required|email',
@@ -145,8 +145,8 @@ class SpmbController extends Controller
         $request->validate([
             'status_ayah' => 'required',
             'status_ibu' => 'required',
-            'nama_ayah' => 'required',
-            'nama_ibu' => 'required',
+            'nama_ayah' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\.\'\-]+$/u'],
+            'nama_ibu' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\.\'\-]+$/u'],
             'nik_ayah' => 'required|digits:16',
             'nik_ibu' => 'required|digits:16',
             'pendidikan_ayah' => 'required',
@@ -155,13 +155,17 @@ class SpmbController extends Controller
             'pekerjaan_ibu' => 'required',
             'pekerjaan_ayah_lainnya' => 'required_if:pekerjaan_ayah,Lainnya',
             'pekerjaan_ibu_lainnya' => 'required_if:pekerjaan_ibu,Lainnya',
-            'penghasilan_ayah' => 'required',
-            'penghasilan_ibu' => 'required',
-            'wa_ayah' => 'required',
-            'wa_ibu' => 'required',
+            'penghasilan_ayah' => ['required', Rule::in(['Tidak Bekerja', '< 2jt', '2jt - 5jt', '5jt - 10jt', '> 10jt'])],
+            'penghasilan_ibu' => ['required', Rule::in(['Tidak Bekerja', '< 2jt', '2jt - 5jt', '5jt - 10jt', '> 10jt'])],
+            'wa_ayah' => ['required', 'digits_between:10,16'],
+            'wa_ibu' => ['required', 'digits_between:10,16'],
         ], [
             'nik_ayah.digits' => 'NIK Ayah harus 16 digit angka.',
             'nik_ibu.digits' => 'NIK Ibu harus 16 digit angka.',
+            'nama_ayah.regex' => 'Nama Ayah hanya boleh berisi huruf.',
+            'nama_ibu.regex' => 'Nama Ibu hanya boleh berisi huruf.',
+            'wa_ayah.digits_between' => 'Nomor WhatsApp Ayah harus 10-16 digit angka.',
+            'wa_ibu.digits_between' => 'Nomor WhatsApp Ibu harus 10-16 digit angka.',
             'pekerjaan_ayah_lainnya.required_if' => 'Silakan isi pekerjaan ayah.',
             'pekerjaan_ibu_lainnya.required_if' => 'Silakan isi pekerjaan ibu.',
         ], [
@@ -265,7 +269,7 @@ class SpmbController extends Controller
     {
         $calonSiswa = CalonSiswa::where('nisn', session('spmb_nisn'))->firstOrFail();
 
-        $options = new Options();
+        $options = new Options;
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isRemoteEnabled', true);
 

@@ -15,12 +15,12 @@
             <div class="pt-panel pt-panel--active" id="pt-panel-ayah">
                 <div class="flex flex-wrap items-center gap-5 mb-8">
                     <span class="text-sm font-bold text-slate-700">Status Ayah:</span>
-                    <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer">
+                    <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer text-slate-400 has-[:checked]:text-blue-700 transition-colors">
                         <input type="radio" name="status_ayah" value="Masih Hidup" class="accent-blue-600" @checked(old('status_ayah', $calonSiswa->status_ayah ?? '') === 'Masih Hidup')>
-                        <span class="text-blue-700">Masih Hidup</span>
+                        <span>Masih Hidup</span>
                     </label>
-                    <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer text-slate-400">
-                        <input type="radio" name="status_ayah" value="Meninggal Dunia" @checked(old('status_ayah', $calonSiswa->status_ayah ?? '') === 'Meninggal Dunia')>
+                    <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer text-slate-400 has-[:checked]:text-blue-700 transition-colors">
+                        <input type="radio" name="status_ayah" value="Meninggal Dunia" class="accent-blue-600" @checked(old('status_ayah', $calonSiswa->status_ayah ?? '') === 'Meninggal Dunia')>
                         <span>Meninggal Dunia</span>
                     </label>
                 </div>
@@ -96,6 +96,7 @@
                         <select id="penghasilan_ayah" name="penghasilan_ayah"
                             class="field-select @error('penghasilan_ayah') input-error @enderror">
                             <option value="" disabled @selected(!old('penghasilan_ayah', $calonSiswa->penghasilan_ayah ?? ''))>Pilih rentang gaji...</option>
+                            <option @selected(old('penghasilan_ayah', $calonSiswa->penghasilan_ayah ?? '') === 'Tidak Bekerja')>Tidak Bekerja</option>
                             <option @selected(old('penghasilan_ayah', $calonSiswa->penghasilan_ayah ?? '') === '< 2jt')>&lt; 2jt</option>
                             <option @selected(old('penghasilan_ayah', $calonSiswa->penghasilan_ayah ?? '') === '2jt - 5jt')>2jt - 5jt</option>
                             <option @selected(old('penghasilan_ayah', $calonSiswa->penghasilan_ayah ?? '') === '5jt - 10jt')>5jt - 10jt</option>
@@ -108,9 +109,9 @@
 
                     <div>
                         <label for="wa_ayah" class="field-label">Nomor Whatsapps</label>
-                        <input type="tel" id="wa_ayah" name="wa_ayah" inputmode="numeric"
+                        <input type="tel" id="wa_ayah" name="wa_ayah" inputmode="numeric" maxlength="16"
                             class="field-input @error('wa_ayah') input-error @enderror"
-                            placeholder="Contoh: 08898234..." value="{{ old('wa_ayah', $calonSiswa->wa_ayah ?? '') }}">
+                            placeholder="Contoh: 08898234... (maks. 16 digit)" value="{{ old('wa_ayah', $calonSiswa->wa_ayah ?? '') }}">
                         @error('wa_ayah')
                             <span class="field-error-text">{{ $message }}</span>
                         @enderror
@@ -121,12 +122,12 @@
             <div class="pt-panel" id="pt-panel-ibu">
                 <div class="flex flex-wrap items-center gap-5 mb-8">
                     <span class="text-sm font-bold text-slate-700">Status Ibu:</span>
-                    <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer">
+                    <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer text-slate-400 has-[:checked]:text-blue-700 transition-colors">
                         <input type="radio" name="status_ibu" value="Masih Hidup" class="accent-blue-600" @checked(old('status_ibu', $calonSiswa->status_ibu ?? '') === 'Masih Hidup')>
-                        <span class="text-blue-700">Masih Hidup</span>
+                        <span>Masih Hidup</span>
                     </label>
-                    <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer text-slate-400">
-                        <input type="radio" name="status_ibu" value="Meninggal Dunia" @checked(old('status_ibu', $calonSiswa->status_ibu ?? '') === 'Meninggal Dunia')>
+                    <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer text-slate-400 has-[:checked]:text-blue-700 transition-colors">
+                        <input type="radio" name="status_ibu" value="Meninggal Dunia" class="accent-blue-600" @checked(old('status_ibu', $calonSiswa->status_ibu ?? '') === 'Meninggal Dunia')>
                         <span>Meninggal Dunia</span>
                     </label>
                 </div>
@@ -202,6 +203,7 @@
                         <select id="penghasilan_ibu" name="penghasilan_ibu"
                             class="field-select @error('penghasilan_ibu') input-error @endif">
                             <option value="" disabled @selected(!old('penghasilan_ibu', $calonSiswa->penghasilan_ibu ?? ''))>Pilih rentang gaji...</option>
+                            <option @selected(old('penghasilan_ibu', $calonSiswa->penghasilan_ibu ?? '') === 'Tidak Bekerja')>Tidak Bekerja</option>
                             <option @selected(old('penghasilan_ibu', $calonSiswa->penghasilan_ibu ?? '') === '< 2jt')>&lt; 2jt</option>
                             <option @selected(old('penghasilan_ibu', $calonSiswa->penghasilan_ibu ?? '') === '2jt - 5jt')>2jt - 5jt</option>
                             <option @selected(old('penghasilan_ibu', $calonSiswa->penghasilan_ibu ?? '') === '5jt - 10jt')>5jt - 10jt</option>
@@ -214,9 +216,9 @@
 
                     <div>
                         <label for="wa_ibu" class="field-label">Nomor Whatsapps</label>
-                        <input type="tel" id="wa_ibu" name="wa_ibu" inputmode="numeric"
+                        <input type="tel" id="wa_ibu" name="wa_ibu" inputmode="numeric" maxlength="16"
                             class="field-input @error('wa_ibu') input-error @endif"
-                            placeholder="Contoh: 08898234..." value="{{ old('wa_ibu', $calonSiswa->wa_ibu ?? '') }}">
+                            placeholder="Contoh: 08898234... (maks. 16 digit)" value="{{ old('wa_ibu', $calonSiswa->wa_ibu ?? '') }}">
                         @error('wa_ibu')
                             <span class="field-error-text">{{ $message }}</span>
                         @enderror

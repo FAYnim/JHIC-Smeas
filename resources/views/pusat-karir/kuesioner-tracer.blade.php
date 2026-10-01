@@ -74,15 +74,6 @@
             <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 md:p-8">
                 <h1 class="text-2xl font-extrabold text-slate-900 text-center">Kuesioner Tracer Study</h1>
 
-                {{-- Stepper --}}
-                <div class="mt-6 flex items-center justify-center gap-2 bg-slate-100 rounded-lg px-4 py-3">
-                    <span class="text-xs font-bold text-slate-900">Data Alumni</span>
-                    <span class="h-px w-8 sm:w-16 bg-slate-300"></span>
-                    <span class="text-xs font-bold text-slate-900">Status Karir</span>
-                    <span class="h-px w-8 sm:w-16 bg-slate-300"></span>
-                    <span class="text-xs font-bold text-slate-900">Rincian Alumni</span>
-                </div>
-
                 {{-- Alumni identity --}}
                 <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div class="rounded-lg bg-[#eff6ff] border border-blue-100 px-4 py-3">

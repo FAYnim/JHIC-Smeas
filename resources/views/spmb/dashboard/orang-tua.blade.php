@@ -18,7 +18,7 @@
                 <div class="flex flex-wrap items-center gap-5 mb-8">
                     <span class="text-sm font-bold text-slate-700">Status Ayah:</span>
                     <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer">
-                        <input type="radio" name="status_ayah" value="Masih Hidup" checked class="accent-blue-600">
+                        <input type="radio" name="status_ayah" value="Masih Hidup" class="accent-blue-600">
                         <span class="text-blue-700">Masih Hidup</span>
                     </label>
                     <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer text-slate-400">
@@ -32,7 +32,7 @@
                         <label for="nama_ayah" class="field-label">Nama Lengkap Ayah (Sesuai KTP)</label>
                         <input type="text" id="nama_ayah" name="nama_ayah"
                             class="field-input @error('nama_ayah') input-error @enderror"
-                            placeholder="Isi nama..." value="{{ old('nama_ayah', 'Ephraim Sugeng') }}">
+                            placeholder="Isi nama..." value="{{ old('nama_ayah') }}">
                         @error('nama_ayah')
                             <span class="field-error-text">{{ $message }}</span>
                         @enderror
@@ -42,7 +42,7 @@
                         <label for="nik_ayah" class="field-label">NIK Ayah</label>
                         <input type="text" id="nik_ayah" name="nik_ayah" inputmode="numeric"
                             class="field-input @error('nik_ayah') input-error @enderror" placeholder="NIK..."
-                            value="{{ old('nik_ayah', '123456') }}">
+                            value="{{ old('nik_ayah') }}">
                         @error('nik_ayah')
                             <span class="field-error-text">{{ $message }}</span>
                         @enderror
@@ -99,7 +99,7 @@
                         <label for="wa_ayah" class="field-label">Nomor Whatsapps</label>
                         <input type="tel" id="wa_ayah" name="wa_ayah" inputmode="numeric"
                             class="field-input @error('wa_ayah') input-error @enderror"
-                            placeholder="Contoh: 08898234..." value="{{ old('wa_ayah', '0889876754') }}">
+                            placeholder="Contoh: 08898234..." value="{{ old('wa_ayah') }}">
                         @error('wa_ayah')
                             <span class="field-error-text">{{ $message }}</span>
                         @enderror
@@ -112,7 +112,7 @@
                 <div class="flex flex-wrap items-center gap-5 mb-8">
                     <span class="text-sm font-bold text-slate-700">Status Ibu:</span>
                     <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer">
-                        <input type="radio" name="status_ibu" value="Masih Hidup" checked class="accent-blue-600">
+                        <input type="radio" name="status_ibu" value="Masih Hidup" class="accent-blue-600">
                         <span class="text-blue-700">Masih Hidup</span>
                     </label>
                     <label class="inline-flex items-center gap-2 text-sm font-bold cursor-pointer text-slate-400">

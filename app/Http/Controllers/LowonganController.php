@@ -106,13 +106,14 @@ class LowonganController extends Controller
             'status' => 'pending',
         ]);
 
-        $request->session()->flash('lamaran_success', [
-            'nisn' => $application->nisn,
-            'registration_code' => $application->registration_code,
-        ]);
-
-        return redirect()->route('pusat-karir.detail', $slug)
-            ->with('success', 'Ajuan lamaran magang Anda berhasil dikirim!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Ajuan lamaran magang Anda berhasil dikirim.',
+            'data' => [
+                'nisn' => $application->nisn,
+                'registration_code' => $application->registration_code,
+            ],
+        ], 201);
     }
 
     public function katalogLowongan(Request $request)

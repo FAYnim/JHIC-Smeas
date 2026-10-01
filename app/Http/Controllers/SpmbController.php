@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CalonSiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -22,20 +23,32 @@ class SpmbController extends Controller
      */
     public function login(Request $request)
     {
-        $nisn = (string) $request->post('nisn', '');
+        $request->validate([
+            'nisn' => 'required|digits:10',
+        ], [
+            'nisn.required' => 'NISN wajib diisi.',
+            'nisn.digits' => 'NISN harus berjumlah persis 10 digit angka.',
+        ]);
 
-        if (strlen($nisn) !== 10 || !ctype_digit($nisn)) {
-            return Redirect::route('spmb.index')
-                ->withInput()
-                ->withErrors(['nisn' => 'NISN harus 10 digit angka.']);
-        }
+        $nisn = (string) $request->post('nisn');
+
+        // Cari atau daftarkan CalonSiswa baru jika belum ada
+        $calonSiswa = CalonSiswa::firstOrCreate(
+            ['nisn' => $nisn],
+            [
+                'nama_lengkap' => 'Calon Siswa Baru',
+                'asal_sekolah' => 'Belum Diisi',
+            ]
+        );
+
+        // Simpan NISN pendaftar ke session
+        session(['spmb_nisn' => $calonSiswa->nisn]);
 
         return Redirect::route('spmb.dashboard')
-            ->with('spmb_notice', 'Selamat datang! Lengkapi data administrasi Anda.');
+            ->with('spmb_notice', 'Selamat datang! Silakan lengkapi data administrasi Anda.');
     }
 
     /** ===== Dashboard section pages ===== */
-
     public function dashboard()
     {
         return view('spmb.dashboard.dashboard');
@@ -76,26 +89,40 @@ class SpmbController extends Controller
         return view('spmb.dashboard.bantuan');
     }
 
-    /** ===== Form saves (flash + back, DB hookup pending) ===== */
-
+    /** ===== Form saves (flash + back, DB saved) ===== */
     public function saveBiodata(Request $request)
     {
         $request->validate([
-            'nisn'          => 'required|digits:10',
-            'nama'          => 'required',
+            'nisn' => 'required|digits:10',
+            'nama' => 'required',
             'jenis_kelamin' => 'required|in:Pria,Wanita',
-            'status'        => 'required',
-            'alamat'        => 'required',
-            'wa'            => 'required',
-            'email'         => 'required|email',
-            'sekolah'       => 'required',
+            'status' => 'required',
+            'alamat' => 'required',
+            'wa' => 'required',
+            'email' => 'required|email',
+            'sekolah' => 'required',
         ], [], [
             'nisn' => 'NISN', 'nama' => 'Nama', 'jenis_kelamin' => 'Jenis Kelamin',
             'alamat' => 'Alamat', 'wa' => 'No. WA', 'sekolah' => 'Nama Sekolah',
         ]);
 
-        // ponytail: no persistence yet — store the biodata row when the
-        // applicant table exists.
+        $nisn = session('spmb_nisn') ?? $request->post('nisn');
+        $calonSiswa = CalonSiswa::where('nisn', $nisn)->first();
+
+        if ($calonSiswa) {
+            $calonSiswa->update([
+                'nisn' => $request->post('nisn'),
+                'nama_lengkap' => $request->post('nama'),
+                'jenis_kelamin' => $request->post('jenis_kelamin'),
+                'alamat' => $request->post('alamat'),
+                'nomor_telepon' => $request->post('wa'),
+                'email' => $request->post('email'),
+                'asal_sekolah' => $request->post('sekolah'),
+            ]);
+
+            session(['spmb_nisn' => $calonSiswa->nisn]);
+        }
+
         return Redirect::route('spmb.biodata')
             ->withInput()
             ->with('spmb_notice', 'Biodata tersimpan.');
@@ -104,7 +131,7 @@ class SpmbController extends Controller
     public function saveOrangTua(Request $request)
     {
         $ayah = ['nama_ayah', 'pendidikan_ayah', 'pekerjaan_ayah', 'penghasilan_ayah', 'wa_ayah'];
-        $ibu  = ['nama_ibu', 'pendidikan_ibu', 'pekerjaan_ibu', 'penghasilan_ibu', 'wa_ibu'];
+        $ibu = ['nama_ibu', 'pendidikan_ibu', 'pekerjaan_ibu', 'penghasilan_ibu', 'wa_ibu'];
 
         $request->validate(
             array_merge(
@@ -123,6 +150,20 @@ class SpmbController extends Controller
             ],
         );
 
+        $nisn = session('spmb_nisn');
+        $calonSiswa = CalonSiswa::where('nisn', $nisn)->first();
+
+        if ($calonSiswa) {
+            $calonSiswa->update([
+                'nama_ayah' => $request->post('nama_ayah'),
+                'pekerjaan_ayah' => $request->post('pekerjaan_ayah'),
+                'wa_ayah' => $request->post('wa_ayah'),
+                'nama_ibu' => $request->post('nama_ibu'),
+                'pekerjaan_ibu' => $request->post('pekerjaan_ibu'),
+                'wa_ibu' => $request->post('wa_ibu'),
+            ]);
+        }
+
         return Redirect::route('spmb.orang-tua')
             ->withInput()
             ->with('spmb_notice', 'Data orang tua tersimpan.');
@@ -130,7 +171,6 @@ class SpmbController extends Controller
 
     public function saveDokumen(Request $request)
     {
-        // ponytail: store uploads (path, size) when storage + DB are ready.
         return Redirect::route('spmb.dokumen')
             ->withInput()
             ->with('spmb_notice', 'Berkas terkirim.');
@@ -146,6 +186,16 @@ class SpmbController extends Controller
             'jalur' => 'Jalur Seleksi', 'jurusan' => 'Jurusan',
             'deklarasi' => 'Pernyataan',
         ]);
+
+        $nisn = session('spmb_nisn');
+        $calonSiswa = CalonSiswa::where('nisn', $nisn)->first();
+
+        if ($calonSiswa) {
+            $calonSiswa->update([
+                'jalur_pendaftaran' => $request->post('jalur'),
+                'jurusan_pilihan' => $request->post('jurusan'),
+            ]);
+        }
 
         return Redirect::route('spmb.formulir')
             ->withInput()

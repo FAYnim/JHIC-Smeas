@@ -21,6 +21,9 @@ class CalonSiswaController extends Controller
         CalonSiswa::create($validated);
 
         // Berikan respons/redirect
-        return redirect()->back()->with('success', 'Data calon siswa berhasil disimpan!');
+        return response()->json([
+            'success' => 'true',
+            'message' => 'Data siswa berhasil disimpan.',
+        ], 201);
     }
 }

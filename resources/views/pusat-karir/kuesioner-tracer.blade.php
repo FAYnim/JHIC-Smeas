@@ -72,7 +72,7 @@
 
         <div class="max-w-3xl mx-auto">
             <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 md:p-8">
-                <h1 class="text-2xl font-extrabold text-slate-900 text-center">Kuisioner Tracer Study</h1>
+                <h1 class="text-2xl font-extrabold text-slate-900 text-center">Kuesioner Tracer Study</h1>
 
                 {{-- Stepper --}}
                 <div class="mt-6 flex items-center justify-center gap-2 bg-slate-100 rounded-lg px-4 py-3">
@@ -116,7 +116,7 @@
                     <div>
                         <p class="text-sm font-bold text-slate-900 mb-2.5">Apakah status pekerjaan anda saat ini?</p>
                         <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Status pekerjaan">
-                            @foreach (['Bekerja', 'Melanjutkan Kuliah', 'Wirausaha', 'Mencari kerja'] as $status)
+                            @foreach ($statusPekerjaanOptions as $status)
                                 <label class="cursor-pointer">
                                     <input type="radio" name="status_pekerjaan" value="{{ $status }}" class="peer sr-only" required>
                                     <span class="inline-block rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 peer-checked:border-blue-600 peer-checked:bg-blue-100 peer-checked:text-blue-700">{{ $status }}</span>
@@ -154,7 +154,7 @@
                         <select name="masa_tunggu" id="masa_tunggu"
                             class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100">
                             <option value="">Pilih masa tunggu</option>
-                            @foreach (['Di bawah 1 Bulan', '1 - 3 Bulan', '4 - 6 Bulan', '7 - 12 Bulan', 'Lebih dari 12 Bulan'] as $option)
+                            @foreach ($masaTungguOptions as $option)
                                 <option value="{{ $option }}" @selected(old('masa_tunggu') === $option)>{{ $option }}</option>
                             @endforeach
                         </select>
@@ -169,7 +169,7 @@
                         <select name="rentang_gaji" id="rentang_gaji"
                             class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100">
                             <option value="">Pilih rentang gaji</option>
-                            @foreach (['Di bawah Rp 2.000.000', 'Rp 2.000.000 - Rp 4.500.000', 'Rp 4.500.000 - Rp 6.000.000', 'Rp 6.000.000 - Rp 10.000.000', 'Lebih dari Rp 10.000.000', 'Belum / Tidak Berpenghasilan'] as $option)
+                            @foreach ($rentangGajiOptions as $option)
                                 <option value="{{ $option }}" @selected(old('rentang_gaji') === $option)>{{ $option }}</option>
                             @endforeach
                         </select>
@@ -182,7 +182,7 @@
                     <div>
                         <p class="text-sm font-bold text-slate-900 mb-2.5">Seberapa relevan dengan bidang anda?</p>
                         <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Relevansi bidang">
-                            @foreach (['Relevan', 'Cukup Relevan', 'Tidak Relevan'] as $relevan)
+                            @foreach ($relevansiOptions as $relevan)
                                 <label class="cursor-pointer">
                                     <input type="radio" name="relevansi" value="{{ $relevan }}" class="peer sr-only" required>
                                     <span class="inline-block rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 peer-checked:border-blue-600 peer-checked:bg-blue-100 peer-checked:text-blue-700">{{ $relevan }}</span>

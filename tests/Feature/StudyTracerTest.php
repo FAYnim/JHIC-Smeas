@@ -26,7 +26,7 @@ class StudyTracerTest extends TestCase
         $response = $this->get(route('pusat-karir.study-tracer.kuesioner'));
 
         $response->assertOk();
-        $response->assertSee('Kuisioner Tracer Study');
+        $response->assertSee('Kuesioner Tracer Study');
         $response->assertSee('Apakah status pekerjaan anda saat ini?');
     }
 
@@ -102,6 +102,26 @@ class StudyTracerTest extends TestCase
         ]);
 
         $this->assertSame(1, KuesionerTracer::count());
+    }
+
+    public function test_store_kuesioner_rejects_invalid_masa_tunggu(): void
+    {
+        $response = $this->from(route('pusat-karir.study-tracer'))
+            ->post(route('pusat-karir.study-tracer.store'), [
+                'alumnis_id' => null,
+                'nisn' => '0067182910',
+                'nama' => 'John Doe',
+                'jurusan' => 'Rekayasa Perangkat Lunak',
+                'tahun_lulus' => 2025,
+                'status_pekerjaan' => 'Bekerja',
+                'masa_tunggu' => 'Sewenang-wenang',
+                'rentang_gaji' => 'Rp 2.000.000 - Rp 4.500.000',
+                'relevansi' => 'Relevan',
+                'is_konfirmasi' => '1',
+            ]);
+
+        $response->assertSessionHasErrors('masa_tunggu');
+        $this->assertSame(0, KuesionerTracer::count());
     }
 
     public function test_pusat_karir_category_links_to_study_tracer(): void

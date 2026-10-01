@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('posisi')->nullable();
             $table->string('masa_tunggu')->nullable();
             $table->string('rentang_gaji')->nullable();
-            $table->string('relevansi')->nullable();
+            $table->string('relevansi');
             $table->text('saran')->nullable();
             $table->boolean('is_konfirmasi')->default(false);
             $table->timestamps();

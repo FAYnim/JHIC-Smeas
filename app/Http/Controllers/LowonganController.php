@@ -15,6 +15,7 @@ use App\Models\Webinar;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class LowonganController extends Controller
@@ -406,12 +407,20 @@ class LowonganController extends Controller
             return view('pusat-karir.kuesioner-tracer', [
                 'alumni' => $alumni,
                 'verified' => session('tracer_verified'),
+                'statusPekerjaanOptions' => KuesionerTracer::STATUS_PEKERJAAN,
+                'relevansiOptions' => KuesionerTracer::RELEVANSI,
+                'masaTungguOptions' => KuesionerTracer::MASA_TUNGGU,
+                'rentangGajiOptions' => KuesionerTracer::RENTANG_GAJI,
             ]);
         }
 
         return view('pusat-karir.kuesioner-tracer', [
             'alumni' => null,
             'verified' => session('tracer_verified'),
+            'statusPekerjaanOptions' => KuesionerTracer::STATUS_PEKERJAAN,
+            'relevansiOptions' => KuesionerTracer::RELEVANSI,
+            'masaTungguOptions' => KuesionerTracer::MASA_TUNGGU,
+            'rentangGajiOptions' => KuesionerTracer::RENTANG_GAJI,
         ]);
     }
 
@@ -420,25 +429,31 @@ class LowonganController extends Controller
         $verified = session('tracer_verified', []);
 
         $validated = $request->validate([
-            'alumnis_id' => ['nullable', 'integer'],
+            'alumnis_id' => ['nullable', 'integer', 'exists:alumnis,id'],
             'nisn' => ['required', 'string', 'digits:10'],
             'nama' => ['required', 'string', 'max:255'],
             'jurusan' => ['required', 'string', 'max:255'],
             'tahun_lulus' => ['required', 'integer'],
-            'status_pekerjaan' => ['required', 'in:Bekerja,Melanjutkan Kuliah,Wirausaha,Mencari kerja'],
+            'status_pekerjaan' => ['required', Rule::in(KuesionerTracer::STATUS_PEKERJAAN)],
             'nama_perusahaan' => ['nullable', 'string', 'max:255'],
             'posisi' => ['nullable', 'string', 'max:255'],
-            'masa_tunggu' => ['nullable', 'string', 'max:255'],
-            'rentang_gaji' => ['nullable', 'string', 'max:255'],
-            'relevansi' => ['required', 'in:Relevan,Cukup Relevan,Tidak Relevan'],
+            'masa_tunggu' => ['nullable', Rule::in(KuesionerTracer::MASA_TUNGGU)],
+            'rentang_gaji' => ['nullable', Rule::in(KuesionerTracer::RENTANG_GAJI)],
+            'relevansi' => ['required', Rule::in(KuesionerTracer::RELEVANSI)],
             'saran' => ['nullable', 'string'],
             'is_konfirmasi' => ['required', 'accepted'],
         ]);
 
-        $alumnisId = $validated['alumnis_id'] ?? ($verified['alumnis_id'] ?? null);
+        if ($verified !== []) {
+            $validated['alumnis_id'] = $verified['alumnis_id'] ?? null;
+            $validated['nisn'] = $verified['nisn'];
+            $validated['nama'] = $verified['nama'];
+            $validated['jurusan'] = $verified['jurusan'];
+            $validated['tahun_lulus'] = $verified['tahun_lulus'];
+        }
 
         KuesionerTracer::create([
-            'alumnis_id' => $alumnisId,
+            'alumnis_id' => $validated['alumnis_id'] ?? null,
             'nisn' => $validated['nisn'],
             'nama' => $validated['nama'],
             'jurusan' => $validated['jurusan'],

@@ -35,8 +35,11 @@ class LowonganApplyValidationTest extends TestCase
                 'consent' => 'on',
             ]);
 
-        $response->assertRedirect(route('pusat-karir.detail', $lowongan->slug));
-        $response->assertSessionHasNoErrors();
+        $response->assertStatus(201);
+        $response->assertJson([
+            'success' => true,
+            'message' => 'Ajuan lamaran magang Anda berhasil dikirim.',
+        ]);
     }
 
     public function test_application_is_saved_with_unique_registration_code(): void

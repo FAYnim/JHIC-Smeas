@@ -18,12 +18,13 @@ class CalonSiswaController extends Controller
         ]);
 
         // Simpan data ke database (pastikan Anda sudah mengimport model CalonSiswa di atas)
-        CalonSiswa::create($validated);
+        $calonSiswa = CalonSiswa::create($validated);
 
-        // Berikan respons/redirect
+        // Berikan respons
         return response()->json([
-            'success' => 'true',
+            'success' => true,
             'message' => 'Data siswa berhasil disimpan.',
+            'data' => $calonSiswa,
         ], 201);
     }
 }

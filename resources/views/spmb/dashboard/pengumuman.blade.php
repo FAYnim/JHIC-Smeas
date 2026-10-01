@@ -29,8 +29,6 @@
             </div>
         </div>
 
-        <div class="flex justify-center mt-6">
-            <a href="{{ route('spmb.dashboard') }}" class="btn-navy">Kembali ke Dashboard</a>
-        </div>
+
     </div>
 @endsection

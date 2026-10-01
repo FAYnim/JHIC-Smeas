@@ -74,6 +74,7 @@ Route::get('/spmb/dokumen', [SpmbController::class, 'dokumen'])->name('spmb.doku
 Route::post('/spmb/dokumen', [SpmbController::class, 'saveDokumen'])->name('spmb.save-dokumen');
 Route::get('/spmb/formulir', [SpmbController::class, 'formulir'])->name('spmb.formulir');
 Route::post('/spmb/formulir', [SpmbController::class, 'saveFormulir'])->name('spmb.save-formulir');
+Route::get('/spmb/formulir/unduh', [SpmbController::class, 'unduhFormulir'])->name('spmb.unduh-formulir');
 Route::get('/spmb/verifikasi', [SpmbController::class, 'verifikasi'])->name('spmb.verifikasi');
 Route::get('/spmb/pengumuman', [SpmbController::class, 'pengumuman'])->name('spmb.pengumuman');
 Route::get('/spmb/bantuan', [SpmbController::class, 'bantuan'])->name('spmb.bantuan');

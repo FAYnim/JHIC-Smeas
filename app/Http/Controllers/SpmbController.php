@@ -3,24 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\CalonSiswa;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 
 class SpmbController extends Controller
 {
-    /**
-     * SPMB login page (NISN entry).
-     */
     public function index()
     {
         return view('spmb.login');
     }
 
-    /**
-     * Validate the NISN input.
-     * ponytail: only validates shape (10 digits) — connect to the NISN
-     * registry / applicant DB when that endpoint exists.
-     */
     public function login(Request $request)
     {
         $request->validate([
@@ -32,16 +28,14 @@ class SpmbController extends Controller
 
         $nisn = (string) $request->post('nisn');
 
-        // Cari atau daftarkan CalonSiswa baru jika belum ada
-        $calonSiswa = CalonSiswa::firstOrCreate(
-            ['nisn' => $nisn],
-            [
-                'nama_lengkap' => 'Calon Siswa Baru',
-                'asal_sekolah' => 'Belum Diisi',
-            ]
-        );
+        $calonSiswa = CalonSiswa::where('nisn', $nisn)->first();
 
-        // Simpan NISN pendaftar ke session
+        if (! $calonSiswa) {
+            return Redirect::route('spmb.login-page')
+                ->withInput()
+                ->with('spmb_error', 'NISN tidak terdaftar. Silakan hubungi panitia.');
+        }
+
         session(['spmb_nisn' => $calonSiswa->nisn]);
 
         return Redirect::route('spmb.dashboard')
@@ -56,12 +50,16 @@ class SpmbController extends Controller
 
     public function biodata()
     {
-        return view('spmb.dashboard.biodata');
+        $calonSiswa = CalonSiswa::where('nisn', session('spmb_nisn'))->first();
+
+        return view('spmb.dashboard.biodata', compact('calonSiswa'));
     }
 
     public function orangTua()
     {
-        return view('spmb.dashboard.orang-tua');
+        $calonSiswa = CalonSiswa::where('nisn', session('spmb_nisn'))->first();
+
+        return view('spmb.dashboard.orang-tua', compact('calonSiswa'));
     }
 
     public function dokumen()
@@ -71,12 +69,16 @@ class SpmbController extends Controller
 
     public function formulir()
     {
-        return view('spmb.dashboard.formulir');
+        $calonSiswa = CalonSiswa::where('nisn', session('spmb_nisn'))->first();
+
+        return view('spmb.dashboard.formulir', compact('calonSiswa'));
     }
 
     public function verifikasi()
     {
-        return view('spmb.dashboard.verifikasi');
+        $calonSiswa = CalonSiswa::where('nisn', session('spmb_nisn'))->first();
+
+        return view('spmb.dashboard.verifikasi', compact('calonSiswa'));
     }
 
     public function pengumuman()
@@ -89,38 +91,48 @@ class SpmbController extends Controller
         return view('spmb.dashboard.bantuan');
     }
 
-    /** ===== Form saves (flash + back, DB saved) ===== */
+    /** ===== Form saves ===== */
     public function saveBiodata(Request $request)
     {
         $request->validate([
-            'nisn' => 'required|digits:10',
             'nama' => 'required',
             'jenis_kelamin' => 'required|in:Pria,Wanita',
-            'status' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required|date|before_or_equal:' . now()->subYears(15)->format('Y-m-d'),
             'alamat' => 'required',
             'wa' => 'required',
             'email' => 'required|email',
             'sekolah' => 'required',
-        ], [], [
-            'nisn' => 'NISN', 'nama' => 'Nama', 'jenis_kelamin' => 'Jenis Kelamin',
-            'alamat' => 'Alamat', 'wa' => 'No. WA', 'sekolah' => 'Nama Sekolah',
+            'deklarasi' => 'required',
+        ], [
+            'tanggal_lahir.before_or_equal' => 'Umur minimal 15 tahun.',
+            'deklarasi.required' => 'Anda harus menyetujui pernyataan.',
+        ], [
+            'nama' => 'Nama',
+            'jenis_kelamin' => 'Jenis Kelamin',
+            'tempat_lahir' => 'Tempat Lahir',
+            'tanggal_lahir' => 'Tanggal Lahir',
+            'alamat' => 'Alamat',
+            'wa' => 'No. WA',
+            'email' => 'Email',
+            'sekolah' => 'Nama Sekolah',
+            'deklarasi' => 'Pernyataan',
         ]);
 
-        $nisn = session('spmb_nisn') ?? $request->post('nisn');
+        $nisn = session('spmb_nisn');
         $calonSiswa = CalonSiswa::where('nisn', $nisn)->first();
 
         if ($calonSiswa) {
             $calonSiswa->update([
-                'nisn' => $request->post('nisn'),
                 'nama_lengkap' => $request->post('nama'),
                 'jenis_kelamin' => $request->post('jenis_kelamin'),
+                'tempat_lahir' => $request->post('tempat_lahir'),
+                'tanggal_lahir' => $request->post('tanggal_lahir'),
                 'alamat' => $request->post('alamat'),
                 'nomor_telepon' => $request->post('wa'),
                 'email' => $request->post('email'),
                 'asal_sekolah' => $request->post('sekolah'),
             ]);
-
-            session(['spmb_nisn' => $calonSiswa->nisn]);
         }
 
         return Redirect::route('spmb.biodata')
@@ -130,36 +142,65 @@ class SpmbController extends Controller
 
     public function saveOrangTua(Request $request)
     {
-        $ayah = ['nama_ayah', 'pendidikan_ayah', 'pekerjaan_ayah', 'penghasilan_ayah', 'wa_ayah'];
-        $ibu = ['nama_ibu', 'pendidikan_ibu', 'pekerjaan_ibu', 'penghasilan_ibu', 'wa_ibu'];
-
-        $request->validate(
-            array_merge(
-                ['status_ayah' => 'required', 'status_ibu' => 'required'],
-                array_fill_keys($ayah, 'required'),
-                array_fill_keys($ibu, 'required'),
-            ),
-            [],
-            [
-                'status_ayah' => 'Status Ayah', 'status_ibu' => 'Status Ibu',
-                'nama_ayah' => 'Nama Ayah', 'nama_ibu' => 'Nama Ibu',
-                'pendidikan_ayah' => 'Pendidikan Terakhir Ayah', 'pendidikan_ibu' => 'Pendidikan Terakhir Ibu',
-                'pekerjaan_ayah' => 'Pekerjaan Utama Ayah', 'pekerjaan_ibu' => 'Pekerjaan Utama Ibu',
-                'penghasilan_ayah' => 'Penghasilan Bulanan Ayah', 'penghasilan_ibu' => 'Penghasilan Bulanan Ibu',
-                'wa_ayah' => 'Nomor WhatsApp Ayah', 'wa_ibu' => 'Nomor WhatsApp Ibu',
-            ],
-        );
+        $request->validate([
+            'status_ayah' => 'required',
+            'status_ibu' => 'required',
+            'nama_ayah' => 'required',
+            'nama_ibu' => 'required',
+            'nik_ayah' => 'required|digits:16',
+            'nik_ibu' => 'required|digits:16',
+            'pendidikan_ayah' => 'required',
+            'pendidikan_ibu' => 'required',
+            'pekerjaan_ayah' => 'required',
+            'pekerjaan_ibu' => 'required',
+            'pekerjaan_ayah_lainnya' => 'required_if:pekerjaan_ayah,Lainnya',
+            'pekerjaan_ibu_lainnya' => 'required_if:pekerjaan_ibu,Lainnya',
+            'penghasilan_ayah' => 'required',
+            'penghasilan_ibu' => 'required',
+            'wa_ayah' => 'required',
+            'wa_ibu' => 'required',
+        ], [
+            'nik_ayah.digits' => 'NIK Ayah harus 16 digit angka.',
+            'nik_ibu.digits' => 'NIK Ibu harus 16 digit angka.',
+            'pekerjaan_ayah_lainnya.required_if' => 'Silakan isi pekerjaan ayah.',
+            'pekerjaan_ibu_lainnya.required_if' => 'Silakan isi pekerjaan ibu.',
+        ], [
+            'status_ayah' => 'Status Ayah',
+            'status_ibu' => 'Status Ibu',
+            'nama_ayah' => 'Nama Ayah',
+            'nama_ibu' => 'Nama Ibu',
+            'nik_ayah' => 'NIK Ayah',
+            'nik_ibu' => 'NIK Ibu',
+            'pendidikan_ayah' => 'Pendidikan Terakhir Ayah',
+            'pendidikan_ibu' => 'Pendidikan Terakhir Ibu',
+            'pekerjaan_ayah' => 'Pekerjaan Utama Ayah',
+            'pekerjaan_ibu' => 'Pekerjaan Utama Ibu',
+            'penghasilan_ayah' => 'Penghasilan Bulanan Ayah',
+            'penghasilan_ibu' => 'Penghasilan Bulanan Ibu',
+            'wa_ayah' => 'Nomor WhatsApp Ayah',
+            'wa_ibu' => 'Nomor WhatsApp Ibu',
+        ]);
 
         $nisn = session('spmb_nisn');
         $calonSiswa = CalonSiswa::where('nisn', $nisn)->first();
 
         if ($calonSiswa) {
             $calonSiswa->update([
+                'status_ayah' => $request->post('status_ayah'),
                 'nama_ayah' => $request->post('nama_ayah'),
+                'nik_ayah' => $request->post('nik_ayah'),
+                'pendidikan_ayah' => $request->post('pendidikan_ayah'),
                 'pekerjaan_ayah' => $request->post('pekerjaan_ayah'),
+                'pekerjaan_ayah_lainnya' => $request->post('pekerjaan_ayah_lainnya'),
+                'penghasilan_ayah' => $request->post('penghasilan_ayah'),
                 'wa_ayah' => $request->post('wa_ayah'),
+                'status_ibu' => $request->post('status_ibu'),
                 'nama_ibu' => $request->post('nama_ibu'),
+                'nik_ibu' => $request->post('nik_ibu'),
+                'pendidikan_ibu' => $request->post('pendidikan_ibu'),
                 'pekerjaan_ibu' => $request->post('pekerjaan_ibu'),
+                'pekerjaan_ibu_lainnya' => $request->post('pekerjaan_ibu_lainnya'),
+                'penghasilan_ibu' => $request->post('penghasilan_ibu'),
                 'wa_ibu' => $request->post('wa_ibu'),
             ]);
         }
@@ -171,19 +212,37 @@ class SpmbController extends Controller
 
     public function saveDokumen(Request $request)
     {
+        $request->validate([
+            'docs.akta' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'docs.kartu-keluarga' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'docs.ijazah-smp' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+        ], [
+            'docs.akta.required' => 'Akta kelahiran wajib diunggah.',
+            'docs.kartu-keluarga.required' => 'Kartu keluarga wajib diunggah.',
+            'docs.ijazah-smp.required' => 'Ijazah SMP wajib diunggah.',
+        ]);
+
+        $nisn = session('spmb_nisn');
+
+        foreach ($request->file('docs') as $key => $file) {
+            $path = $file->store("spmb/{$nisn}", 'public');
+        }
+
         return Redirect::route('spmb.dokumen')
-            ->withInput()
-            ->with('spmb_notice', 'Berkas terkirim.');
+            ->with('spmb_notice', 'Dokumen tersimpan.');
     }
 
     public function saveFormulir(Request $request)
     {
         $request->validate([
-            'jalur' => 'required',
-            'jurusan' => 'required',
+            'jalur' => 'required|in:Prestasi Akademik,Prestasi Non-Akademik,Domisili,Afirmasi,Inklusi',
+            'jurusan' => 'required|in:Rekayasa Perangkat Lunak,Teknik Komputer Jaringan,Bisnis Digital,Manajemen Perkantoran,Manajemen Logistik,Desain Komunikasi Visual,Perhotelan,Akuntansi,Produksi dan Siaran Program Televisi',
             'deklarasi' => 'required',
-        ], [], [
-            'jalur' => 'Jalur Seleksi', 'jurusan' => 'Jurusan',
+        ], [
+            'deklarasi.required' => 'Anda harus menyetujui pernyataan.',
+        ], [
+            'jalur' => 'Jalur Seleksi',
+            'jurusan' => 'Jurusan',
             'deklarasi' => 'Pernyataan',
         ]);
 
@@ -199,6 +258,22 @@ class SpmbController extends Controller
 
         return Redirect::route('spmb.formulir')
             ->withInput()
-            ->with('spmb_notice', 'Formulir terkirim.');
+            ->with('spmb_notice', 'Formulir tersimpan. Silakan unduh formulir Anda.');
+    }
+
+    public function unduhFormulir()
+    {
+        $calonSiswa = CalonSiswa::where('nisn', session('spmb_nisn'))->firstOrFail();
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml(View::make('spmb.dashboard.formulir-pdf', compact('calonSiswa'))->render());
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return $dompdf->stream("formulir-{$calonSiswa->nisn}.pdf", ['Attachment' => true]);
     }
 }

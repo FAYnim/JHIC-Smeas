@@ -9,7 +9,6 @@
         ['q' => 'Bagaimana jika dokumen saya ditolak panitia?', 'a' => 'Lihat status pada menu Dokumen. Jika ada catatan penolakan, unggah ulang berkas yang sesuai, lalu lanjutkan ke tahap berikutnya.'],
         ['q' => 'Kapan hasil pengumuman dirilis?', 'a' => 'Timbul setelah verifikasi administrasi selesai. Pantau menu Pengumuman secara berkala.'],
         ['q' => 'Apakah data bisa direvisi setelah formulir terkirim?', 'a' => 'Tidak. Setelah formulir terkirim, data terkunci. Jika ada kesalahan, hubungi panitia melalui halaman ini.'],
-        ['q' => 'Saya tidak bisa login, kenapa?', 'a' => 'Pastikan NISN 10 digit yang Anda masukkan sudah terdaftar. Jika tetap gagal, hubungi panitia dengan menyebutkan NISN Anda.'],
     ];
 @endphp
 

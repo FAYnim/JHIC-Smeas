@@ -18,17 +18,29 @@ return new class extends Migration
             $table->string('nisn', 10)->unique();
             $table->string('nama_lengkap');
             $table->enum('jenis_kelamin', ['Pria', 'Wanita'])->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('asal_sekolah');
             $table->string('nomor_telepon')->nullable();
             $table->string('email')->nullable();
             $table->text('alamat')->nullable();
 
             // Data Orang Tua
+            $table->string('status_ayah')->nullable();
             $table->string('nama_ayah')->nullable();
+            $table->string('nik_ayah', 16)->nullable();
+            $table->string('pendidikan_ayah')->nullable();
             $table->string('pekerjaan_ayah')->nullable();
+            $table->string('pekerjaan_ayah_lainnya')->nullable();
+            $table->string('penghasilan_ayah')->nullable();
             $table->string('wa_ayah')->nullable();
+            $table->string('status_ibu')->nullable();
             $table->string('nama_ibu')->nullable();
+            $table->string('nik_ibu', 16)->nullable();
+            $table->string('pendidikan_ibu')->nullable();
             $table->string('pekerjaan_ibu')->nullable();
+            $table->string('pekerjaan_ibu_lainnya')->nullable();
+            $table->string('penghasilan_ibu')->nullable();
             $table->string('wa_ibu')->nullable();
 
             // Pilihan Jurusan & Jalur
@@ -45,6 +57,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('calon_siswa');
+        Schema::dropIfExists('calon_siswas');
     }
 };

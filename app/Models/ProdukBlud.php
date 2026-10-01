@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProdukBlud extends Model
 {
+    public const TIPE_SHOWCASE = 'showcase';
+
+    public const TIPE_KUSTOM = 'kustom';
+
     protected $fillable = [
         'slug',
         'tipe',

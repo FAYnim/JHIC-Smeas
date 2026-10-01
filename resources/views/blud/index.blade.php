@@ -379,28 +379,8 @@
             data-blud-section>
             <h2 class="blud-section-title">Produk Terlaris</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                @forelse ($produkBluds->where('tipe', 'showcase')->sortByDesc('rating') as $p)
-                    <article class="blud-card" data-blud-card
-                        data-search="{{ strtolower($p->title . ' ' . $p->jurusan_nama) }}">
-                        <div class="blud-card__media">
-                            <span class="blud-badge-major">{{ $p->jurusan_nama }}</span>
-                            <img src="{{ $p->galeri->first()?->image_url ?? 'https://placehold.co/480x420/e2e8f0/64748b?text=' . urlencode($p->title) }}"
-                                alt="{{ $p->title }}" width="480" height="420" loading="lazy">
-                        </div>
-                        <div class="blud-card__body">
-                            <h3 class="blud-card__title">{{ $p->title }}</h3>
-                            <p class="blud-card__desc">Rp {{ number_format($p->harga_min ?? 0) }} - Rp {{ number_format($p->harga_max ?? 0) }}</p>
-                            @if ($p->rating !== null)
-                                <p class="text-xs font-semibold text-amber-600">
-                                    ★ {{ number_format((float) $p->rating, 1) }}
-                                    <span class="text-slate-500 font-normal">({{ $p->rating_count ?? 0 }})</span>
-                                </p>
-                            @endif
-                            <a href="{{ route('blud.detail', $p->slug) }}" class="blud-btn-detail">
-                                Detail lebih lanjut
-                            </a>
-                        </div>
-                    </article>
+                @forelse ($produkBluds->where('tipe', \App\Models\ProdukBlud::TIPE_SHOWCASE)->sortByDesc('rating') as $p)
+                    @include('blud.partials.card', ['p' => $p])
                 @empty
                     <p class="text-sm text-slate-500 col-span-full">Belum ada produk showcase.</p>
                 @endforelse
@@ -413,33 +393,7 @@
             <h2 class="blud-section-title">Semua Produk</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 @forelse ($produkBluds as $p)
-                    <article class="blud-card" data-blud-card
-                        data-search="{{ strtolower($p->title . ' ' . $p->jurusan_nama) }}">
-                        <div class="blud-card__media">
-                            <span class="blud-badge-major">{{ $p->jurusan_nama }}</span>
-                            <img src="{{ $p->galeri->first()?->image_url ?? 'https://placehold.co/480x420/e2e8f0/64748b?text=' . urlencode($p->title) }}"
-                                alt="{{ $p->title }}" width="480" height="420" loading="lazy">
-                        </div>
-                        <div class="blud-card__body">
-                            <h3 class="blud-card__title">{{ $p->title }}</h3>
-                            @if ($p->tipe === 'showcase')
-                                <p class="blud-card__desc">Rp {{ number_format($p->harga_min ?? 0) }} - Rp {{ number_format($p->harga_max ?? 0) }}</p>
-                            @else
-                                <span class="inline-flex items-center self-start bg-blue-700 text-white text-[0.7rem] font-bold px-2.5 py-0.5 rounded-full">
-                                    Karya Siswa
-                                </span>
-                            @endif
-                            @if ($p->rating !== null)
-                                <p class="text-xs font-semibold text-amber-600">
-                                    ★ {{ number_format((float) $p->rating, 1) }}
-                                    <span class="text-slate-500 font-normal">({{ $p->rating_count ?? 0 }})</span>
-                                </p>
-                            @endif
-                            <a href="{{ route('blud.detail', $p->slug) }}" class="blud-btn-detail">
-                                Detail lebih lanjut
-                            </a>
-                        </div>
-                    </article>
+                    @include('blud.partials.card', ['p' => $p])
                 @empty
                     <p class="text-sm text-slate-500 col-span-full">Belum ada produk terdaftar.</p>
                 @endforelse
@@ -453,26 +407,7 @@
                 <h2 class="blud-section-title">{{ $jurusanNama }}</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                     @foreach ($produkList as $p)
-                        <article class="blud-card" data-blud-card
-                            data-search="{{ strtolower($p->title . ' ' . $p->jurusan_nama) }}">
-                            <div class="blud-card__media">
-                                <img src="{{ $p->galeri->first()?->image_url ?? 'https://placehold.co/480x420/e2e8f0/64748b?text=' . urlencode($p->title) }}"
-                                    alt="{{ $p->title }}" width="480" height="420" loading="lazy">
-                            </div>
-                            <div class="blud-card__body">
-                                <h3 class="blud-card__title">{{ $p->title }}</h3>
-                                @if ($p->tipe === 'showcase')
-                                    <p class="blud-card__desc">Rp {{ number_format($p->harga_min ?? 0) }} - Rp {{ number_format($p->harga_max ?? 0) }}</p>
-                                @else
-                                    <span class="inline-flex items-center self-start bg-blue-700 text-white text-[0.7rem] font-bold px-2.5 py-0.5 rounded-full">
-                                        Karya Siswa
-                                    </span>
-                                @endif
-                                <a href="{{ route('blud.detail', $p->slug) }}" class="blud-btn-detail">
-                                    Detail lebih lanjut
-                                </a>
-                            </div>
-                        </article>
+                        @include('blud.partials.card', ['p' => $p, 'showBadge' => false, 'showRating' => false])
                     @endforeach
                 </div>
             </section>

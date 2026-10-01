@@ -62,7 +62,10 @@ Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply
 // BLUD - Marketplace produk & jasa jurusan
 Route::get('/blud', [BludController::class, 'index'])->name('blud.index');
 Route::get('/blud/{slug}', [BludController::class, 'detail'])->where('slug', '[a-z0-9\-]+')->name('blud.detail');
-Route::post('/blud/{slug}/komentar', [BludController::class, 'storeKomentar'])->where('slug', '[a-z0-9\-]+')->name('blud.komentar.store');
+Route::post('/blud/{slug}/komentar', [BludController::class, 'storeKomentar'])
+    ->where('slug', '[a-z0-9\-]+')
+    ->middleware('throttle:10,1')
+    ->name('blud.komentar.store');
 
 // SPMB Routes
 Route::get('/spmb', [SpmbController::class, 'index'])->name('spmb.index');

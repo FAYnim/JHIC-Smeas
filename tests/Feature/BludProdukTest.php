@@ -87,6 +87,34 @@ class BludProdukTest extends TestCase
         $this->assertSame($beforeCount, $produk->komentars()->count());
     }
 
+    public function test_post_komentar_rating_out_of_range_fails_validation(): void
+    {
+        $response = $this->post(route('blud.komentar.store', 'cheeseroll'), [
+            'nama' => 'Tester',
+            'komentar' => 'Rating di luar rentang.',
+            'rating' => 6,
+        ]);
+
+        $response->assertSessionHasErrors('rating');
+    }
+
+    public function test_unpublished_product_detail_returns_404(): void
+    {
+        ProdukBlud::create([
+            'slug' => 'produk-unpublished',
+            'tipe' => 'showcase',
+            'title' => 'Produk Unpublished',
+            'jurusan_nama' => 'TKJ',
+            'jurusan_slug' => 'tkj',
+            'deskripsi' => 'Produk tidak dipublikasikan.',
+            'is_published' => false,
+        ]);
+
+        $response = $this->get(route('blud.detail', 'produk-unpublished'));
+
+        $response->assertNotFound();
+    }
+
     public function test_showcase_detail_shows_related_products_from_same_jurusan(): void
     {
         $response = $this->get(route('blud.detail', 'kemasan-umkm-custom'));

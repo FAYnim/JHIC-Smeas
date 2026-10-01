@@ -11,7 +11,10 @@ class BludController extends Controller
 {
     public function index(): View
     {
-        $produkBluds = ProdukBlud::where('is_published', true)->orderByDesc('created_at')->get();
+        $produkBluds = ProdukBlud::where('is_published', true)
+            ->with('galeri')
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('blud.index', compact('produkBluds'));
     }
@@ -26,11 +29,12 @@ class BludController extends Controller
         $related = ProdukBlud::where('jurusan_slug', $produk->jurusan_slug)
             ->where('slug', '!=', $produk->slug)
             ->where('is_published', true)
+            ->with('galeri')
             ->orderByDesc('created_at')
             ->limit(6)
             ->get();
 
-        if ($produk->tipe === 'kustom') {
+        if ($produk->tipe === ProdukBlud::TIPE_KUSTOM) {
             return view('blud.detail-kustom', compact('produk', 'related'));
         }
 

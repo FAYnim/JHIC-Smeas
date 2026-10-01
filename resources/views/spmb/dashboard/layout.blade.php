@@ -106,30 +106,6 @@
             border-radius: 0.5rem;
         }
 
-        .dash-topbar__user img {
-            width: 2rem;
-            height: 2rem;
-            border-radius: 9999px;
-            object-fit: cover;
-            background: #ffffff;
-        }
-
-        .dash-topbar__settings {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            background: #0a2e5c;
-            color: #ffffff;
-            border-radius: 0.5rem;
-        }
-
-        .dash-topbar__settings svg {
-            width: 1.25rem;
-            height: 1.25rem;
-        }
-
         .dash-content {
             padding: 0.5rem 1.5rem 2.5rem;
         }
@@ -487,12 +463,8 @@
     {{-- Sidebar --}}
     <aside id="dash-sidebar" class="dash-sidebar">
         <div class="px-5 pt-5 pb-3 flex items-center gap-3">
-            <img src="{{ asset('images/logo-smkn1.png') }}" alt="Logo SMKN 1 Surabaya"
-                class="h-10 w-auto object-contain">
-            <div>
-                <p class="text-white text-base font-extrabold tracking-wide leading-none">SMKN</p>
-                <p class="text-[0.6rem] font-bold tracking-[0.3em] text-blue-100 mt-1">SURABAYA</p>
-            </div>
+            <img src="{{ asset('images/smkn1-logo-white-transparent.png') }}" alt="Logo SMKN 1 Surabaya"
+                class="h-14 w-auto object-contain">
         </div>
 
         <nav class="dash-sidebar__nav flex flex-col gap-1">
@@ -547,13 +519,8 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="#" class="dash-topbar__settings" aria-label="Pengaturan">
-                    <x-lucide-settings />
-                </a>
                 <span class="dash-topbar__user">
-                    Olivia
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c99b326f1?w=96&h=96&fit=crop&crop=faces"
-                        alt="Foto Olivia">
+                    {{ $calonSiswa?->nama_lengkap ?? 'Calon Siswa' }}
                 </span>
             </div>
         </div>

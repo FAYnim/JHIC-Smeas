@@ -16,21 +16,12 @@
                 Hasil seleksi masih dalam proses verifikasi administrasi. Pantau halaman ini secara berkala.
             </p>
 
-            <div class="flex items-center justify-center gap-6 mt-8">
-                <div class="text-center">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Status</p>
-                    <p class="text-lg font-extrabold text-slate-900 mt-1">Verifikasi berjalan</p>
-                </div>
-                <div class="w-px h-10 bg-slate-200"></div>
-                <div class="text-center">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Saluran</p>
-                    <p class="text-lg font-extrabold text-slate-900 mt-1">Menu Pengumuman</p>
-                </div>
+            <div class="mt-8">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Status</p>
+                <p class="text-lg font-extrabold text-slate-900 mt-1">Verifikasi berjalan</p>
             </div>
         </div>
 
-        <div class="flex justify-center mt-6">
-            <a href="{{ route('spmb.dashboard') }}" class="btn-navy">Kembali ke Dashboard</a>
-        </div>
+
     </div>
 @endsection

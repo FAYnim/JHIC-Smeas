@@ -114,22 +114,6 @@
             background: #ffffff;
         }
 
-        .dash-topbar__settings {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            background: #0a2e5c;
-            color: #ffffff;
-            border-radius: 0.5rem;
-        }
-
-        .dash-topbar__settings svg {
-            width: 1.25rem;
-            height: 1.25rem;
-        }
-
         .dash-content {
             padding: 0.5rem 1.5rem 2.5rem;
         }
@@ -547,9 +531,6 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="#" class="dash-topbar__settings" aria-label="Pengaturan">
-                    <x-lucide-settings />
-                </a>
                 <span class="dash-topbar__user">
                     Olivia
                     <img src="https://images.unsplash.com/photo-1494790108377-be9c99b326f1?w=96&h=96&fit=crop&crop=faces"

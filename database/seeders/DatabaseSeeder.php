@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CalonSiswaSeeder::class);
         $this->call(AlumniSeeder::class);
         $this->call(TracerSeeder::class);
+        $this->call(ProdukBludSeeder::class);
     }
 }

@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\ProdukBlud;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class BludController extends Controller
+{
+    public function index(): View
+    {
+        $produkBluds = ProdukBlud::where('is_published', true)->orderByDesc('created_at')->get();
+
+        return view('blud.index', compact('produkBluds'));
+    }
+
+    public function detail(string $slug): View
+    {
+        $produk = ProdukBlud::where('slug', $slug)
+            ->where('is_published', true)
+            ->with(['galeri', 'komentars'])
+            ->firstOrFail();
+
+        $related = ProdukBlud::where('jurusan_slug', $produk->jurusan_slug)
+            ->where('slug', '!=', $produk->slug)
+            ->where('is_published', true)
+            ->orderByDesc('created_at')
+            ->limit(6)
+            ->get();
+
+        if ($produk->tipe === 'kustom') {
+            return view('blud.detail-kustom', compact('produk', 'related'));
+        }
+
+        return view('blud.detail-showcase', compact('produk', 'related'));
+    }
+
+    public function storeKomentar(Request $request, string $slug): RedirectResponse
+    {
+        $produk = ProdukBlud::where('slug', $slug)->where('is_published', true)->firstOrFail();
+
+        $validated = $request->validate([
+            'nama' => ['nullable', 'string', 'max:80'],
+            'komentar' => ['required', 'string', 'max:2000'],
+            'rating' => ['nullable', 'integer', 'min:1', 'max:5'],
+        ]);
+
+        $produk->komentars()->create([
+            'nama' => $validated['nama'] ?? 'Anonim',
+            'komentar' => $validated['komentar'],
+            'rating' => $validated['rating'] ?? null,
+        ]);
+
+        return redirect()->route('blud.detail', $slug)->with('success', 'Komentar terkirim.');
+    }
+}

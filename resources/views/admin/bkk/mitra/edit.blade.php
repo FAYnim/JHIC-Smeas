@@ -22,33 +22,51 @@
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Nama Singkat *</label>
-                    <input type="text" name="short_name" value="{{ old('short_name', $mitra->short_name) }}" required
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                    <input type="text" name="short_name" value="{{ old('short_name', $mitra->short_name) }}" required maxlength="50"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('short_name') border-red-500 @enderror">
+                    @error('short_name')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Sektor *</label>
-                    <input type="text" name="sector" value="{{ old('sector', $mitra->sector) }}" required
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                    <input type="text" name="sector" value="{{ old('sector', $mitra->sector) }}" required maxlength="100"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('sector') border-red-500 @enderror">
+                    @error('sector')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Kota *</label>
-                    <input type="text" name="city" value="{{ old('city', $mitra->city) }}" required
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                    <input type="text" name="city" value="{{ old('city', $mitra->city) }}" required maxlength="100"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('city') border-red-500 @enderror">
+                    @error('city')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
                 <div class="sm:col-span-2">
                     <label class="mb-1 block text-xs font-bold text-slate-600">Website</label>
-                    <input type="url" name="website" value="{{ old('website', $mitra->website) }}"
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                    <input type="url" name="website" value="{{ old('website', $mitra->website) }}" maxlength="255"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('website') border-red-500 @enderror">
+                    @error('website')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
                 <div class="sm:col-span-2">
                     <label class="mb-1 block text-xs font-bold text-slate-600">Deskripsi</label>
-                    <textarea name="description" rows="3"
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ old('description', $mitra->description) }}</textarea>
+                    <textarea name="description" rows="3" maxlength="5000"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('description') border-red-500 @enderror">{{ old('description', $mitra->description) }}</textarea>
+                    @error('description')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
                 <div class="sm:col-span-2">
                     <label class="mb-1 block text-xs font-bold text-slate-600">Alamat</label>
-                    <textarea name="address" rows="2"
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ old('address', $mitra->address) }}</textarea>
+                    <textarea name="address" rows="2" maxlength="1000"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('address') border-red-500 @enderror">{{ old('address', $mitra->address) }}</textarea>
+                    @error('address')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
             </div>
             <div class="mt-4">
@@ -60,7 +78,10 @@
                     </div>
                 @endif
                 <input type="file" name="logo" accept="image/png,image/jpeg,image/webp"
-                    class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-blue-50 file:px-3 file:py-1 file:text-xs file:font-bold file:text-blue-600">
+                    class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-blue-50 file:px-3 file:py-1 file:text-xs file:font-bold file:text-blue-600 @error('logo') border-red-500 @enderror">
+                @error('logo')
+                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                @enderror
             </div>
         </div>
 
@@ -69,25 +90,37 @@
             <div class="grid gap-4 sm:grid-cols-2">
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Status MoU</label>
-                    <select name="is_mou_active" class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                    <select name="is_mou_active" class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('is_mou_active') border-red-500 @enderror">
                         <option value="1" {{ old('is_mou_active', $mitra->is_mou_active) ? 'selected' : '' }}>Aktif</option>
                         <option value="0" {{ old('is_mou_active', $mitra->is_mou_active) === false ? 'selected' : '' }}>Tidak Aktif</option>
                     </select>
+                    @error('is_mou_active')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Berlaku Hingga</label>
                     <input type="date" name="mou_until" value="{{ old('mou_until', $mitra->mou_until?->format('Y-m-d')) }}"
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('mou_until') border-red-500 @enderror">
+                    @error('mou_until')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Kemitraan Sejak</label>
                     <input type="number" name="kemitraan_sejak" value="{{ old('kemitraan_sejak', $mitra->kemitraan_sejak) }}" min="1950"
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('kemitraan_sejak') border-red-500 @enderror">
+                    @error('kemitraan_sejak')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Program (per baris)</label>
-                    <textarea name="programs" rows="3"
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ old('programs', is_array($mitra->programs) ? implode("\n", $mitra->programs) : $mitra->programs) }}</textarea>
+                    <textarea name="programs" rows="3" maxlength="2000"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('programs') border-red-500 @enderror">{{ old('programs', is_array($mitra->programs) ? implode("\n", $mitra->programs) : $mitra->programs) }}</textarea>
+                    @error('programs')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -97,18 +130,27 @@
             <div class="grid gap-4 sm:grid-cols-3">
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Nama</label>
-                    <input type="text" name="narahubung_nama" value="{{ old('narahubung_nama', $mitra->narahubung_nama) }}"
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                    <input type="text" name="narahubung_nama" value="{{ old('narahubung_nama', $mitra->narahubung_nama) }}" maxlength="255"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('narahubung_nama') border-red-500 @enderror">
+                    @error('narahubung_nama')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Jabatan</label>
-                    <input type="text" name="narahubung_jabatan" value="{{ old('narahubung_jabatan', $mitra->narahubung_jabatan) }}"
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                    <input type="text" name="narahubung_jabatan" value="{{ old('narahubung_jabatan', $mitra->narahubung_jabatan) }}" maxlength="100"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('narahubung_jabatan') border-red-500 @enderror">
+                    @error('narahubung_jabatan')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">WhatsApp</label>
-                    <input type="text" name="narahubung_wa" value="{{ old('narahubung_wa', $mitra->narahubung_wa) }}"
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                    <input type="text" name="narahubung_wa" value="{{ old('narahubung_wa', $mitra->narahubung_wa) }}" maxlength="30"
+                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('narahubung_wa') border-red-500 @enderror">
+                    @error('narahubung_wa')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @endforeach
                 </div>
             </div>
         </div>

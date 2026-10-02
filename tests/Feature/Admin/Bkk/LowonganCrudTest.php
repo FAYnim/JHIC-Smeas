@@ -96,4 +96,28 @@ class LowonganCrudTest extends TestCase
 
         $this->assertDatabaseMissing('lowongans', ['id' => $lowongan->id]);
     }
+
+    public function test_store_without_optional_multiline_fields_succeeds(): void
+    {
+        $bkk = User::factory()->bkk()->create();
+
+        $response = $this->actingAs($bkk)->post(route('admin.lowongan.store'), [
+            'company_name' => 'PT Tanpa Dokumen',
+            'title' => 'Posisi Tanpa Dokumen',
+            'jenis' => 'lowongan',
+            'location' => 'Surabaya',
+            'duration' => 'Full-time',
+            'jurusan' => 'RPL',
+            'kuota' => 2,
+            'metode_kerja' => 'On-site',
+            'deskripsi' => 'Deskripsi singkat.',
+            'batas_pendaftaran' => now()->addDays(10)->format('Y-m-d'),
+        ]);
+
+        $response->assertRedirect(route('admin.lowongan.index'));
+        $this->assertDatabaseHas('lowongans', [
+            'company_name' => 'PT Tanpa Dokumen',
+            'title' => 'Posisi Tanpa Dokumen',
+        ]);
+    }
 }

@@ -39,6 +39,25 @@
                 </div>
             </div>
 
+            {{-- Bagian Profil: Visi & Misi --}}
+            <div>
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4 pb-2 border-b">
+                    Profil Sekolah
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Visi Sekolah</label>
+                        <textarea name="settings[profil.visi]" rows="3"
+                            class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ $settings['profil.visi'] ?? '' }}</textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Misi Sekolah</label>
+                        <textarea name="settings[profil.misi]" rows="3"
+                            class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ $settings['profil.misi'] ?? '' }}</textarea>
+                    </div>
+                </div>
+            </div>
+
             {{-- Bagian 2: Kontak & Layanan --}}
             <div>
                 <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4 pb-2 border-b">

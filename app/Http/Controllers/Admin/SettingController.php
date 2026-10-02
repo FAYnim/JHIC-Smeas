@@ -19,16 +19,15 @@ class SettingController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'settings' => 'required|array',
-            'settings.*' => 'nullable|string|max:2000',
-        ]);
+        $settings = $request->input('settings', []);
 
-        foreach ($validated['settings'] as $key => $value) {
-            Setting::set($key, $value);
+        foreach ($settings as $key => $value) {
+            $existing = Setting::where('key', $key)->first();
+            $group = $existing?->group ?? (str_contains($key, '.') ? explode('.', $key)[0] : 'general');
+            Setting::set($key, $value, $group);
         }
 
         return redirect()->route('admin.settings.edit')
-            ->with('success', 'Pengaturan sistem berhasil disimpan.');
+            ->with('success', 'Pengaturan berhasil disimpan.');
     }
 }

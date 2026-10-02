@@ -26,6 +26,9 @@ class SettingSeeder extends Seeder
             ['key' => 'spmb_contact_email', 'value' => 'spmb@smkn1.surabaya.sch.id', 'group' => 'spmb'],
             ['key' => 'spmb_contact_phone', 'value' => '0812-3456-7890', 'group' => 'spmb'],
             ['key' => 'spmb_service_hours', 'value' => 'Senin–Jumat, 07.30–15.00 WIB', 'group' => 'spmb'],
+            // Profil
+            ['key' => 'profil.visi', 'value' => 'Terwujudnya SMK Negeri 1 Surabaya Yang Berkarakter Dan Unggul.', 'group' => 'profil'],
+            ['key' => 'profil.misi', 'value' => 'Meningkatkan kompetensi peserta didik sesuai standar kompetensi lulusan dan berkarakter profil pelajar Pancasila.', 'group' => 'profil'],
         ];
 
         foreach ($settings as $setting) {

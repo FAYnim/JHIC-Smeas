@@ -5,10 +5,12 @@ use App\Http\Controllers\BludController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\SpmbController;
 use App\Models\Alumni;
+use App\Models\Artikel;
 use App\Models\Fasilitas;
 use App\Models\Guru;
 use App\Models\Lowongan;
 use App\Models\MitraPerusahaan;
+use App\Models\Pengumuman;
 use App\Models\Setting;
 use App\Models\StrukturOrganisasi;
 use Illuminate\Support\Facades\Route;
@@ -62,15 +64,24 @@ Route::get('/jurusan/{slug}', function ($slug) {
 })->name('jurusan.detail');
 
 Route::get('/informasi', function () {
-    return view('informasi');
+    $artikels = Artikel::where('kategori', 'berita')->latest('published_at')->limit(6)->get();
+    $pengumumans = Pengumuman::latest()->limit(5)->get();
+
+    return view('informasi', compact('artikels', 'pengumumans'));
 })->name('informasi');
 
 Route::get('/informasi/prestasi', function () {
-    return view('informasi-prestasi');
+    $artikels = Artikel::where('kategori', 'prestasi')->latest('published_at')->limit(6)->get();
+    $pengumumans = Pengumuman::latest()->limit(5)->get();
+
+    return view('informasi-prestasi', compact('artikels', 'pengumumans'));
 })->name('informasi.prestasi');
 
 Route::get('/informasi/akademik', function () {
-    return view('informasi-akademik');
+    $artikels = Artikel::where('kategori', 'akademik')->latest('published_at')->limit(6)->get();
+    $pengumumans = Pengumuman::latest()->limit(5)->get();
+
+    return view('informasi-akademik', compact('artikels', 'pengumumans'));
 })->name('informasi.akademik');
 
 Route::get('/pusat-karir', [LowonganController::class, 'index'])->name('pusat-karir.index');

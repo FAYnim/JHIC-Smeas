@@ -192,53 +192,20 @@
 
                     {{-- Event List --}}
                     <div class="flex-1 space-y-4">
-                        {{-- Event 1 --}}
-                        <div class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
-                                <span class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none">18</span>
-                                <span class="text-[10px] sm:text-xs font-bold text-blue-600 uppercase tracking-wider">OKT</span>
+                        @forelse ($pengumumans as $pengumuman)
+                            <div class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200">
+                                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
+                                    <span class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none">{{ $pengumuman->created_at->format('d') }}</span>
+                                    <span class="text-[10px] sm:text-xs font-bold text-blue-600 uppercase tracking-wider">{{ strtoupper($pengumuman->created_at->format('M')) }}</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1">{{ $pengumuman->judul }}</h3>
+                                    <p class="text-xs sm:text-sm text-slate-500">{{ $pengumuman->created_at->format('d M Y') }}</p>
+                                </div>
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1">Lomba Debat Bahasa Inggris Antar Kelas</h3>
-                                <p class="text-xs sm:text-sm text-slate-500">Aula Utama &middot; 08.00</p>
-                            </div>
-                        </div>
-
-                        {{-- Event 2 --}}
-                        <div class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
-                                <span class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none">22</span>
-                                <span class="text-[10px] sm:text-xs font-bold text-blue-600 uppercase tracking-wider">OKT</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1">Kunjungan Industri Jurusan RPL ke Perusahaan Teknologi</h3>
-                                <p class="text-xs sm:text-sm text-slate-500">Offsite &middot; 07.30</p>
-                            </div>
-                        </div>
-
-                        {{-- Event 3 --}}
-                        <div class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
-                                <span class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none">29</span>
-                                <span class="text-[10px] sm:text-xs font-bold text-blue-600 uppercase tracking-wider">OKT</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1">Seminar Karier &amp; Persiapan Dunia Kerja</h3>
-                                <p class="text-xs sm:text-sm text-slate-500">Aula Utama &middot; 09.00</p>
-                            </div>
-                        </div>
-
-                        {{-- Event 4 --}}
-                        <div class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
-                                <span class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none">05</span>
-                                <span class="text-[10px] sm:text-xs font-bold text-blue-600 uppercase tracking-wider">NOV</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1">Pentas Seni &amp; Pameran Karya Siswa</h3>
-                                <p class="text-xs sm:text-sm text-slate-500">Lapangan Sekolah &middot; 13.00</p>
-                            </div>
-                        </div>
+                        @empty
+                            <p class="text-sm text-slate-500">Belum ada pengumuman.</p>
+                        @endforelse
                     </div>
 
                 </div>
@@ -255,45 +222,24 @@
             </div>
 
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-
-                {{-- Berita 1 --}}
-                <div class="berita-card group bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:border-blue-300">
-                    <div class="aspect-[16/10] overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=375&fit=crop"
-                            alt="LKS Tingkat Sekolah"
-                            class="berita-img w-full h-full object-cover">
+                @forelse ($artikels as $artikel)
+                    <div class="berita-card group bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:border-blue-300">
+                        <div class="aspect-[16/10] overflow-hidden bg-slate-200">
+                            @if ($artikel->image_path)
+                                <img src="{{ asset('storage/' . $artikel->image_path) }}" alt="{{ $artikel->title }}" class="berita-img w-full h-full object-cover">
+                            @else
+                                <div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300"></div>
+                            @endif
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
+                                {{ $artikel->title }}
+                            </h3>
+                        </div>
                     </div>
-                    <div class="p-5 sm:p-6">
-                        <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
-                            SMK Negeri 1 Surabaya melaksanakan LKS Tingkat Sekolah tahun 2026
-                        </h3>
-                    </div>
-                </div>
-
-                {{-- Berita 2 --}}
-                <div class="berita-card group bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:border-blue-300">
-                    <div class="aspect-[16/10] overflow-hidden bg-slate-200">
-                        <div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300"></div>
-                    </div>
-                    <div class="p-5 sm:p-6">
-                        <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
-                            Jadwal Ujian Tengah Semester Ganjil 2026/2027 Diterbitkan
-                        </h3>
-                    </div>
-                </div>
-
-                {{-- Berita 3 --}}
-                <div class="berita-card group bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:border-blue-300">
-                    <div class="aspect-[16/10] overflow-hidden bg-slate-200">
-                        <div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300"></div>
-                    </div>
-                    <div class="p-5 sm:p-6">
-                        <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
-                            Jadwal Ujian Tengah Semester Ganjil 2026/2027 Diterbitkan
-                        </h3>
-                    </div>
-                </div>
-
+                @empty
+                    <p class="text-sm text-slate-500 col-span-3">Belum ada artikel.</p>
+                @endforelse
             </section>
         </div>
     </main>

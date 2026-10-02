@@ -31,7 +31,7 @@
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                         Nama Lengkap <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" name="nama" value="{{ old('nama') }}" required
+                    <input type="text" name="nama" value="{{ old('nama') }}" required maxlength="255"
                         placeholder="Nama siswa alumni"
                         class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('nama')
@@ -43,7 +43,7 @@
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                         Kompetensi Keahlian / Jurusan <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" name="jurusan" value="{{ old('jurusan') }}" required
+                    <input type="text" name="jurusan" value="{{ old('jurusan') }}" required maxlength="255"
                         placeholder="Contoh: Rekayasa Perangkat Lunak"
                         class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('jurusan')

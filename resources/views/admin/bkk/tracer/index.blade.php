@@ -75,8 +75,8 @@
                             @foreach ($alumnis as $al)
                                 <tr class="hover:bg-slate-50 transition">
                                     <td class="px-5 py-3 font-mono font-bold text-slate-900">{{ $al->nisn }}</td>
-                                    <td class="px-5 py-3 font-semibold text-slate-800">{{ $al->nama }}</td>
-                                    <td class="px-5 py-3 text-slate-600">{{ $al->jurusan }}</td>
+                                    <td class="px-5 py-3 font-semibold text-slate-800 max-w-[12rem] truncate" title="{{ $al->nama }}">{{ $al->nama }}</td>
+                                    <td class="px-5 py-3 text-slate-600 max-w-[12rem] truncate" title="{{ $al->jurusan }}">{{ $al->jurusan }}</td>
                                     <td class="px-5 py-3 font-semibold text-blue-700">{{ $al->tahun_lulus }}</td>
                                     <td class="px-5 py-3 text-slate-500">{{ $al->angkatan }}</td>
                                     <td class="px-5 py-3 text-right whitespace-nowrap">

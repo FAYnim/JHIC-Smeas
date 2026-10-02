@@ -37,7 +37,6 @@
             width: 100%;
             height: 4px;
             background-color: #fbbf24;
-            /* amber-400 */
             border-radius: 9999px;
             transform: scaleX(0);
             transform-origin: left;
@@ -63,39 +62,34 @@
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
         }
 
-        /* Interactive Filter Pill */
-        .filter-btn {
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Card Hover Effects */
+        .jurusan-card {
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        .jurusan-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 16px 32px -8px rgba(2, 64, 137, 0.12);
+        }
+
+        .jurusan-card:hover .arrow-icon {
+            transform: translateX(4px);
+        }
+
+        /* Active Filter Button */
         .filter-btn.active {
             background-color: #0250a3;
             color: #ffffff;
             border-color: #0250a3;
             box-shadow: 0 4px 12px rgba(2, 80, 163, 0.25);
         }
-
-        /* Card Aesthetics & Hover Elevation */
-        .jurusan-card {
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .jurusan-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 30px -10px rgba(2, 55, 117, 0.1), 0 10px 10px -5px rgba(2, 55, 117, 0.04);
-            border-color: #60a5fa;
-        }
-
-        .jurusan-card:hover .arrow-icon {
-            transform: translateX(4px);
-            color: #0250a3;
-        }
     </style>
 </head>
 
-<body class="bg-[#f8fafc] text-slate-800 antialiased flex flex-col min-h-screen">
+<body class="bg-[#f8fafc] text-slate-800 antialiased flex flex-col min-h-screen selection:bg-amber-400 selection:text-slate-950">
 
-    {{-- Header / Navbar --}}
+    {{-- ==================== NAVBAR ==================== --}}
     @include('partials.navbar', [
         'activePage' => 'jurusan',
         'berandaUrl' => route('pusat-karir.index')
@@ -151,6 +145,22 @@
 
         {{-- ==================== MAIN CONTENT AREA ==================== --}}
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 z-10 pb-20">
+
+            {{-- ===== STATS ROW (Dynamic Stats from DB) ===== --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white rounded-2xl border border-slate-200/80 p-6 text-center shadow-xs">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-blue-600">{{ $totalLowongan }}</div>
+                    <div class="text-xs sm:text-sm font-bold text-slate-500 mt-1">Lowongan Aktif</div>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-200/80 p-6 text-center shadow-xs">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-blue-600">{{ $totalAlumni }}</div>
+                    <div class="text-xs sm:text-sm font-bold text-slate-500 mt-1">Alumni</div>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-200/80 p-6 text-center shadow-xs">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-blue-600">{{ $totalMitra }}</div>
+                    <div class="text-xs sm:text-sm font-bold text-slate-500 mt-1">Mitra Industri</div>
+                </div>
+            </div>
 
             {{-- ===== FILTER BAR (Floating White Container) ===== --}}
             <div class="bg-white rounded-2xl shadow-[0_10px_30px_-5px_rgba(2,64,137,0.08)] border border-slate-200/80 p-3 sm:p-4 mb-10 flex items-center justify-between gap-4 flex-wrap">

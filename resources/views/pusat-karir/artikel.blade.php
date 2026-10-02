@@ -101,9 +101,9 @@
                     @foreach ($artikels as $a)
                         <a href="{{ route('pusat-karir.detail-artikel', $a->slug) }}"
                             class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow flex flex-col group">
-                            @if ($a->image_url)
+                            @if ($a->display_image)
                                 <div class="h-40 overflow-hidden">
-                                    <img src="{{ $a->image_url }}" alt="{{ $a->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                    <img src="{{ $a->display_image }}" alt="{{ $a->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 </div>
                             @else
                                 <div class="artikel-thumb h-40"></div>

@@ -162,29 +162,31 @@
             </div>
 
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                @php
-                    $wakil = [
-                        ['nama' => 'Dra. Hj. Siti Aminah, M.M.', 'bidang' => 'Kurikulum', 'nip' => '19670520 199303 2 003'],
-                        ['nama' => 'Drs. H. Agus Supriyadi, M.Pd.', 'bidang' => 'Kesiswaan', 'nip' => '19680115 199303 1 005'],
-                        ['nama' => 'Dra. Retnowati, M.M.', 'bidang' => 'Sarana & Prasarana', 'nip' => '19690325 199403 2 002'],
-                        ['nama' => 'Drs. H. Moch. Syaifuddin, M.M.', 'bidang' => 'Hubungan Masyarakat', 'nip' => '19700510 199503 1 001'],
-                    ];
-                @endphp
-
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 @foreach ($wakil as $item)
                     <div class="org-card group bg-white rounded-2xl border border-slate-200/80 p-6 text-center shadow-xs hover:border-blue-500">
-                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mx-auto mb-4 ring-2 ring-slate-100 group-hover:ring-blue-300 transition-all">
-                            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                            </svg>
-                        </div>
-                        <div class="inline-block px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-[11px] font-bold uppercase tracking-wider mb-3 border border-blue-100">
-                            {{ $item['bidang'] }}
-                        </div>
+                        @if ($item->foto_url)
+                            <div class="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 ring-2 ring-slate-100 group-hover:ring-blue-300 transition-all">
+                                <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}" class="w-full h-full object-cover">
+                            </div>
+                        @else
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mx-auto mb-4 ring-2 ring-slate-100 group-hover:ring-blue-300 transition-all">
+                                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                            </div>
+                        @endif
+                        @if ($item->bidang)
+                            <div class="inline-block px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-[11px] font-bold uppercase tracking-wider mb-3 border border-blue-100">
+                                {{ $item->bidang }}
+                            </div>
+                        @endif
                         <h3 class="text-sm font-extrabold text-[#023775] mb-1 leading-snug">
-                            {{ $item['nama'] }}
+                            {{ $item->nama }}
                         </h3>
-                        <p class="text-[11px] text-slate-400 font-medium">NIP. {{ $item['nip'] }}</p>
+                        @if ($item->nip)
+                            <p class="text-[11px] text-slate-400 font-medium">NIP. {{ $item->nip }}</p>
+                        @endif
                     </div>
                 @endforeach
             </section>
@@ -201,41 +203,30 @@
             </div>
 
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @php
-                    $bagian = [
-                        ['nama' => 'Sekretariat', 'icon' => 'document-text', 'desc' => 'Pengelolaan administrasi umum, surat-menyurat, dan kearsipan sekolah.'],
-                        ['nama' => 'Keuangan', 'icon' => 'currency-dollar', 'desc' => 'Pengelolaan anggaran, pembukuan, dan pelaporan keuangan sekolah.'],
-                        ['nama' => 'Kepegawaian', 'icon' => 'users', 'desc' => 'Pengelolaan data guru dan tenaga kependidikan, absensi, serta kesejahteraan.'],
-                        ['nama' => 'Kurikulum', 'icon' => 'academic-cap', 'desc' => 'Perencanaan, pengembangan, dan evaluasi program pembelajaran.'],
-                        ['nama' => 'Kesiswaan', 'icon' => 'user-group', 'desc' => 'Pembinaan karakter, organisasi siswa, dan kegiatan ekstrakurikuler.'],
-                        ['nama' => 'Hubungan Industri', 'icon' => 'building-office', 'desc' => 'Kemitraan dengan DUDIKA, magang siswa, dan penyaluran lulusan.'],
-                    ];
-                @endphp
-
                 @foreach ($bagian as $item)
                     <div class="org-card group bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs hover:border-blue-500">
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center shrink-0 group-hover:from-blue-600 group-hover:to-blue-700 transition-all duration-300">
-                                @if ($item['icon'] === 'document-text')
+                                @if ($item->icon === 'document-text')
                                     <svg class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                @elseif ($item['icon'] === 'currency-dollar')
+                                @elseif ($item->icon === 'currency-dollar')
                                     <svg class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                @elseif ($item['icon'] === 'users')
+                                @elseif ($item->icon === 'academic-cap')
+                                    <svg class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                                @elseif ($item->icon === 'user-group')
                                     <svg class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                                @elseif ($item['icon'] === 'academic-cap')
-                                    <svg class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zM12 14v7m0-7l6.16-3.422"/></svg>
-                                @elseif ($item['icon'] === 'user-group')
-                                    <svg class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-3-3h-1m-5 5v-2a3 3 0 00-3-3H6a3 3 0 00-3 3v2h14zM9 11a3 3 0 116 0 3 3 0 01-6 0z"/></svg>
-                                @else
+                                @elseif ($item->icon === 'building-office')
                                     <svg class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                @else
+                                    <svg class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                                 @endif
                             </div>
                             <div>
                                 <h3 class="text-base font-extrabold text-[#023775] mb-1 group-hover:text-blue-700 transition-colors">
-                                    {{ $item['nama'] }}
+                                    {{ $item->nama }}
                                 </h3>
-                                <p class="text-sm text-slate-500 leading-relaxed">
-                                    {{ $item['desc'] }}
+                                <p class="text-xs text-slate-500 leading-relaxed">
+                                    {{ $item->deskripsi }}
                                 </p>
                             </div>
                         </div>

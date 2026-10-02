@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(AdminUserSeeder::class);
+
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
@@ -26,5 +28,14 @@ class DatabaseSeeder extends Seeder
         $this->call(WebinarSeeder::class);
         $this->call(BimbinganKarirSeeder::class);
         $this->call(CalonSiswaSeeder::class);
+        $this->call(AlumniSeeder::class);
+        $this->call(TracerSeeder::class);
+        $this->call(ProdukBludSeeder::class);
+        $this->call(GuruSeeder::class);
+        $this->call(StrukturOrganisasiSeeder::class);
+        $this->call(FasilitasSeeder::class);
+        $this->call(PengumumanSeeder::class);
+        $this->call(FaqSeeder::class);
+        $this->call(SettingSeeder::class);
     }
 }

@@ -34,5 +34,7 @@ class CalonSiswa extends Model
         'wa_ibu',
         'jalur_pendaftaran',
         'jurusan_pilihan',
+        'status_verifikasi',
+        'catatan_verifikasi',
     ];
 }

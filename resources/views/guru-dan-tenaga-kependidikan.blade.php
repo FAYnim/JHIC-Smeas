@@ -112,36 +112,27 @@
                 </div>
             </div>
 
-            @php
-                $guru = [
-                    ['nama' => 'Yourini Erawati, S.Pd., M.M.', 'jabatan' => 'Ketua Program Akuntansi', 'mapel' => 'Akuntansi', 'warna' => 'from-blue-500 to-blue-700'],
-                    ['nama' => 'Dra. Hj. Siti Aminah, M.M.', 'jabatan' => 'WKS Kurikulum', 'mapel' => 'Matematika', 'warna' => 'from-emerald-500 to-emerald-700'],
-                    ['nama' => 'Rudi Hartono, S.Pd.', 'jabatan' => 'Guru Produktif', 'mapel' => 'TIK & Jaringan', 'warna' => 'from-violet-500 to-violet-700'],
-                    ['nama' => 'Dewi Kartika, S.Pd.', 'jabatan' => 'Guru Produktif', 'mapel' => 'Perhotelan', 'warna' => 'from-rose-500 to-rose-700'],
-                    ['nama' => 'Ahmad Fauzi, S.Kom.', 'jabatan' => 'Guru Produktif', 'mapel' => 'Pemrograman', 'warna' => 'from-amber-500 to-amber-700'],
-                    ['nama' => 'Sri Wahyuni, S.Pd.', 'jabatan' => 'Guru Umum', 'mapel' => 'Bahasa Indonesia', 'warna' => 'from-cyan-500 to-cyan-700'],
-                    ['nama' => 'Budi Santoso, S.Pd.', 'jabatan' => 'Guru Umum', 'mapel' => 'Bahasa Inggris', 'warna' => 'from-indigo-500 to-indigo-700'],
-                    ['nama' => 'Rina Marlina, S.Pd.', 'jabatan' => 'Guru Umum', 'mapel' => 'PJOK', 'warna' => 'from-teal-500 to-teal-700'],
-                    ['nama' => 'Hendra Wijaya, S.Pd.', 'jabatan' => 'Guru Produktif', 'mapel' => 'Otomotif', 'warna' => 'from-orange-500 to-orange-700'],
-                    ['nama' => 'Nina Agustina, S.E.', 'jabatan' => 'Guru Produktif', 'mapel' => 'Bisnis Digital', 'warna' => 'from-pink-500 to-pink-700'],
-                    ['nama' => 'Dedi Kurniawan, S.Kom.', 'jabatan' => 'Guru Produktif', 'mapel' => 'Jaringan Komputer', 'warna' => 'from-sky-500 to-sky-700'],
-                    ['nama' => 'Putri Handayani, S.Pd.', 'jabatan' => 'Guru Umum', 'mapel' => 'IPS', 'warna' => 'from-lime-500 to-lime-700'],
-                ];
-            @endphp
-
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
                 @foreach ($guru as $item)
                     <div class="staff-card group bg-white rounded-2xl border border-slate-200/80 p-5 text-center shadow-xs hover:border-blue-500">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br {{ $item['warna'] }} flex items-center justify-center mx-auto mb-4 ring-2 ring-white shadow-md group-hover:scale-105 transition-transform">
-                            <span class="text-white font-bold text-lg">
-                                {{ strtoupper(substr(explode(' ', $item['nama'])[0], 0, 1)) }}{{ strtoupper(substr(explode(' ', $item['nama'])[1] ?? '', 0, 1)) }}
+                        @if ($item->foto_url)
+                            <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4 ring-2 ring-white shadow-md group-hover:scale-105 transition-transform">
+                                <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}" class="w-full h-full object-cover">
+                            </div>
+                        @else
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br {{ $item->warna ?: 'from-blue-500 to-blue-700' }} flex items-center justify-center mx-auto mb-4 ring-2 ring-white shadow-md group-hover:scale-105 transition-transform">
+                                <span class="text-white font-bold text-lg">
+                                    {{ $item->initials }}
+                                </span>
+                            </div>
+                        @endif
+                        <h3 class="text-sm font-extrabold text-[#023775] mb-1 leading-snug">{{ $item->nama }}</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mb-2">{{ $item->jabatan }}</p>
+                        @if ($item->mapel)
+                            <span class="inline-block px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-[11px] font-bold border border-blue-100">
+                                {{ $item->mapel }}
                             </span>
-                        </div>
-                        <h3 class="text-sm font-extrabold text-[#023775] mb-1 leading-snug">{{ $item['nama'] }}</h3>
-                        <p class="text-[11px] text-slate-400 font-semibold mb-2">{{ $item['jabatan'] }}</p>
-                        <span class="inline-block px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-[11px] font-bold border border-blue-100">
-                            {{ $item['mapel'] }}
-                        </span>
+                        @endif
                     </div>
                 @endforeach
             </section>
@@ -155,32 +146,27 @@
                 </div>
             </div>
 
-            @php
-                $tendik = [
-                    ['nama' => 'Eko Prasetyo', 'jabatan' => 'Kepala Tata Usaha', 'unit' => 'Tata Usaha', 'warna' => 'from-slate-500 to-slate-700'],
-                    ['nama' => 'Mariatul Kiftiah', 'jabatan' => 'Bendahara', 'unit' => 'Keuangan', 'warna' => 'from-rose-500 to-rose-700'],
-                    ['nama' => 'Sugeng Riyadi', 'jabatan' => 'Operator Sekolah', 'unit' => 'TIK', 'warna' => 'from-violet-500 to-violet-700'],
-                    ['nama' => 'Tri Wahyuni', 'jabatan' => 'Staff Kurikulum', 'unit' => 'Kurikulum', 'warna' => 'from-emerald-500 to-emerald-700'],
-                    ['nama' => 'Ari Supriyono', 'jabatan' => 'Kepala Perpustakaan', 'unit' => 'Perpustakaan', 'warna' => 'from-amber-500 to-amber-700'],
-                    ['nama' => 'Dwi Fatimah', 'jabatan' => 'Staff Kesiswaan', 'unit' => 'Kesiswaan', 'warna' => 'from-cyan-500 to-cyan-700'],
-                    ['nama' => 'Bambang Setiawan', 'jabatan' => 'Teknisi', 'unit' => 'Sarpras', 'warna' => 'from-indigo-500 to-indigo-700'],
-                    ['nama' => 'Lestari', 'jabatan' => 'Pustakawan', 'unit' => 'Perpustakaan', 'warna' => 'from-pink-500 to-pink-700'],
-                ];
-            @endphp
-
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 @foreach ($tendik as $item)
                     <div class="staff-card group bg-white rounded-2xl border border-slate-200/80 p-5 text-center shadow-xs hover:border-amber-500">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br {{ $item['warna'] }} flex items-center justify-center mx-auto mb-4 ring-2 ring-white shadow-md group-hover:scale-105 transition-transform">
-                            <span class="text-white font-bold text-lg">
-                                {{ strtoupper(substr(explode(' ', $item['nama'])[0], 0, 1)) }}{{ strtoupper(substr(explode(' ', $item['nama'])[1] ?? '', 0, 1)) }}
+                        @if ($item->foto_url)
+                            <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4 ring-2 ring-white shadow-md group-hover:scale-105 transition-transform">
+                                <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}" class="w-full h-full object-cover">
+                            </div>
+                        @else
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br {{ $item->warna ?: 'from-slate-500 to-slate-700' }} flex items-center justify-center mx-auto mb-4 ring-2 ring-white shadow-md group-hover:scale-105 transition-transform">
+                                <span class="text-white font-bold text-lg">
+                                    {{ $item->initials }}
+                                </span>
+                            </div>
+                        @endif
+                        <h3 class="text-sm font-extrabold text-[#023775] mb-1 leading-snug">{{ $item->nama }}</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mb-2">{{ $item->jabatan }}</p>
+                        @if ($item->mapel)
+                            <span class="inline-block px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-[11px] font-bold border border-amber-100">
+                                {{ $item->mapel }}
                             </span>
-                        </div>
-                        <h3 class="text-sm font-extrabold text-[#023775] mb-1 leading-snug">{{ $item['nama'] }}</h3>
-                        <p class="text-[11px] text-slate-400 font-semibold mb-2">{{ $item['jabatan'] }}</p>
-                        <span class="inline-block px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-[11px] font-bold border border-amber-100">
-                            {{ $item['unit'] }}
-                        </span>
+                        @endif
                     </div>
                 @endforeach
             </section>

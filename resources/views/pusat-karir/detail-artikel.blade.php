@@ -74,9 +74,9 @@
                 <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 leading-snug">{{ $artikel->title }}</h1>
                 <p class="text-xs text-slate-500 mt-2">Dipublikasi {{ $artikel->published_at->translatedFormat('l, d F Y') }}</p>
 
-                @if ($artikel->image_url)
+                @if ($artikel->display_image)
                     <div class="mt-5 rounded-xl overflow-hidden">
-                        <img src="{{ $artikel->image_url }}" alt="{{ $artikel->title }}" class="w-full h-auto max-h-[420px] object-cover">
+                        <img src="{{ $artikel->display_image }}" alt="{{ $artikel->title }}" class="w-full h-auto max-h-[420px] object-cover">
                     </div>
                 @else
                     <div class="artikel-thumb mt-5 rounded-xl h-64 md:h-80"></div>
@@ -93,9 +93,9 @@
                     @forelse ($other as $o)
                         <a href="{{ route('pusat-karir.detail-artikel', $o->slug) }}"
                             class="block bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
-                            @if ($o->image_url)
+                            @if ($o->display_image)
                                 <div class="h-36 overflow-hidden">
-                                    <img src="{{ $o->image_url }}" alt="{{ $o->title }}" class="w-full h-full object-cover">
+                                    <img src="{{ $o->display_image }}" alt="{{ $o->title }}" class="w-full h-full object-cover">
                                 </div>
                             @else
                                 <div class="artikel-thumb h-36"></div>

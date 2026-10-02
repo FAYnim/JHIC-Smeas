@@ -116,47 +116,44 @@
                 </div>
             </div>
 
-            @php
-                $fasilitasPembelajaran = [
-                    ['nama' => 'Ruang Kelas', 'icon' => 'building', 'desc' => 'Ruang kelas ber AC dengan kapasitas 32 siswa per kelas, dilengkapi proyektor dan papan tulis digital.', 'jumlah' => '72 Ruang'],
-                    ['nama' => 'Lab Komputer', 'icon' => 'computer', 'desc' => 'Laboratorium komputer dengan perangkat terbaru untuk pembelajaran TIK, pemrograman, dan jaringan.', 'jumlah' => '6 Lab'],
-                    ['nama' => 'Lab Akuntansi', 'icon' => 'calculator', 'desc' => 'Laboratorium khusus akuntansi dengan software MYOB dan Accurate untuk praktik pembukuan.', 'jumlah' => '2 Lab'],
-                    ['nama' => 'Perpustakaan', 'icon' => 'book', 'desc' => 'Perpustakaan modern dengan koleksi buku, jurnal, dan akses e-learning untuk seluruh siswa.', 'jumlah' => '1 Gedung'],
-                    ['nama' => 'Ruang Multimedia', 'icon' => 'film', 'desc' => 'Studio multimedia untuk pembelajaran desain, video editing, dan produksi konten digital.', 'jumlah' => '2 Ruang'],
-                    ['nama' => 'Lab Bahasa', 'icon' => 'language', 'desc' => 'Laboratorium bahasa dengan sistem audio digital untuk pelatihan listening dan speaking.', 'jumlah' => '1 Lab'],
-                ];
-            @endphp
-
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
                 @foreach ($fasilitasPembelajaran as $item)
                     <div class="facility-card group bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs hover:border-blue-500">
                         <div class="flex items-start gap-4 mb-4">
-                            <div class="facility-icon w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center shrink-0 group-hover:from-blue-600 group-hover:to-blue-700 transition-all duration-300">
-                                @if ($item['icon'] === 'building')
-                                    <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                                @elseif ($item['icon'] === 'computer')
-                                    <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                @elseif ($item['icon'] === 'calculator')
-                                    <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-                                @elseif ($item['icon'] === 'book')
-                                    <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                                @elseif ($item['icon'] === 'film')
-                                    <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                                @else
-                                    <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
-                                @endif
-                            </div>
+                            @if ($item->image_url)
+                                <div class="w-14 h-14 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition-transform">
+                                    <img src="{{ $item->image_url }}" alt="{{ $item->nama }}" class="w-full h-full object-cover">
+                                </div>
+                            @else
+                                <div class="facility-icon w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center shrink-0 group-hover:from-blue-600 group-hover:to-blue-700 transition-all duration-300">
+                                    @if ($item->icon === 'building')
+                                        <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                    @elseif ($item->icon === 'computer')
+                                        <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                    @elseif ($item->icon === 'calculator')
+                                        <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                    @elseif ($item->icon === 'book')
+                                        <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                    @elseif ($item->icon === 'film')
+                                        <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    @else
+                                        <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+                                    @endif
+                                </div>
+                            @endif
                             <div class="flex-1">
                                 <h3 class="text-base font-extrabold text-[#023775] mb-1 group-hover:text-blue-700 transition-colors">
-                                    {{ $item['nama'] }}
+                                    {{ $item->nama }}
                                 </h3>
-                                <span class="inline-block px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider">
-                                    {{ $item['jumlah'] }}
-                                </span>
+                                @if ($item->jumlah)
+                                    <span class="inline-block px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider">
+                                        {{ $item->jumlah }}
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <p class="text-sm text-slate-500 leading-relaxed">
-                            {{ $item['desc'] }}
+                            {{ $item->deskripsi }}
                         </p>
                     </div>
                 @endforeach
@@ -171,49 +168,48 @@
                 </div>
             </div>
 
-            @php
-                $fasilitasPendukung = [
-                    ['nama' => 'Masjid Al-Ikhlas', 'icon' => 'mosque', 'desc' => 'Masjid sekolah untuk kegiatan ibadah dan pembinaan karakter religius siswa.'],
-                    ['nama' => 'Aula Serbaguna', 'icon' => 'stage', 'desc' => 'Aula besar untuk upacara, seminar, pameran, dan kegiatan kemasyarakatan lainnya.'],
-                    ['nama' => 'Lapangan Olahraga', 'icon' => 'sport', 'desc' => 'Lapangan basket, voli, dan futsal untuk kegiatan olahraga dan ekstrakurikuler.'],
-                    ['nama' => 'Kantin Sekolah', 'icon' => 'food', 'desc' => 'Area makan yang bersih dan hygienis dengan berbagai pilihan makanan bergizi.'],
-                    ['nama' => 'Ruang UKS', 'icon' => 'medical', 'desc' => 'Unit kesehatan sekolah dengan peralatan dasar untuk penanganan siswa yang sakit.'],
-                    ['nama' => 'Parkir & Area Hijau', 'icon' => 'tree', 'desc' => 'Area parkir yang luas dan taman hijau yang asri untuk kenyamanan lingkungan sekolah.'],
-                ];
-            @endphp
-
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($fasilitasPendukung as $item)
                     <div class="facility-card group bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs hover:border-amber-500">
                         <div class="flex items-start gap-4 mb-4">
-                            <div class="facility-icon w-14 h-14 rounded-xl bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center shrink-0 group-hover:from-amber-500 group-hover:to-amber-600 transition-all duration-300">
-                                @if ($item['icon'] === 'mosque')
-                                    <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
-                                @elseif ($item['icon'] === 'stage')
-                                    <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                                @elseif ($item['icon'] === 'sport')
-                                    <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                                @elseif ($item['icon'] === 'food')
-                                    <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
-                                @elseif ($item['icon'] === 'medical')
-                                    <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                                @else
-                                    <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-                                @endif
-                            </div>
+                            @if ($item->image_url)
+                                <div class="w-14 h-14 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition-transform">
+                                    <img src="{{ $item->image_url }}" alt="{{ $item->nama }}" class="w-full h-full object-cover">
+                                </div>
+                            @else
+                                <div class="facility-icon w-14 h-14 rounded-xl bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center shrink-0 group-hover:from-amber-500 group-hover:to-amber-600 transition-all duration-300">
+                                    @if ($item->icon === 'mosque')
+                                        <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+                                    @elseif ($item->icon === 'stage')
+                                        <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                    @elseif ($item->icon === 'sport')
+                                        <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                    @elseif ($item->icon === 'food')
+                                        <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+                                    @elseif ($item->icon === 'medical')
+                                        <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                    @else
+                                        <svg class="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                                    @endif
+                                </div>
+                            @endif
                             <div class="flex-1">
                                 <h3 class="text-base font-extrabold text-[#023775] mb-1 group-hover:text-amber-700 transition-colors">
-                                    {{ $item['nama'] }}
+                                    {{ $item->nama }}
                                 </h3>
+                                @if ($item->jumlah)
+                                    <span class="inline-block px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider">
+                                        {{ $item->jumlah }}
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <p class="text-sm text-slate-500 leading-relaxed">
-                            {{ $item['desc'] }}
+                            {{ $item->deskripsi }}
                         </p>
                     </div>
                 @endforeach
             </section>
-
         </div>
     </main>
 

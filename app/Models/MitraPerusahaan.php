@@ -29,6 +29,7 @@ class MitraPerusahaan extends Model
         'narahubung_wa',
         'kelas_industri',
         'documents',
+        'logo_path',
     ];
 
     protected function casts(): array
@@ -42,6 +43,11 @@ class MitraPerusahaan extends Model
             'mou_until' => 'date',
             'kemitraan_sejak' => 'integer',
         ];
+    }
+
+    public function getLogoUrlAttribute(): ?string
+    {
+        return $this->logo_path ? asset('storage/'.$this->logo_path) : null;
     }
 
     public function lowongans(): HasMany

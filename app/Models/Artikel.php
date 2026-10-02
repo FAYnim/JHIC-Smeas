@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Artikel extends Model
 {
@@ -14,6 +15,7 @@ class Artikel extends Model
         'kategori',
         'published_at',
         'image_url',
+        'image_path',
         'reading_time',
     ];
 
@@ -22,5 +24,14 @@ class Artikel extends Model
         return [
             'published_at' => 'datetime',
         ];
+    }
+
+    public function getDisplayImageAttribute(): ?string
+    {
+        if ($this->image_path && Storage::disk('public')->exists($this->image_path)) {
+            return Storage::disk('public')->url($this->image_path);
+        }
+
+        return $this->image_url;
     }
 }

@@ -1,8 +1,17 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BludController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\SpmbController;
+use App\Models\Fasilitas;
+use App\Models\Guru;
+use App\Models\StrukturOrganisasi;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->middleware('guest')->name('login.store');
+Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
 Route::get('/', function () {
     return view('index');
@@ -13,15 +22,24 @@ Route::get('/visi-misi', function () {
 })->name('visi-misi');
 
 Route::get('/struktur-organisasi', function () {
-    return view('struktur-organisasi');
+    $wakil = StrukturOrganisasi::where('kategori', 'wakil')->orderBy('urutan')->get();
+    $bagian = StrukturOrganisasi::where('kategori', 'bagian')->orderBy('urutan')->get();
+
+    return view('struktur-organisasi', compact('wakil', 'bagian'));
 })->name('struktur-organisasi');
 
 Route::get('/guru-dan-tenaga-kependidikan', function () {
-    return view('guru-dan-tenaga-kependidikan');
+    $guru = Guru::where('kategori', 'guru')->where('is_active', true)->orderBy('urutan')->get();
+    $tendik = Guru::where('kategori', 'tendik')->where('is_active', true)->orderBy('urutan')->get();
+
+    return view('guru-dan-tenaga-kependidikan', compact('guru', 'tendik'));
 })->name('guru-dan-tenaga-kependidikan');
 
 Route::get('/sarana-dan-prasarana', function () {
-    return view('sarana-dan-prasarana');
+    $fasilitasPembelajaran = Fasilitas::where('kategori', 'pembelajaran')->orderBy('urutan')->get();
+    $fasilitasPendukung = Fasilitas::where('kategori', 'pendukung')->orderBy('urutan')->get();
+
+    return view('sarana-dan-prasarana', compact('fasilitasPembelajaran', 'fasilitasPendukung'));
 })->name('sarana-dan-prasarana');
 
 Route::get('/jurusan', function () {
@@ -51,14 +69,28 @@ Route::get('/pusat-karir/mitra', [LowonganController::class, 'katalogMitra'])->n
 Route::get('/pusat-karir/mitra/{slug}', [LowonganController::class, 'detailMitra'])->name('pusat-karir.detail-mitra');
 Route::get('/pusat-karir/artikel', [LowonganController::class, 'artikel'])->name('pusat-karir.artikel');
 Route::get('/pusat-karir/artikel/{slug}', [LowonganController::class, 'detailArtikel'])->name('pusat-karir.detail-artikel');
+Route::get('/pusat-karir/study-tracer', [LowonganController::class, 'studyTracer'])->name('pusat-karir.study-tracer');
+Route::get('/pusat-karir/study-tracer/kuesioner', [LowonganController::class, 'formKuesioner'])->name('pusat-karir.study-tracer.kuesioner');
+Route::post('/pusat-karir/study-tracer/kuesioner', [LowonganController::class, 'storeKuesioner'])->name('pusat-karir.study-tracer.store');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
 Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
 Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');
 
 // BLUD - Marketplace produk & jasa jurusan
-Route::get('/blud', function () {
-    return view('blud.index');
-})->name('blud.index');
+Route::get('/blud', [BludController::class, 'index'])->name('blud.index');
+Route::get('/blud/{slug}', [BludController::class, 'detail'])->where('slug', '[a-z0-9\-]+')->name('blud.detail');
+Route::post('/blud/{slug}/komentar', [BludController::class, 'storeKomentar'])
+    ->where('slug', '[a-z0-9\-]+')
+    ->middleware('throttle:10,1')
+    ->name('blud.komentar.store');
+Route::post('/blud/{slug}/penawaran', [BludController::class, 'storePenawaran'])
+    ->where('slug', '[a-z0-9\-]+')
+    ->middleware('throttle:10,1')
+    ->name('blud.penawaran.store');
+Route::post('/blud/{slug}/laporkan', [BludController::class, 'storeLaporkan'])
+    ->where('slug', '[a-z0-9\-]+')
+    ->middleware('throttle:10,1')
+    ->name('blud.laporkan.store');
 
 // SPMB Routes
 Route::get('/spmb', [SpmbController::class, 'index'])->name('spmb.index');
@@ -78,3 +110,14 @@ Route::get('/spmb/formulir/unduh', [SpmbController::class, 'unduhFormulir'])->na
 Route::get('/spmb/verifikasi', [SpmbController::class, 'verifikasi'])->name('spmb.verifikasi');
 Route::get('/spmb/pengumuman', [SpmbController::class, 'pengumuman'])->name('spmb.pengumuman');
 Route::get('/spmb/bantuan', [SpmbController::class, 'bantuan'])->name('spmb.bantuan');
+
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        require __DIR__.'/admin.php';
+    });
+
+if (app()->runningUnitTests()) {
+    require __DIR__.'/testing.php';
+}

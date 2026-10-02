@@ -28,7 +28,6 @@ class Lowongan extends Model
         'dokumen',
         'benefits',
         'batas_pendaftaran',
-        'durasi_pelaksanaan',
         'status_kuota',
         'pokja_nama',
         'pokja_koordinator',

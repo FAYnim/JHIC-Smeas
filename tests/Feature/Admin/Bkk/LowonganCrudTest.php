@@ -58,7 +58,6 @@ class LowonganCrudTest extends TestCase
             'kualifikasi' => "Menguasai PHP & Laravel\nDisiplin",
             'benefits' => "Uang saku\nSertifikat",
             'batas_pendaftaran' => now()->addDays(20)->format('Y-m-d'),
-            'durasi_pelaksanaan' => '6 Bulan',
             'is_published' => '1',
             'logo' => $file,
         ]);
@@ -119,5 +118,16 @@ class LowonganCrudTest extends TestCase
             'company_name' => 'PT Tanpa Dokumen',
             'title' => 'Posisi Tanpa Dokumen',
         ]);
+    }
+
+    public function test_create_form_has_no_durasi_pelaksanaan_field(): void
+    {
+        $bkk = User::factory()->bkk()->create();
+
+        $response = $this->actingAs($bkk)->get(route('admin.lowongan.create'));
+
+        $response->assertOk();
+        $response->assertDontSee('name="durasi_pelaksanaan"', false);
+        $response->assertSee('name="duration"', false);
     }
 }

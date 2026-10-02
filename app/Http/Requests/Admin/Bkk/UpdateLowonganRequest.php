@@ -29,7 +29,6 @@ class UpdateLowonganRequest extends FormRequest
             'kualifikasi' => ['nullable', 'string'],
             'benefits' => ['nullable', 'string'],
             'batas_pendaftaran' => ['required', 'date'],
-            'durasi_pelaksanaan' => ['required', 'string', 'max:100'],
             'status_kuota' => ['nullable', 'string', 'max:50'],
             'pokja_nama' => ['nullable', 'string', 'max:255'],
             'pokja_koordinator' => ['nullable', 'string', 'max:255'],

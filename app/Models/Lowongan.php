@@ -42,6 +42,8 @@ class Lowongan extends Model
         'fresh_graduate_ok',
         'logo_color',
         'mitra_id',
+        'is_published',
+        'logo_path',
     ];
 
     protected function casts(): array
@@ -54,7 +56,13 @@ class Lowongan extends Model
             'benefits' => 'array',
             'batas_pendaftaran' => 'date',
             'fresh_graduate_ok' => 'boolean',
+            'is_published' => 'boolean',
         ];
+    }
+
+    public function getLogoUrlAttribute(): ?string
+    {
+        return $this->logo_path ? asset('storage/'.$this->logo_path) : null;
     }
 
     public function applications()

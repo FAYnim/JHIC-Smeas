@@ -30,10 +30,10 @@ return new class extends Migration
 
             // Content (stored as text, rendered in blade)
             $table->text('deskripsi');
-            $table->json('tanggung_jawab');                     // array of strings
-            $table->json('kualifikasi');                        // array of strings
-            $table->json('dokumen');                            // array of {name, desc, type}
-            $table->json('benefits');                           // array of strings
+            $table->json('tanggung_jawab')->default('[]');
+            $table->json('kualifikasi')->default('[]');
+            $table->json('dokumen')->default('[]');
+            $table->json('benefits')->default('[]');
 
             // Registration info
             $table->date('batas_pendaftaran');

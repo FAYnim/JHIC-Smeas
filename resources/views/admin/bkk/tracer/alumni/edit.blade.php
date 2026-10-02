@@ -31,7 +31,7 @@
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                         Nama Lengkap <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" name="nama" value="{{ old('nama', $alumni->nama) }}" required
+                    <input type="text" name="nama" value="{{ old('nama', $alumni->nama) }}" required maxlength="255"
                         class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('nama')
                         <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
@@ -42,7 +42,7 @@
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                         Kompetensi Keahlian / Jurusan <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" name="jurusan" value="{{ old('jurusan', $alumni->jurusan) }}" required
+                    <input type="text" name="jurusan" value="{{ old('jurusan', $alumni->jurusan) }}" required maxlength="255"
                         class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('jurusan')
                         <p class="text-xs text-red-500 mt-1">{{ $message }}</p>

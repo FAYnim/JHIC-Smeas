@@ -109,4 +109,23 @@ class MitraCrudTest extends TestCase
         $response->assertRedirect(route('admin.mitra.index'));
         $this->assertDatabaseMissing('mitra_perusahaans', ['id' => $mitra->id]);
     }
+
+    public function test_store_with_invalid_data_shows_field_errors(): void
+    {
+        $bkk = User::factory()->bkk()->create();
+
+        $response = $this->actingAs($bkk)->post(route('admin.mitra.store'), [
+            'name' => 'PT Uji Validasi',
+            'short_name' => str_repeat('X', 60),
+            'sector' => str_repeat('Y', 150),
+            'city' => 'Surabaya',
+            'website' => 'bukan-url-valid',
+            'kemitraan_sejak' => 1900,
+        ]);
+
+        $response->assertSessionHasErrors(['short_name', 'sector', 'website', 'kemitraan_sejak']);
+
+        $response = $this->actingAs($bkk)->get(route('admin.mitra.create'));
+        $response->assertSee('URL tidak valid');
+    }
 }

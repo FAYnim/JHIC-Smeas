@@ -17,7 +17,7 @@ class UpdateUserRequest extends FormRequest
         $userId = $this->route('user') instanceof User ? $this->route('user')->id : $this->route('user');
 
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
             'email' => 'required|string|email|max:255|unique:users,email,'.$userId,
             'password' => 'nullable|string|min:8',
             'role' => 'required|in:'.implode(',', [User::ROLE_ADMIN, User::ROLE_BKK, User::ROLE_HUMAS, User::ROLE_SPMB]),

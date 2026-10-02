@@ -121,9 +121,14 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Catatan Panitia (Opsional)</label>
-                        <textarea name="catatan_verifikasi" rows="4" placeholder="Misal: Scan Kartu Keluarga buram, harap perbarui..."
-                            class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ old('catatan_verifikasi', $calonSiswa->catatan_verifikasi) }}</textarea>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">
+                            Catatan Panitia <span class="text-red-500">(wajib jika status "Ditolak")</span>
+                        </label>
+                        <textarea name="catatan_verifikasi" rows="4" maxlength="1000" placeholder="Misal: Scan Kartu Keluarga buram, harap perbarui..."
+                            class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('catatan_verifikasi') border-red-500 @enderror">{{ old('catatan_verifikasi', $calonSiswa->catatan_verifikasi) }}</textarea>
+                        @error('catatan_verifikasi')
+                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <button type="submit" class="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-blue-700 transition">

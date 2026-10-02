@@ -33,4 +33,32 @@ class StoreMitraRequest extends FormRequest
             'logo' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nama perusahaan wajib diisi.',
+            'name.max' => 'Nama perusahaan maksimal 255 karakter.',
+            'short_name.required' => 'Nama singkat wajib diisi.',
+            'short_name.max' => 'Nama singkat maksimal 50 karakter.',
+            'sector.required' => 'Sektor industri wajib diisi.',
+            'sector.max' => 'Sektor industri maksimal 100 karakter.',
+            'city.required' => 'Kota wajib diisi.',
+            'city.max' => 'Kota maksimal 100 karakter.',
+            'website.url' => 'URL tidak valid — gunakan format https://contoh.com',
+            'website.max' => 'URL website maksimal 255 karakter.',
+            'logo_color.max' => 'Warna logo maksimal 20 karakter.',
+            'logo_text.max' => 'Teks logo maksimal 10 karakter.',
+            'mou_until.date' => 'Tanggal berlaku MoU tidak valid.',
+            'kemitraan_sejak.integer' => 'Tahun kemitraan harus berupa angka.',
+            'kemitraan_sejak.min' => 'Tahun kemitraan minimal 1950.',
+            'kemitraan_sejak.max' => 'Tahun kemitraan maksimal tahun depan.',
+            'narahubung_nama.max' => 'Nama narahubung maksimal 255 karakter.',
+            'narahubung_jabatan.max' => 'Jabatan narahubung maksimal 100 karakter.',
+            'narahubung_wa.max' => 'Nomor WhatsApp narahubung maksimal 30 karakter.',
+            'logo.image' => 'File logo harus berupa gambar.',
+            'logo.mimes' => 'Format logo harus PNG, JPG, atau WEBP.',
+            'logo.max' => 'Ukuran logo maksimal 2MB.',
+        ];
+    }
 }

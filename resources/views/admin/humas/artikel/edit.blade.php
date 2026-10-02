@@ -21,7 +21,7 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Judul Artikel *</label>
-                    <input type="text" name="title" value="{{ old('title', $artikel->title) }}" required
+                    <input type="text" name="title" value="{{ old('title', $artikel->title) }}" required maxlength="255"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('title') border-red-500 @enderror">
                     @error('title')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -31,7 +31,7 @@
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Kategori *</label>
-                        <input type="text" name="kategori" value="{{ old('kategori', $artikel->kategori) }}" required
+                        <input type="text" name="kategori" value="{{ old('kategori', $artikel->kategori) }}" required maxlength="100"
                             class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('kategori') border-red-500 @enderror">
                         @error('kategori')
                             <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -50,7 +50,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Ringkasan Singkat (Excerpt) *</label>
-                    <textarea name="excerpt" rows="2" required
+                    <textarea name="excerpt" rows="2" required maxlength="500"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('excerpt') border-red-500 @enderror">{{ old('excerpt', $artikel->excerpt) }}</textarea>
                     @error('excerpt')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -59,7 +59,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Konten Lengkap *</label>
-                    <textarea name="content" rows="10" required
+                    <textarea name="content" rows="10" required maxlength="50000"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('content') border-red-500 @enderror">{{ old('content', $artikel->content) }}</textarea>
                     @error('content')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -89,7 +89,7 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Atau Image URL</label>
-                        <input type="url" name="image_url" value="{{ old('image_url', $artikel->image_url) }}"
+                        <input type="url" name="image_url" value="{{ old('image_url', $artikel->image_url) }}" maxlength="500"
                             class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('image_url') border-red-500 @enderror">
                         @error('image_url')
                             <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -106,7 +106,7 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Estimasi Waktu Baca</label>
-                        <input type="text" name="reading_time" value="{{ old('reading_time', $artikel->reading_time) }}"
+                        <input type="text" name="reading_time" value="{{ old('reading_time', $artikel->reading_time) }}" maxlength="50"
                             class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('reading_time') border-red-500 @enderror">
                     </div>
                 </div>

@@ -32,7 +32,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Nama Jabatan / Unit *</label>
-                    <input type="text" name="nama" value="{{ old('nama', $strukturOrganisasi->nama) }}" required
+                    <input type="text" name="nama" value="{{ old('nama', $strukturOrganisasi->nama) }}" required maxlength="255"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('nama') border-red-500 @enderror">
                     @error('nama')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -41,7 +41,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Bidang (Khusus Wakil)</label>
-                    <input type="text" name="bidang" value="{{ old('bidang', $strukturOrganisasi->bidang) }}"
+                    <input type="text" name="bidang" value="{{ old('bidang', $strukturOrganisasi->bidang) }}" maxlength="255"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('bidang') border-red-500 @enderror">
                     @error('bidang')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -50,7 +50,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">NIP (Khusus Wakil)</label>
-                    <input type="text" name="nip" value="{{ old('nip', $strukturOrganisasi->nip) }}"
+                    <input type="text" name="nip" value="{{ old('nip', $strukturOrganisasi->nip) }}" maxlength="100"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('nip') border-red-500 @enderror">
                     @error('nip')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -77,7 +77,7 @@
 
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Tugas / Fungsi (Unit Bagian)</label>
-                    <textarea name="deskripsi" rows="3"
+                    <textarea name="deskripsi" rows="3" maxlength="2000"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi', $strukturOrganisasi->deskripsi) }}</textarea>
                     @error('deskripsi')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>

@@ -83,18 +83,13 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                 </div>
                 <div>
-                    <label class="mb-1 block text-xs font-bold text-slate-600">Durasi *</label>
+                    <label class="mb-1 block text-xs font-bold text-slate-600">Durasi Magang/Kerja * <span class="font-normal text-slate-400">(mis. 6 Bulan (Jan–Jun))</span></label>
                     <input type="text" name="duration" value="{{ old('duration') }}" required
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Batas Pendaftaran *</label>
                     <input type="date" name="batas_pendaftaran" value="{{ old('batas_pendaftaran') }}" required
-                        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
-                </div>
-                <div>
-                    <label class="mb-1 block text-xs font-bold text-slate-600">Durasi Pelaksanaan *</label>
-                    <input type="text" name="durasi_pelaksanaan" value="{{ old('durasi_pelaksanaan') }}" required
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                 </div>
             </div>

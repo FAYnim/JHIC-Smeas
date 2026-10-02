@@ -24,7 +24,7 @@ class UpdateWebinarRequest extends FormRequest
             'platform' => ['required', 'string', 'max:100'],
             'location' => ['nullable', 'string', 'max:255'],
             'start_date' => ['required', 'date'],
-            'start_time' => ['required', 'string', 'max:50'],
+            'start_time' => ['required', 'date_format:H:i'],
             'registration_url' => ['required', 'url', 'max:500'],
             'is_published' => ['nullable', 'boolean'],
         ];

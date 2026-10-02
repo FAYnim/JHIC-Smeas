@@ -80,7 +80,7 @@
                                 {{ $item->jumlah ?: '-' }}
                             </td>
                             <td class="px-4 py-3 text-slate-500 max-w-sm">
-                                {{ $item->deskripsi }}
+                                <p class="truncate" title="{{ $item->deskripsi }}">{{ $item->deskripsi }}</p>
                             </td>
                             <td class="px-4 py-3 text-center font-bold text-slate-600">
                                 {{ $item->urutan }}

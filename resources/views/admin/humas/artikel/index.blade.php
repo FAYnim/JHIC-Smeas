@@ -62,9 +62,9 @@
                                             NEWS
                                         </div>
                                     @endif
-                                    <div class="max-w-md">
-                                        <p class="font-extrabold text-slate-900">{{ $item->title }}</p>
-                                        <p class="text-[11px] text-slate-400 font-mono">/pusat-karir/artikel/{{ $item->slug }}</p>
+                                    <div class="max-w-md min-w-0">
+                                        <p class="font-extrabold text-slate-900 truncate" title="{{ $item->title }}">{{ $item->title }}</p>
+                                        <p class="text-[11px] text-slate-400 font-mono truncate">/pusat-karir/artikel/{{ $item->slug }}</p>
                                     </div>
                                 </div>
                             </td>

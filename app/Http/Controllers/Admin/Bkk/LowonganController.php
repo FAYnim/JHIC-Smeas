@@ -112,6 +112,7 @@ class LowonganController extends Controller
         $data['tanggung_jawab'] = $this->parseMultiline($data['tanggung_jawab'] ?? null);
         $data['kualifikasi'] = $this->parseMultiline($data['kualifikasi'] ?? null);
         $data['benefits'] = $this->parseMultiline($data['benefits'] ?? null);
+        $data['dokumen'] = $data['dokumen'] ?? [];
 
         $data['is_published'] = $request->boolean('is_published');
 

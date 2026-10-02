@@ -35,7 +35,6 @@ class LowonganFactory extends Factory
             'dokumen' => [['name' => 'CV.pdf', 'desc' => 'Dokumen', 'type' => 'pdf']],
             'benefits' => ['Uang saku'],
             'batas_pendaftaran' => now()->addMonths(2)->toDateString(),
-            'durasi_pelaksanaan' => '6 Bulan',
             'status_kuota' => 'Tersedia',
             'pokja_nama' => 'Pokja PKL',
             'pokja_koordinator' => 'Bpk. Uji',

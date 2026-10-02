@@ -51,7 +51,7 @@ class WebinarCrudTest extends TestCase
             'platform' => 'Zoom Meeting',
             'location' => 'Online via Zoom',
             'start_date' => now()->addDays(7)->format('Y-m-d'),
-            'start_time' => '09:00 WIB',
+            'start_time' => '09:00',
             'registration_url' => 'https://zoom.us/webinar/register/12345',
             'is_published' => '1',
         ]);
@@ -89,7 +89,7 @@ class WebinarCrudTest extends TestCase
             'platform' => 'Google Meet',
             'location' => 'Online Meet',
             'start_date' => now()->addDays(10)->format('Y-m-d'),
-            'start_time' => '13:00 WIB',
+            'start_time' => '13:00',
             'registration_url' => 'https://meet.google.com/xyz',
             'is_published' => '1',
         ]);
@@ -112,7 +112,7 @@ class WebinarCrudTest extends TestCase
             'platform' => 'Zoom',
             'location' => 'Online',
             'start_date' => now()->addDays(3),
-            'start_time' => '09:00 WIB',
+            'start_time' => '09:00',
             'is_published' => true,
         ]);
 
@@ -135,7 +135,7 @@ class WebinarCrudTest extends TestCase
             'platform' => 'Zoom',
             'location' => 'Online',
             'start_date' => now()->addDays(2),
-            'start_time' => '10:00 WIB',
+            'start_time' => '10:00',
             'is_published' => true,
         ]);
 
@@ -143,5 +143,20 @@ class WebinarCrudTest extends TestCase
 
         $response->assertRedirect(route('admin.webinar.index'));
         $this->assertDatabaseMissing('webinars', ['id' => $webinar->id]);
+    }
+
+    public function test_rejects_non_time_start_time(): void
+    {
+        $response = $this->actingAs($this->humas)->post(route('admin.webinar.store'), [
+            'title' => 'Webinar Validasi Waktu',
+            'description' => 'Deskripsi',
+            'speaker' => 'Pembicara',
+            'platform' => 'Zoom',
+            'start_date' => now()->addDays(7)->format('Y-m-d'),
+            'start_time' => '09:00 - 11:30 WIB',
+            'registration_url' => 'https://example.com/reg',
+        ]);
+
+        $response->assertSessionHasErrors('start_time');
     }
 }

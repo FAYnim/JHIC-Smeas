@@ -97,4 +97,18 @@ class UserCrudTest extends TestCase
 
         $this->assertDatabaseHas('users', ['id' => $this->adminUser->id]);
     }
+
+    public function test_user_name_has_max_length(): void
+    {
+        $admin = User::factory()->create(['role' => User::ROLE_ADMIN]);
+
+        $response = $this->actingAs($admin)->post(route('admin.users.store'), [
+            'name' => str_repeat('N', 120),
+            'email' => 'namapnjg@example.com',
+            'password' => 'password123',
+            'role' => 'bkk',
+        ]);
+
+        $response->assertSessionHasErrors('name');
+    }
 }

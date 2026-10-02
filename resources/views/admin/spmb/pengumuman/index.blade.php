@@ -38,8 +38,8 @@
             <tbody class="divide-y divide-slate-100">
                 @forelse ($pengumumans as $item)
                     <tr class="hover:bg-slate-50">
-                        <td class="px-4 py-3">
-                            <p class="font-bold text-slate-900">{{ $item->judul }}</p>
+                        <td class="px-4 py-3 max-w-sm">
+                            <p class="font-bold text-slate-900 truncate" title="{{ $item->judul }}">{{ $item->judul }}</p>
                             <p class="text-xs text-slate-500 line-clamp-1">{{ Str::limit($item->konten, 90) }}</p>
                         </td>
                         <td class="px-4 py-3">

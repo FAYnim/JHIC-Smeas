@@ -72,15 +72,15 @@
                                             {{ $item->initials }}
                                         </div>
                                     @endif
-                                    <div>
-                                        <p class="font-extrabold text-slate-900">{{ $item->nama }}</p>
+                                    <div class="min-w-0 max-w-[14rem]">
+                                        <p class="font-extrabold text-slate-900 truncate" title="{{ $item->nama }}">{{ $item->nama }}</p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-4 py-3">
-                                <p class="font-medium text-slate-900">{{ $item->jabatan }}</p>
+                            <td class="px-4 py-3 max-w-[12rem]">
+                                <p class="font-medium text-slate-900 truncate" title="{{ $item->jabatan }}">{{ $item->jabatan }}</p>
                                 @if ($item->mapel)
-                                    <p class="text-[11px] text-slate-500">{{ $item->mapel }}</p>
+                                    <p class="text-[11px] text-slate-500 truncate" title="{{ $item->mapel }}">{{ $item->mapel }}</p>
                                 @endif
                             </td>
                             <td class="px-4 py-3">

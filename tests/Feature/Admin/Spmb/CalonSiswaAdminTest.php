@@ -129,4 +129,35 @@ class CalonSiswaAdminTest extends TestCase
             'catatan_verifikasi' => 'Seluruh berkas lengkap dan terkonfirmasi valid.',
         ]);
     }
+
+    public function test_reject_status_requires_catatan(): void
+    {
+        $siswa = CalonSiswa::create([
+            'nisn' => '3333333333',
+            'nama_lengkap' => 'Calon Siswa Verifikasi',
+            'asal_sekolah' => 'SMPN 3 Surabaya',
+            'status_verifikasi' => 'menunggu',
+        ]);
+
+        $response = $this->actingAs($this->spmbUser)
+            ->patch(route('admin.calon-siswa.update-verifikasi', $siswa), [
+                'status_verifikasi' => 'ditolak',
+                'catatan_verifikasi' => null,
+            ]);
+
+        $response->assertSessionHasErrors('catatan_verifikasi');
+
+        $response2 = $this->actingAs($this->spmbUser)
+            ->patch(route('admin.calon-siswa.update-verifikasi', $siswa), [
+                'status_verifikasi' => 'ditolak',
+                'catatan_verifikasi' => 'Scan KK buram, mohon unggah ulang.',
+            ]);
+
+        $response2->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('calon_siswas', [
+            'id' => $siswa->id,
+            'status_verifikasi' => 'ditolak',
+            'catatan_verifikasi' => 'Scan KK buram, mohon unggah ulang.',
+        ]);
+    }
 }

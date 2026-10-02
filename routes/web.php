@@ -109,4 +109,3 @@ Route::middleware('auth')
 if (app()->runningUnitTests()) {
     require __DIR__.'/testing.php';
 }
-

@@ -21,7 +21,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Nama Lengkap <span class="text-red-500">*</span>
                 </label>
-                <input type="text" name="name" value="{{ old('name', $user->name) }}" required
+                <input type="text" name="name" value="{{ old('name', $user->name) }}" required maxlength="100"
                     class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                 @error('name')
                     <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
@@ -32,7 +32,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Alamat Email <span class="text-red-500">*</span>
                 </label>
-                <input type="email" name="email" value="{{ old('email', $user->email) }}" required
+                <input type="email" name="email" value="{{ old('email', $user->email) }}" required maxlength="255"
                     class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                 @error('email')
                     <p class="text-xs text-red-500 mt-1">{{ $message }}</p>

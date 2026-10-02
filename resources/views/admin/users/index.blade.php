@@ -60,14 +60,14 @@
                         $isCurrent = $user->id === auth()->id();
                     @endphp
                     <tr class="hover:bg-slate-50">
-                        <td class="px-4 py-3">
+                        <td class="px-4 py-3 max-w-[16rem]">
                             <div class="flex items-center gap-2">
-                                <p class="font-bold text-slate-900">{{ $user->name }}</p>
+                                <p class="font-bold text-slate-900 truncate" title="{{ $user->name }}">{{ $user->name }}</p>
                                 @if ($isCurrent)
-                                    <span class="rounded bg-slate-200 px-1.5 py-0.5 text-[10px] font-bold text-slate-700">Anda</span>
+                                    <span class="rounded bg-slate-200 px-1.5 py-0.5 text-[10px] font-bold text-slate-700 shrink-0">Anda</span>
                                 @endif
                             </div>
-                            <p class="text-xs text-slate-500">{{ $user->email }}</p>
+                            <p class="text-xs text-slate-500 truncate" title="{{ $user->email }}">{{ $user->email }}</p>
                         </td>
                         <td class="px-4 py-3">
                             <span class="inline-flex rounded-full border px-2.5 py-0.5 text-xs font-bold {{ $badgeClass }}">

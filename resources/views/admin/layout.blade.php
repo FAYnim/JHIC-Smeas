@@ -238,10 +238,10 @@
                 <h1 class="text-xl font-extrabold text-slate-900">@yield('page-title', 'Dashboard')</h1>
             </div>
 
-            <div class="flex items-center gap-3">
-                <span class="adm-userchip">
-                    <span>{{ auth()->user()->name }}</span>
-                    <span class="text-[10px] font-semibold text-blue-200">
+            <div class="flex items-center gap-3 min-w-0">
+                <span class="adm-userchip min-w-0">
+                    <span class="max-w-[10rem] truncate">{{ auth()->user()->name }}</span>
+                    <span class="text-[10px] font-semibold text-blue-200 shrink-0">
                         ({{ auth()->user()->roleLabel() }})
                     </span>
                 </span>
@@ -249,7 +249,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
-                        class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-red-600 transition">
+                        class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-red-600 transition shrink-0">
                         <x-lucide-log-out class="w-4 h-4" />
                         Keluar
                     </button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alumni;
 use App\Models\Artikel;
+use App\Models\BimbinganKarir;
 use App\Models\KuesionerTracer;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
@@ -32,6 +33,21 @@ class LowonganController extends Controller
             ->filter(fn (Webinar $w) => $w->start_date->isFuture())
             ->sortBy('start_date')
             ->first();
+
+        $bimbinganKatalog = BimbinganKarir::with('kategori')
+            ->where('is_published', true)
+            ->latest()
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'title' => $item->title,
+                    'kategori' => $item->kategori->slug ?? 'umum',
+                    'kategori_label' => $item->kategori->nama ?? 'Umum',
+                    'type' => 'Materi',
+                    'url' => $item->external_url ?? '#',
+                ];
+            })
+            ->all();
 
         $categories = [
             [
@@ -62,8 +78,8 @@ class LowonganController extends Controller
                 'name' => 'Bimbingan Karir',
                 'slug' => 'bimbingan-karir',
                 'icon' => 'academic-cap',
-                'count' => 5,
-                'unit' => 'kategori',
+                'count' => count($bimbinganKatalog),
+                'unit' => 'materi',
                 'url' => '#bimbingan-karir',
             ],
             [
@@ -81,7 +97,8 @@ class LowonganController extends Controller
             'artikels',
             'webinars',
             'upcomingWebinar',
-            'categories'
+            'categories',
+            'bimbinganKatalog'
         ));
     }
 

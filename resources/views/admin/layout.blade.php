@@ -191,6 +191,12 @@
                                 @case('settings')
                                     <x-lucide-settings />
                                 @break
+                                @case('academic-cap')
+                                    <x-lucide-book-open />
+                                @break
+                                @case('chart-bar')
+                                    <x-lucide-bar-chart-3 />
+                                @break
                                 @default
                                     <x-lucide-circle />
                             @endswitch

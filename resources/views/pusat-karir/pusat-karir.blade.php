@@ -849,17 +849,7 @@
 
             <!-- ===== Katalog Bimbingan Karir ===== -->
             @php
-                // Data dummy — nantinya diganti dari controller (BimbinganKarir + BimbinganKategori)
-                $bimbinganKatalog = $bimbinganKatalog ?? [
-                    ['title' => 'Cara Membuat CV Menarik untuk Fresh Graduate', 'kategori' => 'tips-cv', 'kategori_label' => 'Tips CV', 'type' => 'Artikel', 'url' => '#'],
-                    ['title' => 'Contoh CV Kreatif untuk Jurusan DKV', 'kategori' => 'tips-cv', 'kategori_label' => 'Tips CV', 'type' => 'Template', 'url' => '#'],
-                    ['title' => 'Pertanyaan Wajib Interview & Cara Menjawabnya', 'kategori' => 'tips-interview', 'kategori_label' => 'Tips Interview', 'type' => 'Artikel', 'url' => '#'],
-                    ['title' => 'Simulasi Interview Bersama HRD Mitra', 'kategori' => 'tips-interview', 'kategori_label' => 'Tips Interview', 'type' => 'Workshop', 'url' => '#'],
-                    ['title' => 'Roadmap Karir Teknik Komputer & Informatika', 'kategori' => 'roadmap-karir', 'kategori_label' => 'Roadmap Karir', 'type' => 'Infografis', 'url' => '#'],
-                    ['title' => 'Menjelajah Karir di Dunia Otomotif', 'kategori' => 'roadmap-karir', 'kategori_label' => 'Roadmap Karir', 'type' => 'Artikel', 'url' => '#'],
-                    ['title' => 'Sertifikasi BNSP: Apa yang Perlu Disiapkan?', 'kategori' => 'sertifikasi', 'kategori_label' => 'Sertifikasi', 'type' => 'Panduan', 'url' => '#'],
-                    ['title' => 'Daftar Skema Sertifikasi untuk Lulusan SMK', 'kategori' => 'sertifikasi', 'kategori_label' => 'Sertifikasi', 'type' => 'Referensi', 'url' => '#'],
-                ];
+                $bimbinganKatalog = $bimbinganKatalog ?? [];
             @endphp
 
             <div class="mt-12">

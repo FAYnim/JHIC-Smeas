@@ -53,6 +53,20 @@ class AdminMenu
             'roles' => [User::ROLE_ADMIN, User::ROLE_BKK],
         ],
         [
+            'group' => 'Pusat Karir',
+            'label' => 'Bimbingan Karir',
+            'route' => 'admin.bimbingan.index',
+            'icon' => 'academic-cap',
+            'roles' => [User::ROLE_ADMIN, User::ROLE_BKK],
+        ],
+        [
+            'group' => 'Pusat Karir',
+            'label' => 'Tracer Study',
+            'route' => 'admin.tracer.index',
+            'icon' => 'chart-bar',
+            'roles' => [User::ROLE_ADMIN, User::ROLE_BKK],
+        ],
+        [
             'group' => 'Profil Sekolah',
             'label' => 'Guru & Tendik',
             'route' => 'admin.guru.index',

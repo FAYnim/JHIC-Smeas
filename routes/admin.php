@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Bkk\BimbinganController;
 use App\Http\Controllers\Admin\Bkk\LamaranController;
 use App\Http\Controllers\Admin\Bkk\LowonganController;
 use App\Http\Controllers\Admin\Bkk\MitraController;
@@ -16,4 +17,6 @@ Route::middleware('role:bkk')->group(function () {
     Route::resource('lowongan', LowonganController::class);
 
     Route::resource('mitra', MitraController::class);
+
+    Route::resource('bimbingan', BimbinganController::class);
 });

@@ -4,8 +4,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BludController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\SpmbController;
+use App\Models\Alumni;
 use App\Models\Fasilitas;
 use App\Models\Guru;
+use App\Models\Lowongan;
+use App\Models\MitraPerusahaan;
 use App\Models\Setting;
 use App\Models\StrukturOrganisasi;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +50,11 @@ Route::get('/sarana-dan-prasarana', function () {
 })->name('sarana-dan-prasarana');
 
 Route::get('/jurusan', function () {
-    return view('jurusan');
+    $totalLowongan = Lowongan::where('is_published', true)->count();
+    $totalAlumni = Alumni::count();
+    $totalMitra = MitraPerusahaan::count();
+
+    return view('jurusan.index', compact('totalLowongan', 'totalAlumni', 'totalMitra'));
 })->name('jurusan');
 
 Route::get('/jurusan/{slug}', function ($slug) {

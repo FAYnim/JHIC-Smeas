@@ -114,11 +114,6 @@
 
                     {{-- Left Hero Description --}}
                     <div class="max-w-2xl">
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-amber-300 text-xs sm:text-sm font-bold tracking-wider uppercase mb-5">
-                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                            SMK NEGERI 1 SURABAYA
-                        </div>
-
                         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-5 leading-[1.15]">
                             Profil Jurusan
                         </h1>

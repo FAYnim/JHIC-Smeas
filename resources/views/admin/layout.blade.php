@@ -197,6 +197,15 @@
                                 @case('chart-bar')
                                     <x-lucide-bar-chart-3 />
                                 @break
+                                @case('network')
+                                    <x-lucide-network />
+                                @break
+                                @case('building')
+                                    <x-lucide-building />
+                                @break
+                                @case('video')
+                                    <x-lucide-video />
+                                @break
                                 @default
                                     <x-lucide-circle />
                             @endswitch

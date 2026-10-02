@@ -49,11 +49,14 @@ class AdminLayoutTest extends TestCase
 
         $response = $this->actingAs($admin)->get(route('admin.dashboard'));
 
-        // Modul Fase 3 & 4 (guru, calon-siswa, users, settings) belum terdaftar
+        // Modul Fase 3 (guru, artikel, webinar, dsb) kini sudah aktif
         $response->assertOk();
         $response->assertSee('Dashboard', false);
         $response->assertSee(route('admin.lowongan.index'), false);
-        $response->assertDontSee('/admin/guru', false);
+        $response->assertSee(route('admin.guru.index'), false);
+
+        // Modul Fase 4 (calon-siswa, users, settings) belum terdaftar routenya
         $response->assertDontSee('/admin/users', false);
+        $response->assertDontSee('/admin/settings', false);
     }
 }

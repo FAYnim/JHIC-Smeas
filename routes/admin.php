@@ -6,6 +6,11 @@ use App\Http\Controllers\Admin\Bkk\LowonganController;
 use App\Http\Controllers\Admin\Bkk\MitraController;
 use App\Http\Controllers\Admin\Bkk\TracerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Humas\ArtikelController;
+use App\Http\Controllers\Admin\Humas\FasilitasController;
+use App\Http\Controllers\Admin\Humas\GuruController;
+use App\Http\Controllers\Admin\Humas\StrukturOrganisasiController;
+use App\Http\Controllers\Admin\Humas\WebinarController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -32,4 +37,16 @@ Route::middleware('role:bkk')->group(function () {
         Route::patch('kuesioner/{kuesioner}/toggle-confirm', [TracerController::class, 'toggleConfirmKuesioner'])->name('kuesioner.toggle-confirm');
         Route::put('settings', [TracerController::class, 'updateSettings'])->name('settings.update');
     });
+});
+
+Route::middleware('role:humas')->group(function () {
+    Route::patch('guru/{guru}/toggle-active', [GuruController::class, 'toggleActive'])->name('guru.toggle-active');
+    Route::resource('guru', GuruController::class);
+
+    Route::resource('struktur-organisasi', StrukturOrganisasiController::class);
+    Route::resource('fasilitas', FasilitasController::class);
+    Route::resource('artikel', ArtikelController::class);
+
+    Route::patch('webinar/{webinar}/toggle-publish', [WebinarController::class, 'togglePublish'])->name('webinar.toggle-publish');
+    Route::resource('webinar', WebinarController::class);
 });

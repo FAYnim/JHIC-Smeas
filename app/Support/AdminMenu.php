@@ -74,6 +74,27 @@ class AdminMenu
             'roles' => [User::ROLE_ADMIN, User::ROLE_HUMAS],
         ],
         [
+            'group' => 'Profil Sekolah',
+            'label' => 'Struktur Organisasi',
+            'route' => 'admin.struktur-organisasi.index',
+            'icon' => 'network',
+            'roles' => [User::ROLE_ADMIN, User::ROLE_HUMAS],
+        ],
+        [
+            'group' => 'Profil Sekolah',
+            'label' => 'Sarana & Prasarana',
+            'route' => 'admin.fasilitas.index',
+            'icon' => 'building',
+            'roles' => [User::ROLE_ADMIN, User::ROLE_HUMAS],
+        ],
+        [
+            'group' => 'Umum',
+            'label' => 'Webinar',
+            'route' => 'admin.webinar.index',
+            'icon' => 'video',
+            'roles' => [User::ROLE_ADMIN, User::ROLE_HUMAS],
+        ],
+        [
             'group' => 'SPMB',
             'label' => 'Calon Siswa',
             'route' => 'admin.calon-siswa.index',

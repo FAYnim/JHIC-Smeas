@@ -4,6 +4,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BludController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\SpmbController;
+use App\Models\Fasilitas;
+use App\Models\Guru;
+use App\Models\StrukturOrganisasi;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -19,15 +22,24 @@ Route::get('/visi-misi', function () {
 })->name('visi-misi');
 
 Route::get('/struktur-organisasi', function () {
-    return view('struktur-organisasi');
+    $wakil = StrukturOrganisasi::where('kategori', 'wakil')->orderBy('urutan')->get();
+    $bagian = StrukturOrganisasi::where('kategori', 'bagian')->orderBy('urutan')->get();
+
+    return view('struktur-organisasi', compact('wakil', 'bagian'));
 })->name('struktur-organisasi');
 
 Route::get('/guru-dan-tenaga-kependidikan', function () {
-    return view('guru-dan-tenaga-kependidikan');
+    $guru = Guru::where('kategori', 'guru')->where('is_active', true)->orderBy('urutan')->get();
+    $tendik = Guru::where('kategori', 'tendik')->where('is_active', true)->orderBy('urutan')->get();
+
+    return view('guru-dan-tenaga-kependidikan', compact('guru', 'tendik'));
 })->name('guru-dan-tenaga-kependidikan');
 
 Route::get('/sarana-dan-prasarana', function () {
-    return view('sarana-dan-prasarana');
+    $fasilitasPembelajaran = Fasilitas::where('kategori', 'pembelajaran')->orderBy('urutan')->get();
+    $fasilitasPendukung = Fasilitas::where('kategori', 'pendukung')->orderBy('urutan')->get();
+
+    return view('sarana-dan-prasarana', compact('fasilitasPembelajaran', 'fasilitasPendukung'));
 })->name('sarana-dan-prasarana');
 
 Route::get('/jurusan', function () {

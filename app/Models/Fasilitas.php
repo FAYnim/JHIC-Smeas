@@ -5,33 +5,33 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class Artikel extends Model
+class Fasilitas extends Model
 {
+    protected $table = 'fasilitas';
+
     protected $fillable = [
-        'title',
-        'slug',
-        'excerpt',
-        'content',
+        'nama',
         'kategori',
-        'published_at',
-        'image_url',
+        'deskripsi',
+        'jumlah',
+        'icon',
         'image_path',
-        'reading_time',
+        'urutan',
     ];
 
     protected function casts(): array
     {
         return [
-            'published_at' => 'datetime',
+            'urutan' => 'integer',
         ];
     }
 
-    public function getDisplayImageAttribute(): ?string
+    public function getImageUrlAttribute(): ?string
     {
         if ($this->image_path && Storage::disk('public')->exists($this->image_path)) {
             return Storage::disk('public')->url($this->image_path);
         }
 
-        return $this->image_url;
+        return null;
     }
 }

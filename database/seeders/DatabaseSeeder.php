@@ -31,5 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AlumniSeeder::class);
         $this->call(TracerSeeder::class);
         $this->call(ProdukBludSeeder::class);
+        $this->call(GuruSeeder::class);
+        $this->call(StrukturOrganisasiSeeder::class);
+        $this->call(FasilitasSeeder::class);
     }
 }

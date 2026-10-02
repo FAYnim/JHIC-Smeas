@@ -59,8 +59,9 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Waktu Pelaksanaan *</label>
-                        <input type="text" name="start_time" value="{{ old('start_time', '09:00 - 11:30 WIB') }}" required placeholder="Contoh: 09:00 - 11:30 WIB"
+                        <input type="time" name="start_time" value="{{ old('start_time', '09:00') }}" required
                             class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('start_time') border-red-500 @enderror">
+                        <p class="mt-1 text-[11px] text-slate-400">Jam mulai webinar (WIB).</p>
                         @error('start_time')
                             <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
                         @enderror

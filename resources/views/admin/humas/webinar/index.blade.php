@@ -64,7 +64,7 @@
                                 {{ $item->speaker }}
                             </td>
                             <td class="px-4 py-3 text-slate-600">
-                                <p class="font-medium text-slate-800">{{ $item->start_date ? $item->start_date->format('d M Y') : '-' }} • {{ $item->start_time }}</p>
+                                <p class="font-medium text-slate-800">{{ $item->start_date ? $item->start_date->format('d M Y') : '-' }} • {{ substr($item->start_time, 0, 5) }} WIB</p>
                                 <span class="inline-flex rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-700">
                                     {{ $item->platform }}
                                 </span>

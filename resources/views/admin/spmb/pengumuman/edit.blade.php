@@ -21,7 +21,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Judul Pengumuman <span class="text-red-500">*</span>
                 </label>
-                <input type="text" name="judul" value="{{ old('judul', $pengumuman->judul) }}" required
+                <input type="text" name="judul" value="{{ old('judul', $pengumuman->judul) }}" required maxlength="255"
                     class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                 @error('judul')
                     <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
@@ -32,7 +32,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Isi Pengumuman <span class="text-red-500">*</span>
                 </label>
-                <textarea name="konten" rows="8" required
+                <textarea name="konten" rows="8" required maxlength="5000"
                     class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ old('konten', $pengumuman->konten) }}</textarea>
                 @error('konten')
                     <p class="text-xs text-red-500 mt-1">{{ $message }}</p>

@@ -43,7 +43,7 @@
                             #{{ $item->urutan }}
                         </td>
                         <td class="px-4 py-3">
-                            <p class="font-bold text-slate-900">{{ $item->pertanyaan }}</p>
+                            <p class="font-bold text-slate-900 truncate max-w-sm" title="{{ $item->pertanyaan }}">{{ $item->pertanyaan }}</p>
                             <p class="text-xs text-slate-500 line-clamp-2 mt-0.5">{{ $item->jawaban }}</p>
                         </td>
                         <td class="px-4 py-3">

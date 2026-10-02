@@ -33,7 +33,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('sector') border-red-500 @enderror">
                     @error('sector')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Kota *</label>
@@ -41,7 +41,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('city') border-red-500 @enderror">
                     @error('city')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
                 <div class="sm:col-span-2">
                     <label class="mb-1 block text-xs font-bold text-slate-600">Website</label>
@@ -49,7 +49,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('website') border-red-500 @enderror">
                     @error('website')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
                 <div class="sm:col-span-2">
                     <label class="mb-1 block text-xs font-bold text-slate-600">Deskripsi</label>
@@ -57,7 +57,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
                     @error('description')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
                 <div class="sm:col-span-2">
                     <label class="mb-1 block text-xs font-bold text-slate-600">Alamat</label>
@@ -65,7 +65,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('address') border-red-500 @enderror">{{ old('address') }}</textarea>
                     @error('address')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
             </div>
             <div class="mt-4">
@@ -97,7 +97,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('mou_until') border-red-500 @enderror">
                     @error('mou_until')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Kemitraan Sejak</label>
@@ -105,7 +105,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('kemitraan_sejak') border-red-500 @enderror">
                     @error('kemitraan_sejak')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Program (per baris)</label>
@@ -113,7 +113,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('programs') border-red-500 @enderror">{{ old('programs') }}</textarea>
                     @error('programs')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
             </div>
         </div>
@@ -127,7 +127,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('narahubung_nama') border-red-500 @enderror">
                     @error('narahubung_nama')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">Jabatan</label>
@@ -135,7 +135,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('narahubung_jabatan') border-red-500 @enderror">
                     @error('narahubung_jabatan')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold text-slate-600">WhatsApp</label>
@@ -143,7 +143,7 @@
                         class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none @error('narahubung_wa') border-red-500 @enderror">
                     @error('narahubung_wa')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                    @endforeach
+                    @enderror
                 </div>
             </div>
         </div>

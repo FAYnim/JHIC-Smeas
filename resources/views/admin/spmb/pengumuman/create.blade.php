@@ -20,7 +20,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Judul Pengumuman <span class="text-red-500">*</span>
                 </label>
-                <input type="text" name="judul" value="{{ old('judul') }}" required
+                <input type="text" name="judul" value="{{ old('judul') }}" required maxlength="255"
                     placeholder="Contoh: Jadwal Tes Wawancara & Daftar Ulang Jalur Prestasi"
                     class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                 @error('judul')
@@ -32,7 +32,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Isi Pengumuman <span class="text-red-500">*</span>
                 </label>
-                <textarea name="konten" rows="8" required
+                <textarea name="konten" rows="8" required maxlength="5000"
                     placeholder="Tuliskan isi pengumuman lengkap, jadwal pelaksanaan, lokasi, atau persyaratan yang harus dipersiapkan siswa..."
                     class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ old('konten') }}</textarea>
                 @error('konten')

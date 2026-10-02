@@ -20,7 +20,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Kategori <span class="text-xs font-normal text-slate-400">(Opsional)</span>
                 </label>
-                <input type="text" name="kategori" value="{{ old('kategori', 'Umum') }}"
+                <input type="text" name="kategori" value="{{ old('kategori', 'Umum') }}" maxlength="100"
                     placeholder="Misal: Dokumen, Jalur Seleksi, Verifikasi, Biaya"
                     class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                 @error('kategori')
@@ -32,7 +32,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Pertanyaan <span class="text-red-500">*</span>
                 </label>
-                <input type="text" name="pertanyaan" value="{{ old('pertanyaan') }}" required
+                <input type="text" name="pertanyaan" value="{{ old('pertanyaan') }}" required maxlength="255"
                     placeholder="Contoh: Berapa ukuran maksimal file dokumen yang diunggah?"
                     class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                 @error('pertanyaan')
@@ -44,7 +44,7 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Jawaban <span class="text-red-500">*</span>
                 </label>
-                <textarea name="jawaban" rows="5" required
+                <textarea name="jawaban" rows="5" required maxlength="5000"
                     placeholder="Tuliskan jawaban yang ringkas dan jelas bagi calon siswa..."
                     class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ old('jawaban') }}</textarea>
                 @error('jawaban')

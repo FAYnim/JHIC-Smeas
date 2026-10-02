@@ -20,7 +20,7 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Judul Artikel *</label>
-                    <input type="text" name="title" value="{{ old('title') }}" required placeholder="Contoh: Siswa SMKN 1 Surabaya Lolos Seleksi Magang Industri Jepang"
+                    <input type="text" name="title" value="{{ old('title') }}" required maxlength="255" placeholder="Contoh: Siswa SMKN 1 Surabaya Lolos Seleksi Magang Industri Jepang"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('title') border-red-500 @enderror">
                     @error('title')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -30,7 +30,7 @@
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Kategori *</label>
-                        <input type="text" name="kategori" value="{{ old('kategori', 'Prestasi') }}" required placeholder="Contoh: Prestasi / Karir / Informasi"
+                        <input type="text" name="kategori" value="{{ old('kategori', 'Prestasi') }}" required maxlength="100" placeholder="Contoh: Prestasi / Karir / Informasi"
                             class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('kategori') border-red-500 @enderror">
                         @error('kategori')
                             <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -49,7 +49,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Ringkasan Singkat (Excerpt) *</label>
-                    <textarea name="excerpt" rows="2" required placeholder="Ringkasan 1-2 kalimat pengantar artikel..."
+                    <textarea name="excerpt" rows="2" required maxlength="500" placeholder="Ringkasan 1-2 kalimat pengantar artikel..."
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('excerpt') border-red-500 @enderror">{{ old('excerpt') }}</textarea>
                     @error('excerpt')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -58,7 +58,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Konten Lengkap *</label>
-                    <textarea name="content" rows="10" required placeholder="Tuliskan isi artikel selengkapnya di sini..."
+                    <textarea name="content" rows="10" required maxlength="50000" placeholder="Tuliskan isi artikel selengkapnya di sini..."
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('content') border-red-500 @enderror">{{ old('content') }}</textarea>
                     @error('content')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -78,7 +78,7 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Atau Gunakan Image URL</label>
-                        <input type="url" name="image_url" value="{{ old('image_url') }}" placeholder="https://example.com/banner.jpg"
+                        <input type="url" name="image_url" value="{{ old('image_url') }}" maxlength="500" placeholder="https://example.com/banner.jpg"
                             class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('image_url') border-red-500 @enderror">
                         @error('image_url')
                             <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -95,7 +95,7 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Estimasi Waktu Baca (Opsional)</label>
-                        <input type="text" name="reading_time" value="{{ old('reading_time') }}" placeholder="Contoh: 3 menit baca (auto jika kosong)"
+                        <input type="text" name="reading_time" value="{{ old('reading_time') }}" maxlength="50" placeholder="Contoh: 3 menit baca (auto jika kosong)"
                             class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('reading_time') border-red-500 @enderror">
                     </div>
                 </div>

@@ -49,8 +49,8 @@
                                 </div>
                             </td>
                             <td class="px-4 py-3">
-                                <span class="inline-flex rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-bold text-blue-700 border border-blue-100">
-                                    {{ $item->bidang ?: '-' }}
+                                <span class="inline-flex max-w-[12rem] rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-bold text-blue-700 border border-blue-100">
+                                    <span class="truncate" title="{{ $item->bidang }}">{{ $item->bidang ?: '-' }}</span>
                                 </span>
                                 @if ($item->nip)
                                     <p class="mt-0.5 text-[11px] text-slate-400">NIP. {{ $item->nip }}</p>
@@ -107,7 +107,7 @@
                                 {{ $item->nama }}
                             </td>
                             <td class="px-4 py-3 text-slate-600 max-w-md">
-                                {{ $item->deskripsi ?: '-' }}
+                                <p class="truncate" title="{{ $item->deskripsi }}">{{ $item->deskripsi ?: '-' }}</p>
                             </td>
                             <td class="px-4 py-3 text-slate-500 font-mono text-[11px]">
                                 {{ $item->icon ?: 'default' }}

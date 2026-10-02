@@ -21,7 +21,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap & Gelar *</label>
-                    <input type="text" name="nama" value="{{ old('nama', $guru->nama) }}" required
+                    <input type="text" name="nama" value="{{ old('nama', $guru->nama) }}" required maxlength="255"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('nama') border-red-500 @enderror">
                     @error('nama')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -30,7 +30,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Jabatan *</label>
-                    <input type="text" name="jabatan" value="{{ old('jabatan', $guru->jabatan) }}" required
+                    <input type="text" name="jabatan" value="{{ old('jabatan', $guru->jabatan) }}" required maxlength="255"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('jabatan') border-red-500 @enderror">
                     @error('jabatan')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -39,7 +39,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Mata Pelajaran / Unit Kerja</label>
-                    <input type="text" name="mapel" value="{{ old('mapel', $guru->mapel) }}"
+                    <input type="text" name="mapel" value="{{ old('mapel', $guru->mapel) }}" maxlength="255"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('mapel') border-red-500 @enderror">
                     @error('mapel')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>

@@ -20,7 +20,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Nama Sarana / Ruangan *</label>
-                    <input type="text" name="nama" value="{{ old('nama') }}" required placeholder="Contoh: Lab Komputer / Masjid Al-Ikhlas"
+                    <input type="text" name="nama" value="{{ old('nama') }}" required maxlength="255" placeholder="Contoh: Lab Komputer / Masjid Al-Ikhlas"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('nama') border-red-500 @enderror">
                     @error('nama')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -40,7 +40,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Jumlah / Kapasitas</label>
-                    <input type="text" name="jumlah" value="{{ old('jumlah') }}" placeholder="Contoh: 6 Lab / 72 Ruang / 1 Gedung"
+                    <input type="text" name="jumlah" value="{{ old('jumlah') }}" maxlength="100" placeholder="Contoh: 6 Lab / 72 Ruang / 1 Gedung"
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('jumlah') border-red-500 @enderror">
                     @error('jumlah')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
@@ -67,7 +67,7 @@
 
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Fasilitas *</label>
-                    <textarea name="deskripsi" rows="3" required placeholder="Jelaskan spesifikasi dan kegunaan sarana ini..."
+                    <textarea name="deskripsi" rows="3" required maxlength="2000" placeholder="Jelaskan spesifikasi dan kegunaan sarana ini..."
                         class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi') }}</textarea>
                     @error('deskripsi')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>

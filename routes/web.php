@@ -6,6 +6,7 @@ use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\SpmbController;
 use App\Models\Fasilitas;
 use App\Models\Guru;
+use App\Models\Setting;
 use App\Models\StrukturOrganisasi;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,10 @@ Route::get('/', function () {
 })->name('beranda');
 
 Route::get('/visi-misi', function () {
-    return view('visi-misi');
+    $visi = Setting::get('profil.visi', '');
+    $misi = Setting::get('profil.misi', '');
+
+    return view('visi-misi', compact('visi', 'misi'));
 })->name('visi-misi');
 
 Route::get('/struktur-organisasi', function () {

@@ -136,7 +136,7 @@
                             VISI SEKOLAH
                         </div>
                         <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#023775] leading-snug lg:leading-tight">
-                            Terwujudnya SMK Negeri 1 Surabaya Yang Berkarakter Dan Unggul.
+                            {{ $visi }}
                         </h2>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
                             01
                         </div>
                         <h3 class="text-base sm:text-lg font-extrabold text-[#013572] group-hover:text-blue-700 transition-colors leading-snug">
-                            MENINGKATKAN KOMPETENSI PESERTA DIDIK SESUAI STANDAR KOMPETENSI LULUSAN DAN BERKARAKTER PROFIL PELAJAR PANCASILA.
+                            {{ $misi }}
                         </h3>
                     </div>
                     <div class="pt-6 mt-6 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-slate-400 group-hover:text-blue-600 transition-colors">

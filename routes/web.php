@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BludController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\SpmbController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->middleware('guest')->name('login.store');
+Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
 Route::get('/', function () {
     return view('index');
@@ -93,6 +98,13 @@ Route::get('/spmb/formulir/unduh', [SpmbController::class, 'unduhFormulir'])->na
 Route::get('/spmb/verifikasi', [SpmbController::class, 'verifikasi'])->name('spmb.verifikasi');
 Route::get('/spmb/pengumuman', [SpmbController::class, 'pengumuman'])->name('spmb.pengumuman');
 Route::get('/spmb/bantuan', [SpmbController::class, 'bantuan'])->name('spmb.bantuan');
+
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        require __DIR__.'/admin.php';
+    });
 
 if (app()->runningUnitTests()) {
     require __DIR__.'/testing.php';

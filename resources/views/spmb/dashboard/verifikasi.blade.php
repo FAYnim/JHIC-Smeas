@@ -5,6 +5,45 @@
 @section('content')
     <div class="max-w-4xl flex flex-col gap-6">
         <div class="dash-card">
+            <p class="text-xs font-bold tracking-wide text-slate-500 uppercase mb-3">Status Verifikasi Berkas</p>
+
+            @php
+                $status = $calonSiswa->status_verifikasi ?? 'menunggu';
+                $statusLabels = [
+                    'menunggu' => ['Menunggu Verifikasi', 'bg-amber-100 text-amber-800'],
+                    'terverifikasi' => ['Terverifikasi — Lengkap & Valid', 'bg-emerald-100 text-emerald-800'],
+                    'ditolak' => ['Ditolak — Perlu Perbaikan', 'bg-red-100 text-red-800'],
+                ];
+                [$statusLabel, $statusClass] = $statusLabels[$status] ?? $statusLabels['menunggu'];
+            @endphp
+
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold {{ $statusClass }}">
+                {{ $statusLabel }}
+            </span>
+
+            @if ($status === 'ditolak')
+                @if ($calonSiswa->catatan_verifikasi)
+                    <div class="mt-3 rounded-lg bg-red-50 border border-red-200 p-3">
+                        <p class="text-xs font-bold text-red-700 uppercase tracking-wide mb-1">Catatan Panitia</p>
+                        <p class="text-sm font-medium text-red-800 whitespace-pre-line">{{ $calonSiswa->catatan_verifikasi }}</p>
+                    </div>
+                @else
+                    <p class="mt-3 text-xs font-medium text-red-600">
+                        Hubungi panitia untuk keterangan lebih lanjut.
+                    </p>
+                @endif
+            @elseif ($status === 'terverifikasi')
+                <p class="mt-3 text-xs font-medium text-emerald-700">
+                    Selamat! Berkas Anda telah dinyatakan lengkap dan valid.
+                </p>
+            @else
+                <p class="mt-3 text-xs font-medium text-slate-500">
+                    Berkas Anda sedang dalam proses pemeriksaan panitia.
+                </p>
+            @endif
+        </div>
+
+        <div class="dash-card">
             <div class="flex items-center justify-between mb-4">
                 <p class="text-xs font-bold tracking-wide text-slate-500 uppercase">Data Biodata</p>
                 <a href="{{ route('spmb.biodata') }}"

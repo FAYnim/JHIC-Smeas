@@ -86,7 +86,9 @@ class CalonSiswaController extends Controller
     {
         $validated = $request->validate([
             'status_verifikasi' => 'required|in:menunggu,terverifikasi,ditolak',
-            'catatan_verifikasi' => 'nullable|string|max:1000',
+            'catatan_verifikasi' => 'required_if:status_verifikasi,ditolak|nullable|string|max:1000',
+        ], [
+            'catatan_verifikasi.required_if' => 'Catatan wajib diisi saat menolak berkas agar calon siswa tahu apa yang perlu diperbaiki.',
         ]);
 
         $calonSiswa->update($validated);

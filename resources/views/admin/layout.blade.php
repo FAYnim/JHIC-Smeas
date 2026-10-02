@@ -206,6 +206,18 @@
                                 @case('video')
                                     <x-lucide-video />
                                 @break
+                                @case('megaphone')
+                                    <x-lucide-megaphone />
+                                @break
+                                @case('help-circle')
+                                    <x-lucide-help-circle />
+                                @break
+                                @case('shopping-bag')
+                                    <x-lucide-shopping-bag />
+                                @break
+                                @case('flag')
+                                    <x-lucide-flag />
+                                @break
                                 @default
                                     <x-lucide-circle />
                             @endswitch

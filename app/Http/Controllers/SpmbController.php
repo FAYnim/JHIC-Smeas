@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CalonSiswa;
+use App\Models\Faq;
+use App\Models\Pengumuman;
+use App\Models\Setting;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
@@ -83,12 +86,19 @@ class SpmbController extends Controller
 
     public function pengumuman()
     {
-        return view('spmb.dashboard.pengumuman');
+        $pengumumans = Pengumuman::published()->latest('published_at')->get();
+
+        return view('spmb.dashboard.pengumuman', compact('pengumumans'));
     }
 
     public function bantuan()
     {
-        return view('spmb.dashboard.bantuan');
+        $faqs = Faq::active()->orderBy('urutan')->get();
+        $contactEmail = Setting::get('spmb_contact_email', 'spmb@smkn1.surabaya.sch.id');
+        $contactPhone = Setting::get('spmb_contact_phone', '0812-3456-7890');
+        $serviceHours = Setting::get('spmb_service_hours', 'Senin–Jumat, 07.30–15.00 WIB');
+
+        return view('spmb.dashboard.bantuan', compact('faqs', 'contactEmail', 'contactPhone', 'serviceHours'));
     }
 
     /** ===== Form saves ===== */

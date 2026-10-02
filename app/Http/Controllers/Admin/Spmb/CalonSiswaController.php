@@ -1,0 +1,97 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Spmb;
+
+use App\Http\Controllers\Controller;
+use App\Models\CalonSiswa;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+
+class CalonSiswaController extends Controller
+{
+    public function index(Request $request): View
+    {
+        $query = CalonSiswa::query()->latest();
+
+        if ($request->filled('status')) {
+            $query->where('status_verifikasi', $request->query('status'));
+        }
+
+        if ($request->filled('jurusan')) {
+            $query->where('jurusan_pilihan', $request->query('jurusan'));
+        }
+
+        if ($request->filled('jalur')) {
+            $query->where('jalur_pendaftaran', $request->query('jalur'));
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->query('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_lengkap', 'like', "%{$search}%")
+                    ->orWhere('nisn', 'like', "%{$search}%")
+                    ->orWhere('asal_sekolah', 'like', "%{$search}%");
+            });
+        }
+
+        $calonSiswas = $query->paginate(15)->withQueryString();
+
+        $jurusanOptions = [
+            'Rekayasa Perangkat Lunak',
+            'Teknik Komputer Jaringan',
+            'Bisnis Digital',
+            'Manajemen Perkantoran',
+            'Manajemen Logistik',
+            'Desain Komunikasi Visual',
+            'Perhotelan',
+            'Akuntansi',
+            'Produksi dan Siaran Program Televisi',
+        ];
+
+        $jalurOptions = [
+            'Prestasi Akademik',
+            'Prestasi Non-Akademik',
+            'Domisili',
+            'Afirmasi',
+            'Inklusi',
+        ];
+
+        return view('admin.spmb.calon-siswa.index', compact('calonSiswas', 'jurusanOptions', 'jalurOptions'));
+    }
+
+    public function show(CalonSiswa $calonSiswa): View
+    {
+        // Temukan berkas dokumen di storage public spmb/{nisn}/
+        $files = [];
+        $directory = "spmb/{$calonSiswa->nisn}";
+
+        if (Storage::disk('public')->exists($directory)) {
+            $filePaths = Storage::disk('public')->files($directory);
+            foreach ($filePaths as $path) {
+                $files[] = [
+                    'name' => basename($path),
+                    'path' => $path,
+                    'url' => Storage::disk('public')->url($path),
+                    'size' => Storage::disk('public')->size($path),
+                ];
+            }
+        }
+
+        return view('admin.spmb.calon-siswa.show', compact('calonSiswa', 'files'));
+    }
+
+    public function updateVerifikasi(Request $request, CalonSiswa $calonSiswa): RedirectResponse
+    {
+        $validated = $request->validate([
+            'status_verifikasi' => 'required|in:menunggu,terverifikasi,ditolak',
+            'catatan_verifikasi' => 'nullable|string|max:1000',
+        ]);
+
+        $calonSiswa->update($validated);
+
+        return redirect()->route('admin.calon-siswa.show', $calonSiswa)
+            ->with('success', 'Status verifikasi berkas berhasil diperbarui.');
+    }
+}

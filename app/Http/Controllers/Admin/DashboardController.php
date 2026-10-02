@@ -9,6 +9,7 @@ use App\Models\CalonSiswa;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
 use App\Models\MitraPerusahaan;
+use App\Models\ProdukBlud;
 use App\Models\User;
 use App\Models\Webinar;
 use Illuminate\Contracts\View\View;
@@ -89,6 +90,27 @@ class DashboardController extends Controller
                 'value' => CalonSiswa::query()->count(),
                 'icon' => 'graduation-cap',
                 'tone' => 'emerald',
+            ];
+            $stats[] = [
+                'label' => 'Menunggu Verifikasi',
+                'value' => CalonSiswa::query()->where('status_verifikasi', 'menunggu')->count(),
+                'icon' => 'inbox',
+                'tone' => 'amber',
+            ];
+        }
+
+        if ($user->isAdmin()) {
+            $stats[] = [
+                'label' => 'Total Pengguna',
+                'value' => User::query()->count(),
+                'icon' => 'shield',
+                'tone' => 'violet',
+            ];
+            $stats[] = [
+                'label' => 'Produk BLUD',
+                'value' => ProdukBlud::query()->count(),
+                'icon' => 'shopping-bag',
+                'tone' => 'blue',
             ];
         }
 

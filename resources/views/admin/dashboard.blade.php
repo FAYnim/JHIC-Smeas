@@ -44,6 +44,12 @@
                             @case('video')
                                 <x-lucide-video class="w-4 h-4" />
                             @break
+                            @case('shield')
+                                <x-lucide-shield class="w-4 h-4" />
+                            @break
+                            @case('shopping-bag')
+                                <x-lucide-shopping-bag class="w-4 h-4" />
+                            @break
                             @default
                                 <x-lucide-circle class="w-4 h-4" />
                         @endswitch

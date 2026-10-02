@@ -55,8 +55,8 @@ class AdminLayoutTest extends TestCase
         $response->assertSee(route('admin.lowongan.index'), false);
         $response->assertSee(route('admin.guru.index'), false);
 
-        // Modul Fase 4 (calon-siswa, users, settings) belum terdaftar routenya
-        $response->assertDontSee('/admin/users', false);
-        $response->assertDontSee('/admin/settings', false);
+        // Modul Fase 4 (calon-siswa, users, settings) kini sudah terdaftar routenya
+        $response->assertSee(route('admin.users.index'), false);
+        $response->assertSee(route('admin.settings.edit'), false);
     }
 }

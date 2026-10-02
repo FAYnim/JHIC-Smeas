@@ -18,4 +18,9 @@ class ProdukBludKomentar extends Model
     {
         return $this->belongsTo(ProdukBlud::class, 'produk_blud_id');
     }
+
+    public function produk(): BelongsTo
+    {
+        return $this->belongsTo(ProdukBlud::class, 'produk_blud_id');
+    }
 }

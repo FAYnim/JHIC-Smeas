@@ -37,11 +37,11 @@ class AdminLayoutTest extends TestCase
 
         $response = $this->actingAs($bkk)->get(route('admin.dashboard'));
 
-        // Fase 1: hanya admin.dashboard yang terdaftar; modul Pusat Karir
-        // belum punya route, jadi itemnya juga tidak tampil di sidebar.
+        // Fase 1: hanya admin.dashboard yang terdaftar; modul lain belum punya
+        // route, jadi link sidebar-nya tidak tampil.
         $response->assertSee('Dashboard', false);
         $response->assertDontSee('Pengguna', false);
-        $response->assertDontSee('Lowongan', false);
+        $response->assertDontSee('/admin/lowongan', false);
     }
 
     public function test_admin_menu_hides_modules_not_yet_implemented(): void
@@ -50,8 +50,11 @@ class AdminLayoutTest extends TestCase
 
         $response = $this->actingAs($admin)->get(route('admin.dashboard'));
 
-        // Modul Lowongan belum punya route di Fase 1, jadi tidak boleh tampil.
-        $response->assertDontSee('Lowongan', false);
+        // Route modul Fase 2+ belum terdaftar; sidebar hanya menampilkan
+        // item yang route-nya ada (Dashboard).
+        $response->assertOk();
         $response->assertSee('Dashboard', false);
+        $response->assertDontSee('/admin/lowongan', false);
+        $response->assertDontSee('/admin/users', false);
     }
 }

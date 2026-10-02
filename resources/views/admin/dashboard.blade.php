@@ -69,7 +69,7 @@
                 <ul class="divide-y divide-slate-100">
                     @foreach ($recentLowongans as $lowongan)
                         <li class="py-3 first:pt-0 last:pb-0">
-                            <p class="text-sm font-bold text-slate-900">{{ $lowongan->title }}</p>
+                            <p class="text-sm font-bold text-slate-900 truncate" title="{{ $lowongan->title }}">{{ $lowongan->title }}</p>
                             <p class="text-xs font-medium text-slate-500 mt-0.5">
                                 {{ $lowongan->company_name }} · {{ $lowongan->created_at?->format('d M Y') }}
                             </p>
@@ -87,7 +87,7 @@
                 <ul class="divide-y divide-slate-100">
                     @foreach ($recentArticles as $artikel)
                         <li class="py-3 first:pt-0 last:pb-0">
-                            <p class="text-sm font-bold text-slate-900">{{ $artikel->title }}</p>
+                            <p class="text-sm font-bold text-slate-900 truncate" title="{{ $artikel->title }}">{{ $artikel->title }}</p>
                             <p class="text-xs font-medium text-slate-500 mt-0.5">
                                 {{ $artikel->kategori }} · {{ $artikel->published_at?->format('d M Y') }}
                             </p>
@@ -105,7 +105,7 @@
                 <ul class="divide-y divide-slate-100">
                     @foreach ($recentCalonSiswa as $calonSiswa)
                         <li class="py-3 first:pt-0 last:pb-0">
-                            <p class="text-sm font-bold text-slate-900">{{ $calonSiswa->nama_lengkap }}</p>
+                            <p class="text-sm font-bold text-slate-900 truncate" title="{{ $calonSiswa->nama_lengkap }}">{{ $calonSiswa->nama_lengkap }}</p>
                             <p class="text-xs font-medium text-slate-500 mt-0.5">
                                 {{ $calonSiswa->jurusan_pilihan }} · {{ $calonSiswa->created_at?->format('d M Y') }}
                             </p>

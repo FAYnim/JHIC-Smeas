@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Route;
 
 class AdminMenu
 {
@@ -111,11 +112,9 @@ class AdminMenu
      */
     public static function availableItemsFor(?User $user): array
     {
-        $router = app('router')->getRoutes();
-
         return array_values(array_filter(
             self::itemsFor($user),
-            fn (array $item): bool => $router->has($item['route']),
+            fn (array $item): bool => Route::has($item['route']),
         ));
     }
 }

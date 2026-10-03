@@ -24,6 +24,16 @@ class PublicPagesTest extends TestCase
         $response->assertSee('Misi Test Unik');
     }
 
+    public function test_beranda_displays_prakata_from_settings(): void
+    {
+        Setting::set('profil.prakata_nama', 'Kepala Sekolah Test Unik', 'profil');
+
+        $response = $this->get(route('beranda'));
+
+        $response->assertOk();
+        $response->assertSee('Kepala Sekolah Test Unik');
+    }
+
     public function test_jurusan_page_displays_stats(): void
     {
         Lowongan::factory()->create(['is_published' => true]);

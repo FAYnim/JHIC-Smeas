@@ -648,11 +648,7 @@
                             <blockquote style="margin:0; position:relative; z-index:1;">
                                 <p
                                     style="font-size:clamp(0.95rem, 1.5vw, 1.1rem); color:#334155; font-style:italic; font-weight:600; line-height:1.9; text-align:justify; margin:0;">
-                                    Era globalisasi membawa perubahan yang cepat dalam berbagai aspek kehidupan. Oleh
-                                    karena itu, pendidikan memiliki peran penting dalam menyiapkan sumber daya manusia
-                                    yang mampu menghadapi perubahan tersebut. Sekolah perlu memiliki arah pengembangan
-                                    yang jelas dan berkelanjutan, sekaligus mampu menyesuaikan diri dengan kebutuhan dan
-                                    permasalahan masyarakat saat ini.
+                                    {{ $prakata['quote'] }}
                                 </p>
                             </blockquote>
                         </div>
@@ -660,11 +656,11 @@
 
                     {{-- Right Column: Headmaster Photo --}}
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                        <img src="{{ asset('images/Group 198.png') }}" alt="Dr. Drs. Anton Sujarwo, M.Pd."
+                        <img src="{{ asset($prakata['foto']) }}" alt="{{ $prakata['nama'] }}"
                             style="width:260px; max-width:100%; height:auto; display:block;">
                         <p
                             style="margin-top:12px; font-size:0.95rem; font-weight:700; color:#0b192c; text-align:center;">
-                            Dr. Drs. Anton Sujarwo, M.Pd.
+                            {{ $prakata['nama'] }}
                         </p>
                     </div>
 

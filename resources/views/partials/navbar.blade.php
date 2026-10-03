@@ -35,12 +35,12 @@
             </a>
 
             {{-- Desktop Nav --}}
-            <nav class="hidden md:flex items-center gap-7">
+            <nav class="hidden md:flex items-center gap-7" aria-label="Main navigation">
                 @foreach ($navLinks as $link)
                     @if ($link['key'] === 'profil')
                         {{-- Dropdown Profil --}}
                         <div class="relative" id="desktop-profil-dropdown">
-                            <button type="button" id="desktop-profil-btn"
+                            <button type="button" id="desktop-profil-btn" aria-expanded="false"
                                 class="nav-hover-link text-sm {{ $isActive($link['key']) ? 'font-bold text-slate-900 border-b-2 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900' }} transition-colors py-2 inline-flex items-center gap-1 cursor-pointer">
                                 {{ $link['label'] }}
                                 <svg class="w-3.5 h-3.5 transition-transform duration-200" id="desktop-profil-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,6 +172,22 @@
                     ddMenu.classList.remove('opacity-100', 'translate-y-0');
                     if (ddChev) ddChev.classList.remove('rotate-180');
                 }, 120);
+            });
+        }
+
+        const ddBtn = document.getElementById('desktop-profil-btn');
+        if (ddBtn && ddMenu) {
+            ddBtn.addEventListener('click', () => {
+                const isOpen = !ddMenu.classList.contains('hidden');
+                if (isOpen) {
+                    ddMenu.classList.add('hidden', 'opacity-0', '-translate-y-1');
+                    ddMenu.classList.remove('opacity-100', 'translate-y-0');
+                    ddBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    ddMenu.classList.remove('hidden', 'opacity-0', '-translate-y-1');
+                    ddMenu.classList.add('opacity-100', 'translate-y-0');
+                    ddBtn.setAttribute('aria-expanded', 'true');
+                }
             });
         }
 

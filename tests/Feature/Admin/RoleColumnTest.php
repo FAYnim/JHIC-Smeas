@@ -3,9 +3,7 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\User;
-use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class RoleColumnTest extends TestCase
@@ -40,15 +38,18 @@ class RoleColumnTest extends TestCase
         $this->assertNull($user->role);
     }
 
-    public function test_invalid_role_is_rejected_by_database(): void
+    public function test_invalid_role_is_rejected_when_creating_user(): void
     {
-        $this->expectException(QueryException::class);
+        $admin = User::factory()->admin()->create();
 
-        DB::table('users')->insert([
+        $this->actingAs($admin)->post(route('admin.users.store'), [
             'name' => 'Salah Peran',
             'email' => 'salah@smkn1.surabaya.sch.id',
-            'password' => bcrypt('rahasia123'),
+            'password' => 'rahasia123',
+            'password_confirmation' => 'rahasia123',
             'role' => 'superuser',
-        ]);
+        ])->assertSessionHasErrors('role');
+
+        $this->assertDatabaseMissing('users', ['email' => 'salah@smkn1.surabaya.sch.id']);
     }
 }

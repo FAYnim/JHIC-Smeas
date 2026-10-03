@@ -189,7 +189,7 @@
                                 <h3 class="text-sm sm:text-base font-bold text-slate-900 mb-0.5">Kalender Akademik 2026/2027</h3>
                                 <p class="text-xs sm:text-sm text-slate-500">Unduh versi lengkap dalam format PDF</p>
                             </div>
-                            <a href="#"
+                            <a href="{{ asset('storage/dokumen/kalender-akademik.pdf') }}" download
                                 class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-sm transition-colors shrink-0">
                                 Unduh PDF
                             </a>
@@ -255,7 +255,7 @@
                                 <p class="text-xs sm:text-sm text-blue-100/90 leading-relaxed mb-5 flex-1">
                                     Tanyakan kepada SMEAS.AI untuk informasi lengkap seputar jadwal pembelajaran.
                                 </p>
-                                <a href="#"
+                                <a href="https://smeas.smkn1sch.sch.id" target="_blank"
                                     class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-[#024089] text-sm font-bold shadow-sm transition-colors self-start">
                                     SMEAS.AI
                                 </a>

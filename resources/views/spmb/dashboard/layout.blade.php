@@ -500,11 +500,13 @@
                 <x-lucide-lightbulb />
                 Bantuan
             </a>
-            {{-- ponytail: beranda belum ada — arahkan ke pusat karir; swap href ke route beranda saat tersedia --}}
-            <a href="{{ route('pusat-karir.index') }}" class="dash-nav-item">
-                <x-lucide-log-out />
-                Keluar
-            </a>
+            <form action="{{ route('spmb.logout') }}" method="POST" class="mt-2">
+                @csrf
+                <button type="submit" class="dash-nav-item w-full text-left">
+                    <x-lucide-log-out />
+                    Keluar
+                </button>
+            </form>
         </nav>
     </aside>
 

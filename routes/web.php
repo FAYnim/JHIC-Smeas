@@ -61,7 +61,10 @@ Route::get('/jurusan/{slug}', function ($slug) {
 })->name('jurusan.detail');
 
 Route::get('/informasi', function () {
-    return view('informasi');
+    $artikels = Artikel::where('kategori', 'berita')->latest('published_at')->limit(6)->get();
+    $pengumumans = Pengumuman::latest()->limit(5)->get();
+
+    return view('informasi', compact('artikels', 'pengumumans'));
 })->name('informasi');
 
 Route::get('/informasi/prestasi', function () {

@@ -1379,7 +1379,7 @@
                     <div class="success-detail-grid">
                         <div class="success-detail-row">
                             <span>Nama Siswa</span>
-                            <strong>Siswa SMKN 1 Surabaya</strong>
+                            <strong>{{ $lamaran['nama'] }}</strong>
                         </div>
                         <div class="success-detail-row">
                             <span>NISN</span>
@@ -1436,11 +1436,11 @@
                         </p>
 
                         <div class="company-tags-row">
-                            <span class="company-tag company-tag--blue">Mitra DUDI</span>
-                            <span class="company-tag company-tag--green">Kelas Industri</span>
-                            <span class="company-tag company-tag--amber">PKL Resmi</span>
+                            @if ($lowongan->is_mitra_dudi)
+                                <span class="company-tag company-tag--blue">Mitra DUDI</span>
+                            @endif
                             <span class="company-tag company-tag--link">
-                                🌐 {{ $lowongan->company_name }}
+                                {{ $lowongan->bidang_industri ?? $lowongan->company_name }}
                             </span>
                         </div>
                     </div>
@@ -1451,10 +1451,6 @@
                     <div class="stat-cell">
                         <span class="stat-num">{{ $lowongan->kuota }}</span>
                         <span class="stat-lbl">Kuota Tersedia</span>
-                    </div>
-                    <div class="stat-cell">
-                        <span class="stat-num">1</span>
-                        <span class="stat-lbl">Lowongan Aktif</span>
                     </div>
                     <div class="stat-cell">
                         <span class="stat-num">{{ $lowongan->fresh_graduate_ok ? '✓' : '—' }}</span>
@@ -1483,7 +1479,7 @@
         <div class="section-tabs" role="tablist">
             <button type="button" class="section-tab active" data-tab="peluang" role="tab"
                 aria-selected="true">
-                Peluang & Lowongan Aktif (1)
+                Peluang & Lowongan Aktif
             </button>
             <button type="button" class="section-tab" data-tab="info" role="tab" aria-selected="false">
                 Informasi Kemitraan & Dokumen
@@ -1499,8 +1495,8 @@
 
                     <!-- Filter Buttons -->
                     <div class="filter-row" style="margin-top: 1.25rem;">
-                        <button class="filter-btn active" data-filter="all">Semua (1)</button>
-                        <button class="filter-btn" data-filter="pkl">Magang PKL Siswa (1)</button>
+                        <button class="filter-btn active" data-filter="all">Semua</button>
+                        <button class="filter-btn" data-filter="pkl">Magang PKL Siswa</button>
                     </div>
 
                     <!-- Job Card 1 — Magang PKL -->
@@ -1514,7 +1510,7 @@
                         <div class="job-card-top">
                             <div>
                                 <h2>{{ $lowongan->title }}</h2>
-                                <p class="job-sub-text">Divisi Information Technology Regional V • Rekomendasi Jurusan:
+                                <p class="job-sub-text">{{ $lowongan->bidang_industri }} • Rekomendasi Jurusan:
                                     <strong style="color:#1d4ed8;">{{ $lowongan->jurusan }}</strong>
                                 </p>
                             </div>
@@ -1548,7 +1544,7 @@
 
                         <div class="job-benefits-text">
                             🎁
-                            {{ implode(', ', $lowongan->benefits ?? ['Uang Saku', 'Sertifikat Resmi', 'Pembimbing Khusus']) }}
+                            {{ $lowongan->benefits ? implode(', ', $lowongan->benefits) : '' }}
                         </div>
 
                         <div class="job-footer-row">
@@ -1597,10 +1593,10 @@
                             {{ $lowongan->company_short ?? $lowongan->company_name }}</p>
 
                         <div class="narahubung-person">
-                            <div class="person-avatar">AS</div>
+                            <div class="person-avatar">{{ strtoupper(substr($lowongan->pokja_koordinator ?? 'N', 0, 1)) }}</div>
                             <div class="person-info">
                                 <p class="person-name">
-                                    {{ $lowongan->pokja_koordinator ?? 'Bpk. Aris Santoso, S.Kom' }}</p>
+                                    {{ $lowongan->pokja_koordinator ?? 'Narahubung' }}</p>
                                 <p class="person-role">Pokja PKL & Kemitraan DUDI</p>
                             </div>
                         </div>
@@ -1687,156 +1683,6 @@
                     <!-- Kelas Industri -->
                     <div class="info-card">
                         <h3>Kelas Industri</h3>
-
-                        <div class="info-grid-3">
-                            <div class="info-grid-item">
-                                <h4>Jurusan Sasaran</h4>
-                                <ul>
-                                    @foreach (explode(',', $lowongan->jurusan) as $j)
-                                        <li>{{ trim($j) }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <div class="info-grid-item">
-                                <h4>Durasi Program</h4>
-                                <p>{{ $lowongan->duration }}</p>
-                            </div>
-                            <div class="info-grid-item">
-                                <h4>Skema</h4>
-                                <p>{{ $lowongan->metode_kerja }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dokumen Pembelajaran -->
-                    <div class="info-card">
-                        <h3>Dokumen Pembelajaran & Persyaratan Kemitraan</h3>
-                        <p style="font-size: 0.8rem; color: #64748b; margin: -0.5rem 0 1rem;">Berkas resmi yang dapat
-                            diunduh oleh siswa, wali murid, dan bapak/ibu guru pengampu</p>
-
-                        @if ($lowongan->dokumen)
-                            <div class="docs-grid">
-                                @foreach ($lowongan->dokumen as $doc)
-                                    <div class="doc-card">
-                                        <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="doc-card-name">{{ basename($doc) }}</span>
-                                        <a href="{{ asset('storage/' . $doc) }}" download class="doc-card-dl">
-                                            <svg viewBox="0 0 20 20" fill="currentColor">
-                                                <path
-                                                    d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                                <path
-                                                    d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <!-- Sidebar (same as Tab 1) -->
-                <aside class="side-column" style="margin-top: 1.25rem;">
-
-                    <!-- Narahubung Card -->
-                    <div class="narahubung-card">
-                        <h3 class="narahubung-title">Narahubung Kemitraan Sekolah</h3>
-                        <p class="narahubung-sub">Guru pengampu kerja sama
-                            {{ $lowongan->company_short ?? $lowongan->company_name }}</p>
-
-                        <div class="narahubung-person">
-                            <div class="person-avatar">AS</div>
-                            <div class="person-info">
-                                <p class="person-name">
-                                    {{ $lowongan->pokja_koordinator ?? 'Bpk. Aris Santoso, S.Kom' }}</p>
-                                <p class="person-role">Pokja PKL & Kemitraan DUDI</p>
-                            </div>
-                        </div>
-
-                        @if ($lowongan->pokja_wa)
-                            <a href="https://wa.me/{{ $lowongan->pokja_wa }}" target="_blank"
-                                class="wa-btn">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                                    <path
-                                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                                </svg>
-                                Hubungi via WhatsApp Pokja
-                            </a>
-                        @endif
-
-                        <p class="narahubung-note">Konsultasi ketersediaan kuota rombel dan surat izin Pokja.</p>
-                    </div>
-
-                    <!-- Location Card -->
-                    <div class="location-card">
-                        <h3 class="location-card-title">Lokasi Penempatan Industri</h3>
-
-                        <div class="map-placeholder">
-                            <div class="map-pin">
-                                <div class="map-pin-inner"></div>
-                            </div>
-                            <span class="map-label">{{ $lowongan->company_short ?? $lowongan->company_name }}</span>
-                        </div>
-
-                        <h4 class="location-name">{{ $lowongan->company_name }}</h4>
-                        <p class="location-address">{{ $lowongan->location }}</p>
-
-                        <a href="https://maps.google.com/?q={{ urlencode($lowongan->company_name . ' ' . $lowongan->location) }}" target="_blank"
-                            class="maps-link">
-                            Buka Petunjuk Arah di Google Maps ↗
-                        </a>
-                    </div>
-
-                    <!-- Docs Download Card -->
-                    <div class="docs-card">
-                        <h3 class="docs-card-title">Dokumen & Silabus Kemitraan</h3>
-                        <p class="docs-card-sub">Unduh materi acuan resmi sebelum mendaftar.</p>
-
-                        @if ($lowongan->dokumen)
-                            @foreach ($lowongan->dokumen as $doc)
-                                <div class="doc-download-item">
-                                    <div class="doc-download-left">
-                                        <svg class="doc-file-icon" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <div>
-                                            <div class="doc-file-name">{{ basename($doc) }}</div>
-                                            <div class="doc-file-size">Dokumen Pendukung</div>
-                                        </div>
-                                    </div>
-                                    <a href="{{ asset('storage/' . $doc) }}" download class="doc-unduh-btn">
-                                        Unduh
-                                        <svg viewBox="0 0 20 20" fill="currentColor">
-                                            <path
-                                                d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                            <path
-                                                d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            @endforeach
-                        @endif
-                    </div>
-
-                </aside>
-            </div>
-        </div>
-
-        <!-- ===== Bottom CTA ===== -->
-        <div class="bottom-cta">
-            <div class="bottom-cta-text">
-                <span class="cta-badge">KEMITRAAN INDUSTRI</span>
-                <h3>Tertarik Menjadi Bagian Mitra Resmi SMKN 1 Surabaya?</h3>
-                <p>Buka akses ke ribuan talenta vokasi siap kerja, sinkronisasi kurikulum industri, atau penyelenggaraan
-                    kelas industri bersama.</p>
-            </div>
-            <div class="cta-actions">
                 <a href="{{ route('pusat-karir.katalog-mitra') }}" class="cta-btn-primary">
                     Lihat Mitra Industri →
                 </a>

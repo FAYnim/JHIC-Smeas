@@ -24,10 +24,7 @@ Route::get('/', function () {
 })->name('beranda');
 
 Route::get('/visi-misi', function () {
-    $visi = Setting::get('profil.visi', '');
-    $misi = Setting::get('profil.misi', '');
-
-    return view('visi-misi', compact('visi', 'misi'));
+    return view('visi-misi');
 })->name('visi-misi');
 
 Route::get('/struktur-organisasi', function () {
@@ -64,10 +61,7 @@ Route::get('/jurusan/{slug}', function ($slug) {
 })->name('jurusan.detail');
 
 Route::get('/informasi', function () {
-    $artikels = Artikel::where('kategori', 'berita')->latest('published_at')->limit(6)->get();
-    $pengumumans = Pengumuman::latest()->limit(5)->get();
-
-    return view('informasi', compact('artikels', 'pengumumans'));
+    return view('informasi');
 })->name('informasi');
 
 Route::get('/informasi/prestasi', function () {

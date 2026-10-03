@@ -149,7 +149,7 @@
                             <div
                                 class="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
                                 {{-- Agenda Sekolah --}}
-                                <button type="button" data-category="agenda"
+                                <a href="{{ route('informasi') }}#agenda"
                                     class="category-tab active flex items-center gap-3 px-4 py-3 rounded-xl text-left min-w-[160px] lg:min-w-0">
                                     <div
                                         class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
@@ -163,7 +163,7 @@
                                         <div class="text-sm font-bold text-slate-900">Agenda Sekolah</div>
                                         <div class="text-xs text-slate-500">Jadwal kegiatan & event terbaru.</div>
                                     </div>
-                                </button>
+                                </a>
 
                                 {{-- Prestasi --}}
                                 <a href="{{ route('informasi.prestasi') }}"
@@ -207,7 +207,7 @@
                         <div class="flex-1 space-y-4">
                             {{-- Event 1 --}}
                             <div
-                                class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
+                                class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200">
                                 <div
                                     class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
                                     <span
@@ -224,7 +224,7 @@
 
                             {{-- Event 2 --}}
                             <div
-                                class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
+                                class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200">
                                 <div
                                     class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
                                     <span
@@ -241,7 +241,7 @@
 
                             {{-- Event 3 --}}
                             <div
-                                class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
+                                class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200">
                                 <div
                                     class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
                                     <span
@@ -258,7 +258,7 @@
 
                             {{-- Event 4 --}}
                             <div
-                                class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200 cursor-pointer">
+                                class="event-card flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-blue-200">
                                 <div
                                     class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0 shadow-xs">
                                     <span

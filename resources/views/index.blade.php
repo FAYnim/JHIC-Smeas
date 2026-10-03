@@ -146,12 +146,198 @@
 
         /* ===== Feature cards hover ===== */
         .feature-card {
+            background: #2196F3 !important;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .feature-card:hover {
+            background: #eab308 !important;
             transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            box-shadow: 0 12px 28px rgba(234, 179, 8, 0.45);
+        }
+
+        .feature-card h3 { color: #fff !important; }
+        .feature-card p { color: rgba(255, 255, 255, 0.85) !important; }
+        .feature-card > div:first-child { background: rgba(255, 255, 255, 0.2) !important; }
+        .feature-card:hover h3 { color: #0b192c !important; }
+        .feature-card:hover p { color: rgba(11, 25, 44, 0.8) !important; }
+        .feature-card:hover > div:first-child { background: rgba(0, 0, 0, 0.15) !important; }
+
+        /* ===== Pusat Karir hero card (match pusat-karir page) ===== */
+        .pk-hero {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.25rem;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            background-color: #061d36;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .pk-hero__bg {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 58%;
+            z-index: 0;
+        }
+
+        .pk-hero__bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .pk-hero__overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(90deg,
+                    #061d36 0%,
+                    #061d36 40%,
+                    rgba(6, 29, 54, 0.85) 55%,
+                    rgba(6, 29, 54, 0.4) 70%,
+                    rgba(6, 29, 54, 0) 88%
+                ),
+                linear-gradient(0deg,
+                    rgba(6, 29, 54, 0.4) 0%,
+                    rgba(6, 29, 54, 0) 25%
+                );
+        }
+
+        .pk-hero__content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 2.5rem 2.5rem 2.25rem;
+        }
+
+        .pk-hero__title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 0.625rem;
+        }
+
+        .pk-hero__subtitle {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: rgba(203, 213, 225, 0.9);
+            max-width: 480px;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .pk-hero__search {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 0.625rem;
+            overflow: hidden;
+            max-width: 560px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            margin-bottom: 1.25rem;
+        }
+
+        .pk-hero__search input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.875rem 1.125rem;
+            font-size: 0.9rem;
+            color: #334155;
+            background: transparent;
+        }
+
+        .pk-hero__search input::placeholder {
+            color: #94a3b8;
+        }
+
+        .pk-hero__search button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            margin: 4px;
+            border: none;
+            border-radius: 0.5rem;
+            background: #2563eb;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .pk-hero__search button:hover {
+            background: #1d4ed8;
+        }
+
+        .pk-hero__search button svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .pk-hero__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pk-hero__actions a {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .pk-hero__actions a:first-child {
+            color: #024089;
+            background: #fff;
+            border-color: #fff;
+        }
+
+        .pk-hero__actions a:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .pk-hero__actions a:first-child:hover {
+            background: #eff6ff;
+        }
+
+        @media (max-width: 768px) {
+            .pk-hero__bg {
+                width: 100%;
+                left: 0;
+            }
+
+            .pk-hero__overlay {
+                background: linear-gradient(180deg,
+                    #061d36 0%,
+                    rgba(6, 29, 54, 0.92) 65%,
+                    rgba(6, 29, 54, 0.75) 100%
+                );
+            }
+
+            .pk-hero__content {
+                padding: 2rem 1.25rem 1.75rem;
+            }
+
+            .pk-hero__search {
+                max-width: 100%;
+            }
         }
 
         /* ===== Scroll-triggered fade-in ===== */
@@ -573,9 +759,9 @@
                 <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:20px;"
                     class="fade-up">
 
-                    {{-- Card 1: YELLOW --}}
+                    {{-- Card 1 --}}
                     <div class="feature-card"
-                        style="background:#eab308;border-radius:0;padding:28px 24px;border:none;box-shadow:0 12px 28px rgba(234,179,8,0.45);">
+                        style="border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
                         <div
                             style="width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
                             <svg style="width:20px;height:20px;color:#fff;" fill="currentColor" viewBox="0 0 24 24">
@@ -856,48 +1042,35 @@
         {{-- ==================== PUSAT KARIR SMKN 1 SURABAYA ==================== --}}
         <section style="padding:64px 0 80px;background:#fff;">
             <div style="max-width:1280px;margin:0 auto;padding:0 16px;">
-                <div class="fade-up"
-                    style="background:linear-gradient(135deg, #024089, #013572);border-radius:24px;padding:40px;box-shadow:0 20px 40px -12px rgba(2,64,137,0.3);">
-                    <h2 style="font-size:clamp(1.5rem, 3vw, 1.875rem);font-weight:800;color:#fff;margin-bottom:24px;">
-                        Pusat Karir SMKN 1 Surabaya
-                    </h2>
-
-                    {{-- Search inside card --}}
-                    <div style="max-width:560px;margin-bottom:24px;">
-                        <div
-                            style="display:flex;align-items:center;background:rgba(255,255,255,0.1);border-radius:12px;border:1px solid rgba(255,255,255,0.2);overflow:hidden;">
-                            <div style="padding:0 12px 0 16px;">
-                                <svg style="width:20px;height:20px;color:rgba(255,255,255,0.6);" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                            </div>
-                            <input type="text" placeholder="Cari lowongan kerja, magang, atau mitra..."
-                                style="flex:1;padding:14px 16px 14px 0;font-size:0.875rem;color:#fff;border:none;outline:none;background:transparent;"
-                                class="placeholder:text-white/50">
-                        </div>
+                <div class="pk-hero fade-up">
+                    <div class="pk-hero__bg">
+                        <img src="{{ asset('images/smkn1.png') }}" alt="Background Pusat Karir">
                     </div>
+                    <div class="pk-hero__overlay"></div>
+                    <div class="pk-hero__content">
+                        <h2 class="pk-hero__title">Pusat Karir SMKN 1 Surabaya</h2>
+                        <p class="pk-hero__subtitle">
+                            Temukan lowongan kerja, magang, dan peluang karier terbaik
+                            untuk alumni dan siswa SMKN 1 Surabaya.
+                        </p>
 
-                    {{-- Quick Action Buttons --}}
-                    <div style="display:flex;flex-wrap:wrap;gap:12px;">
-                        <a href="{{ route('pusat-karir.katalog-lowongan') }}"
-                            style="display:inline-flex;align-items:center;padding:10px 20px;font-size:0.75rem;font-weight:700;color:#024089;background:#fff;border-radius:8px;text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,0.1);transition:background 0.3s;"
-                            onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='#fff'">
-                            Lowongan Kerja
-                        </a>
-                        <a href="{{ route('pusat-karir.katalog-magang') }}"
-                            style="display:inline-flex;align-items:center;padding:10px 20px;font-size:0.75rem;font-weight:700;color:#fff;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);border-radius:8px;text-decoration:none;transition:background 0.3s;"
-                            onmouseover="this.style.background='rgba(255,255,255,0.25)'"
-                            onmouseout="this.style.background='rgba(255,255,255,0.15)'">
-                            Program Magang
-                        </a>
-                        <a href="{{ route('pusat-karir.katalog-mitra') }}"
-                            style="display:inline-flex;align-items:center;padding:10px 20px;font-size:0.75rem;font-weight:700;color:#fff;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);border-radius:8px;text-decoration:none;transition:background 0.3s;"
-                            onmouseover="this.style.background='rgba(255,255,255,0.25)'"
-                            onmouseout="this.style.background='rgba(255,255,255,0.15)'">
-                            Mitra DUDI
-                        </a>
+                        <form class="pk-hero__search" action="{{ route('pusat-karir.index') }}" method="GET">
+                            <input type="text" name="q" placeholder="Cari perusahaan, posisi, atau tempat magang..."
+                                autocomplete="off">
+                            <button type="submit" aria-label="Cari">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="2.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </button>
+                        </form>
+
+                        <div class="pk-hero__actions">
+                            <a href="{{ route('pusat-karir.katalog-lowongan') }}">Lowongan Kerja</a>
+                            <a href="{{ route('pusat-karir.katalog-magang') }}">Program Magang</a>
+                            <a href="{{ route('pusat-karir.katalog-mitra') }}">Mitra DUDI</a>
+                        </div>
                     </div>
                 </div>
             </div>

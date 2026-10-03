@@ -92,7 +92,7 @@
     {{-- ==================== NAVBAR ==================== --}}
     @include('partials.navbar', [
         'activePage' => 'jurusan',
-        'berandaUrl' => route('pusat-karir.index')
+        'berandaUrl' => route('beranda')
     ])
 
     <main class="flex-grow">

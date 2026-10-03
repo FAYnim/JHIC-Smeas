@@ -104,7 +104,7 @@
 
         @include('partials.navbar', [
             'activePage' => 'informasi',
-            'berandaUrl' => route('pusat-karir.index'),
+            'berandaUrl' => route('beranda'),
         ])
 
         <main class="flex-grow">

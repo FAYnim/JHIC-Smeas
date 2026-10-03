@@ -80,7 +80,7 @@
     {{-- Header / Navbar --}}
     @include('partials.navbar', [
         'activePage' => 'profil',
-        'berandaUrl' => route('pusat-karir.index'),
+        'berandaUrl' => route('beranda'),
     ])
 
     <main class="flex-grow">

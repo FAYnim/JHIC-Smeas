@@ -88,4 +88,87 @@ class ModerasiAdminTest extends TestCase
         $deleteResponse->assertRedirect();
         $this->assertDatabaseMissing('produk_blud_laporans', ['id' => $laporan->id]);
     }
+
+    public function test_blud_user_can_mark_laporan_as_handled_with_note(): void
+    {
+        $blud = User::factory()->blud()->create();
+        $produk = ProdukBlud::create([
+            'slug' => 'produk-sample-4',
+            'tipe' => ProdukBlud::TIPE_SHOWCASE,
+            'title' => 'Sample Produk 4',
+            'jurusan_nama' => 'AK',
+            'jurusan_slug' => 'ak',
+            'deskripsi' => 'Deskripsi',
+        ]);
+        $laporan = ProdukBludLaporkan::create([
+            'produk_blud_id' => $produk->id,
+            'kategori' => 'Spam',
+            'deskripsi' => 'x',
+        ]);
+
+        $this->actingAs($blud)
+            ->patch(route('admin.moderasi-blud.tindak-lanjut-laporan', $laporan), [
+                'catatan_internal' => 'Sudah diperiksa, produk aman.',
+            ])
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('produk_blud_laporans', [
+            'id' => $laporan->id,
+            'status' => 'ditindaklanjuti',
+            'catatan_internal' => 'Sudah diperiksa, produk aman.',
+            'ditangani_oleh' => $blud->id,
+        ]);
+        $this->assertNotNull($laporan->fresh()->ditangani_at);
+    }
+
+    public function test_blud_user_can_mark_komentar_as_handled(): void
+    {
+        $blud = User::factory()->blud()->create();
+        $produk = ProdukBlud::create([
+            'slug' => 'produk-sample-5',
+            'tipe' => ProdukBlud::TIPE_SHOWCASE,
+            'title' => 'Sample Produk 5',
+            'jurusan_nama' => 'AK',
+            'jurusan_slug' => 'ak',
+            'deskripsi' => 'Deskripsi',
+        ]);
+        $komentar = ProdukBludKomentar::create([
+            'produk_blud_id' => $produk->id,
+            'nama' => 'Pengunjung',
+            'komentar' => 'Bagus',
+        ]);
+
+        $this->actingAs($blud)
+            ->patch(route('admin.moderasi-blud.tindak-lanjut-komentar', $komentar))
+            ->assertRedirect();
+
+        $this->assertSame('ditindaklanjuti', $komentar->fresh()->status);
+    }
+
+    public function test_unhandled_laporan_is_listed_first(): void
+    {
+        $produk = ProdukBlud::create([
+            'slug' => 'produk-sample-6',
+            'tipe' => ProdukBlud::TIPE_SHOWCASE,
+            'title' => 'Sample Produk 6',
+            'jurusan_nama' => 'AK',
+            'jurusan_slug' => 'ak',
+            'deskripsi' => 'Deskripsi',
+        ]);
+        ProdukBludLaporkan::create([
+            'produk_blud_id' => $produk->id,
+            'kategori' => 'Laporan Lama Selesai',
+            'deskripsi' => 'x',
+            'status' => 'ditindaklanjuti',
+        ]);
+        ProdukBludLaporkan::create([
+            'produk_blud_id' => $produk->id,
+            'kategori' => 'Laporan Baru Belum',
+            'deskripsi' => 'x',
+        ]);
+
+        $this->actingAs($this->adminUser)
+            ->get(route('admin.moderasi-blud.index', ['tab' => 'laporan']))
+            ->assertSeeInOrder(['Laporan Baru Belum', 'Laporan Lama Selesai']);
+    }
 }

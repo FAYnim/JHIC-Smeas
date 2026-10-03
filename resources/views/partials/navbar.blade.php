@@ -81,7 +81,7 @@
 
             {{-- Mobile Menu Button --}}
             <div class="flex md:hidden items-center">
-                <button type="button" id="mobile-menu-btn" aria-label="Toggle Navigation"
+                <button type="button" id="mobile-menu-btn" aria-label="Toggle Navigation" aria-expanded="false"
                     class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
                     <x-lucide-menu id="menu-icon-open" class="w-6 h-6" />
                     <x-lucide-x id="menu-icon-close" class="w-6 h-6 hidden" />
@@ -98,7 +98,7 @@
                 @if ($link['key'] === 'profil')
                     {{-- Mobile Dropdown Profil --}}
                     <div>
-                        <button type="button" data-mobile-profil-toggle
+                        <button type="button" data-mobile-profil-toggle aria-expanded="false"
                             class="w-full flex items-center justify-between px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
                             {{ $link['label'] }}
                             <svg class="w-4 h-4 transition-transform duration-200" data-mobile-profil-chevron fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,6 +151,7 @@
                 const open = menu.classList.toggle('hidden');
                 if (iconOn) iconOn.classList.toggle('hidden', !open);
                 if (iconOf) iconOf.classList.toggle('hidden', open);
+                btn.setAttribute('aria-expanded', String(!open));
             });
         }
 
@@ -158,6 +159,7 @@
         const ddWrap  = document.getElementById('desktop-profil-dropdown');
         const ddMenu  = document.getElementById('desktop-profil-menu');
         const ddChev  = document.getElementById('desktop-profil-chevron');
+        const ddBtn   = document.getElementById('desktop-profil-btn');
         if (ddWrap && ddMenu) {
             let hideTimer;
             ddWrap.addEventListener('mouseenter', () => {
@@ -165,17 +167,18 @@
                 ddMenu.classList.remove('hidden', 'opacity-0', '-translate-y-1');
                 ddMenu.classList.add('opacity-100', 'translate-y-0');
                 if (ddChev) ddChev.classList.add('rotate-180');
+                ddBtn.setAttribute('aria-expanded', 'true');
             });
             ddWrap.addEventListener('mouseleave', () => {
                 hideTimer = setTimeout(() => {
                     ddMenu.classList.add('hidden', 'opacity-0', '-translate-y-1');
                     ddMenu.classList.remove('opacity-100', 'translate-y-0');
                     if (ddChev) ddChev.classList.remove('rotate-180');
+                    ddBtn.setAttribute('aria-expanded', 'false');
                 }, 120);
             });
         }
 
-        const ddBtn = document.getElementById('desktop-profil-btn');
         if (ddBtn && ddMenu) {
             ddBtn.addEventListener('click', () => {
                 const isOpen = !ddMenu.classList.contains('hidden');
@@ -199,6 +202,7 @@
             mToggle.addEventListener('click', () => {
                 mMenu.classList.toggle('hidden');
                 if (mChev) mChev.classList.toggle('rotate-180');
+                mToggle.setAttribute('aria-expanded', String(!mMenu.classList.contains('hidden')));
             });
         }
     });

@@ -9,6 +9,21 @@
         ({{ auth()->user()->roleLabel() }}).
     </p>
 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+        <a href="{{ route('admin.lowongan.index') }}" class="p-4 bg-white rounded-lg shadow hover:shadow-md transition">
+            <h3 class="font-bold">Lowongan</h3>
+            <p class="text-sm text-gray-500">Kelola lowongan kerja & magang</p>
+        </a>
+        <a href="{{ route('admin.mitra.index') }}" class="p-4 bg-white rounded-lg shadow hover:shadow-md transition">
+            <h3 class="font-bold">Mitra</h3>
+            <p class="text-sm text-gray-500">Kelola mitra industri</p>
+        </a>
+        <a href="{{ route('admin.lamaran.index') }}" class="p-4 bg-white rounded-lg shadow hover:shadow-md transition">
+            <h3 class="font-bold">Lamaran</h3>
+            <p class="text-sm text-gray-500">Kelola lamaran masuk</p>
+        </a>
+    </div>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
         @foreach ($stats as $stat)
             @php

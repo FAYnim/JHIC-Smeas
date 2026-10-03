@@ -209,7 +209,7 @@
                     <h3 class="text-2xl font-extrabold text-amber-400 mb-4 tracking-tight">Jelajahi Smeas</h3>
                     <ul class="space-y-3 text-sm font-semibold text-blue-100">
                         <li><a href="{{ route('pusat-karir.index') }}" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2"><span class="text-amber-400">&bull;</span> Pusat Karir</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2"><span class="text-amber-400">&bull;</span> BLUD</a></li>
+                        <li><a href="{{ route('blud.index') }}" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2"><span class="text-amber-400">&bull;</span> BLUD</a></li>
                         <li><a href="{{ route('spmb.index') }}" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2"><span class="text-amber-400">&bull;</span> PPDB / SPMB</a></li>
                     </ul>
                 </div>

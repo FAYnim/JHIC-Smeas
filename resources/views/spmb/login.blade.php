@@ -181,8 +181,8 @@
     @include('partials.navbar', [
         'activePage'    => '',
         'spmbClickable' => false,
-        'logoUrl'       => url('/'),
-        'berandaUrl'    => url('/'),
+        'logoUrl'       => route('beranda'),
+        'berandaUrl'    => route('beranda'),
     ])
 
     <!-- ===== SPMB Login Section ===== -->

@@ -126,8 +126,10 @@
                             </div>
                             <div>
                                 <p class="font-bold text-slate-900 text-sm sm:text-base">{{ $produk->jurusan_nama }}</p>
-                                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer"
-                                    class="detail-btn-sm detail-btn-blue-sm mt-2">Tanya seputar karya</a>
+                                @if ($produk->wa_number)
+                                    <a href="https://wa.me/{{ $produk->wa_number }}" target="_blank" rel="noopener noreferrer"
+                                        class="detail-btn-sm detail-btn-blue-sm mt-2">Tanya seputar karya</a>
+                                @endif
                             </div>
                         </div>
                     </div>

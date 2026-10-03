@@ -44,7 +44,7 @@ class LowonganController extends Controller
                     'kategori' => $item->kategori->slug ?? 'umum',
                     'kategori_label' => $item->kategori->nama ?? 'Umum',
                     'type' => 'Materi',
-                    'url' => $item->external_url ?? '#',
+                    'url' => ($item->external_url && $item->external_url !== '#') ? $item->external_url : null,
                 ];
             })
             ->all();
@@ -131,14 +131,10 @@ class LowonganController extends Controller
             'status' => 'pending',
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Ajuan lamaran magang Anda berhasil dikirim.',
-            'data' => [
-                'nisn' => $application->nisn,
-                'registration_code' => $application->registration_code,
-            ],
-        ], 201);
+        return redirect()->route('pusat-karir.detail', $slug)->with('lamaran_success', [
+            'nisn' => $application->nisn,
+            'registration_code' => $application->registration_code,
+        ]);
     }
 
     public function katalogLowongan(Request $request)

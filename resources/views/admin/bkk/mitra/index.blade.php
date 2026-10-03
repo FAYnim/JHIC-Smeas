@@ -12,11 +12,14 @@
                 Cari
             </button>
         </form>
-        <a href="{{ route('admin.mitra.create') }}"
-            class="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700">
-            <x-lucide-plus class="w-4 h-4" />
-            Tambah Mitra
-        </a>
+        <div class="flex items-center gap-3">
+            <a href="{{ route('pusat-karir.katalog-mitra') }}" target="_blank" class="text-sm text-blue-600 hover:underline">Lihat di Situs →</a>
+            <a href="{{ route('admin.mitra.create') }}"
+                class="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700">
+                <x-lucide-plus class="w-4 h-4" />
+                Tambah Mitra
+            </a>
+        </div>
     </div>
 
     <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">

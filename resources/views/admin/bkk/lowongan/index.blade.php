@@ -19,11 +19,14 @@
                 Lowongan Kerja
             </a>
         </div>
-        <a href="{{ route('admin.lowongan.create') }}"
-            class="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700">
-            <x-lucide-plus class="w-4 h-4" />
-            Tambah Lowongan
-        </a>
+        <div class="flex items-center gap-3">
+            <a href="{{ route('pusat-karir.katalog-lowongan') }}" target="_blank" class="text-sm text-blue-600 hover:underline">Lihat di Situs →</a>
+            <a href="{{ route('admin.lowongan.create') }}"
+                class="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700">
+                <x-lucide-plus class="w-4 h-4" />
+                Tambah Lowongan
+            </a>
+        </div>
     </div>
 
     <div class="mb-4 flex flex-wrap items-center gap-3">

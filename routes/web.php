@@ -11,7 +11,6 @@ use App\Models\Guru;
 use App\Models\Lowongan;
 use App\Models\MitraPerusahaan;
 use App\Models\Pengumuman;
-use App\Models\Setting;
 use App\Models\StrukturOrganisasi;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +19,9 @@ Route::post('/login', [LoginController::class, 'store'])->middleware('guest')->n
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
 Route::get('/', function () {
-    return view('index');
+    $artikels = Artikel::latest('published_at')->take(4)->get();
+
+    return view('index', compact('artikels'));
 })->name('beranda');
 
 Route::get('/visi-misi', function () {
@@ -56,8 +57,13 @@ Route::get('/jurusan', function () {
     return view('jurusan.index', compact('totalLowongan', 'totalAlumni', 'totalMitra'));
 })->name('jurusan');
 
-Route::get('/jurusan/{slug}', function ($slug) {
-    return view("jurusan.{$slug}");
+Route::get('/jurusan/{slug}', function (string $slug) {
+    $view = "jurusan.{$slug}";
+    if (! view()->exists($view)) {
+        abort(404);
+    }
+
+    return view($view);
 })->name('jurusan.detail');
 
 Route::get('/informasi', function () {
@@ -110,22 +116,25 @@ Route::post('/blud/{slug}/laporkan', [BludController::class, 'storeLaporkan'])
 
 // SPMB Routes
 Route::get('/spmb', [SpmbController::class, 'index'])->name('spmb.index');
-Route::get('/spmb/login', [SpmbController::class, 'index'])->name('spmb.login-page');
+Route::get('/spmb/login', fn () => redirect()->route('spmb.index'))->name('spmb.login-page');
 Route::post('/spmb/login', [SpmbController::class, 'login'])->name('spmb.login');
+Route::post('/spmb/logout', [SpmbController::class, 'logout'])->name('spmb.logout');
 
-Route::get('/spmb/dashboard', [SpmbController::class, 'dashboard'])->name('spmb.dashboard');
-Route::get('/spmb/biodata', [SpmbController::class, 'biodata'])->name('spmb.biodata');
-Route::post('/spmb/biodata', [SpmbController::class, 'saveBiodata'])->name('spmb.save-biodata');
-Route::get('/spmb/orang-tua', [SpmbController::class, 'orangTua'])->name('spmb.orang-tua');
-Route::post('/spmb/orang-tua', [SpmbController::class, 'saveOrangTua'])->name('spmb.save-orang-tua');
-Route::get('/spmb/dokumen', [SpmbController::class, 'dokumen'])->name('spmb.dokumen');
-Route::post('/spmb/dokumen', [SpmbController::class, 'saveDokumen'])->name('spmb.save-dokumen');
-Route::get('/spmb/formulir', [SpmbController::class, 'formulir'])->name('spmb.formulir');
-Route::post('/spmb/formulir', [SpmbController::class, 'saveFormulir'])->name('spmb.save-formulir');
-Route::get('/spmb/formulir/unduh', [SpmbController::class, 'unduhFormulir'])->name('spmb.unduh-formulir');
-Route::get('/spmb/verifikasi', [SpmbController::class, 'verifikasi'])->name('spmb.verifikasi');
-Route::get('/spmb/pengumuman', [SpmbController::class, 'pengumuman'])->name('spmb.pengumuman');
-Route::get('/spmb/bantuan', [SpmbController::class, 'bantuan'])->name('spmb.bantuan');
+Route::middleware('spmb.auth')->group(function () {
+    Route::get('/spmb/dashboard', [SpmbController::class, 'dashboard'])->name('spmb.dashboard');
+    Route::get('/spmb/biodata', [SpmbController::class, 'biodata'])->name('spmb.biodata');
+    Route::post('/spmb/biodata', [SpmbController::class, 'saveBiodata'])->name('spmb.save-biodata');
+    Route::get('/spmb/orang-tua', [SpmbController::class, 'orangTua'])->name('spmb.orang-tua');
+    Route::post('/spmb/orang-tua', [SpmbController::class, 'saveOrangTua'])->name('spmb.save-orang-tua');
+    Route::get('/spmb/dokumen', [SpmbController::class, 'dokumen'])->name('spmb.dokumen');
+    Route::post('/spmb/dokumen', [SpmbController::class, 'saveDokumen'])->name('spmb.save-dokumen');
+    Route::get('/spmb/formulir', [SpmbController::class, 'formulir'])->name('spmb.formulir');
+    Route::post('/spmb/formulir', [SpmbController::class, 'saveFormulir'])->name('spmb.save-formulir');
+    Route::get('/spmb/formulir/unduh', [SpmbController::class, 'unduhFormulir'])->name('spmb.unduh-formulir');
+    Route::get('/spmb/verifikasi', [SpmbController::class, 'verifikasi'])->name('spmb.verifikasi');
+    Route::get('/spmb/pengumuman', [SpmbController::class, 'pengumuman'])->name('spmb.pengumuman');
+    Route::get('/spmb/bantuan', [SpmbController::class, 'bantuan'])->name('spmb.bantuan');
+});
 
 Route::middleware('auth')
     ->prefix('admin')

@@ -332,20 +332,22 @@
 
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 @forelse ($artikels as $artikel)
-                    <div class="berita-card group bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:border-blue-300">
-                        <div class="aspect-[16/10] overflow-hidden bg-slate-200">
-                            @if ($artikel->image_path)
-                                <img src="{{ asset('storage/' . $artikel->image_path) }}" alt="{{ $artikel->title }}" class="berita-img w-full h-full object-cover">
-                            @else
-                                <div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300"></div>
-                            @endif
+                    <a href="{{ route('pusat-karir.detail-artikel', $artikel->slug) }}" class="block group">
+                        <div class="berita-card bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:border-blue-300">
+                            <div class="aspect-[16/10] overflow-hidden bg-slate-200">
+                                @if ($artikel->image_path)
+                                    <img src="{{ asset('storage/' . $artikel->image_path) }}" alt="{{ $artikel->title }}" class="berita-img w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300"></div>
+                                @endif
+                            </div>
+                            <div class="p-5 sm:p-6">
+                                <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
+                                    {{ $artikel->title }}
+                                </h3>
+                            </div>
                         </div>
-                        <div class="p-5 sm:p-6">
-                            <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
-                                {{ $artikel->title }}
-                            </h3>
-                        </div>
-                    </div>
+                    </a>
                 @empty
                     <p class="text-sm text-slate-500 col-span-3">Belum ada artikel prestasi.</p>
                 @endforelse
@@ -426,7 +428,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2">
+                            <a href="{{ route('blud.index') }}" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2">
                                 <span class="text-amber-400">&bull;</span> BLUD
                             </a>
                         </li>

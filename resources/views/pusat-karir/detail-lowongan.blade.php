@@ -1343,11 +1343,11 @@
 
         <!-- Breadcrumbs -->
         <nav class="flex items-center text-xs gap-1.5 mb-4 flex-wrap">
-            <a href="#" class="text-blue-600 hover:underline font-medium">Beranda</a>
+            <a href="{{ route('beranda') }}" class="text-blue-600 hover:underline font-medium">Beranda</a>
             <span class="text-slate-400">/</span>
             <a href="{{ route('pusat-karir.index') }}" class="text-blue-600 hover:underline font-medium">Pusat Karir</a>
             <span class="text-slate-400">/</span>
-            <a href="#" class="text-blue-600 hover:underline font-medium">Mitra Industri (DUDI)</a>
+            <a href="{{ route('pusat-karir.katalog-mitra') }}" class="text-blue-600 hover:underline font-medium">Mitra Industri (DUDI)</a>
             <span class="text-slate-400">/</span>
             <span class="text-slate-500 font-medium">{{ $lowongan->company_short ?? $lowongan->company_name }}</span>
         </nav>

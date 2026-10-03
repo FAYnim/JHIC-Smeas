@@ -58,7 +58,7 @@
 
         {{-- Breadcrumb --}}
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <nav class="flex items-center gap-2 text-sm text-slate-500 font-medium">
+            <nav class="flex items-center gap-2 text-sm text-slate-500 font-medium" aria-label="Breadcrumb">
                 <a href="{{ route('beranda') }}" class="hover:text-blue-600 transition-colors">Beranda</a>
                 <span>/</span>
                 <a href="{{ route('jurusan') }}" class="hover:text-blue-600 transition-colors">Jurusan</a>

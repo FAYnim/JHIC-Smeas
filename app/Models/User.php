@@ -25,6 +25,8 @@ class User extends Authenticatable
 
     public const ROLE_SPMB = 'spmb';
 
+    public const ROLE_BLUD = 'blud';
+
     /**
      * Get the attributes that should be cast.
      *
@@ -65,6 +67,7 @@ class User extends Authenticatable
             self::ROLE_BKK => 'BKK (Pusat Karir)',
             self::ROLE_HUMAS => 'Humas',
             self::ROLE_SPMB => 'Panitia SPMB',
+            self::ROLE_BLUD => 'Staf BLUD',
             default => 'Belum Ditugaskan',
         };
     }

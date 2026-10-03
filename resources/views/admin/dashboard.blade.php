@@ -65,6 +65,15 @@
                             @case('shopping-bag')
                                 <x-lucide-shopping-bag class="w-4 h-4" />
                             @break
+                            @case('shopping-cart')
+                                <x-lucide-shopping-cart class="w-4 h-4" />
+                            @break
+                            @case('flag')
+                                <x-lucide-flag class="w-4 h-4" />
+                            @break
+                            @case('message-square')
+                                <x-lucide-message-square class="w-4 h-4" />
+                            @break
                             @default
                                 <x-lucide-circle class="w-4 h-4" />
                         @endswitch
@@ -124,6 +133,42 @@
                             <p class="text-xs font-medium text-slate-500 mt-0.5">
                                 {{ $calonSiswa->jurusan_pilihan }} · {{ $calonSiswa->created_at?->format('d M Y') }}
                             </p>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if ($recentPesanans->isNotEmpty())
+            <div class="bg-white rounded-xl border border-slate-200 p-5">
+                <p class="text-xs font-bold uppercase tracking-wide text-slate-500 mb-4">Pesanan Baru</p>
+                <ul class="divide-y divide-slate-100">
+                    @foreach ($recentPesanans as $pesanan)
+                        <li class="py-3 first:pt-0 last:pb-0">
+                            <a href="{{ route('admin.pesanan-blud.show', $pesanan) }}" class="block hover:text-blue-700">
+                                <p class="text-sm font-bold text-slate-900 truncate">{{ $pesanan->nama }}</p>
+                                <p class="text-xs font-medium text-slate-500 mt-0.5">
+                                    {{ $pesanan->produk?->title ?? '—' }} · {{ $pesanan->created_at?->format('d M Y') }}
+                                </p>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if ($pendingLaporans->isNotEmpty())
+            <div class="bg-white rounded-xl border border-slate-200 p-5">
+                <p class="text-xs font-bold uppercase tracking-wide text-slate-500 mb-4">Laporan Belum Ditangani</p>
+                <ul class="divide-y divide-slate-100">
+                    @foreach ($pendingLaporans as $laporan)
+                        <li class="py-3 first:pt-0 last:pb-0">
+                            <a href="{{ route('admin.moderasi-blud.index', ['tab' => 'laporan']) }}" class="block hover:text-blue-700">
+                                <p class="text-sm font-bold text-slate-900 truncate">{{ $laporan->kategori }}</p>
+                                <p class="text-xs font-medium text-slate-500 mt-0.5">
+                                    {{ $laporan->produk?->title ?? '—' }} · {{ $laporan->created_at?->format('d M Y') }}
+                                </p>
+                            </a>
                         </li>
                     @endforeach
                 </ul>

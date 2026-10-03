@@ -1101,71 +1101,6 @@
                         </a>
                     @endforeach
                 </div>
-                    </a>
-
-                    {{-- Side Articles Container --}}
-                    <div style="display:flex;flex-direction:column;gap:16px;" id="berita-side">
-                        {{-- Article 2 --}}
-                        <a href="{{ route('informasi') }}"
-                            style="display:flex;gap:16px;background:#fff;border-radius:12px;padding:16px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);text-decoration:none;transition:box-shadow 0.3s;"
-                            onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'"
-                            onmouseout="this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
-                            <div
-                                style="width:96px;height:96px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#f1f5f9;">
-                                <img src="{{ asset('images/image 4.png') }}" alt="Berita"
-                                    style="width:100%;height:100%;object-fit:cover;">
-                            </div>
-                            <div style="flex:1;min-width:0;">
-                                <span style="font-size:0.75rem;font-weight:700;color:#024089;">Prestasi</span>
-                                <h4
-                                    style="font-size:0.875rem;font-weight:700;color:#0f172a;margin-top:4px;line-height:1.4;">
-                                    Siswa Raih Medali Emas LKS Tingkat Nasional
-                                </h4>
-                                <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">3 hari yang lalu</p>
-                            </div>
-                        </a>
-
-                        {{-- Article 3 --}}
-                        <a href="{{ route('informasi') }}"
-                            style="display:flex;gap:16px;background:#fff;border-radius:12px;padding:16px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);text-decoration:none;transition:box-shadow 0.3s;"
-                            onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'"
-                            onmouseout="this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
-                            <div
-                                style="width:96px;height:96px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#f1f5f9;">
-                                <img src="{{ asset('images/image 5.png') }}" alt="Berita"
-                                    style="width:100%;height:100%;object-fit:cover;">
-                            </div>
-                            <div style="flex:1;min-width:0;">
-                                <span style="font-size:0.75rem;font-weight:700;color:#024089;">Kegiatan</span>
-                                <h4
-                                    style="font-size:0.875rem;font-weight:700;color:#0f172a;margin-top:4px;line-height:1.4;">
-                                    Upacara Hari Pendidikan Nasional
-                                </h4>
-                                <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">5 hari yang lalu</p>
-                            </div>
-                        </a>
-
-                        {{-- Article 4 --}}
-                        <a href="{{ route('informasi') }}"
-                            style="display:flex;gap:16px;background:#fff;border-radius:12px;padding:16px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);text-decoration:none;transition:box-shadow 0.3s;"
-                            onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'"
-                            onmouseout="this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
-                            <div
-                                style="width:96px;height:96px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#f1f5f9;">
-                                <img src="{{ asset('images/smkn1.png') }}" alt="Berita"
-                                    style="width:100%;height:100%;object-fit:cover;">
-                            </div>
-                            <div style="flex:1;min-width:0;">
-                                <span style="font-size:0.75rem;font-weight:700;color:#f59e0b;">Pengumuman</span>
-                                <h4
-                                    style="font-size:0.875rem;font-weight:700;color:#0f172a;margin-top:4px;line-height:1.4;">
-                                    Jadwal SPMB Tahun Ajaran 2026/2027
-                                </h4>
-                                <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">1 minggu yang lalu</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
 
                 <div style="text-align:center;margin-top:40px;" class="fade-up">
                     <a href="{{ route('informasi') }}"
@@ -1330,12 +1265,6 @@
                         prakataTopRow.style.alignItems = 'flex-start';
                         prakataTopRow.style.justifyContent = 'flex-start';
                     }
-                }
-
-                // Berita grid: side-by-side on lg
-                const beritaGrid = document.getElementById('berita-grid');
-                if (beritaGrid) {
-                    beritaGrid.style.gridTemplateColumns = w >= 1024 ? '7fr 5fr' : '1fr';
                 }
 
                 // Footer grid: 3 cols on md

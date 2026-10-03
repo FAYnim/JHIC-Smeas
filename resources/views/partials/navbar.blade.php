@@ -1,7 +1,7 @@
 @php
     $activePage   = $activePage   ?? '';
     $spmbClickable = $spmbClickable ?? true;
-    $logoUrl      = $logoUrl      ?? route('pusat-karir.index');
+    $logoUrl      = $logoUrl      ?? route('beranda');
     $berandaUrl   = $berandaUrl   ?? route('beranda');
 
     $profilDropdown = [

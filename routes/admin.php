@@ -27,11 +27,11 @@ Route::middleware('role:bkk')->group(function () {
     Route::patch('lamaran/{application}/status', [LamaranController::class, 'updateStatus'])->name('lamaran.update-status');
 
     Route::patch('lowongan/{lowongan}/toggle-publish', [LowonganController::class, 'togglePublish'])->name('lowongan.toggle-publish');
-    Route::resource('lowongan', LowonganController::class);
+    Route::resource('lowongan', LowonganController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-    Route::resource('mitra', MitraController::class);
+    Route::resource('mitra', MitraController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-    Route::resource('bimbingan', BimbinganController::class);
+    Route::resource('bimbingan', BimbinganController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
     Route::prefix('tracer')->name('tracer.')->group(function () {
         Route::get('/', [TracerController::class, 'index'])->name('index');
@@ -48,14 +48,14 @@ Route::middleware('role:bkk')->group(function () {
 
 Route::middleware('role:humas')->group(function () {
     Route::patch('guru/{guru}/toggle-active', [GuruController::class, 'toggleActive'])->name('guru.toggle-active');
-    Route::resource('guru', GuruController::class);
+    Route::resource('guru', GuruController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-    Route::resource('struktur-organisasi', StrukturOrganisasiController::class);
-    Route::resource('fasilitas', FasilitasController::class);
-    Route::resource('artikel', ArtikelController::class);
+    Route::resource('struktur-organisasi', StrukturOrganisasiController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('fasilitas', FasilitasController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('artikel', ArtikelController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
     Route::patch('webinar/{webinar}/toggle-publish', [WebinarController::class, 'togglePublish'])->name('webinar.toggle-publish');
-    Route::resource('webinar', WebinarController::class);
+    Route::resource('webinar', WebinarController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 });
 
 Route::middleware('role:spmb')->group(function () {
@@ -64,9 +64,9 @@ Route::middleware('role:spmb')->group(function () {
     Route::patch('calon-siswa/{calonSiswa}/verifikasi', [CalonSiswaController::class, 'updateVerifikasi'])->name('calon-siswa.update-verifikasi');
 
     Route::patch('pengumuman/{pengumuman}/toggle-publish', [PengumumanController::class, 'togglePublish'])->name('pengumuman.toggle-publish');
-    Route::resource('pengumuman', PengumumanController::class);
+    Route::resource('pengumuman', PengumumanController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-    Route::resource('faq', FaqController::class);
+    Route::resource('faq', FaqController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 });
 
 Route::middleware('role:admin')->group(function () {
@@ -78,7 +78,7 @@ Route::middleware('role:admin')->group(function () {
     Route::delete('moderasi-blud/penawaran/{penawaran}', [ModerasiController::class, 'destroyPenawaran'])->name('moderasi-blud.destroy-penawaran');
     Route::delete('moderasi-blud/laporan/{laporan}', [ModerasiController::class, 'destroyLaporan'])->name('moderasi-blud.destroy-laporan');
 
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
     Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SettingController::class, 'update'])->name('settings.update');

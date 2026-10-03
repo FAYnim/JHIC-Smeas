@@ -218,6 +218,9 @@
                                 @case('flag')
                                     <x-lucide-flag />
                                 @break
+                                @case('link')
+                                    <x-lucide-link />
+                                @break
                                 @default
                                     <x-lucide-circle />
                             @endswitch

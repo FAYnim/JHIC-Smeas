@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Bkk\BimbinganController;
 use App\Http\Controllers\Admin\Bkk\LamaranController;
 use App\Http\Controllers\Admin\Bkk\LowonganController;
 use App\Http\Controllers\Admin\Bkk\MitraController;
+use App\Http\Controllers\Admin\Bkk\SumberRekomendasiController;
 use App\Http\Controllers\Admin\Bkk\TracerController;
 use App\Http\Controllers\Admin\Blud\ModerasiController;
 use App\Http\Controllers\Admin\Blud\ProdukBludController;
@@ -44,6 +45,10 @@ Route::middleware('role:bkk')->group(function () {
         Route::patch('kuesioner/{kuesioner}/toggle-confirm', [TracerController::class, 'toggleConfirmKuesioner'])->name('kuesioner.toggle-confirm');
         Route::put('settings', [TracerController::class, 'updateSettings'])->name('settings.store');
     });
+
+    Route::get('sumber-rekomendasi', [SumberRekomendasiController::class, 'index'])->name('sumber-rekomendasi.index');
+    Route::post('sumber-rekomendasi', [SumberRekomendasiController::class, 'store'])->name('sumber-rekomendasi.store');
+    Route::delete('sumber-rekomendasi/{sumberRekomendasi}', [SumberRekomendasiController::class, 'destroy'])->name('sumber-rekomendasi.destroy');
 });
 
 Route::middleware('role:humas')->group(function () {

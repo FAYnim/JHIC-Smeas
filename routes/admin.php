@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Bkk\MitraController;
 use App\Http\Controllers\Admin\Bkk\SumberRekomendasiController;
 use App\Http\Controllers\Admin\Bkk\TracerController;
 use App\Http\Controllers\Admin\Blud\ModerasiController;
+use App\Http\Controllers\Admin\Blud\PesananController;
 use App\Http\Controllers\Admin\Blud\ProdukBludController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Humas\ArtikelController;
@@ -74,14 +75,23 @@ Route::middleware('role:spmb')->group(function () {
     Route::resource('faq', FaqController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 });
 
-Route::middleware('role:admin')->group(function () {
+Route::middleware('role:blud')->group(function () {
     Route::get('produk-blud', [ProdukBludController::class, 'index'])->name('produk-blud.index');
     Route::patch('produk-blud/{produkBlud}/toggle-publish', [ProdukBludController::class, 'togglePublish'])->name('produk-blud.toggle-publish');
 
+    Route::get('pesanan-blud', [PesananController::class, 'index'])->name('pesanan-blud.index');
+    Route::get('pesanan-blud/{pesanan}', [PesananController::class, 'show'])->name('pesanan-blud.show');
+    Route::patch('pesanan-blud/{pesanan}', [PesananController::class, 'update'])->name('pesanan-blud.update');
+    Route::delete('pesanan-blud/{pesanan}', [PesananController::class, 'destroy'])->name('pesanan-blud.destroy');
+
     Route::get('moderasi-blud', [ModerasiController::class, 'index'])->name('moderasi-blud.index');
+    Route::patch('moderasi-blud/komentar/{komentar}/tindak-lanjut', [ModerasiController::class, 'tindakLanjutKomentar'])->name('moderasi-blud.tindak-lanjut-komentar');
+    Route::patch('moderasi-blud/laporan/{laporan}/tindak-lanjut', [ModerasiController::class, 'tindakLanjutLaporan'])->name('moderasi-blud.tindak-lanjut-laporan');
     Route::delete('moderasi-blud/komentar/{komentar}', [ModerasiController::class, 'destroyKomentar'])->name('moderasi-blud.destroy-komentar');
-    Route::delete('moderasi-blud/penawaran/{penawaran}', [ModerasiController::class, 'destroyPenawaran'])->name('moderasi-blud.destroy-penawaran');
     Route::delete('moderasi-blud/laporan/{laporan}', [ModerasiController::class, 'destroyLaporan'])->name('moderasi-blud.destroy-laporan');
+});
+
+Route::middleware('role:admin')->group(function () {
 
     Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 

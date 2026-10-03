@@ -5,7 +5,6 @@ namespace Tests\Feature\Admin\Blud;
 use App\Models\ProdukBlud;
 use App\Models\ProdukBludKomentar;
 use App\Models\ProdukBludLaporkan;
-use App\Models\ProdukBludPenawaran;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -26,7 +25,7 @@ class ModerasiAdminTest extends TestCase
         $this->spmbUser = User::factory()->create(['role' => User::ROLE_SPMB]);
     }
 
-    public function test_only_admin_can_access_moderasi_blud(): void
+    public function test_only_blud_staff_and_admin_can_access_moderasi_blud(): void
     {
         $responseGuest = $this->get(route('admin.moderasi-blud.index'));
         $responseGuest->assertRedirect(route('login'));
@@ -62,33 +61,6 @@ class ModerasiAdminTest extends TestCase
         $deleteResponse = $this->actingAs($this->adminUser)->delete(route('admin.moderasi-blud.destroy-komentar', $komentar));
         $deleteResponse->assertRedirect();
         $this->assertDatabaseMissing('produk_blud_komentars', ['id' => $komentar->id]);
-    }
-
-    public function test_admin_can_view_and_delete_penawaran(): void
-    {
-        $produk = ProdukBlud::create([
-            'slug' => 'produk-sample-2',
-            'tipe' => ProdukBlud::TIPE_KUSTOM,
-            'title' => 'Sample Kustom 2',
-            'jurusan_nama' => 'DKV',
-            'jurusan_slug' => 'dkv',
-            'deskripsi' => 'Deskripsi',
-        ]);
-
-        $penawaran = ProdukBludPenawaran::create([
-            'produk_blud_id' => $produk->id,
-            'nama' => 'Budi Client',
-            'kontak' => '0812345678',
-            'pesan' => 'Saya ingin pesan 50 kaos',
-        ]);
-
-        $response = $this->actingAs($this->adminUser)->get(route('admin.moderasi-blud.index', ['tab' => 'penawaran']));
-        $response->assertOk();
-        $response->assertSee('Saya ingin pesan 50 kaos');
-
-        $deleteResponse = $this->actingAs($this->adminUser)->delete(route('admin.moderasi-blud.destroy-penawaran', $penawaran));
-        $deleteResponse->assertRedirect();
-        $this->assertDatabaseMissing('produk_blud_penawarans', ['id' => $penawaran->id]);
     }
 
     public function test_admin_can_view_and_delete_laporan(): void

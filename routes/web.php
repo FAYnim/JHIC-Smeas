@@ -67,7 +67,10 @@ Route::get('/jurusan/{slug}', function (string $slug) {
 })->name('jurusan.detail');
 
 Route::get('/informasi', function () {
-    return view('informasi');
+    $artikels = Artikel::where('kategori', 'berita')->latest('published_at')->limit(6)->get();
+    $pengumumans = Pengumuman::latest()->limit(5)->get();
+
+    return view('informasi', compact('artikels', 'pengumumans'));
 })->name('informasi');
 
 Route::get('/informasi/prestasi', function () {
@@ -97,6 +100,7 @@ Route::post('/pusat-karir/study-tracer/kuesioner', [LowonganController::class, '
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
 Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
 Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');
+Route::get('/pusat-karir/lamaran/{registrationCode}/bukti', [LowonganController::class, 'unduhBukti'])->name('pusat-karir.bukti-lamar');
 
 // BLUD - Marketplace produk & jasa jurusan
 Route::get('/blud', [BludController::class, 'index'])->name('blud.index');

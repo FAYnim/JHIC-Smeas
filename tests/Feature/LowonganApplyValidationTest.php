@@ -25,15 +25,30 @@ class LowonganApplyValidationTest extends TestCase
         $response->assertRedirect();
     }
 
-    public function test_numeric_nisn_is_accepted(): void
+    public function test_regular_post_redirects_to_detail_with_flash(): void
     {
         $lowongan = $this->makeLowongan();
 
-        $response = $this->from(route('pusat-karir.lamar', $lowongan->slug))
-            ->post(route('pusat-karir.store-lamar', $lowongan->slug), [
-                'nisn' => '1234567890',
-                'consent' => 'on',
-            ]);
+        $response = $this->post(route('pusat-karir.store-lamar', $lowongan->slug), [
+            'nisn' => '1234567890',
+            'consent' => 'on',
+        ]);
+
+        $response->assertRedirect(route('pusat-karir.detail', $lowongan->slug));
+        $response->assertSessionHas('lamaran_success', function (array $data): bool {
+            return $data['nisn'] === '1234567890'
+                && str_starts_with($data['registration_code'], 'PKL-');
+        });
+    }
+
+    public function test_json_request_still_receives_json(): void
+    {
+        $lowongan = $this->makeLowongan();
+
+        $response = $this->postJson(route('pusat-karir.store-lamar', $lowongan->slug), [
+            'nisn' => '1234567890',
+            'consent' => 'on',
+        ]);
 
         $response->assertStatus(201);
         $response->assertJson([
@@ -78,7 +93,7 @@ class LowonganApplyValidationTest extends TestCase
             'deskripsi' => 'Deskripsi contoh untuk testing.',
             'tanggung_jawab' => ['Mengerjakan tugas harian'],
             'kualifikasi' => ['Siswa aktif'],
-            'dokumen' => [['name' => 'CV.pdf', 'desc' => 'Dokumen', 'type' => 'pdf']],
+            'dokumen' => [],
             'benefits' => ['Uang saku'],
             'batas_pendaftaran' => '2026-08-15',
             'durasi_pelaksanaan' => '6 Bulan',

@@ -13,6 +13,9 @@ use App\Models\TracerMitraAlumnus;
 use App\Models\TracerSetting;
 use App\Models\TracerStatusLulusan;
 use App\Models\Webinar;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -116,25 +119,66 @@ class LowonganController extends Controller
         return view('pusat-karir.lamar-lowongan', compact('lowongan'));
     }
 
-    public function storeApply(Request $request, string $slug)
+    public function storeApply(Request $request, string $slug): RedirectResponse|JsonResponse
     {
         $lowongan = Lowongan::where('slug', $slug)->firstOrFail();
 
-        $validated = $request->validate([
-            'nisn' => ['required', 'numeric', 'digits:10'],
+        $requirements = collect($lowongan->dokumen ?? [])->map(fn (array $doc): array => [
+            'key' => Str::slug($doc['name'], '_'),
+            'label' => str_replace(['_', '.pdf'], [' ', ''], $doc['name']),
+            'type' => ($doc['type'] ?? 'pdf') === 'link' ? 'link' : 'file',
         ]);
+
+        $rules = ['nisn' => ['required', 'numeric', 'digits:10']];
+        foreach ($requirements as $doc) {
+            $rules[$doc['key']] = $doc['type'] === 'link'
+                ? ['nullable', 'url', 'max:2048']
+                : ['required', 'file', 'mimes:pdf', 'max:2048'];
+        }
+
+        $validated = $request->validate($rules);
+
+        $registrationCode = $this->generateRegistrationCode($lowongan->company_short ?? 'TELKOM');
+
+        $documents = [];
+        foreach ($requirements as $doc) {
+            if ($doc['type'] === 'link') {
+                if (! empty($validated[$doc['key']])) {
+                    $documents[] = $doc + ['value' => $validated[$doc['key']]];
+                }
+
+                continue;
+            }
+
+            $path = $request->file($doc['key'])
+                ->storeAs("magang/{$registrationCode}", $doc['key'].'.pdf', 'public');
+            $documents[] = $doc + ['value' => $path];
+        }
 
         $application = MagangApplication::create([
             'lowongan_id' => $lowongan->id,
             'nisn' => $validated['nisn'],
-            'registration_code' => $this->generateRegistrationCode($lowongan->company_short ?? 'TELKOM'),
+            'registration_code' => $registrationCode,
             'status' => 'pending',
+            'documents' => $documents,
         ]);
 
-        return redirect()->route('pusat-karir.detail', $slug)->with('lamaran_success', [
-            'nisn' => $application->nisn,
-            'registration_code' => $application->registration_code,
-        ]);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Ajuan lamaran magang Anda berhasil dikirim.',
+                'data' => [
+                    'nisn' => $application->nisn,
+                    'registration_code' => $application->registration_code,
+                ],
+            ], 201);
+        }
+
+        return redirect()->route('pusat-karir.detail', $lowongan->slug)
+            ->with('lamaran_success', [
+                'nisn' => $application->nisn,
+                'registration_code' => $application->registration_code,
+            ]);
     }
 
     public function katalogLowongan(Request $request)
@@ -485,6 +529,26 @@ class LowonganController extends Controller
 
         return redirect()->route('pusat-karir.study-tracer')
             ->with('success', 'Terima kasih! Data kuesioner Anda telah tersimpan.');
+    }
+
+    public function unduhBukti(string $registrationCode)
+    {
+        $application = MagangApplication::with('lowongan')
+            ->where('registration_code', $registrationCode)
+            ->firstOrFail();
+
+        $options = new Options;
+        $options->set('isHtml5ParserEnabled', true);
+
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml(view('pusat-karir.bukti-lamaran-pdf', compact('application'))->render());
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => "attachment; filename=\"bukti-{$application->registration_code}.pdf\"",
+        ]);
     }
 
     protected function generateRegistrationCode(string $companyShort): string

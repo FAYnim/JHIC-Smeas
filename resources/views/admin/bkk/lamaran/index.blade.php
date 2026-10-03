@@ -47,6 +47,7 @@
                     <th class="px-4 py-3">NISN</th>
                     <th class="px-4 py-3">Posisi Lowongan</th>
                     <th class="px-4 py-3">Perusahaan</th>
+                    <th class="px-4 py-3">Berkas</th>
                     <th class="px-4 py-3">Tanggal Daftar</th>
                     <th class="px-4 py-3">Status</th>
                     <th class="px-4 py-3 text-right">Aksi</th>
@@ -61,6 +62,17 @@
                             <p class="font-semibold text-slate-800">{{ $lamaran->lowongan?->title ?? '-' }}</p>
                         </td>
                         <td class="px-4 py-3 text-slate-600">{{ $lamaran->lowongan?->company_name ?? '-' }}</td>
+                        <td class="px-4 py-3">
+                            <div class="flex flex-col gap-1">
+                                @forelse (($lamaran->documents ?? []) as $doc)
+                                    <a href="{{ $doc['type'] === 'link' ? $doc['value'] : asset('storage/'.$doc['value']) }}"
+                                        target="_blank" rel="noopener"
+                                        class="text-xs font-semibold text-blue-600 hover:underline">{{ $doc['label'] }}</a>
+                                @empty
+                                    <span class="text-xs text-slate-400">-</span>
+                                @endforelse
+                            </div>
+                        </td>
                         <td class="px-4 py-3 text-slate-600">{{ $lamaran->created_at->format('d M Y') }}</td>
                         <td class="px-4 py-3">
                             <span class="rounded-full px-2.5 py-1 text-xs font-bold {{ $lamaran->status === 'accepted' ? 'bg-green-100 text-green-700' : ($lamaran->status === 'rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700') }}">
@@ -87,7 +99,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="px-4 py-8 text-center text-slate-500">Belum ada lamaran.</td>
+                        <td colspan="8" class="px-4 py-8 text-center text-slate-500">Belum ada lamaran.</td>
                     </tr>
                 @endforelse
             </tbody>

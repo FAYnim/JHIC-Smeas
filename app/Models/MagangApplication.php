@@ -16,7 +16,15 @@ class MagangApplication extends Model
         'nisn',
         'registration_code',
         'status',
+        'documents',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'documents' => 'array',
+        ];
+    }
 
     public function lowongan()
     {

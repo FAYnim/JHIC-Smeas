@@ -13,6 +13,9 @@
                         <span class="doc-row__hint">SCAN AKTA KELAHIRAN</span>
                         <span class="doc-row__meta">pdf, jpg, png · maks 2MB</span>
                     </div>
+                    @if (($dokumenStatus['akta']['uploaded'] ?? false))
+                        <p class="mt-2 text-xs font-semibold text-emerald-700">Sudah diunggah: {{ $dokumenStatus['akta']['name'] }}</p>
+                    @endif
                     <input type="file" name="docs[akta]" accept=".pdf,.jpg,.jpeg,.png"
                         class="file-input mt-2.5" required>
                     @error('docs.akta')
@@ -26,9 +29,12 @@
                         <span class="doc-row__hint">SCAN KARTU KELUARGA</span>
                         <span class="doc-row__meta">pdf, jpg, png · maks 2MB</span>
                     </div>
-                    <input type="file" name="docs[kartu-keluarga]" accept=".pdf,.jpg,.jpeg,.png"
+                    @if (($dokumenStatus['kartu_keluarga']['uploaded'] ?? false))
+                        <p class="mt-2 text-xs font-semibold text-emerald-700">Sudah diunggah: {{ $dokumenStatus['kartu_keluarga']['name'] }}</p>
+                    @endif
+                    <input type="file" name="docs[kartu_keluarga]" accept=".pdf,.jpg,.jpeg,.png"
                         class="file-input mt-2.5" required>
-                    @error('docs.kartu-keluarga')
+                    @error('docs.kartu_keluarga')
                         <span class="field-error-text">{{ $message }}</span>
                     @enderror
                 </div>
@@ -39,9 +45,12 @@
                         <span class="doc-row__hint">SCAN IJAZAH SMP</span>
                         <span class="doc-row__meta">pdf, jpg, png · maks 2MB</span>
                     </div>
-                    <input type="file" name="docs[ijazah-smp]" accept=".pdf,.jpg,.jpeg,.png"
+                    @if (($dokumenStatus['ijazah_smp']['uploaded'] ?? false))
+                        <p class="mt-2 text-xs font-semibold text-emerald-700">Sudah diunggah: {{ $dokumenStatus['ijazah_smp']['name'] }}</p>
+                    @endif
+                    <input type="file" name="docs[ijazah_smp]" accept=".pdf,.jpg,.jpeg,.png"
                         class="file-input mt-2.5" required>
-                    @error('docs.ijazah-smp')
+                    @error('docs.ijazah_smp')
                         <span class="field-error-text">{{ $message }}</span>
                     @enderror
                 </div>

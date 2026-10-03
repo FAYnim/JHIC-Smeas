@@ -141,28 +141,27 @@
             <div class="rounded-xl border border-slate-200 bg-white p-6">
                 <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Berkas Lampiran Siswa</h3>
 
-                @if (!empty($files))
-                    <ul class="divide-y divide-slate-100">
-                        @foreach ($files as $file)
-                            <li class="py-3 first:pt-0 last:pb-0 flex items-center justify-between gap-3">
-                                <div class="min-w-0">
-                                    <p class="text-sm font-bold text-slate-800 truncate">{{ $file['name'] }}</p>
-                                    <p class="text-xs text-slate-400">{{ round($file['size'] / 1024, 1) }} KB</p>
-                                </div>
-                                <a href="{{ $file['url'] }}" target="_blank"
+                <ul class="divide-y divide-slate-100">
+                    @foreach ($documents as $doc)
+                        <li class="py-3 first:pt-0 last:pb-0 flex items-center justify-between gap-3">
+                            <div class="min-w-0">
+                                <p class="text-sm font-bold text-slate-800 truncate">{{ $doc['label'] }}</p>
+                                @if ($doc['uploaded'])
+                                    <p class="text-xs text-slate-400">{{ $doc['name'] }} &middot; {{ round($doc['size'] / 1024, 1) }} KB</p>
+                                @else
+                                    <p class="text-xs font-semibold text-red-500">Belum diunggah</p>
+                                @endif
+                            </div>
+                            @if ($doc['uploaded'])
+                                <a href="{{ $doc['url'] }}" target="_blank" rel="noopener"
                                     class="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-700 hover:bg-slate-200 shrink-0">
                                     <x-lucide-external-link class="w-3.5 h-3.5" />
                                     Buka
                                 </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @else
-                    <div class="text-center py-6 text-slate-400 text-xs">
-                        <x-lucide-folder-open class="w-8 h-8 mx-auto mb-2 opacity-50" />
-                        Belum ada dokumen fisik yang tersimpan di storage untuk siswa ini.
-                    </div>
-                @endif
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

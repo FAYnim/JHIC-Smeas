@@ -169,17 +169,34 @@
         /* ===== Prakata quote ===== */
         .prakata-quote {
             position: relative;
+            padding: 32px 40px 32px 36px;
+            border-left: 4px solid #024089;
+            background: linear-gradient(135deg, rgba(2, 64, 137, 0.04) 0%, rgba(251, 191, 36, 0.03) 100%);
+            border-radius: 0 16px 16px 0;
         }
 
         .prakata-quote::before {
             content: '\201C';
             position: absolute;
-            top: -24px;
-            left: -12px;
-            font-size: 80px;
-            color: rgba(2, 64, 137, 0.08);
-            font-family: Georgia, serif;
+            top: -8px;
+            left: 16px;
+            font-size: 96px;
+            color: rgba(2, 64, 137, 0.12);
+            font-family: Georgia, 'Times New Roman', serif;
             line-height: 1;
+            pointer-events: none;
+        }
+
+        .prakata-quote::after {
+            content: '\201D';
+            position: absolute;
+            bottom: -20px;
+            right: 24px;
+            font-size: 96px;
+            color: rgba(2, 64, 137, 0.08);
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1;
+            pointer-events: none;
         }
 
         /* ===== Search bar glow ===== */
@@ -441,15 +458,17 @@
                             style="font-size:clamp(2rem, 4vw, 2.75rem); font-weight:800; color:#0b192c; line-height:1.2; margin:0 0 28px 0;">
                             Prakata kepala sekolah
                         </h2>
-                        <div style="max-width:720px;">
-                            <p
-                                style="font-size:clamp(0.95rem, 1.5vw, 1.05rem); color:#1e293b; font-weight:700; line-height:1.8; text-align:justify; margin:0;">
-                                Era globalisasi membawa perubahan yang cepat dalam berbagai aspek kehidupan. Oleh karena
-                                itu, pendidikan memiliki peran penting dalam menyiapkan sumber daya manusia yang mampu
-                                menghadapi perubahan tersebut. Sekolah perlu memiliki arah pengembangan yang jelas dan
-                                berkelanjutan, sekaligus mampu menyesuaikan diri dengan kebutuhan dan permasalahan
-                                masyarakat saat ini.
-                            </p>
+                        <div class="prakata-quote">
+                            <blockquote style="margin:0; position:relative; z-index:1;">
+                                <p
+                                    style="font-size:clamp(0.95rem, 1.5vw, 1.1rem); color:#334155; font-style:italic; font-weight:600; line-height:1.9; text-align:justify; margin:0;">
+                                    Era globalisasi membawa perubahan yang cepat dalam berbagai aspek kehidupan. Oleh
+                                    karena itu, pendidikan memiliki peran penting dalam menyiapkan sumber daya manusia
+                                    yang mampu menghadapi perubahan tersebut. Sekolah perlu memiliki arah pengembangan
+                                    yang jelas dan berkelanjutan, sekaligus mampu menyesuaikan diri dengan kebutuhan dan
+                                    permasalahan masyarakat saat ini.
+                                </p>
+                            </blockquote>
                         </div>
                     </div>
 
@@ -541,128 +560,124 @@
         </section>
 
         {{-- ==================== KENAPA HARUS SMKN 1 SURABAYA? ==================== --}}
-        <section style="padding:64px 0 80px;background:#f8fafc;">
-            <div style="max-width:1280px;margin:0 auto;padding:0 16px;">
-                <div style="text-align:center;margin-bottom:48px;" class="fade-up">
-                    <h2 style="font-size:clamp(1.75rem, 4vw, 2.25rem);font-weight:800;color:#0f172a;line-height:1.3;">
-                        Kenapa harus <span style="color:#024089;">SMKN 1 Surabaya</span>?
+        <section style="padding:64px 0 80px;background:#eef2f6;">
+            <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+                {{-- Title: Left-aligned --}}
+                <div style="margin-bottom:40px;" class="fade-up">
+                    <h2 style="font-size:clamp(2rem, 4vw, 2.75rem);font-weight:800;color:#0b192c;line-height:1.2;">
+                        Kenapa harus <span style="color:#1a8cff;">SMKN 1<br>Surabaya?</span>
                     </h2>
                 </div>
 
-                {{-- Feature Cards Grid --}}
-                <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:24px;"
+                {{-- Feature Cards Grid: 3 columns --}}
+                <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:20px;"
                     class="fade-up">
 
-                    {{-- Card 1 --}}
+                    {{-- Card 1: YELLOW --}}
                     <div class="feature-card"
-                        style="background:#fff;border-radius:16px;padding:24px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+                        style="background:#eab308;border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
                         <div
-                            style="width:48px;height:48px;border-radius:12px;background:#eff6ff;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-                            <svg style="width:24px;height:24px;color:#024089;" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            style="width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+                            <svg style="width:20px;height:20px;color:#fff;" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
                         </div>
-                        <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Fasilitas Lengkap
-                            dan Iklim sekolah yang Kondusif</h3>
-                        <p style="font-size:0.875rem;color:#64748b;line-height:1.6;">
-                            Didukung laboratorium modern, bengkel praktik lengkap, dan lingkungan belajar yang nyaman
-                            untuk mendukung perkembangan siswa.
+                        <h3 style="font-size:1.05rem;font-weight:800;color:#0b192c;margin-bottom:10px;line-height:1.3;">
+                            Pilihan Jurusan Relevan dengan Industri</h3>
+                        <p style="font-size:0.875rem;color:rgba(11,25,44,0.8);line-height:1.6;">
+                            SMK Negeri 1 Surabaya menyediakan 9 keahlian mulai dari IT, multimedia, bisnis, hingga
+                            perhotelan yang disesuaikan dengan kebutuhan industri masa kini.
                         </p>
                     </div>
 
-                    {{-- Card 2 --}}
+                    {{-- Card 2: BLUE --}}
                     <div class="feature-card"
-                        style="background:#fff;border-radius:16px;padding:24px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+                        style="background:#2196F3;border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
                         <div
-                            style="width:48px;height:48px;border-radius:12px;background:#fffbeb;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-                            <svg style="width:24px;height:24px;color:#f59e0b;" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+                            <svg style="width:20px;height:20px;color:#fff;" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
                         </div>
-                        <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Lulusan
-                            Bersertifikat Keahlian Standar Industri</h3>
-                        <p style="font-size:0.875rem;color:#64748b;line-height:1.6;">
-                            Siswa mendapatkan sertifikasi kompetensi yang diakui industri, meningkatkan daya saing di
-                            dunia kerja.
+                        <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.3;">
+                            Lulus Berbekal Sertifikat Profesi BNSP</h3>
+                        <p style="font-size:0.875rem;color:rgba(255,255,255,0.85);line-height:1.6;">
+                            Lulusan dibekali sertifikat kompetensi nasional berlogo Garuda melalui program Uji
+                            Sertifikasi Keahlian sebagai bukti kelayakan kerja profesional.
                         </p>
                     </div>
 
-                    {{-- Card 3 --}}
+                    {{-- Card 3: BLUE --}}
                     <div class="feature-card"
-                        style="background:#fff;border-radius:16px;padding:24px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+                        style="background:#2196F3;border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
                         <div
-                            style="width:48px;height:48px;border-radius:12px;background:#ecfdf5;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-                            <svg style="width:24px;height:24px;color:#10b981;" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+                            <svg style="width:20px;height:20px;color:#fff;" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
                         </div>
-                        <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Pendidik
-                            Berpengalaman dan Berkualitas Tinggi</h3>
-                        <p style="font-size:0.875rem;color:#64748b;line-height:1.6;">
-                            Tim pengajar profesional bersertifikat dengan pengalaman industri dan akademis yang mumpuni.
+                        <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.3;">
+                            Praktik Nyata Lewat Fasilitas Teaching Factory</h3>
+                        <p style="font-size:0.875rem;color:rgba(255,255,255,0.85);line-height:1.6;">
+                            Didukung laboratorium modern dan fasilitas Teaching Factory, siswa langsung belajar menangani
+                            proyek kerja riil berstandar industri.
                         </p>
                     </div>
 
-                    {{-- Card 4 --}}
+                    {{-- Card 4: BLUE --}}
                     <div class="feature-card"
-                        style="background:#fff;border-radius:16px;padding:24px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+                        style="background:#2196F3;border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
                         <div
-                            style="width:48px;height:48px;border-radius:12px;background:#faf5ff;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-                            <svg style="width:24px;height:24px;color:#a855f7;" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+                            <svg style="width:20px;height:20px;color:#fff;" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
                         </div>
-                        <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Mitra Industri
-                            Berkelas dan Terpercaya</h3>
-                        <p style="font-size:0.875rem;color:#64748b;line-height:1.6;">
-                            Bermitra dengan ratusan perusahaan dan instansi ternama untuk program magang dan penempatan
-                            kerja.
+                        <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.3;">
+                            Akses Penyaluran Kerja via BKK dan Mitra Industri</h3>
+                        <p style="font-size:0.875rem;color:rgba(255,255,255,0.85);line-height:1.6;">
+                            Melalui kerja sama dunia usaha, unit Bursa Kerja Khusus siap menjembatani siswa ke berbagai
+                            peluang magang dan rekrutmen kerja.
                         </p>
                     </div>
 
-                    {{-- Card 5 --}}
+                    {{-- Card 5: BLUE --}}
                     <div class="feature-card"
-                        style="background:#fff;border-radius:16px;padding:24px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+                        style="background:#2196F3;border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
                         <div
-                            style="width:48px;height:48px;border-radius:12px;background:#fff1f2;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-                            <svg style="width:24px;height:24px;color:#f43f5e;" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+                            <svg style="width:20px;height:20px;color:#fff;" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
                         </div>
-                        <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Kurikulum Terbaru
-                            Berbasis DUDI</h3>
-                        <p style="font-size:0.875rem;color:#64748b;line-height:1.6;">
-                            Kurikulum yang selalu diperbarui sesuai kebutuhan Dunia Usaha dan Dunia Industri (DUDI)
-                            terkini.
+                        <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.3;">
+                            Tata Kelola Pendidikan Berstandar Mutu ISO</h3>
+                        <p style="font-size:0.875rem;color:rgba(255,255,255,0.85);line-height:1.6;">
+                            Tata kelola pendidikan dan pembelajaran berjalan terstruktur di bawah sistem manajemen mutu
+                            sertifikasi ISO.
                         </p>
                     </div>
 
-                    {{-- Card 6 --}}
+                    {{-- Card 6: BLUE --}}
                     <div class="feature-card"
-                        style="background:#fff;border-radius:16px;padding:24px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+                        style="background:#2196F3;border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
                         <div
-                            style="width:48px;height:48px;border-radius:12px;background:#f0f9ff;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-                            <svg style="width:24px;height:24px;color:#0ea5e9;" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+                            <svg style="width:20px;height:20px;color:#fff;" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
                         </div>
-                        <h3 style="font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Segudang Prestasi
-                            Nasional & Internasional</h3>
-                        <p style="font-size:0.875rem;color:#64748b;line-height:1.6;">
-                            Secara konsisten meraih prestasi di berbagai bidang lomba dan kompetisi tingkat nasional
-                            hingga internasional.
+                        <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.3;">
+                            Kultur Berprestasi di Lokasi yang Sangat Strategis</h3>
+                        <p style="font-size:0.875rem;color:rgba(255,255,255,0.85);line-height:1.6;">
+                            Sekolah ini rutin berprestasi di ajang Lomba Kompetensi Siswa (LKS) dan bertempat di kawasan
+                            Wonokromo yang mudah dijangkau transportasi umum.
                         </p>
                     </div>
 

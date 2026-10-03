@@ -915,6 +915,12 @@
             height: 14px;
         }
 
+        .doc-unduh-btn[aria-disabled="true"] {
+            pointer-events: none;
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
         /* ===== Tab 2 — Info Kemitraan ===== */
         .info-card {
             background: #ffffff;
@@ -1714,7 +1720,7 @@
                                     <div class="doc-file-size">Standar Kompetensi PKL (2,4 MB)</div>
                                 </div>
                             </div>
-                            <a href="#" class="doc-unduh-btn">
+                            <a aria-disabled="true" tabindex="-1" title="Dokumen belum tersedia" class="doc-unduh-btn">
                                 Unduh
                                 <svg viewBox="0 0 20 20" fill="currentColor">
                                     <path
@@ -1737,7 +1743,7 @@
                                     <div class="doc-file-size">Template Pokja PKL (450 KB)</div>
                                 </div>
                             </div>
-                            <a href="#" class="doc-unduh-btn">
+                            <a aria-disabled="true" tabindex="-1" title="Dokumen belum tersedia" class="doc-unduh-btn">
                                 Unduh
                                 <svg viewBox="0 0 20 20" fill="currentColor">
                                     <path
@@ -1918,7 +1924,7 @@
                                     <div class="doc-file-size">Standar Kompetensi PKL (2,4 MB)</div>
                                 </div>
                             </div>
-                            <a href="#" class="doc-unduh-btn">
+                            <a aria-disabled="true" tabindex="-1" title="Dokumen belum tersedia" class="doc-unduh-btn">
                                 Unduh
                                 <svg viewBox="0 0 20 20" fill="currentColor">
                                     <path
@@ -1941,7 +1947,7 @@
                                     <div class="doc-file-size">Template Pokja PKL (450 KB)</div>
                                 </div>
                             </div>
-                            <a href="#" class="doc-unduh-btn">
+                            <a aria-disabled="true" tabindex="-1" title="Dokumen belum tersedia" class="doc-unduh-btn">
                                 Unduh
                                 <svg viewBox="0 0 20 20" fill="currentColor">
                                     <path

@@ -8,7 +8,7 @@ Dokumen ini berisi hasil audit menyeluruh terhadap arsitektur kode, routing, fun
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ CRITICAL (Mendesak / Fungsionalitas Rusak / Test Gagal)    │ 5 Temuan (1 Fixed)
+│ CRITICAL (Mendesak / Fungsionalitas Rusak / Test Gagal)    │ 5 Temuan (5 Fixed)
 ├─────────────────────────────────────────────────────────────┤
 │ HIGH (Fitur Menggantung / Data Mock Padahal Ada DB)         │ 7 Temuan
 ├─────────────────────────────────────────────────────────────┤
@@ -37,60 +37,31 @@ Dokumen ini berisi hasil audit menyeluruh terhadap arsitektur kode, routing, fun
 
 ---
 
-### [CRITICAL-02] Alur Pengajuan Lamaran Magang Terputus (Form HTML Mengirim POST Biasa, Controller Mengembalikan JSON)
-* **Lokasi**: [resources/views/pusat-karir/lamar-lowongan.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/lamar-lowongan.blade.php#L349-L352), [app/Http/Controllers/LowonganController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/LowonganController.php#L119-L142), [resources/views/pusat-karir/detail-lowongan.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/detail-lowongan.blade.php#L1356-L1408)
-* **Kondisi Saat Ini**:
-  - Pada [lamar-lowongan.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/lamar-lowongan.blade.php), form tag adalah `<form action="..." method="POST">` standar HTML tanpa intercept JavaScript `fetch()` / AJAX.
-  - Namun pada [LowonganController.php:storeApply()](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/LowonganController.php#L134-L141), respon yang dikembalikan adalah `response()->json([...], 201)`.
-  - Akibatnya, saat siswa menekan tombol "Kirim Lamaran", browser menampilkan layar putih berisi teks JSON mentah (`{"success":true,"message":"...","data":{...}}`), bukan kembali ke halaman detail atau menampilkan popup sukses.
-  - Sementara itu, di [detail-lowongan.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/detail-lowongan.blade.php#L1356) sudah disiapkan popup `@if (session('lamaran_success'))` yang tidak pernah terpicu karena controller tidak pernah melakukan `redirect()->with('lamaran_success', ...)`.
-* **Apa yang Seharusnya Terjadi**:
-  Setelah form dikirim, pengguna diarahkan kembali ke detail lowongan dengan flash session `lamaran_success` sehingga modal popup "Pengajuan magang terkirim" beserta nomor registrasi PKL muncul, atau form ditangani via `fetch()` dan merender modal konfirmasi langsung.
-* **Tindakan yang Harus Dikerjakan**:
-  - Sesuaikan `storeApply()` di [LowonganController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/LowonganController.php) agar jika request adalah HTTP reguler (`!$request->wantsJson()`), lakukan `return redirect()->route('pusat-karir.detail', $slug)->with('lamaran_success', [...])`.
+### [CRITICAL-02] ✅ FIXED — Alur Pengajuan Lamaran Magang Redirect dengan Flash Session
+* **Status**: **SELESAI (Fixed)** — `test_regular_post_redirects_to_detail_with_flash` & `test_json_request_still_receives_json` hijau.
+* **Perbaikan**: `LowonganController::storeApply()` kini mengecek `$request->wantsJson()`. Jika request adalah form submit HTML reguler, controller me-redirect kembali ke route `pusat-karir.detail` dengan flash session `lamaran_success` sehingga modal popup "Pengajuan magang terkirim" beserta nomor registrasi PKL tampil interaktif.
+* **Lokasi**: [app/Http/Controllers/LowonganController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/LowonganController.php), [resources/views/pusat-karir/detail-lowongan.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/detail-lowongan.blade.php#L1356), [tests/Feature/LowonganApplyValidationTest.php](file:///c:/laragon/www/JHIC-Smeas-v2/tests/Feature/LowonganApplyValidationTest.php)
 
 ---
 
-### [CRITICAL-03] File Upload Dokumen Lamaran Magang Diabaikan & Tidak Disimpan
-* **Lokasi**: [resources/views/pusat-karir/lamar-lowongan.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/lamar-lowongan.blade.php#L390-L423), [app/Http/Controllers/LowonganController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/LowonganController.php#L123-L132), [app/Models/MagangApplication.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Models/MagangApplication.php)
-* **Kondisi Saat Ini**:
-  Form `lamar-lowongan.blade.php` memiliki input unggah berkas PDF persyaratan magang (`name="{{ $inputName }}"`). Namun di [LowonganController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/LowonganController.php), validasi hanya memeriksa `nisn`, berkas upload sama sekali tidak divalidasi maupun disimpan ke disk storage, dan tabel `magang_applications` tidak memiliki kolom/relasi penyimpanan file berkas pendaftar.
-* **Apa yang Seharusnya Terjadi**:
-  Berkas pendaftaran magang (CV/Portofolio/Surat Pengantar) divalidasi format dan ukurannya, disimpan ke storage (`storage/app/public/magang/...`), dan path file dicatat di database sehingga admin BKK di halaman `admin/lamaran` dapat mengunduh dan memverifikasinya.
-* **Tindakan yang Harus Dikerjakan**:
-  1. Tambahkan migration kolom file attachment atau relasi dokumen pada `magang_applications`.
-  2. Implementasikan upload handling di `storeApply()` dan tampilkan berkas tersebut di panel admin [LamaranController](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/Admin/Bkk/LamaranController.php).
+### [CRITICAL-03] ✅ FIXED — File Upload Dokumen Lamaran Magang Divalidasi & Disimpan
+* **Status**: **SELESAI (Fixed)** — `test_uploaded_files_are_stored_and_recorded` & `test_required_pdf_is_validated` hijau.
+* **Perbaikan**: Menambahkan migrasi kolom JSON `documents` pada tabel `magang_applications` dan casting array pada model `MagangApplication`. `storeApply()` memvalidasi input dokumen secara dinamis berdasarkan definisi lowongan, menyimpan file ke storage `public/magang/{registration_code}/`, serta menampilkannya di tabel admin panel BKK [LamaranController](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/Admin/Bkk/LamaranController.php) dan view `admin/bkk/lamaran/index.blade.php`.
+* **Lokasi**: [app/Http/Controllers/LowonganController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/LowonganController.php), [app/Models/MagangApplication.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Models/MagangApplication.php), [database/migrations/2026_10_03_100000_add_documents_to_magang_applications_table.php](file:///c:/laragon/www/JHIC-Smeas-v2/database/migrations/2026_10_03_100000_add_documents_to_magang_applications_table.php), [resources/views/admin/bkk/lamaran/index.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/admin/bkk/lamaran/index.blade.php)
 
 ---
 
-### [CRITICAL-04] Upload Dokumen SPMB Menggunakan Overwrite File Path Tanpa Pencatatan Database
-* **Lokasi**: [app/Http/Controllers/SpmbController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/SpmbController.php#L227-L248), [app/Http/Controllers/Admin/Spmb/CalonSiswaController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/Admin/Spmb/CalonSiswaController.php#L66-L81), [resources/views/spmb/dashboard/verifikasi.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/spmb/dashboard/verifikasi.blade.php#L118-L153)
-* **Kondisi Saat Ini**:
-  Pada [SpmbController.php:saveDokumen()](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/SpmbController.php#L241-L243):
-  ```php
-  foreach ($request->file('docs') as $key => $file) {
-      $path = $file->store("spmb/{$nisn}", 'public');
-  }
-  ```
-  Path file hasil upload tidak disimpan ke model `CalonSiswa` ataupun tabel dokumen. Controller admin [CalonSiswaController::show](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/Admin/Spmb/CalonSiswaController.php#L68-L80) hanya menebak dengan membaca isi folder filesystem `Storage::disk('public')->files("spmb/{$nisn}")`.
-  Dampaknya:
-  - Di halaman calon siswa [verifikasi.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/spmb/dashboard/verifikasi.blade.php#L125-L151), bagian "Dokumen" selalu bertuliskan statis "Wajib diunggah", siswa tidak bisa melihat file apa yang sudah terunggah, nama file, maupun status kelengkapan per jenis dokumen (Akta, KK, Ijazah).
-* **Apa yang Seharusnya Terjadi**:
-  Status atau path dokumen spesifik (akta, kk, ijazah) dicatat di database atau dicek keberadaannya di folder berdasarkan nama jenis dokumen, sehingga siswa dan panitia SPMB tahu persis dokumen mana yang sudah atau belum diunggah.
-* **Tindakan yang Harus Dikerjakan**:
-  - Simpan mapping jenis dokumen ke database atau susun penamaan file terstruktur (`akta.pdf`, `kk.pdf`, `ijazah.pdf`) dan oper statusnya ke view siswa.
+### [CRITICAL-04] ✅ FIXED — Dokumen SPMB Disimpan Terstruktur & Status Ditampilkan Riil
+* **Status**: **SELESAI (Fixed)** — `test_documents_are_saved_with_structured_names_and_reported` hijau.
+* **Perbaikan**: Menggunakan penamaan terstruktur (`akta.ext`, `kartu_keluarga.ext`, `ijazah_smp.ext`) pada folder `spmb/{nisn}/` dengan penghapusan otomatis file lama saat ekstensi berbeda diunggah ulang. Model `CalonSiswa` memiliki helper `dokumenStatus()` yang menyediakan informasi status keberadaan, nama file, URL, dan ukuran dokumen. Status ini diintegrasikan ke halaman `dokumen.blade.php`, ringkasan `verifikasi.blade.php`, dan panel admin `CalonSiswaController::show`.
+* **Lokasi**: [app/Models/CalonSiswa.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Models/CalonSiswa.php), [app/Http/Controllers/SpmbController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/SpmbController.php), [resources/views/spmb/dashboard/verifikasi.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/spmb/dashboard/verifikasi.blade.php), [resources/views/admin/spmb/calon-siswa/show.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/admin/spmb/calon-siswa/show.blade.php)
 
 ---
 
-### [CRITICAL-05] Fitur "Unduh Bukti Pengajuan (PDF)" Magang & Unduh Dokumen Silabus Mengarah ke URL Kosong/Buntutu
-* **Lokasi**: [resources/views/pusat-karir/detail-lowongan.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/detail-lowongan.blade.php#L1403-L1405), [resources/views/pusat-karir/detail-lowongan.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/detail-lowongan.blade.php#L1716-L1747)
-* **Kondisi Saat Ini**:
-  - Tombol `<button type="button" class="success-download-btn">Unduh Bukti Pengajuan (PDF)</button>` tidak memiliki event listener JavaScript maupun link route download PDF.
-  - Link download "Dokumen & Silabus Kemitraan" di sidebar detail lowongan memiliki `href="#"`.
-* **Apa yang Seharusnya Terjadi**:
-  Jika siswa ingin mengunduh bukti pendaftaran PKL, sistem men-generate kartu registrasi PDF (seperti halnya di modul SPMB dengan Dompdf). Link silabus seharusnya mengarah ke URL download dokumen atau asset storage yang valid.
-* **Tindakan yang Harus Dikerjakan**:
-  - Buat route & method controller `unduhBuktiMagang($registration_code)` dengan PDF view, atau sembunyikan tombol jika PDF generator bukti magang belum masuk cakupan fase rilis saat ini.
+### [CRITICAL-05] ✅ FIXED — Unduh Bukti Pengajuan (PDF) Magang Tersedia & Link Silabus Dinonaktifkan
+* **Status**: **SELESAI (Fixed)** — `test_bukti_pdf_can_be_downloaded` hijau.
+* **Perbaikan**: Membuat route `pusat-karir.bukti-lamar` dan method `LowonganController::unduhBukti()` dengan template PDF `resources/views/pusat-karir/bukti-lamaran-pdf.blade.php` berbasis Dompdf. Tombol popup sukses kini langsung mengunduh PDF kartu registrasi resmi. Link silabus demo yang belum memiliki dokumen fisik dinonaktifkan dengan `aria-disabled="true"` dan styling cursor `not-allowed`.
+* **Lokasi**: [routes/web.php](file:///c:/laragon/www/JHIC-Smeas-v2/routes/web.php), [app/Http/Controllers/LowonganController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/LowonganController.php), [resources/views/pusat-karir/bukti-lamaran-pdf.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/bukti-lamaran-pdf.blade.php), [resources/views/pusat-karir/detail-lowongan.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/pusat-karir/detail-lowongan.blade.php)
 
 ---
 
@@ -247,12 +218,10 @@ Dokumen ini berisi hasil audit menyeluruh terhadap arsitektur kode, routing, fun
 
 ---
 
-### [MEDIUM-06] Input File Upload pada Dokumen SPMB Menggunakan Nama Dokumen Kebab-case yang Berbeda dengan Key Validasi
-* **Lokasi**: [resources/views/spmb/dashboard/dokumen.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/spmb/dashboard/dokumen.blade.php#L29-L34), [app/Http/Controllers/SpmbController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/SpmbController.php#L231)
-* **Kondisi Saat Ini**:
-  Key array adalah `docs[kartu-keluarga]` dan `docs[ijazah-smp]`. Validasi di controller menggunakan `'docs.kartu-keluarga'`. Meskipun berjalan, validasi pesan error Laravel untuk nested array dengan tanda minus sering kali memicu kendala display error pada beberapa driver session jika terjadi penolakan validasi.
-* **Apa yang Seharusnya Terjadi**:
-  Gunakan naming convention snake_case standar (`docs[kartu_keluarga]`, `docs[ijazah_smp]`) di view maupun controller validation rule.
+### [MEDIUM-06] ✅ FIXED — Input File Upload pada Dokumen SPMB Menggunakan Nama Dokumen Kebab-case yang Berbeda dengan Key Validasi
+* **Status**: **SELESAI (Fixed)**
+* **Perbaikan**: Key form upload di view `resources/views/spmb/dashboard/dokumen.blade.php` serta validation rules di `SpmbController::saveDokumen()` diselaraskan menjadi snake_case standar (`docs.kartu_keluarga`, `docs.ijazah_smp`).
+* **Lokasi**: [resources/views/spmb/dashboard/dokumen.blade.php](file:///c:/laragon/www/JHIC-Smeas-v2/resources/views/spmb/dashboard/dokumen.blade.php), [app/Http/Controllers/SpmbController.php](file:///c:/laragon/www/JHIC-Smeas-v2/app/Http/Controllers/SpmbController.php)
 
 ---
 
@@ -299,10 +268,10 @@ Dokumen ini berisi hasil audit menyeluruh terhadap arsitektur kode, routing, fun
 | No | Kategori | Item Pekerjaan | Status |
 |:--:|:---|:---|:---:|
 | 1 | **Critical** | Hubungkan data `Artikel` ke route `/informasi` & Blade template (Fix Test Suite) | ✅ **Fixed** (CRITICAL-01) |
-| 2 | **Critical** | Perbaiki respon `storeApply` di `LowonganController` dari JSON ke Redirect dengan Session Flash | ⏳ Siap dikerjakan |
-| 3 | **Critical** | Tambahkan mekanisme penyimpanan berkas pendaftaran magang di `storeApply` | ⏳ Siap dikerjakan |
-| 4 | **Critical** | Catat mapping dokumen SPMB calon siswa ke database dan tampilkan status riil di halaman verifikasi | ⏳ Siap dikerjakan |
-| 5 | **Critical** | Berikan route download atau sembunyikan tombol PDF bukti magang & silabus yang kosong | ⏳ Siap dikerjakan |
+| 2 | **Critical** | Perbaiki respon `storeApply` di `LowonganController` dari JSON ke Redirect dengan Session Flash | ✅ **Fixed** (CRITICAL-02) |
+| 3 | **Critical** | Tambahkan mekanisme penyimpanan berkas pendaftaran magang di `storeApply` | ✅ **Fixed** (CRITICAL-03) |
+| 4 | **Critical** | Catat mapping dokumen SPMB calon siswa ke database dan tampilkan status riil di halaman verifikasi | ✅ **Fixed** (CRITICAL-04) |
+| 5 | **Critical** | Berikan route download atau sembunyikan tombol PDF bukti magang & silabus yang kosong | ✅ **Fixed** (CRITICAL-05) |
 | 6 | **High** | Dinamisasi Beranda (`index.blade.php`) dengan data Guru, Artikel, dan Pengaturan dari DB | ⏳ Siap dikerjakan |
 | 7 | **High** | Fungsikan search bar jurusan di beranda menuju form GET `/jurusan` | ⏳ Siap dikerjakan |
 | 8 | **High** | Hubungkan nomor WhatsApp konsultasi BLUD dengan setting nomor telepon resmi | ⏳ Siap dikerjakan |

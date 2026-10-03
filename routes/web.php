@@ -11,7 +11,6 @@ use App\Models\Guru;
 use App\Models\Lowongan;
 use App\Models\MitraPerusahaan;
 use App\Models\Pengumuman;
-use App\Models\Setting;
 use App\Models\StrukturOrganisasi;
 use Illuminate\Support\Facades\Route;
 

@@ -77,13 +77,13 @@
             <h2 class="text-lg font-bold text-slate-900">Template Berkas Karir Siap Pakai</h2>
             <p class="text-sm text-slate-500 mt-1">Unduh berkas resmi yang disesuaikan dengan format seleksi mitra industri SMKN 1 Surabaya</p>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-                @foreach (['Format CV ATS', 'Format CV ATS', 'Format CV ATS'] as $tpl)
+                @foreach (['Format CV ATS' => 'cv-ats.pdf', 'Format CV Kreatif' => 'cv-kreatif.pdf', 'Format CV Formal' => 'cv-formal.pdf'] as $label => $file)
                     <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex items-center justify-between gap-3">
                         <div>
-                            <p class="text-sm font-bold text-slate-900">{{ $tpl }}</p>
+                            <p class="text-sm font-bold text-slate-900">{{ $label }}</p>
                             <p class="text-xs text-slate-500 mt-0.5">Standard HRD • Format .DOCX (148 KB)</p>
                         </div>
-                        <a href="#"
+                        <a href="{{ asset('storage/dokumen/' . $file) }}" download
                             class="inline-flex items-center gap-1.5 px-4 py-2 border border-slate-300 text-slate-700 hover:bg-slate-50 text-sm font-bold rounded-lg transition-colors shrink-0">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
                             Unduh

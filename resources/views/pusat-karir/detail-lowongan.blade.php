@@ -1379,7 +1379,7 @@
                     <div class="success-detail-grid">
                         <div class="success-detail-row">
                             <span>Nama Siswa</span>
-                            <strong>{{ $lamaran['nama'] }}</strong>
+                            <strong>Siswa SMKN 1 Surabaya</strong>
                         </div>
                         <div class="success-detail-row">
                             <span>NISN</span>
@@ -1650,11 +1650,11 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                         <div>
-                                            <div class="doc-file-name">{{ basename($doc) }}</div>
-                                            <div class="doc-file-size">Dokumen Pendukung</div>
+                                            <div class="doc-file-name">{{ $doc['name'] }}</div>
+                                            <div class="doc-file-size">{{ $doc['desc'] }}</div>
                                         </div>
                                     </div>
-                                    <a href="{{ asset('storage/' . $doc) }}" download class="doc-unduh-btn">
+                                    <a href="{{ asset('storage/' . $doc['name']) }}" download class="doc-unduh-btn">
                                         Unduh
                                         <svg viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -1683,14 +1683,11 @@
                     <!-- Kelas Industri -->
                     <div class="info-card">
                         <h3>Kelas Industri</h3>
-                <a href="{{ route('pusat-karir.katalog-mitra') }}" class="cta-btn-primary">
-                    Lihat Mitra Industri →
-                </a>
-                @if ($lowongan->dokumen)
-                    <a href="{{ asset('storage/' . $lowongan->dokumen[0]) }}" download class="cta-btn-secondary">
-                        📄 Unduh Dokumen →
-                    </a>
-                @endif
+                        <p class="info-desc">Program sinkronisasi kurikulum dengan industri.</p>
+                    </div>
+
+                </div>
+
             </div>
         </div>
 

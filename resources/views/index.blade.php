@@ -1054,7 +1054,7 @@
                             untuk alumni dan siswa SMKN 1 Surabaya.
                         </p>
 
-                        <form class="pk-hero__search" action="{{ route('pusat-karir.index') }}" method="GET">
+                        <form class="pk-hero__search" action="{{ route('pusat-karir.katalog-lowongan') }}" method="GET">
                             <input type="text" name="q" placeholder="Cari perusahaan, posisi, atau tempat magang..."
                                 autocomplete="off">
                             <button type="submit" aria-label="Cari">
@@ -1086,92 +1086,20 @@
                 </div>
 
                 <div style="display:grid;grid-template-columns:1fr;gap:24px;" class="fade-up" id="berita-grid">
-                    {{-- Main Featured Article --}}
-                    <a href="{{ route('informasi') }}" class="news-main"
-                        style="text-decoration:none;display:block;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="{{ asset('images/VBG - WEB DEV COMPTETITION.jpg') }}"
-                            alt="Berita Terbaru SMKN 1 Surabaya">
-                        <div
-                            style="position:absolute;inset:0;background:linear-gradient(to top, rgba(15,23,42,0.85), rgba(15,23,42,0.2) 50%, transparent);">
-                        </div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
-                            <span
-                                style="display:inline-block;padding:4px 12px;font-size:0.75rem;font-weight:700;color:#024089;background:#fbbf24;border-radius:9999px;margin-bottom:12px;">
-                                Berita Terbaru
-                            </span>
-                            <h3
-                                style="font-size:clamp(1.1rem, 2vw, 1.25rem);font-weight:700;color:#fff;line-height:1.4;">
-                                VBG — Web Dev Competition 2026
-                            </h3>
-                            <p style="font-size:0.875rem;color:rgba(191,219,254,0.8);margin-top:8px;">
-                                Siswa SMKN 1 Surabaya berhasil meraih juara dalam kompetisi pengembangan web tingkat
-                                nasional.
-                            </p>
-                        </div>
-                    </a>
-
-                    {{-- Side Articles Container --}}
-                    <div style="display:flex;flex-direction:column;gap:16px;" id="berita-side">
-                        {{-- Article 2 --}}
-                        <a href="{{ route('informasi') }}"
-                            style="display:flex;gap:16px;background:#fff;border-radius:12px;padding:16px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);text-decoration:none;transition:box-shadow 0.3s;"
-                            onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'"
-                            onmouseout="this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
-                            <div
-                                style="width:96px;height:96px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#f1f5f9;">
-                                <img src="{{ asset('images/image 4.png') }}" alt="Berita"
-                                    style="width:100%;height:100%;object-fit:cover;">
-                            </div>
-                            <div style="flex:1;min-width:0;">
-                                <span style="font-size:0.75rem;font-weight:700;color:#024089;">Prestasi</span>
-                                <h4
-                                    style="font-size:0.875rem;font-weight:700;color:#0f172a;margin-top:4px;line-height:1.4;">
-                                    Siswa Raih Medali Emas LKS Tingkat Nasional
-                                </h4>
-                                <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">3 hari yang lalu</p>
-                            </div>
+                    {{-- Berita Terbaru --}}
+                    @foreach ($artikels->take(4) as $artikel)
+                        <a href="{{ route('pusat-karir.detail-artikel', $artikel->slug) }}" class="block group">
+                            <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                                @if ($artikel->display_image)
+                                    <img src="{{ $artikel->display_image }}" alt="{{ $artikel->title }}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                @endif
+                                <div class="p-5">
+                                    <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{{ $artikel->title }}</h3>
+                                    <p class="text-sm text-slate-500 mt-2">{{ $artikel->excerpt ?? Str::limit(strip_tags($artikel->content), 120) }}</p>
+                                </div>
+                            </article>
                         </a>
-
-                        {{-- Article 3 --}}
-                        <a href="{{ route('informasi') }}"
-                            style="display:flex;gap:16px;background:#fff;border-radius:12px;padding:16px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);text-decoration:none;transition:box-shadow 0.3s;"
-                            onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'"
-                            onmouseout="this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
-                            <div
-                                style="width:96px;height:96px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#f1f5f9;">
-                                <img src="{{ asset('images/image 5.png') }}" alt="Berita"
-                                    style="width:100%;height:100%;object-fit:cover;">
-                            </div>
-                            <div style="flex:1;min-width:0;">
-                                <span style="font-size:0.75rem;font-weight:700;color:#024089;">Kegiatan</span>
-                                <h4
-                                    style="font-size:0.875rem;font-weight:700;color:#0f172a;margin-top:4px;line-height:1.4;">
-                                    Upacara Hari Pendidikan Nasional
-                                </h4>
-                                <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">5 hari yang lalu</p>
-                            </div>
-                        </a>
-
-                        {{-- Article 4 --}}
-                        <a href="{{ route('informasi') }}"
-                            style="display:flex;gap:16px;background:#fff;border-radius:12px;padding:16px;border:1px solid #f1f5f9;box-shadow:0 1px 2px rgba(0,0,0,0.04);text-decoration:none;transition:box-shadow 0.3s;"
-                            onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'"
-                            onmouseout="this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
-                            <div
-                                style="width:96px;height:96px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#f1f5f9;">
-                                <img src="{{ asset('images/smkn1.png') }}" alt="Berita"
-                                    style="width:100%;height:100%;object-fit:cover;">
-                            </div>
-                            <div style="flex:1;min-width:0;">
-                                <span style="font-size:0.75rem;font-weight:700;color:#f59e0b;">Pengumuman</span>
-                                <h4
-                                    style="font-size:0.875rem;font-weight:700;color:#0f172a;margin-top:4px;line-height:1.4;">
-                                    Jadwal SPMB Tahun Ajaran 2026/2027
-                                </h4>
-                                <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">1 minggu yang lalu</p>
-                            </div>
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div style="text-align:center;margin-top:40px;" class="fade-up">
@@ -1337,12 +1265,6 @@
                         prakataTopRow.style.alignItems = 'flex-start';
                         prakataTopRow.style.justifyContent = 'flex-start';
                     }
-                }
-
-                // Berita grid: side-by-side on lg
-                const beritaGrid = document.getElementById('berita-grid');
-                if (beritaGrid) {
-                    beritaGrid.style.gridTemplateColumns = w >= 1024 ? '7fr 5fr' : '1fr';
                 }
 
                 // Footer grid: 3 cols on md

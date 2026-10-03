@@ -189,7 +189,7 @@
                                 <h3 class="text-sm sm:text-base font-bold text-slate-900 mb-0.5">Kalender Akademik 2026/2027</h3>
                                 <p class="text-xs sm:text-sm text-slate-500">Unduh versi lengkap dalam format PDF</p>
                             </div>
-                            <a href="#"
+                            <a href="{{ asset('storage/dokumen/kalender-akademik.pdf') }}" download
                                 class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-sm transition-colors shrink-0">
                                 Unduh PDF
                             </a>
@@ -255,7 +255,7 @@
                                 <p class="text-xs sm:text-sm text-blue-100/90 leading-relaxed mb-5 flex-1">
                                     Tanyakan kepada SMEAS.AI untuk informasi lengkap seputar jadwal pembelajaran.
                                 </p>
-                                <a href="#"
+                                <a href="https://smeas.smkn1sch.sch.id" target="_blank"
                                     class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-[#024089] text-sm font-bold shadow-sm transition-colors self-start">
                                     SMEAS.AI
                                 </a>
@@ -279,20 +279,22 @@
 
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 @forelse ($artikels as $artikel)
-                    <div class="berita-card group bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:border-blue-300">
-                        <div class="aspect-[16/10] overflow-hidden bg-slate-200">
-                            @if ($artikel->image_path)
-                                <img src="{{ asset('storage/' . $artikel->image_path) }}" alt="{{ $artikel->title }}" class="berita-img w-full h-full object-cover">
-                            @else
-                                <div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300"></div>
-                            @endif
+                    <a href="{{ route('pusat-karir.detail-artikel', $artikel->slug) }}" class="block group">
+                        <div class="berita-card bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:border-blue-300">
+                            <div class="aspect-[16/10] overflow-hidden bg-slate-200">
+                                @if ($artikel->image_path)
+                                    <img src="{{ asset('storage/' . $artikel->image_path) }}" alt="{{ $artikel->title }}" class="berita-img w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300"></div>
+                                @endif
+                            </div>
+                            <div class="p-5 sm:p-6">
+                                <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
+                                    {{ $artikel->title }}
+                                </h3>
+                            </div>
                         </div>
-                        <div class="p-5 sm:p-6">
-                            <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
-                                {{ $artikel->title }}
-                            </h3>
-                        </div>
-                    </div>
+                    </a>
                 @empty
                     <p class="text-sm text-slate-500 col-span-3">Belum ada artikel akademik.</p>
                 @endforelse
@@ -373,7 +375,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2">
+                            <a href="{{ route('blud.index') }}" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2">
                                 <span class="text-amber-400">&bull;</span> BLUD
                             </a>
                         </li>

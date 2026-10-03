@@ -85,7 +85,7 @@ class TracerStudyTest extends TestCase
             'total_alumni_sub_warna' => 'blue',
         ]);
 
-        $response = $this->actingAs($bkk)->put(route('admin.tracer.settings.update'), [
+        $response = $this->actingAs($bkk)->put(route('admin.tracer.settings.store'), [
             'tingkat_keterserapan' => '92.5%',
             'masa_tunggu' => '2.1 Bulan',
             'kesesuaian' => '88%',

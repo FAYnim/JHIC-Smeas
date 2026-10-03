@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -40,6 +41,7 @@ class ProdukBlud extends Model
         'produk_count',
         'presentase_chat',
         'waktu_chat',
+        'wa_number',
     ];
 
     protected function casts(): array
@@ -70,5 +72,22 @@ class ProdukBlud extends Model
     public function laporans(): HasMany
     {
         return $this->hasMany(ProdukBludLaporkan::class, 'produk_blud_id')->latest();
+    }
+
+    protected function waNumber(): Attribute
+    {
+        return Attribute::get(function (?string $value): ?string {
+            if ($value === null || $value === '') {
+                return null;
+            }
+
+            $normalized = preg_replace('/\D+/', '', $value);
+
+            if (str_starts_with($normalized, '0')) {
+                return '62'.substr($normalized, 1);
+            }
+
+            return $normalized;
+        });
     }
 }

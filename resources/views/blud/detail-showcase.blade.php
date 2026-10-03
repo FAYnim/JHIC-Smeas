@@ -118,10 +118,12 @@
                                 data-open-modal="modal-penawaran">
                                 Minta Penawaran
                             </button>
-                            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer"
-                                class="detail-btn-amber">
-                                Konsultasi WA
-                            </a>
+                            @if ($produk->wa_number)
+                                <a href="https://wa.me/{{ $produk->wa_number }}" target="_blank" rel="noopener noreferrer"
+                                    class="detail-btn-amber">
+                                    Konsultasi WA
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -136,8 +138,10 @@
                         <div>
                             <p class="font-bold text-slate-900 text-sm sm:text-base">{{ $produk->jurusan_nama }}</p>
                             <div class="flex flex-wrap gap-2 mt-2">
-                                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer"
-                                    class="detail-btn-sm detail-btn-blue-sm">Chat Sekarang</a>
+                                @if ($produk->wa_number)
+                                    <a href="https://wa.me/{{ $produk->wa_number }}" target="_blank" rel="noopener noreferrer"
+                                        class="detail-btn-sm detail-btn-blue-sm">Chat Sekarang</a>
+                                @endif
                                 <a href="{{ route('jurusan.detail', ['slug' => $produk->jurusan_slug]) }}"
                                     class="detail-btn-sm detail-btn-amber-sm">Kunjungi Jurusan</a>
                             </div>

@@ -1348,12 +1348,12 @@
     <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
 
         <!-- Breadcrumbs -->
-        <nav class="flex items-center text-xs gap-1.5 mb-4 flex-wrap">
-            <a href="#" class="text-blue-600 hover:underline font-medium">Beranda</a>
+        <nav class="flex items-center text-xs gap-1.5 mb-4 flex-wrap" aria-label="Breadcrumb">
+            <a href="{{ route('beranda') }}" class="text-blue-600 hover:underline font-medium">Beranda</a>
             <span class="text-slate-400">/</span>
             <a href="{{ route('pusat-karir.index') }}" class="text-blue-600 hover:underline font-medium">Pusat Karir</a>
             <span class="text-slate-400">/</span>
-            <a href="#" class="text-blue-600 hover:underline font-medium">Mitra Industri (DUDI)</a>
+            <a href="{{ route('pusat-karir.katalog-mitra') }}" class="text-blue-600 hover:underline font-medium">Mitra Industri (DUDI)</a>
             <span class="text-slate-400">/</span>
             <span class="text-slate-500 font-medium">{{ $lowongan->company_short ?? $lowongan->company_name }}</span>
         </nav>
@@ -1401,10 +1401,12 @@
                         </div>
                     </div>
 
-                    <a href="https://wa.me/{{ $lowongan->pokja_wa ?? '6281234567890' }}" target="_blank"
-                        class="success-wa-btn">
-                        Konfirmasi ke WhatsApp Pokja
-                    </a>
+                    @if ($lowongan->pokja_wa)
+                        <a href="https://wa.me/{{ $lowongan->pokja_wa }}" target="_blank"
+                            class="success-wa-btn">
+                            Konfirmasi ke WhatsApp Pokja
+                        </a>
+                    @endif
 
                     <a href="{{ route('pusat-karir.bukti-lamar', $lamaran['registration_code']) }}"
                         class="success-download-btn" style="display: block; text-align: center; text-decoration: none;">
@@ -1420,7 +1422,7 @@
                 <div class="company-header-left">
                     <!-- Company Logo -->
                     <div class="company-logo-wrap">
-                        <span>TELKOM</span>
+                        <span>{{ strtoupper(substr($lowongan->company_short ?? $lowongan->company_name, 0, 4)) }}</span>
                     </div>
 
                     <!-- Company Info -->
@@ -1434,22 +1436,22 @@
                                             d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
                                             clip-rule="evenodd" />
                                     </svg>
-                                    MoU Aktif s.d. 2028
+                                    MoU Aktif
                                 </span>
                             @endif
                         </div>
 
                         <p class="company-subtitle">
-                            Telekomunikasi, Digital Infrastructure & Cloud Platform • Regional V Jatim, Bali & Nusra
+                            {{ $lowongan->bidang_industri ?? $lowongan->company_name }}
                         </p>
 
                         <div class="company-tags-row">
-                            <span class="company-tag company-tag--blue">Tempat PKL Resmi</span>
-                            <span class="company-tag company-tag--green">Kelas Industri Fiber</span>
-                            <span class="company-tag company-tag--amber">Guru Tamu & Uji UKK</span>
-                            <a href="https://www.telkom.co.id" target="_blank" class="company-tag company-tag--link">
-                                🌐 www.telkom.co.id ↗
-                            </a>
+                            @if ($lowongan->is_mitra_dudi)
+                                <span class="company-tag company-tag--blue">Mitra DUDI</span>
+                            @endif
+                            <span class="company-tag company-tag--link">
+                                {{ $lowongan->bidang_industri ?? $lowongan->company_name }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -1457,16 +1459,12 @@
                 <!-- Stats -->
                 <div class="company-stats-box">
                     <div class="stat-cell">
-                        <span class="stat-num">32</span>
-                        <span class="stat-lbl">Siswa PKL</span>
+                        <span class="stat-num">{{ $lowongan->kuota }}</span>
+                        <span class="stat-lbl">Kuota Tersedia</span>
                     </div>
                     <div class="stat-cell">
-                        <span class="stat-num">1</span>
-                        <span class="stat-lbl">Kelas Industri</span>
-                    </div>
-                    <div class="stat-cell">
-                        <span class="stat-num">2</span>
-                        <span class="stat-lbl">Peluang Aktif</span>
+                        <span class="stat-num">{{ $lowongan->fresh_graduate_ok ? '✓' : '—' }}</span>
+                        <span class="stat-lbl">Fresh Graduate</span>
                     </div>
                 </div>
             </div>
@@ -1479,13 +1477,10 @@
                             d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                             clip-rule="evenodd" />
                     </svg>
-                    <span>Plaza Telkom Ketintang Baru, Jl. Ketintang Baru No. 1-3, Gayungan, Surabaya</span>
-                    <span class="distance-badge">
-                        🚗 Jarak: ±1,8 km dari SMKN 1 Surabaya (6 Menit Perjalanan)
-                    </span>
+                    <span>{{ $lowongan->location ?? $lowongan->company_name }}</span>
                 </div>
                 <div class="kemitraan-sejak">
-                    Kemitraan Sejak: <strong>2021</strong>
+                    Kemitraan Sejak: <strong>{{ $lowongan->created_at->format('Y') }}</strong>
                 </div>
             </div>
         </div>
@@ -1494,7 +1489,7 @@
         <div class="section-tabs" role="tablist">
             <button type="button" class="section-tab active" data-tab="peluang" role="tab"
                 aria-selected="true">
-                Peluang & Lowongan Aktif (2)
+                Peluang & Lowongan Aktif
             </button>
             <button type="button" class="section-tab" data-tab="info" role="tab" aria-selected="false">
                 Informasi Kemitraan & Dokumen
@@ -1510,9 +1505,8 @@
 
                     <!-- Filter Buttons -->
                     <div class="filter-row" style="margin-top: 1.25rem;">
-                        <button class="filter-btn active" data-filter="all">Semua (2)</button>
-                        <button class="filter-btn" data-filter="pkl">Magang PKL Siswa (1)</button>
-                        <button class="filter-btn" data-filter="loker">Loker BKK Alumni (1)</button>
+                        <button class="filter-btn active" data-filter="all">Semua</button>
+                        <button class="filter-btn" data-filter="pkl">Magang PKL Siswa</button>
                     </div>
 
                     <!-- Job Card 1 — Magang PKL -->
@@ -1526,7 +1520,7 @@
                         <div class="job-card-top">
                             <div>
                                 <h2>{{ $lowongan->title }}</h2>
-                                <p class="job-sub-text">Divisi Information Technology Regional V • Rekomendasi Jurusan:
+                                <p class="job-sub-text">{{ $lowongan->bidang_industri }} • Rekomendasi Jurusan:
                                     <strong style="color:#1d4ed8;">{{ $lowongan->jurusan }}</strong>
                                 </p>
                             </div>
@@ -1560,7 +1554,7 @@
 
                         <div class="job-benefits-text">
                             🎁
-                            {{ implode(', ', $lowongan->benefits ?? ['Uang Saku', 'Sertifikat Resmi', 'Pembimbing Khusus']) }}
+                            {{ $lowongan->benefits ? implode(', ', $lowongan->benefits) : '' }}
                         </div>
 
                         <div class="job-footer-row">
@@ -1574,80 +1568,26 @@
                         </div>
                     </div>
 
-                    <!-- Job Card 2 — Loker BKK Alumni (hardcoded demo) -->
-                    <div class="job-card job-card--loker" data-type="loker">
-                        <div class="job-badges">
-                            <span class="job-badge jb-orange">LOKER BKK ALUMNI</span>
-                            <span class="job-badge jb-purple">Fresh Graduate Welcome</span>
-                        </div>
-
-                        <div class="job-card-top">
-                            <div>
-                                <h2>Junior NOC & Network Maintenance Engineer</h2>
-                                <p class="job-sub-text">Status: Kontrak Kerja (PKWT 1 Tahun) • Target Jurusan: <strong
-                                        style="color:#1d4ed8;">SIJA, TJA, & TKJ</strong></p>
-                            </div>
-                            <button class="bookmark-btn" title="Simpan">
-                                <svg width="16" height="16" fill="none" stroke="currentColor"
-                                    stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="salary-text">Rp 4.700.000 - Rp 5.500.000 / bln</div>
-
-                        <div class="job-meta-row">
-                            <span class="job-meta-item">
-                                <svg viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Full-time On-site
-                            </span>
-                            <span class="job-meta-item">
-                                <svg viewBox="0 0 20 20" fill="currentColor">
-                                    <path
-                                        d="M10.75 10.818a4.5 4.5 0 01-6.364-6.364L8.05 0.793a4.5 4.5 0 016.364 0l.222.222" />
-                                    <path d="M10 13a8 8 0 100-16 8 8 0 000 16z" />
-                                </svg>
-                                BPJS TK & Jenjang Karir
-                            </span>
-                        </div>
-
-                        <div class="job-footer-row">
-                            <div class="deadline-text">
-                                Tenggat Lamaran: <strong>30 Oktober 2026</strong>
-                            </div>
-                            <a href="#" class="card-action-btn">
-                                Lihat Detail Loker →
-                            </a>
-                        </div>
-                    </div>
-
                     <!-- Keunggulan Section -->
                     <div class="benefits-section">
-                        <h3>Keunggulan Program Kemitraan Bersama Telkom</h3>
-                        <p class="benefits-desc">Manfaat terakreditasi khusus untuk siswa aktif dan lulusan terdaftar
-                            SMKN 1 Surabaya.</p>
+                        <h3>Keunggulan Program Kemitraan</h3>
+                        <p class="benefits-desc">Manfaat untuk siswa aktif dan lulusan terdaftar SMKN 1 Surabaya.</p>
 
                         <div class="benefits-grid">
                             <div class="benefit-card">
                                 <div class="benefit-card-icon benefit-card-icon--blue">🏫</div>
-                                <h4>Kelas Industri Telkom</h4>
-                                <p>Sinkronisasi kurikulum fiber optik, router & cloud langsung bersama mentor ahli.</p>
+                                <h4>Kelas Industri</h4>
+                                <p>Sinkronisasi kurikulum langsung bersama mentor ahli industri.</p>
                             </div>
                             <div class="benefit-card">
                                 <div class="benefit-card-icon benefit-card-icon--green">🏅</div>
-                                <h4>Sertifikasi DTI Resmi</h4>
-                                <p>Pengakuan kompetensi nasional Digital Talent Indonesia pasca masa magang.</p>
+                                <h4>Sertifikasi Resmi</h4>
+                                <p>Pengakuan kompetensi nasional pasca masa magang.</p>
                             </div>
                             <div class="benefit-card">
                                 <div class="benefit-card-icon benefit-card-icon--amber">🚀</div>
                                 <h4>Jalur Prioritas BKK</h4>
-                                <p>Pelulusan berkinerja tinggi direkomendasikan langsung saat kelulusan sekolah.</p>
+                                <p>Pelulusan berkinerja tinggi direkomendasikan saat kelulusan.</p>
                             </div>
                         </div>
                     </div>
@@ -1663,22 +1603,24 @@
                             {{ $lowongan->company_short ?? $lowongan->company_name }}</p>
 
                         <div class="narahubung-person">
-                            <div class="person-avatar">AS</div>
+                            <div class="person-avatar">{{ strtoupper(substr($lowongan->pokja_koordinator ?? 'N', 0, 1)) }}</div>
                             <div class="person-info">
                                 <p class="person-name">
-                                    {{ $lowongan->pokja_koordinator ?? 'Bpk. Aris Santoso, S.Kom' }}</p>
-                                <p class="person-role">Pokja PKL & Kemitraan DUDI Telkom</p>
+                                    {{ $lowongan->pokja_koordinator ?? 'Narahubung' }}</p>
+                                <p class="person-role">Pokja PKL & Kemitraan DUDI</p>
                             </div>
                         </div>
 
-                        <a href="https://wa.me/{{ $lowongan->pokja_wa ?? '6281234567890' }}" target="_blank"
-                            class="wa-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                            </svg>
-                            Hubungi via WhatsApp Pokja
-                        </a>
+                        @if ($lowongan->pokja_wa)
+                            <a href="https://wa.me/{{ $lowongan->pokja_wa }}" target="_blank"
+                                class="wa-btn">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                </svg>
+                                Hubungi via WhatsApp Pokja
+                            </a>
+                        @endif
 
                         <p class="narahubung-note">Konsultasi ketersediaan kuota rombel dan surat izin Pokja.</p>
                     </div>
@@ -1691,13 +1633,13 @@
                             <div class="map-pin">
                                 <div class="map-pin-inner"></div>
                             </div>
-                            <span class="map-label">Plaza Telkom Ketintang (6 Menit)</span>
+                            <span class="map-label">{{ $lowongan->company_short ?? $lowongan->company_name }}</span>
                         </div>
 
-                        <h4 class="location-name">Plaza Telkom Ketintang Baru</h4>
-                        <p class="location-address">Jl. Ketintang Baru No. 1-3, Gayungan, Surabaya</p>
+                        <h4 class="location-name">{{ $lowongan->company_name }}</h4>
+                        <p class="location-address">{{ $lowongan->location }}</p>
 
-                        <a href="https://maps.google.com/?q=Plaza+Telkom+Ketintang+Baru+Surabaya" target="_blank"
+                        <a href="https://maps.google.com/?q={{ urlencode($lowongan->company_name . ' ' . $lowongan->location) }}" target="_blank"
                             class="maps-link">
                             Buka Petunjuk Arah di Google Maps ↗
                         </a>
@@ -1708,16 +1650,29 @@
                         <h3 class="docs-card-title">Dokumen & Silabus Kemitraan</h3>
                         <p class="docs-card-sub">Unduh materi acuan resmi sebelum mendaftar.</p>
 
-                        <div class="doc-download-item">
-                            <div class="doc-download-left">
-                                <svg class="doc-file-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <div>
-                                    <div class="doc-file-name">Silabus_Kelas_Industri_Telkom.pdf</div>
-                                    <div class="doc-file-size">Standar Kompetensi PKL (2,4 MB)</div>
+                        @if ($lowongan->dokumen)
+                            @foreach ($lowongan->dokumen as $doc)
+                                <div class="doc-download-item">
+                                    <div class="doc-download-left">
+                                        <svg class="doc-file-icon" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <div>
+                                            <div class="doc-file-name">{{ $doc['name'] }}</div>
+                                            <div class="doc-file-size">{{ $doc['desc'] }}</div>
+                                        </div>
+                                    </div>
+                                    <a href="{{ asset('storage/' . $doc['name']) }}" download class="doc-unduh-btn">
+                                        Unduh
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path
+                                                d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
+                                            <path
+                                                d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
                             <a aria-disabled="true" tabindex="-1" title="Dokumen belum tersedia" class="doc-unduh-btn">
@@ -1770,91 +1725,9 @@
                     <!-- Kelas Industri -->
                     <div class="info-card">
                         <h3>Kelas Industri</h3>
-
-                        <div class="info-grid-3">
-                            <div class="info-grid-item">
-                                <h4>Jurusan Sasaran</h4>
-                                <ul>
-                                    <li>RPL</li>
-                                    <li>TKJ</li>
-                                </ul>
-                            </div>
-                            <div class="info-grid-item">
-                                <h4>Instruktur Industri</h4>
-                                <p>Pendampingan 32 JP / Semester</p>
-                            </div>
-                            <div class="info-grid-item">
-                                <h4>Output Sertifikasi</h4>
-                                <p>Sertifikat Telkom DTI</p>
-                            </div>
-                        </div>
+                        <p class="info-desc">Program sinkronisasi kurikulum dengan industri.</p>
                     </div>
 
-                    <!-- Dokumen Pembelajaran -->
-                    <div class="info-card">
-                        <h3>Dokumen Pembelajaran & Persyaratan Kemitraan</h3>
-                        <p style="font-size: 0.8rem; color: #64748b; margin: -0.5rem 0 1rem;">Berkas resmi yang dapat
-                            diunduh oleh siswa, wali murid, dan bapak/ibu guru pengampu</p>
-
-                        <div class="docs-grid">
-                            <div class="doc-card">
-                                <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="doc-card-name">Silabus_Kelas_Industri_Telkom_2028.pdf</span>
-                                <span class="doc-card-dl"><svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                        <path
-                                            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                    </svg></span>
-                            </div>
-                            <div class="doc-card">
-                                <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="doc-card-name">Tata_Tertib_dan_K3_Praktik_Industri.pdf</span>
-                                <span class="doc-card-dl"><svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                        <path
-                                            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                    </svg></span>
-                            </div>
-                            <div class="doc-card">
-                                <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="doc-card-name">Format_Surat_Izin_Ortu_Telkom.docx</span>
-                                <span class="doc-card-dl"><svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                        <path
-                                            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                    </svg></span>
-                            </div>
-                            <div class="doc-card">
-                                <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="doc-card-name">Skema_Uji_Kompetensi_Kejuruan_DTI.pdf</span>
-                                <span class="doc-card-dl"><svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                        <path
-                                            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                    </svg></span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Sidebar (same as Tab 1) -->

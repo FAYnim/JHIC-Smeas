@@ -292,12 +292,12 @@
     <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
 
         <!-- Breadcrumbs -->
-        <nav class="flex items-center text-xs gap-1.5 mb-4 flex-wrap">
-            <a href="#" class="text-blue-600 hover:underline font-medium">Beranda</a>
+        <nav class="flex items-center text-xs gap-1.5 mb-4 flex-wrap" aria-label="Breadcrumb">
+            <a href="{{ route('beranda') }}" class="text-blue-600 hover:underline font-medium">Beranda</a>
             <span class="text-slate-400">/</span>
             <a href="{{ route('pusat-karir.index') }}" class="text-blue-600 hover:underline font-medium">Pusat Karir</a>
             <span class="text-slate-400">/</span>
-            <a href="#" class="text-blue-600 hover:underline font-medium">Peluang Unggulan</a>
+            <a href="{{ route('pusat-karir.index') }}#peluang-unggulan" class="text-blue-600 hover:underline font-medium">Peluang Unggulan</a>
             <span class="text-slate-400">/</span>
             <span class="text-slate-500 font-medium">{{ $lowongan->company_short }} - {{ $lowongan->title }}</span>
         </nav>

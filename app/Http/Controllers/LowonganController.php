@@ -47,7 +47,7 @@ class LowonganController extends Controller
                     'kategori' => $item->kategori->slug ?? 'umum',
                     'kategori_label' => $item->kategori->nama ?? 'Umum',
                     'type' => 'Materi',
-                    'url' => $item->external_url ?? '#',
+                    'url' => ($item->external_url && $item->external_url !== '#') ? $item->external_url : null,
                 ];
             })
             ->all();

@@ -1,7 +1,7 @@
 @php
     $activePage   = $activePage   ?? '';
     $spmbClickable = $spmbClickable ?? true;
-    $logoUrl      = $logoUrl      ?? route('pusat-karir.index');
+    $logoUrl      = $logoUrl      ?? route('beranda');
     $berandaUrl   = $berandaUrl   ?? route('beranda');
 
     $profilDropdown = [
@@ -35,12 +35,12 @@
             </a>
 
             {{-- Desktop Nav --}}
-            <nav class="hidden md:flex items-center gap-7">
+            <nav class="hidden md:flex items-center gap-7" aria-label="Main navigation">
                 @foreach ($navLinks as $link)
                     @if ($link['key'] === 'profil')
                         {{-- Dropdown Profil --}}
                         <div class="relative" id="desktop-profil-dropdown">
-                            <button type="button" id="desktop-profil-btn"
+                            <button type="button" id="desktop-profil-btn" aria-expanded="false"
                                 class="nav-hover-link text-sm {{ $isActive($link['key']) ? 'font-bold text-slate-900 border-b-2 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900' }} transition-colors py-2 inline-flex items-center gap-1 cursor-pointer">
                                 {{ $link['label'] }}
                                 <svg class="w-3.5 h-3.5 transition-transform duration-200" id="desktop-profil-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@
 
             {{-- Mobile Menu Button --}}
             <div class="flex md:hidden items-center">
-                <button type="button" id="mobile-menu-btn" aria-label="Toggle Navigation"
+                <button type="button" id="mobile-menu-btn" aria-label="Toggle Navigation" aria-expanded="false"
                     class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
                     <x-lucide-menu id="menu-icon-open" class="w-6 h-6" />
                     <x-lucide-x id="menu-icon-close" class="w-6 h-6 hidden" />
@@ -98,7 +98,7 @@
                 @if ($link['key'] === 'profil')
                     {{-- Mobile Dropdown Profil --}}
                     <div>
-                        <button type="button" data-mobile-profil-toggle
+                        <button type="button" data-mobile-profil-toggle aria-expanded="false"
                             class="w-full flex items-center justify-between px-3 py-2 rounded-md text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">
                             {{ $link['label'] }}
                             <svg class="w-4 h-4 transition-transform duration-200" data-mobile-profil-chevron fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,6 +151,7 @@
                 const open = menu.classList.toggle('hidden');
                 if (iconOn) iconOn.classList.toggle('hidden', !open);
                 if (iconOf) iconOf.classList.toggle('hidden', open);
+                btn.setAttribute('aria-expanded', String(!open));
             });
         }
 
@@ -158,6 +159,7 @@
         const ddWrap  = document.getElementById('desktop-profil-dropdown');
         const ddMenu  = document.getElementById('desktop-profil-menu');
         const ddChev  = document.getElementById('desktop-profil-chevron');
+        const ddBtn   = document.getElementById('desktop-profil-btn');
         if (ddWrap && ddMenu) {
             let hideTimer;
             ddWrap.addEventListener('mouseenter', () => {
@@ -165,13 +167,30 @@
                 ddMenu.classList.remove('hidden', 'opacity-0', '-translate-y-1');
                 ddMenu.classList.add('opacity-100', 'translate-y-0');
                 if (ddChev) ddChev.classList.add('rotate-180');
+                ddBtn.setAttribute('aria-expanded', 'true');
             });
             ddWrap.addEventListener('mouseleave', () => {
                 hideTimer = setTimeout(() => {
                     ddMenu.classList.add('hidden', 'opacity-0', '-translate-y-1');
                     ddMenu.classList.remove('opacity-100', 'translate-y-0');
                     if (ddChev) ddChev.classList.remove('rotate-180');
+                    ddBtn.setAttribute('aria-expanded', 'false');
                 }, 120);
+            });
+        }
+
+        if (ddBtn && ddMenu) {
+            ddBtn.addEventListener('click', () => {
+                const isOpen = !ddMenu.classList.contains('hidden');
+                if (isOpen) {
+                    ddMenu.classList.add('hidden', 'opacity-0', '-translate-y-1');
+                    ddMenu.classList.remove('opacity-100', 'translate-y-0');
+                    ddBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    ddMenu.classList.remove('hidden', 'opacity-0', '-translate-y-1');
+                    ddMenu.classList.add('opacity-100', 'translate-y-0');
+                    ddBtn.setAttribute('aria-expanded', 'true');
+                }
             });
         }
 
@@ -183,6 +202,7 @@
             mToggle.addEventListener('click', () => {
                 mMenu.classList.toggle('hidden');
                 if (mChev) mChev.classList.toggle('rotate-180');
+                mToggle.setAttribute('aria-expanded', String(!mMenu.classList.contains('hidden')));
             });
         }
     });

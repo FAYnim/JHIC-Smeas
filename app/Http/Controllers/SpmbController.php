@@ -8,6 +8,7 @@ use App\Models\Pengumuman;
 use App\Models\Setting;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -44,6 +45,13 @@ class SpmbController extends Controller
 
         return Redirect::route('spmb.dashboard')
             ->with('spmb_notice', 'Selamat datang! Silakan lengkapi data administrasi Anda.');
+    }
+
+    public function logout(): RedirectResponse
+    {
+        session()->forget('spmb_nisn');
+
+        return redirect()->route('spmb.index');
     }
 
     /** ===== Dashboard section pages ===== */

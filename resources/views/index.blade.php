@@ -974,7 +974,7 @@
 
                 {{-- Search Bar --}}
                 <div style="max-width:640px;margin:0 auto 32px;" class="fade-up">
-                    <div class="search-glow"
+                    <form action="{{ route('jurusan') }}" method="GET" class="search-glow"
                         style="display:flex;align-items:center;background:#fff;border-radius:12px;border:2px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.04);overflow:hidden;transition:all 0.3s ease;">
                         <div style="padding:0 12px 0 20px;">
                             <svg style="width:20px;height:20px;color:#94a3b8;" fill="none" stroke="currentColor"
@@ -983,9 +983,10 @@
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </div>
-                        <input type="text" placeholder="Senang di JHIK, coba pengolahan di bawah ini"
+                        <input type="text" name="q" value="{{ request('q') }}"
+                            placeholder="Senang di JHIK, coba pengolahan di bawah ini"
                             style="flex:1;padding:16px 16px 16px 0;font-size:0.875rem;color:#334155;border:none;outline:none;background:transparent;">
-                    </div>
+                    </form>
                 </div>
 
                 {{-- CTA Button --}}

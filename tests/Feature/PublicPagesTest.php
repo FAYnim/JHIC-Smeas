@@ -100,4 +100,13 @@ class PublicPagesTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Akademik Test Unik');
     }
+
+    public function test_beranda_search_form_targets_jurusan(): void
+    {
+        $response = $this->get(route('beranda'));
+
+        $response->assertOk();
+        $response->assertSee('action="'.route('jurusan').'"', false);
+        $response->assertSee('name="q"', false);
+    }
 }

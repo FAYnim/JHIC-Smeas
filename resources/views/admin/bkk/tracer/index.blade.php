@@ -210,7 +210,7 @@
         <!-- Tab 3: Settings Tracer Study -->
         <div class="max-w-3xl bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
             <h3 class="text-base font-bold text-slate-900 mb-4">Pengaturan Statistik Halaman Publik Tracer Study</h3>
-            <form method="POST" action="{{ route('admin.tracer.settings.update') }}" class="space-y-4">
+            <form method="POST" action="{{ route('admin.tracer.settings.store') }}" class="space-y-4">
                 @csrf
                 @method('PUT')
 

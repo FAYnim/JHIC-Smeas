@@ -42,7 +42,7 @@ Route::middleware('role:bkk')->group(function () {
         Route::delete('alumni/{alumni}', [TracerController::class, 'destroyAlumni'])->name('alumni.destroy');
 
         Route::patch('kuesioner/{kuesioner}/toggle-confirm', [TracerController::class, 'toggleConfirmKuesioner'])->name('kuesioner.toggle-confirm');
-        Route::put('settings', [TracerController::class, 'updateSettings'])->name('settings.update');
+        Route::put('settings', [TracerController::class, 'updateSettings'])->name('settings.store');
     });
 });
 

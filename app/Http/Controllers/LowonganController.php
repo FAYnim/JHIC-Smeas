@@ -9,6 +9,7 @@ use App\Models\KuesionerTracer;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
 use App\Models\MitraPerusahaan;
+use App\Models\SumberRekomendasi;
 use App\Models\TracerMitraAlumnus;
 use App\Models\TracerSetting;
 use App\Models\TracerStatusLulusan;
@@ -95,13 +96,19 @@ class LowonganController extends Controller
             ],
         ];
 
+        $sumberRekomendasi = SumberRekomendasi::where('is_active', true)
+            ->orderBy('urutan')
+            ->limit(5)
+            ->get();
+
         return view('pusat-karir.pusat-karir', compact(
             'lowongans',
             'artikels',
             'webinars',
             'upcomingWebinar',
             'categories',
-            'bimbinganKatalog'
+            'bimbinganKatalog',
+            'sumberRekomendasi'
         ));
     }
 

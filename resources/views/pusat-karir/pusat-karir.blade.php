@@ -916,55 +916,33 @@
         </section>
 
         <!-- ===== Sumber Rekomendasi Section ===== -->
-        @php
-            // Data dummy — diset kosong [] sampai backend & dashboard admin selesai
-            $sumberRekomendasi = $sumberRekomendasi ?? [];
-        @endphp
 
         <section class="w-full px-5 mt-4 mb-16" id="sumber-rekomendasi">
             <h2 class="text-3xl font-bold text-slate-800 mb-6">Sumber Rekomendasi</h2>
 
-            @if (!empty($sumberRekomendasi) && count($sumberRekomendasi) > 0)
+            @if ($sumberRekomendasi->isNotEmpty())
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     @foreach ($sumberRekomendasi as $sumber)
-                        <a href="{{ $sumber['url'] ?? '#' }}" target="_blank" rel="noopener noreferrer"
+                        <a href="{{ $sumber->url }}" target="_blank" rel="noopener noreferrer"
                             class="bg-white rounded-xl border border-slate-200/90 hover:border-blue-400 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-lg group">
 
                             <div>
-                                @if (!empty($sumber['has_image']))
+                                @if ($sumber->image_url !== null)
                                     {{-- Thumbnail Container --}}
                                     <div
                                         class="w-full h-48 rounded-lg bg-slate-100 overflow-hidden mb-5 flex items-center justify-center relative border border-slate-100/80 group-hover:border-blue-100 transition-colors">
-                                        @if (!empty($sumber['image']))
-                                            <img src="{{ asset($sumber['image']) }}" alt="{{ $sumber['title'] }}"
+                                            <img src="{{ $sumber->image_url }}" alt="{{ $sumber->title }}"
                                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                        @else
-                                            {{-- Visual Placeholder Gradient with School/Career Vibe --}}
-                                            <div
-                                                class="w-full h-full bg-gradient-to-br from-slate-100 via-blue-50/50 to-indigo-50/80 flex flex-col items-center justify-center text-slate-400 gap-2 p-4 text-center">
-                                                <div
-                                                    class="w-12 h-12 rounded-xl bg-white shadow-sm border border-slate-200/60 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform duration-300">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor"
-                                                        stroke-width="1.8" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.949 8.949 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                    </svg>
-                                                </div>
-                                                <span
-                                                    class="text-xs font-semibold text-slate-400 group-hover:text-blue-600 transition-colors">Asset
-                                                    Image Placeholder</span>
-                                            </div>
-                                        @endif
                                     </div>
 
                                     {{-- Category Tag & Title --}}
                                     <span
                                         class="text-xs font-semibold text-red-600 uppercase tracking-wider block mb-2">
-                                        {{ $sumber['category'] ?? 'Rekomendasi' }}
+                                        {{ $sumber->kategori ?? 'Rekomendasi' }}
                                     </span>
                                     <h3
                                         class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug flex items-start justify-between gap-2 mb-4">
-                                        <span>{{ $sumber['title'] ?? '' }}</span>
+                                        <span>{{ $sumber->title }}</span>
                                         <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all shrink-0 mt-1"
                                             fill="none" stroke="currentColor" stroke-width="2.5"
                                             viewBox="0 0 24 24">
@@ -976,7 +954,7 @@
                                     {{-- Card Without Image (Text & Editorial Focus) --}}
                                     <div class="flex items-center justify-between mb-4">
                                         <span class="text-xs font-semibold text-red-600 uppercase tracking-wider">
-                                            {{ $sumber['category'] ?? 'Rekomendasi' }}
+                                            {{ $sumber->kategori ?? 'Rekomendasi' }}
                                         </span>
                                         <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all shrink-0"
                                             fill="none" stroke="currentColor" stroke-width="2.5"
@@ -987,7 +965,7 @@
                                     </div>
                                     <h3
                                         class="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug mb-6">
-                                        {{ $sumber['title'] ?? '' }}
+                                        {{ $sumber->title }}
                                     </h3>
                                 @endif
                             </div>
@@ -995,7 +973,7 @@
                             {{-- Card Footer Date / Metadata --}}
                             <div class="pt-4 border-t border-slate-100 mt-auto">
                                 <span class="text-xs font-medium text-slate-400 block">
-                                    {{ $sumber['date'] ?? '' }}
+                                    {{ $sumber->created_at->format('d M Y') }}
                                 </span>
                             </div>
                         </a>

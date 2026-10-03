@@ -420,12 +420,12 @@
                 <p class="text-sm text-slate-300 mt-2 max-w-xl">Buka akses ke ribuan talenta vokasi siap kerja, sinkronisasi kurikulum industri, atau penyelenggaraan kelas industri bersama.</p>
             </div>
             <div class="flex flex-col gap-3 shrink-0">
-                <a href="#"
+                <a href="{{ route('pusat-karir.index') }}#kontak"
                     class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-bold rounded-lg transition-colors">
                     Hubungi Pokja Hubungan Industri
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
                 </a>
-                <a href="#"
+                <a href="{{ asset('storage/dokumen/panduan-mou.pdf') }}" download
                     class="inline-flex items-center justify-center gap-2 px-6 py-3 border border-slate-600 text-slate-200 hover:text-white hover:border-slate-400 text-sm font-bold rounded-lg transition-colors">
                     Unduh Draf Panduan MoU (.PDF)
                 </a>

@@ -1412,7 +1412,7 @@
                 <div class="company-header-left">
                     <!-- Company Logo -->
                     <div class="company-logo-wrap">
-                        <span>TELKOM</span>
+                        <span>{{ strtoupper(substr($lowongan->company_short ?? $lowongan->company_name, 0, 4)) }}</span>
                     </div>
 
                     <!-- Company Info -->
@@ -1426,19 +1426,19 @@
                                             d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
                                             clip-rule="evenodd" />
                                     </svg>
-                                    MoU Aktif s.d. 2028
+                                    MoU Aktif
                                 </span>
                             @endif
                         </div>
 
                         <p class="company-subtitle">
-                            Telekomunikasi, Digital Infrastructure & Cloud Platform • Regional V Jatim, Bali & Nusra
+                            {{ $lowongan->bidang_industri ?? $lowongan->company_name }}
                         </p>
 
                         <div class="company-tags-row">
-                            <span class="company-tag company-tag--blue">Tempat PKL Resmi</span>
-                            <span class="company-tag company-tag--green">Kelas Industri Fiber</span>
-                            <span class="company-tag company-tag--amber">Guru Tamu & Uji UKK</span>
+                            <span class="company-tag company-tag--blue">Mitra DUDI</span>
+                            <span class="company-tag company-tag--green">Kelas Industri</span>
+                            <span class="company-tag company-tag--amber">PKL Resmi</span>
                             <span class="company-tag company-tag--link">
                                 🌐 {{ $lowongan->company_name }}
                             </span>
@@ -1449,16 +1449,16 @@
                 <!-- Stats -->
                 <div class="company-stats-box">
                     <div class="stat-cell">
-                        <span class="stat-num">32</span>
-                        <span class="stat-lbl">Siswa PKL</span>
+                        <span class="stat-num">{{ $lowongan->kuota }}</span>
+                        <span class="stat-lbl">Kuota Tersedia</span>
                     </div>
                     <div class="stat-cell">
                         <span class="stat-num">1</span>
-                        <span class="stat-lbl">Kelas Industri</span>
+                        <span class="stat-lbl">Lowongan Aktif</span>
                     </div>
                     <div class="stat-cell">
-                        <span class="stat-num">2</span>
-                        <span class="stat-lbl">Peluang Aktif</span>
+                        <span class="stat-num">{{ $lowongan->fresh_graduate_ok ? '✓' : '—' }}</span>
+                        <span class="stat-lbl">Fresh Graduate</span>
                     </div>
                 </div>
             </div>
@@ -1471,13 +1471,10 @@
                             d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                             clip-rule="evenodd" />
                     </svg>
-                    <span>Plaza Telkom Ketintang Baru, Jl. Ketintang Baru No. 1-3, Gayungan, Surabaya</span>
-                    <span class="distance-badge">
-                        🚗 Jarak: ±1,8 km dari SMKN 1 Surabaya (6 Menit Perjalanan)
-                    </span>
+                    <span>{{ $lowongan->location ?? $lowongan->company_name }}</span>
                 </div>
                 <div class="kemitraan-sejak">
-                    Kemitraan Sejak: <strong>2021</strong>
+                    Kemitraan Sejak: <strong>{{ $lowongan->created_at->format('Y') }}</strong>
                 </div>
             </div>
         </div>
@@ -1567,25 +1564,24 @@
 
                     <!-- Keunggulan Section -->
                     <div class="benefits-section">
-                        <h3>Keunggulan Program Kemitraan Bersama Telkom</h3>
-                        <p class="benefits-desc">Manfaat terakreditasi khusus untuk siswa aktif dan lulusan terdaftar
-                            SMKN 1 Surabaya.</p>
+                        <h3>Keunggulan Program Kemitraan</h3>
+                        <p class="benefits-desc">Manfaat untuk siswa aktif dan lulusan terdaftar SMKN 1 Surabaya.</p>
 
                         <div class="benefits-grid">
                             <div class="benefit-card">
                                 <div class="benefit-card-icon benefit-card-icon--blue">🏫</div>
-                                <h4>Kelas Industri Telkom</h4>
-                                <p>Sinkronisasi kurikulum fiber optik, router & cloud langsung bersama mentor ahli.</p>
+                                <h4>Kelas Industri</h4>
+                                <p>Sinkronisasi kurikulum langsung bersama mentor ahli industri.</p>
                             </div>
                             <div class="benefit-card">
                                 <div class="benefit-card-icon benefit-card-icon--green">🏅</div>
-                                <h4>Sertifikasi DTI Resmi</h4>
-                                <p>Pengakuan kompetensi nasional Digital Talent Indonesia pasca masa magang.</p>
+                                <h4>Sertifikasi Resmi</h4>
+                                <p>Pengakuan kompetensi nasional pasca masa magang.</p>
                             </div>
                             <div class="benefit-card">
                                 <div class="benefit-card-icon benefit-card-icon--amber">🚀</div>
                                 <h4>Jalur Prioritas BKK</h4>
-                                <p>Pelulusan berkinerja tinggi direkomendasikan langsung saat kelulusan sekolah.</p>
+                                <p>Pelulusan berkinerja tinggi direkomendasikan saat kelulusan.</p>
                             </div>
                         </div>
                     </div>
@@ -1605,7 +1601,7 @@
                             <div class="person-info">
                                 <p class="person-name">
                                     {{ $lowongan->pokja_koordinator ?? 'Bpk. Aris Santoso, S.Kom' }}</p>
-                                <p class="person-role">Pokja PKL & Kemitraan DUDI Telkom</p>
+                                <p class="person-role">Pokja PKL & Kemitraan DUDI</p>
                             </div>
                         </div>
 
@@ -1631,13 +1627,13 @@
                             <div class="map-pin">
                                 <div class="map-pin-inner"></div>
                             </div>
-                            <span class="map-label">Plaza Telkom Ketintang (6 Menit)</span>
+                            <span class="map-label">{{ $lowongan->company_short ?? $lowongan->company_name }}</span>
                         </div>
 
-                        <h4 class="location-name">Plaza Telkom Ketintang Baru</h4>
-                        <p class="location-address">Jl. Ketintang Baru No. 1-3, Gayungan, Surabaya</p>
+                        <h4 class="location-name">{{ $lowongan->company_name }}</h4>
+                        <p class="location-address">{{ $lowongan->location }}</p>
 
-                        <a href="https://maps.google.com/?q=Plaza+Telkom+Ketintang+Baru+Surabaya" target="_blank"
+                        <a href="https://maps.google.com/?q={{ urlencode($lowongan->company_name . ' ' . $lowongan->location) }}" target="_blank"
                             class="maps-link">
                             Buka Petunjuk Arah di Google Maps ↗
                         </a>
@@ -1696,17 +1692,18 @@
                             <div class="info-grid-item">
                                 <h4>Jurusan Sasaran</h4>
                                 <ul>
-                                    <li>RPL</li>
-                                    <li>TKJ</li>
+                                    @foreach (explode(',', $lowongan->jurusan) as $j)
+                                        <li>{{ trim($j) }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="info-grid-item">
-                                <h4>Instruktur Industri</h4>
-                                <p>Pendampingan 32 JP / Semester</p>
+                                <h4>Durasi Program</h4>
+                                <p>{{ $lowongan->duration }}</p>
                             </div>
                             <div class="info-grid-item">
-                                <h4>Output Sertifikasi</h4>
-                                <p>Sertifikat Telkom DTI</p>
+                                <h4>Skema</h4>
+                                <p>{{ $lowongan->metode_kerja }}</p>
                             </div>
                         </div>
                     </div>
@@ -1756,7 +1753,7 @@
                             <div class="person-info">
                                 <p class="person-name">
                                     {{ $lowongan->pokja_koordinator ?? 'Bpk. Aris Santoso, S.Kom' }}</p>
-                                <p class="person-role">Pokja PKL & Kemitraan DUDI Telkom</p>
+                                <p class="person-role">Pokja PKL & Kemitraan DUDI</p>
                             </div>
                         </div>
 
@@ -1782,13 +1779,13 @@
                             <div class="map-pin">
                                 <div class="map-pin-inner"></div>
                             </div>
-                            <span class="map-label">Plaza Telkom Ketintang (6 Menit)</span>
+                            <span class="map-label">{{ $lowongan->company_short ?? $lowongan->company_name }}</span>
                         </div>
 
-                        <h4 class="location-name">Plaza Telkom Ketintang Baru</h4>
-                        <p class="location-address">Jl. Ketintang Baru No. 1-3, Gayungan, Surabaya</p>
+                        <h4 class="location-name">{{ $lowongan->company_name }}</h4>
+                        <p class="location-address">{{ $lowongan->location }}</p>
 
-                        <a href="https://maps.google.com/?q=Plaza+Telkom+Ketintang+Baru+Surabaya" target="_blank"
+                        <a href="https://maps.google.com/?q={{ urlencode($lowongan->company_name . ' ' . $lowongan->location) }}" target="_blank"
                             class="maps-link">
                             Buka Petunjuk Arah di Google Maps ↗
                         </a>
@@ -1845,7 +1842,7 @@
                 </a>
                 @if ($lowongan->dokumen)
                     <a href="{{ asset('storage/' . $lowongan->dokumen[0]) }}" download class="cta-btn-secondary">
-                        📄 Unduh Draf Panduan MoU (.PDF)
+                        📄 Unduh Dokumen →
                     </a>
                 @endif
             </div>

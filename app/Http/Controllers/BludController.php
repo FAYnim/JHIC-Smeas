@@ -9,12 +9,20 @@ use Illuminate\View\View;
 
 class BludController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $produkBluds = ProdukBlud::where('is_published', true)
+        $query = ProdukBlud::where('is_published', true)
             ->with('galeri')
-            ->orderByDesc('created_at')
-            ->get();
+            ->orderByDesc('created_at');
+
+        if ($request->filled('q')) {
+            $q = $request->string('q')->toString();
+            $query->where(fn ($b) => $b->where('title', 'like', "%{$q}%")
+                ->orWhere('jurusan_nama', 'like', "%{$q}%")
+                ->orWhere('deskripsi', 'like', "%{$q}%"));
+        }
+
+        $produkBluds = $query->get();
 
         return view('blud.index', compact('produkBluds'));
     }

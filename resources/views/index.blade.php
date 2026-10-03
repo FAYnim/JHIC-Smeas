@@ -575,7 +575,7 @@
 
                     {{-- Card 1: YELLOW --}}
                     <div class="feature-card"
-                        style="background:#eab308;border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
+                        style="background:#eab308;border-radius:0;padding:28px 24px;border:none;box-shadow:0 12px 28px rgba(234,179,8,0.45);">
                         <div
                             style="width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
                             <svg style="width:20px;height:20px;color:#fff;" fill="currentColor" viewBox="0 0 24 24">

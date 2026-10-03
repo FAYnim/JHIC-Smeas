@@ -61,6 +61,13 @@ class AdminMenu
         ],
         [
             'group' => 'Pusat Karir',
+            'label' => 'Sumber Rekomendasi',
+            'route' => 'admin.sumber-rekomendasi.index',
+            'icon' => 'link',
+            'roles' => [User::ROLE_ADMIN, User::ROLE_BKK],
+        ],
+        [
+            'group' => 'Pusat Karir',
             'label' => 'Tracer Study',
             'route' => 'admin.tracer.index',
             'icon' => 'chart-bar',

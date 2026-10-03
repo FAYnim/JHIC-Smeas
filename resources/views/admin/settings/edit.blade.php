@@ -55,6 +55,25 @@
                         <textarea name="settings[profil.misi]" rows="3"
                             class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ $settings['profil.misi'] ?? '' }}</textarea>
                     </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Kepala Sekolah (Prakata)</label>
+                            <input type="text" name="settings[profil.prakata_nama]"
+                                value="{{ $settings['profil.prakata_nama'] ?? 'Dr. Drs. Anton Sujarwo, M.Pd.' }}"
+                                class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Foto Kepala Sekolah (path gambar)</label>
+                            <input type="text" name="settings[profil.prakata_foto]"
+                                value="{{ $settings['profil.prakata_foto'] ?? 'images/Group 198.png' }}"
+                                class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Isi Prakata Kepala Sekolah</label>
+                        <textarea name="settings[profil.prakata_quote]" rows="4"
+                            class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ $settings['profil.prakata_quote'] ?? '' }}</textarea>
+                    </div>
                 </div>
             </div>
 

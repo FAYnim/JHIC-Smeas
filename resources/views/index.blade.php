@@ -648,11 +648,7 @@
                             <blockquote style="margin:0; position:relative; z-index:1;">
                                 <p
                                     style="font-size:clamp(0.95rem, 1.5vw, 1.1rem); color:#334155; font-style:italic; font-weight:600; line-height:1.9; text-align:justify; margin:0;">
-                                    Era globalisasi membawa perubahan yang cepat dalam berbagai aspek kehidupan. Oleh
-                                    karena itu, pendidikan memiliki peran penting dalam menyiapkan sumber daya manusia
-                                    yang mampu menghadapi perubahan tersebut. Sekolah perlu memiliki arah pengembangan
-                                    yang jelas dan berkelanjutan, sekaligus mampu menyesuaikan diri dengan kebutuhan dan
-                                    permasalahan masyarakat saat ini.
+                                    {{ $prakata['quote'] }}
                                 </p>
                             </blockquote>
                         </div>
@@ -660,11 +656,11 @@
 
                     {{-- Right Column: Headmaster Photo --}}
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                        <img src="{{ asset('images/Group 198.png') }}" alt="Dr. Drs. Anton Sujarwo, M.Pd."
+                        <img src="{{ asset($prakata['foto']) }}" alt="{{ $prakata['nama'] }}"
                             style="width:260px; max-width:100%; height:auto; display:block;">
                         <p
                             style="margin-top:12px; font-size:0.95rem; font-weight:700; color:#0b192c; text-align:center;">
-                            Dr. Drs. Anton Sujarwo, M.Pd.
+                            {{ $prakata['nama'] }}
                         </p>
                     </div>
 
@@ -721,10 +717,11 @@
                         </div>
 
                         {{-- Card 2: 689+ Pengajar --}}
+                        {{-- ponytail: jurusan & siswa masih hardcoded — tak ada tabel jurusans/siswas; upgrade path: buat tabel + hitung di route beranda --}}
                         <div class="stat-card stat-card-2">
                             <div class="stat-card-inner" style="text-align:center;">
                                 <span
-                                    style="font-size:2.6rem; font-weight:800; color:#024089; line-height:1; display:block;">120+</span>
+                                    style="font-size:2.6rem; font-weight:800; color:#024089; line-height:1; display:block;">{{ $gurusCount }}</span>
                                 <span
                                     style="font-size:0.875rem; font-weight:700; color:#024089; margin-top:8px; display:block;">Pengajar</span>
                             </div>
@@ -915,65 +912,28 @@
                             }
                         </style>
 
-                        {{-- Teacher Card 1: Sari Okta --}}
-                        <div style="flex:0 0 280px;text-align:center;">
-                            <div
-                                style="position:relative;width:280px;height:340px;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1);margin-bottom:16px;">
-                                <img src="{{ asset('images/sari-okta-rahmalina-spd 1.png') }}"
-                                    alt="Sari Okta Rahmalina, S.Pd."
-                                    style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s ease;">
+                        @forelse ($gurus as $guru)
+                            <div style="flex:0 0 280px;text-align:center;">
                                 <div
-                                    style="position:absolute;inset:0;background:linear-gradient(to top, rgba(15,23,42,0.5), transparent 40%);">
+                                    style="position:relative;width:280px;height:340px;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1);margin-bottom:16px;background:linear-gradient(135deg,#1a8cff,#024089);">
+                                    @if ($guru->foto_url)
+                                        <img src="{{ $guru->foto_url }}" alt="{{ $guru->nama }}"
+                                            style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s ease;">
+                                    @else
+                                        <div
+                                            style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:3.5rem;font-weight:800;">
+                                            {{ $guru->initials }}</div>
+                                    @endif
+                                    <div
+                                        style="position:absolute;inset:0;background:linear-gradient(to top, rgba(15,23,42,0.5), transparent 40%);">
+                                    </div>
                                 </div>
+                                <p style="font-size:0.9rem;font-weight:700;color:#0f172a;">{{ $guru->nama }}</p>
+                                <p style="font-size:0.8rem;font-weight:500;color:#64748b;">{{ $guru->mapel ?? $guru->jabatan }}</p>
                             </div>
-                            <p style="font-size:0.9rem;font-weight:700;color:#0f172a;">Sari Okta</p>
-                            <p style="font-size:0.8rem;font-weight:500;color:#64748b;">Guru bahasa Indonesia</p>
-                        </div>
-
-                        {{-- Teacher Card 2: Sidik Dwi Widodo --}}
-                        <div style="flex:0 0 280px;text-align:center;">
-                            <div
-                                style="position:relative;width:280px;height:340px;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1);margin-bottom:16px;">
-                                <img src="{{ asset('images/drs-sidik-dwi-widodo-mm-mpd 1.png') }}"
-                                    alt="Drs. Sidik Dwi Widodo, M.M., M.Pd."
-                                    style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s ease;">
-                                <div
-                                    style="position:absolute;inset:0;background:linear-gradient(to top, rgba(15,23,42,0.5), transparent 40%);">
-                                </div>
-                            </div>
-                            <p style="font-size:0.9rem;font-weight:700;color:#0f172a;">Sidik Dwi Widodo</p>
-                            <p style="font-size:0.8rem;font-weight:500;color:#64748b;">Guru Matematika</p>
-                        </div>
-
-                        {{-- Teacher Card 3: Pak Adi --}}
-                        <div style="flex:0 0 280px;text-align:center;">
-                            <div
-                                style="position:relative;width:280px;height:340px;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1);margin-bottom:16px;">
-                                <img src="{{ asset('images/pak-adi 5.png') }}" alt="Pak Adi"
-                                    style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s ease;">
-                                <div
-                                    style="position:absolute;inset:0;background:linear-gradient(to top, rgba(15,23,42,0.5), transparent 40%);">
-                                </div>
-                            </div>
-                            <p style="font-size:0.9rem;font-weight:700;color:#0f172a;">Pak Adi</p>
-                            <p style="font-size:0.8rem;font-weight:500;color:#64748b;">Guru Pendidikan Agama Islam</p>
-                        </div>
-
-                        {{-- Teacher Card 4: Anton Sujarwo (Kepala Sekolah) --}}
-                        <div style="flex:0 0 280px;text-align:center;">
-                            <div
-                                style="position:relative;width:280px;height:340px;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1);margin-bottom:16px;">
-                                <img src="{{ asset('images/anton-sujarwo 2.png') }}"
-                                    alt="Dr. Drs. Anton Sujarwo, M.Pd."
-                                    style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s ease;">
-                                <div
-                                    style="position:absolute;inset:0;background:linear-gradient(to top, rgba(15,23,42,0.5), transparent 40%);">
-                                </div>
-                            </div>
-                            <p style="font-size:0.9rem;font-weight:700;color:#0f172a;">Dr. Drs. Anton Sujarwo, M.Pd.
-                            </p>
-                            <p style="font-size:0.8rem;font-weight:500;color:#64748b;">Kepala Sekolah</p>
-                        </div>
+                        @empty
+                            <p style="flex:1;text-align:center;padding:48px 16px;font-size:0.9rem;color:#64748b;">Belum ada data guru.</p>
+                        @endforelse
 
                     </div>
                 </div>
@@ -1014,7 +974,7 @@
 
                 {{-- Search Bar --}}
                 <div style="max-width:640px;margin:0 auto 32px;" class="fade-up">
-                    <div class="search-glow"
+                    <form action="{{ route('jurusan') }}" method="GET" class="search-glow"
                         style="display:flex;align-items:center;background:#fff;border-radius:12px;border:2px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.04);overflow:hidden;transition:all 0.3s ease;">
                         <div style="padding:0 12px 0 20px;">
                             <svg style="width:20px;height:20px;color:#94a3b8;" fill="none" stroke="currentColor"
@@ -1023,9 +983,10 @@
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </div>
-                        <input type="text" placeholder="Senang di JHIK, coba pengolahan di bawah ini"
+                        <input type="text" name="q" value="{{ request('q') }}"
+                            placeholder="Senang di JHIK, coba pengolahan di bawah ini"
                             style="flex:1;padding:16px 16px 16px 0;font-size:0.875rem;color:#334155;border:none;outline:none;background:transparent;">
-                    </div>
+                    </form>
                 </div>
 
                 {{-- CTA Button --}}
@@ -1087,7 +1048,7 @@
 
                 <div style="display:grid;grid-template-columns:1fr;gap:24px;" class="fade-up" id="berita-grid">
                     {{-- Berita Terbaru --}}
-                    @foreach ($artikels->take(4) as $artikel)
+                    @forelse ($artikels->take(4) as $artikel)
                         <a href="{{ route('pusat-karir.detail-artikel', $artikel->slug) }}" class="block group">
                             <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
                                 @if ($artikel->display_image)
@@ -1099,7 +1060,9 @@
                                 </div>
                             </article>
                         </a>
-                    @endforeach
+                    @empty
+                        <p class="text-sm text-slate-500 col-span-full text-center">Belum ada berita.</p>
+                    @endforelse
                 </div>
 
                 <div style="text-align:center;margin-top:40px;" class="fade-up">

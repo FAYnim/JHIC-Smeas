@@ -11,6 +11,7 @@ use App\Models\Guru;
 use App\Models\Lowongan;
 use App\Models\MitraPerusahaan;
 use App\Models\Pengumuman;
+use App\Models\Setting;
 use App\Models\StrukturOrganisasi;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +21,16 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')-
 
 Route::get('/', function () {
     $artikels = Artikel::latest('published_at')->take(4)->get();
+    $gurus = Guru::where('kategori', 'guru')->where('is_active', true)
+        ->orderBy('urutan')->limit(4)->get();
+    $gurusCount = Guru::where('is_active', true)->count();
+    $prakata = [
+        'nama' => Setting::get('profil.prakata_nama', 'Dr. Drs. Anton Sujarwo, M.Pd.'),
+        'quote' => Setting::get('profil.prakata_quote', 'Era globalisasi membawa perubahan yang cepat dalam berbagai aspek kehidupan. Oleh karena itu, pendidikan memiliki peran penting dalam menyiapkan sumber daya manusia yang mampu menghadapi perubahan tersebut. Sekolah perlu memiliki arah pengembangan yang jelas dan berkelanjutan, sekaligus mampu menyesuaikan diri dengan kebutuhan dan permasalahan masyarakat saat ini.'),
+        'foto' => Setting::get('profil.prakata_foto', 'images/Group 198.png'),
+    ];
 
-    return view('index', compact('artikels'));
+    return view('index', compact('artikels', 'prakata', 'gurus', 'gurusCount'));
 })->name('beranda');
 
 Route::get('/visi-misi', function () {
@@ -97,6 +106,9 @@ Route::get('/pusat-karir/artikel/{slug}', [LowonganController::class, 'detailArt
 Route::get('/pusat-karir/study-tracer', [LowonganController::class, 'studyTracer'])->name('pusat-karir.study-tracer');
 Route::get('/pusat-karir/study-tracer/kuesioner', [LowonganController::class, 'formKuesioner'])->name('pusat-karir.study-tracer.kuesioner');
 Route::post('/pusat-karir/study-tracer/kuesioner', [LowonganController::class, 'storeKuesioner'])->name('pusat-karir.study-tracer.store');
+Route::post('/pusat-karir/verifikasi-nisn', [LowonganController::class, 'verifikasiNisn'])
+    ->middleware('throttle:10,1')
+    ->name('pusat-karir.verifikasi-nisn');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
 Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
 Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');

@@ -37,5 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PengumumanSeeder::class);
         $this->call(FaqSeeder::class);
         $this->call(SettingSeeder::class);
+        $this->call(SumberRekomendasiSeeder::class);
     }
 }

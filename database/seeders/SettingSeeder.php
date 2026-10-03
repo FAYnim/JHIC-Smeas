@@ -29,6 +29,9 @@ class SettingSeeder extends Seeder
             // Profil
             ['key' => 'profil.visi', 'value' => 'Terwujudnya SMK Negeri 1 Surabaya Yang Berkarakter Dan Unggul.', 'group' => 'profil'],
             ['key' => 'profil.misi', 'value' => 'Meningkatkan kompetensi peserta didik sesuai standar kompetensi lulusan dan berkarakter profil pelajar Pancasila.', 'group' => 'profil'],
+            ['key' => 'profil.prakata_nama', 'value' => 'Dr. Drs. Anton Sujarwo, M.Pd.', 'group' => 'profil'],
+            ['key' => 'profil.prakata_quote', 'value' => 'Era globalisasi membawa perubahan yang cepat dalam berbagai aspek kehidupan. Oleh karena itu, pendidikan memiliki peran penting dalam menyiapkan sumber daya manusia yang mampu menghadapi perubahan tersebut. Sekolah perlu memiliki arah pengembangan yang jelas dan berkelanjutan, sekaligus mampu menyesuaikan diri dengan kebutuhan dan permasalahan masyarakat saat ini.', 'group' => 'profil'],
+            ['key' => 'profil.prakata_foto', 'value' => 'images/Group 198.png', 'group' => 'profil'],
         ];
 
         foreach ($settings as $setting) {

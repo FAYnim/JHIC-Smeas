@@ -279,16 +279,16 @@
         {{-- Search --}}
         <section class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10">
             <div class="blud-search">
-                <label class="blud-search__field" for="blud-search-input">
+                <form action="{{ route('blud.index') }}" method="GET" class="blud-search__field">
                     <svg class="w-5 h-5 text-slate-500 shrink-0" fill="none" stroke="currentColor"
                         stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" />
                     </svg>
-                    <input id="blud-search-input" type="search" name="q"
+                    <input id="blud-search-input" type="search" name="q" value="{{ request('q') }}"
                         placeholder="Cari produk atau layanan..." autocomplete="off"
                         aria-label="Cari produk atau layanan">
-                </label>
+                </form>
             </div>
         </section>
 

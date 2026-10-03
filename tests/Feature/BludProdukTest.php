@@ -53,6 +53,18 @@ class BludProdukTest extends TestCase
         $response->assertNotFound();
     }
 
+    public function test_blud_index_search_filters_products_backend(): void
+    {
+        $this->get(route('blud.index', ['q' => 'Cheeseroll']))
+            ->assertOk()
+            ->assertSee('Cheeseroll');
+
+        $this->get(route('blud.index', ['q' => 'zonk-tidak-ada-produk']))
+            ->assertOk()
+            ->assertDontSee('Cheeseroll')
+            ->assertDontSee('Website Sekolah');
+    }
+
     public function test_post_komentar_creates_row_and_redirects(): void
     {
         $response = $this->post(route('blud.komentar.store', 'cheeseroll'), [

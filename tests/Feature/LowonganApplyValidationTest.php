@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\CalonSiswa;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,6 +11,17 @@ use Tests\TestCase;
 class LowonganApplyValidationTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        CalonSiswa::create([
+            'nisn' => '1234567890',
+            'nama_lengkap' => 'Siswa Lamar Uji',
+            'asal_sekolah' => 'SMP Uji',
+        ]);
+    }
 
     public function test_non_numeric_nisn_is_rejected(): void
     {
@@ -23,6 +35,20 @@ class LowonganApplyValidationTest extends TestCase
 
         $response->assertSessionHasErrors('nisn');
         $response->assertRedirect();
+    }
+
+    public function test_unregistered_nisn_is_rejected(): void
+    {
+        $lowongan = $this->makeLowongan();
+
+        $response = $this->from(route('pusat-karir.lamar', $lowongan->slug))
+            ->post(route('pusat-karir.store-lamar', $lowongan->slug), [
+                'nisn' => '9999999999',
+                'consent' => 'on',
+            ]);
+
+        $response->assertSessionHasErrors('nisn');
+        $this->assertDatabaseCount('magang_applications', 0);
     }
 
     public function test_regular_post_redirects_to_detail_with_flash(): void

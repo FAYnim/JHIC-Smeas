@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Alumni;
 use App\Models\Artikel;
 use App\Models\BimbinganKarir;
+use App\Models\CalonSiswa;
 use App\Models\KuesionerTracer;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
 use App\Models\MitraPerusahaan;
+use App\Models\SumberRekomendasi;
 use App\Models\TracerMitraAlumnus;
 use App\Models\TracerSetting;
 use App\Models\TracerStatusLulusan;
@@ -95,13 +97,19 @@ class LowonganController extends Controller
             ],
         ];
 
+        $sumberRekomendasi = SumberRekomendasi::where('is_active', true)
+            ->orderBy('urutan')
+            ->limit(5)
+            ->get();
+
         return view('pusat-karir.pusat-karir', compact(
             'lowongans',
             'artikels',
             'webinars',
             'upcomingWebinar',
             'categories',
-            'bimbinganKatalog'
+            'bimbinganKatalog',
+            'sumberRekomendasi'
         ));
     }
 
@@ -119,6 +127,18 @@ class LowonganController extends Controller
         return view('pusat-karir.lamar-lowongan', compact('lowongan'));
     }
 
+    public function verifikasiNisn(Request $request): JsonResponse
+    {
+        $request->validate(['nisn' => ['required', 'digits:10']]);
+
+        $siswa = CalonSiswa::where('nisn', $request->string('nisn')->toString())->first();
+
+        return response()->json([
+            'valid' => $siswa !== null,
+            'nama' => $siswa?->nama_lengkap,
+        ]);
+    }
+
     public function storeApply(Request $request, string $slug): RedirectResponse|JsonResponse
     {
         $lowongan = Lowongan::where('slug', $slug)->firstOrFail();
@@ -129,7 +149,7 @@ class LowonganController extends Controller
             'type' => ($doc['type'] ?? 'pdf') === 'link' ? 'link' : 'file',
         ]);
 
-        $rules = ['nisn' => ['required', 'numeric', 'digits:10']];
+        $rules = ['nisn' => ['required', 'numeric', 'digits:10', 'exists:calon_siswas,nisn']];
         foreach ($requirements as $doc) {
             $rules[$doc['key']] = $doc['type'] === 'link'
                 ? ['nullable', 'url', 'max:2048']

@@ -121,15 +121,44 @@ class LowonganController extends Controller
     {
         $lowongan = Lowongan::where('slug', $slug)->firstOrFail();
 
-        $validated = $request->validate([
-            'nisn' => ['required', 'numeric', 'digits:10'],
+        $requirements = collect($lowongan->dokumen ?? [])->map(fn (array $doc): array => [
+            'key' => Str::slug($doc['name'], '_'),
+            'label' => str_replace(['_', '.pdf'], [' ', ''], $doc['name']),
+            'type' => ($doc['type'] ?? 'pdf') === 'link' ? 'link' : 'file',
         ]);
+
+        $rules = ['nisn' => ['required', 'numeric', 'digits:10']];
+        foreach ($requirements as $doc) {
+            $rules[$doc['key']] = $doc['type'] === 'link'
+                ? ['nullable', 'url', 'max:2048']
+                : ['required', 'file', 'mimes:pdf', 'max:2048'];
+        }
+
+        $validated = $request->validate($rules);
+
+        $registrationCode = $this->generateRegistrationCode($lowongan->company_short ?? 'TELKOM');
+
+        $documents = [];
+        foreach ($requirements as $doc) {
+            if ($doc['type'] === 'link') {
+                if (! empty($validated[$doc['key']])) {
+                    $documents[] = $doc + ['value' => $validated[$doc['key']]];
+                }
+
+                continue;
+            }
+
+            $path = $request->file($doc['key'])
+                ->storeAs("magang/{$registrationCode}", $doc['key'].'.pdf', 'public');
+            $documents[] = $doc + ['value' => $path];
+        }
 
         $application = MagangApplication::create([
             'lowongan_id' => $lowongan->id,
             'nisn' => $validated['nisn'],
-            'registration_code' => $this->generateRegistrationCode($lowongan->company_short ?? 'TELKOM'),
+            'registration_code' => $registrationCode,
             'status' => 'pending',
+            'documents' => $documents,
         ]);
 
         if ($request->wantsJson()) {

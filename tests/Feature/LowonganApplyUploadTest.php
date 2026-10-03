@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\CalonSiswa;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,6 +13,17 @@ use Tests\TestCase;
 class LowonganApplyUploadTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        CalonSiswa::create([
+            'nisn' => '1234567890',
+            'nama_lengkap' => 'Siswa Lamar Uji',
+            'asal_sekolah' => 'SMP Uji',
+        ]);
+    }
 
     public function test_required_pdf_is_validated(): void
     {

@@ -149,7 +149,7 @@ class LowonganController extends Controller
             'type' => ($doc['type'] ?? 'pdf') === 'link' ? 'link' : 'file',
         ]);
 
-        $rules = ['nisn' => ['required', 'numeric', 'digits:10']];
+        $rules = ['nisn' => ['required', 'numeric', 'digits:10', 'exists:calon_siswas,nisn']];
         foreach ($requirements as $doc) {
             $rules[$doc['key']] = $doc['type'] === 'link'
                 ? ['nullable', 'url', 'max:2048']

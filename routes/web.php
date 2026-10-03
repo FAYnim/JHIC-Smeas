@@ -106,6 +106,9 @@ Route::get('/pusat-karir/artikel/{slug}', [LowonganController::class, 'detailArt
 Route::get('/pusat-karir/study-tracer', [LowonganController::class, 'studyTracer'])->name('pusat-karir.study-tracer');
 Route::get('/pusat-karir/study-tracer/kuesioner', [LowonganController::class, 'formKuesioner'])->name('pusat-karir.study-tracer.kuesioner');
 Route::post('/pusat-karir/study-tracer/kuesioner', [LowonganController::class, 'storeKuesioner'])->name('pusat-karir.study-tracer.store');
+Route::post('/pusat-karir/verifikasi-nisn', [LowonganController::class, 'verifikasiNisn'])
+    ->middleware('throttle:10,1')
+    ->name('pusat-karir.verifikasi-nisn');
 Route::get('/pusat-karir/{slug}', [LowonganController::class, 'show'])->name('pusat-karir.detail');
 Route::get('/pusat-karir/{slug}/lamar', [LowonganController::class, 'apply'])->name('pusat-karir.lamar');
 Route::post('/pusat-karir/{slug}/lamar', [LowonganController::class, 'storeApply'])->name('pusat-karir.store-lamar');

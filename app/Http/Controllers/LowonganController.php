@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alumni;
 use App\Models\Artikel;
 use App\Models\BimbinganKarir;
+use App\Models\CalonSiswa;
 use App\Models\KuesionerTracer;
 use App\Models\Lowongan;
 use App\Models\MagangApplication;
@@ -124,6 +125,18 @@ class LowonganController extends Controller
         $lowongan = Lowongan::where('slug', $slug)->firstOrFail();
 
         return view('pusat-karir.lamar-lowongan', compact('lowongan'));
+    }
+
+    public function verifikasiNisn(Request $request): JsonResponse
+    {
+        $request->validate(['nisn' => ['required', 'digits:10']]);
+
+        $siswa = CalonSiswa::where('nisn', $request->string('nisn')->toString())->first();
+
+        return response()->json([
+            'valid' => $siswa !== null,
+            'nama' => $siswa?->nama_lengkap,
+        ]);
     }
 
     public function storeApply(Request $request, string $slug): RedirectResponse|JsonResponse

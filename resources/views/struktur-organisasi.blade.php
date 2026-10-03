@@ -158,7 +158,6 @@
             </div>
 
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 @foreach ($wakil as $item)
                     <div class="org-card group bg-white rounded-2xl border border-slate-200/80 p-6 text-center shadow-xs hover:border-blue-500">
                         @if ($item->foto_url)

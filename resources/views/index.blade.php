@@ -1054,7 +1054,7 @@
                             untuk alumni dan siswa SMKN 1 Surabaya.
                         </p>
 
-                        <form class="pk-hero__search" action="{{ route('pusat-karir.index') }}" method="GET">
+                        <form class="pk-hero__search" action="{{ route('pusat-karir.katalog-lowongan') }}" method="GET">
                             <input type="text" name="q" placeholder="Cari perusahaan, posisi, atau tempat magang..."
                                 autocomplete="off">
                             <button type="submit" aria-label="Cari">
@@ -1087,27 +1087,20 @@
 
                 <div style="display:grid;grid-template-columns:1fr;gap:24px;" class="fade-up" id="berita-grid">
                     {{-- Main Featured Article --}}
-                    <a href="{{ route('informasi') }}" class="news-main"
-                        style="text-decoration:none;display:block;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-                        <img src="{{ asset('images/VBG - WEB DEV COMPTETITION.jpg') }}"
-                            alt="Berita Terbaru SMKN 1 Surabaya">
-                        <div
-                            style="position:absolute;inset:0;background:linear-gradient(to top, rgba(15,23,42,0.85), rgba(15,23,42,0.2) 50%, transparent);">
-                        </div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
-                            <span
-                                style="display:inline-block;padding:4px 12px;font-size:0.75rem;font-weight:700;color:#024089;background:#fbbf24;border-radius:9999px;margin-bottom:12px;">
-                                Berita Terbaru
-                            </span>
-                            <h3
-                                style="font-size:clamp(1.1rem, 2vw, 1.25rem);font-weight:700;color:#fff;line-height:1.4;">
-                                VBG — Web Dev Competition 2026
-                            </h3>
-                            <p style="font-size:0.875rem;color:rgba(191,219,254,0.8);margin-top:8px;">
-                                Siswa SMKN 1 Surabaya berhasil meraih juara dalam kompetisi pengembangan web tingkat
-                                nasional.
-                            </p>
-                        </div>
+                    @foreach ($artikels->take(4) as $artikel)
+                        <a href="{{ route('pusat-karir.detail-artikel', $artikel->slug) }}" class="block group">
+                            <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                                @if ($artikel->image)
+                                    <img src="{{ asset('storage/' . $artikel->image) }}" alt="{{ $artikel->title }}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                @endif
+                                <div class="p-5">
+                                    <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{{ $artikel->title }}</h3>
+                                    <p class="text-sm text-slate-500 mt-2">{{ $artikel->excerpt ?? Str::limit(strip_tags($artikel->content), 120) }}</p>
+                                </div>
+                            </article>
+                        </a>
+                    @endforeach
+                </div>
                     </a>
 
                     {{-- Side Articles Container --}}

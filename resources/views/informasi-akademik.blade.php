@@ -375,7 +375,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2">
+                            <a href="{{ route('blud.index') }}" class="hover:text-amber-400 transition-colors inline-flex items-center gap-2">
                                 <span class="text-amber-400">&bull;</span> BLUD
                             </a>
                         </li>

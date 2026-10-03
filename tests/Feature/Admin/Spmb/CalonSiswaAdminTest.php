@@ -88,7 +88,7 @@ class CalonSiswaAdminTest extends TestCase
     {
         Storage::fake('public');
         Storage::disk('public')->put('spmb/1234567890/akta.pdf', 'akta content');
-        Storage::disk('public')->put('spmb/1234567890/ijazah.jpg', 'ijazah content');
+        Storage::disk('public')->put('spmb/1234567890/ijazah_smp.jpg', 'ijazah content');
 
         $calonSiswa = CalonSiswa::create([
             'nisn' => '1234567890',
@@ -103,7 +103,7 @@ class CalonSiswaAdminTest extends TestCase
         $response->assertSee('Dewi Sartika');
         $response->assertSee('1234567890');
         $response->assertSee('akta.pdf');
-        $response->assertSee('ijazah.jpg');
+        $response->assertSee('ijazah_smp.jpg');
     }
 
     public function test_can_update_status_verifikasi(): void

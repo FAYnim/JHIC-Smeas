@@ -10,6 +10,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
 
@@ -67,7 +68,11 @@ class SpmbController extends Controller
 
     public function dokumen()
     {
-        return view('spmb.dashboard.dokumen');
+        $calonSiswa = CalonSiswa::where('nisn', session('spmb_nisn'))->first();
+
+        return view('spmb.dashboard.dokumen', [
+            'dokumenStatus' => $calonSiswa?->dokumenStatus() ?? [],
+        ]);
     }
 
     public function formulir()
@@ -81,7 +86,10 @@ class SpmbController extends Controller
     {
         $calonSiswa = CalonSiswa::where('nisn', session('spmb_nisn'))->first();
 
-        return view('spmb.dashboard.verifikasi', compact('calonSiswa'));
+        return view('spmb.dashboard.verifikasi', [
+            'calonSiswa' => $calonSiswa,
+            'dokumenStatus' => $calonSiswa?->dokumenStatus() ?? [],
+        ]);
     }
 
     public function pengumuman()
@@ -228,18 +236,26 @@ class SpmbController extends Controller
     {
         $request->validate([
             'docs.akta' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'docs.kartu-keluarga' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'docs.ijazah-smp' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'docs.kartu_keluarga' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'docs.ijazah_smp' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ], [
             'docs.akta.required' => 'Akta kelahiran wajib diunggah.',
-            'docs.kartu-keluarga.required' => 'Kartu keluarga wajib diunggah.',
-            'docs.ijazah-smp.required' => 'Ijazah SMP wajib diunggah.',
+            'docs.kartu_keluarga.required' => 'Kartu keluarga wajib diunggah.',
+            'docs.ijazah_smp.required' => 'Ijazah SMP wajib diunggah.',
         ]);
 
         $nisn = session('spmb_nisn');
+        $disk = Storage::disk('public');
 
-        foreach ($request->file('docs') as $key => $file) {
-            $path = $file->store("spmb/{$nisn}", 'public');
+        foreach (array_keys(CalonSiswa::DOKUMEN) as $key) {
+            foreach ($disk->files("spmb/{$nisn}") as $existing) {
+                if (pathinfo($existing, PATHINFO_FILENAME) === $key) {
+                    $disk->delete($existing);
+                }
+            }
+
+            $file = $request->file("docs.{$key}");
+            $file->storeAs("spmb/{$nisn}", $key.'.'.$file->extension(), 'public');
         }
 
         return Redirect::route('spmb.dokumen')

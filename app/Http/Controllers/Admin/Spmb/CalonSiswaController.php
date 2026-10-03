@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\CalonSiswa;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class CalonSiswaController extends Controller
@@ -63,23 +62,9 @@ class CalonSiswaController extends Controller
 
     public function show(CalonSiswa $calonSiswa): View
     {
-        // Temukan berkas dokumen di storage public spmb/{nisn}/
-        $files = [];
-        $directory = "spmb/{$calonSiswa->nisn}";
+        $documents = $calonSiswa->dokumenStatus();
 
-        if (Storage::disk('public')->exists($directory)) {
-            $filePaths = Storage::disk('public')->files($directory);
-            foreach ($filePaths as $path) {
-                $files[] = [
-                    'name' => basename($path),
-                    'path' => $path,
-                    'url' => Storage::disk('public')->url($path),
-                    'size' => Storage::disk('public')->size($path),
-                ];
-            }
-        }
-
-        return view('admin.spmb.calon-siswa.show', compact('calonSiswa', 'files'));
+        return view('admin.spmb.calon-siswa.show', compact('calonSiswa', 'documents'));
     }
 
     public function updateVerifikasi(Request $request, CalonSiswa $calonSiswa): RedirectResponse

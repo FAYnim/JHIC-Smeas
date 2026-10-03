@@ -1,4 +1,5 @@
 @extends('spmb.dashboard.layout')
+@use('App\Models\CalonSiswa')
 
 @section('page-title', 'Verifikasi')
 
@@ -122,33 +123,22 @@
                     class="text-xs font-bold text-[#1d5fa8] hover:underline">Kelola</a>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 border border-slate-100">
-                    <div class="w-8 h-8 rounded-md bg-[#1d5fa8]/10 text-[#1d5fa8] flex items-center justify-center shrink-0">
-                        <x-lucide-book class="w-4 h-4" />
+                @foreach (CalonSiswa::DOKUMEN as $key => $label)
+                    @php $doc = $dokumenStatus[$key] ?? ['uploaded' => false, 'name' => null]; @endphp
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 border border-slate-100">
+                        <div class="w-8 h-8 rounded-md bg-[#1d5fa8]/10 text-[#1d5fa8] flex items-center justify-center shrink-0">
+                            <x-lucide-book class="w-4 h-4" />
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-bold text-slate-900 truncate">{{ strtoupper($label) }}</p>
+                            @if ($doc['uploaded'])
+                                <p class="text-[0.65rem] font-semibold text-emerald-600 truncate">Terunggah &middot; {{ $doc['name'] }}</p>
+                            @else
+                                <p class="text-[0.65rem] font-semibold text-slate-400">Belum diunggah</p>
+                            @endif
+                        </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-xs font-bold text-slate-900 truncate">AKTA KELAHIRAN</p>
-                        <p class="text-[0.65rem] font-semibold text-slate-400">Wajib diunggah</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 border border-slate-100">
-                    <div class="w-8 h-8 rounded-md bg-[#1d5fa8]/10 text-[#1d5fa8] flex items-center justify-center shrink-0">
-                        <x-lucide-book class="w-4 h-4" />
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-xs font-bold text-slate-900 truncate">KARTU KELUARGA</p>
-                        <p class="text-[0.65rem] font-semibold text-slate-400">Wajib diunggah</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 border border-slate-100">
-                    <div class="w-8 h-8 rounded-md bg-[#1d5fa8]/10 text-[#1d5fa8] flex items-center justify-center shrink-0">
-                        <x-lucide-book class="w-4 h-4" />
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-xs font-bold text-slate-900 truncate">IJAZAH SMP</p>
-                        <p class="text-[0.65rem] font-semibold text-slate-400">Wajib diunggah</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 

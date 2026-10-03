@@ -650,7 +650,7 @@
                     @if (!empty($artikelTerbaru) && count($artikelTerbaru) > 0)
                         <div class="divide-y divide-slate-100 flex flex-col flex-1">
                             @foreach ($artikelTerbaru as $artikel)
-                                <a href="{{ url('pusat-karir/artikel/' . ($artikel['slug'] ?? '')) }}"
+                                <a href="{{ route('pusat-karir.detail-artikel', $artikel['slug'] ?? '') }}"
                                     class="px-5 py-5 flex items-center gap-4 hover:bg-slate-50 transition-colors flex-1 group"
                                     data-artikel-item>
                                     <div

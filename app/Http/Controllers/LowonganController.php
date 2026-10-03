@@ -13,6 +13,7 @@ use App\Models\TracerMitraAlumnus;
 use App\Models\TracerSetting;
 use App\Models\TracerStatusLulusan;
 use App\Models\Webinar;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -116,7 +117,7 @@ class LowonganController extends Controller
         return view('pusat-karir.lamar-lowongan', compact('lowongan'));
     }
 
-    public function storeApply(Request $request, string $slug)
+    public function storeApply(Request $request, string $slug): RedirectResponse|JsonResponse
     {
         $lowongan = Lowongan::where('slug', $slug)->firstOrFail();
 
@@ -131,14 +132,22 @@ class LowonganController extends Controller
             'status' => 'pending',
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Ajuan lamaran magang Anda berhasil dikirim.',
-            'data' => [
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Ajuan lamaran magang Anda berhasil dikirim.',
+                'data' => [
+                    'nisn' => $application->nisn,
+                    'registration_code' => $application->registration_code,
+                ],
+            ], 201);
+        }
+
+        return redirect()->route('pusat-karir.detail', $lowongan->slug)
+            ->with('lamaran_success', [
                 'nisn' => $application->nisn,
                 'registration_code' => $application->registration_code,
-            ],
-        ], 201);
+            ]);
     }
 
     public function katalogLowongan(Request $request)

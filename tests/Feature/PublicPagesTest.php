@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Artikel;
+use App\Models\Guru;
 use App\Models\Lowongan;
 use App\Models\Setting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,6 +33,31 @@ class PublicPagesTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Kepala Sekolah Test Unik');
+    }
+
+    public function test_beranda_displays_gurus_from_database(): void
+    {
+        Guru::create([
+            'nama' => 'Guru Carousel Khusus, S.Pd.',
+            'jabatan' => 'Guru Bahasa Indonesia',
+            'mapel' => 'Bahasa Indonesia',
+            'kategori' => 'guru',
+            'urutan' => 1,
+            'is_active' => true,
+        ]);
+
+        $response = $this->get(route('beranda'));
+
+        $response->assertOk();
+        $response->assertSee('Guru Carousel Khusus, S.Pd.');
+    }
+
+    public function test_beranda_shows_empty_state_when_no_artikels(): void
+    {
+        $response = $this->get(route('beranda'));
+
+        $response->assertOk();
+        $response->assertSee('Belum ada berita.');
     }
 
     public function test_jurusan_page_displays_stats(): void

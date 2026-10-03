@@ -21,13 +21,16 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')-
 
 Route::get('/', function () {
     $artikels = Artikel::latest('published_at')->take(4)->get();
+    $gurus = Guru::where('kategori', 'guru')->where('is_active', true)
+        ->orderBy('urutan')->limit(4)->get();
+    $gurusCount = Guru::where('is_active', true)->count();
     $prakata = [
         'nama' => Setting::get('profil.prakata_nama', 'Dr. Drs. Anton Sujarwo, M.Pd.'),
         'quote' => Setting::get('profil.prakata_quote', 'Era globalisasi membawa perubahan yang cepat dalam berbagai aspek kehidupan. Oleh karena itu, pendidikan memiliki peran penting dalam menyiapkan sumber daya manusia yang mampu menghadapi perubahan tersebut. Sekolah perlu memiliki arah pengembangan yang jelas dan berkelanjutan, sekaligus mampu menyesuaikan diri dengan kebutuhan dan permasalahan masyarakat saat ini.'),
         'foto' => Setting::get('profil.prakata_foto', 'images/Group 198.png'),
     ];
 
-    return view('index', compact('artikels', 'prakata'));
+    return view('index', compact('artikels', 'prakata', 'gurus', 'gurusCount'));
 })->name('beranda');
 
 Route::get('/visi-misi', function () {

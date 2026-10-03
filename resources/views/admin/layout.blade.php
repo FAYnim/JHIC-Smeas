@@ -226,6 +226,12 @@
                     @endforeach
                 </div>
             @endforeach
+
+            <a href="{{ route('beranda') }}" target="_blank" rel="noopener"
+                class="adm-nav-item mt-auto">
+                <x-lucide-external-link />
+                Lihat Situs
+            </a>
         </nav>
     </aside>
 

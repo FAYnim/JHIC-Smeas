@@ -381,6 +381,7 @@
                         </div>
                         <span id="verified-name">Data Siswa Ditemukan (NISN Valid)</span>
                     </div>
+                    <p id="nisn-verify-error" class="mt-2 text-sm text-red-600 font-medium" style="display: none;"></p>
                 </section>
 
                 <!-- Section 2: Berkas -->
@@ -466,18 +467,61 @@
             verifiedBox.style.display = 'none';
         });
 
-        document.getElementById('btn-verifikasi-nisn').addEventListener('click', function() {
+        const verifyBtn = document.getElementById('btn-verifikasi-nisn');
+        const verifyError = document.getElementById('nisn-verify-error');
+
+        verifyBtn.addEventListener('click', async function() {
             const val = nisnInput.value.trim();
 
             if (!/^\d+$/.test(val) || val.length !== 10) {
                 verifiedBox.style.display = 'none';
-                alert('NISN harus diisi dengan angka, 10 digit tanpa huruf atau simbol.');
+                verifyError.textContent = 'NISN harus diisi dengan angka, 10 digit tanpa huruf atau simbol.';
+                verifyError.style.display = 'block';
                 nisnInput.focus();
                 return;
             }
 
-            verifiedBox.style.display = 'flex';
-            verifiedName.textContent = `Data Siswa NISN ${val} (NISN Valid)`;
+            const token = document.querySelector('form input[name="_token"]').value;
+
+            verifyBtn.disabled = true;
+            verifyBtn.textContent = 'Memeriksa...';
+
+            try {
+                const response = await fetch('{{ route('pusat-karir.verifikasi-nisn') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': token,
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: new URLSearchParams({ nisn: val }),
+                });
+
+                if (response.status === 422) {
+                    const errors = await response.json();
+                    throw new Error(errors.errors?.nisn?.[0] || 'NISN tidak valid.');
+                }
+
+                const data = await response.json();
+
+                if (data.valid) {
+                    verifyError.style.display = 'none';
+                    verifiedBox.style.display = 'flex';
+                    verifiedName.textContent = `Data Siswa: ${data.nama} — NISN Valid`;
+                } else {
+                    verifiedBox.style.display = 'none';
+                    verifyError.textContent = 'NISN tidak terdaftar di SMKN 1 Surabaya.';
+                    verifyError.style.display = 'block';
+                }
+            } catch (error) {
+                verifiedBox.style.display = 'none';
+                verifyError.textContent = error.message || 'Gagal memeriksa NISN. Coba lagi.';
+                verifyError.style.display = 'block';
+            } finally {
+                verifyBtn.disabled = false;
+                verifyBtn.textContent = 'Verifikasi';
+            }
         });
 
         function updateFileName(input, targetId) {

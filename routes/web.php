@@ -20,7 +20,8 @@ Route::post('/login', [LoginController::class, 'store'])->middleware('guest')->n
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
 Route::get('/', function () {
-    return view('index');
+    $artikels = Artikel::latest('published_at')->take(4)->get();
+    return view('index', compact('artikels'));
 })->name('beranda');
 
 Route::get('/visi-misi', function () {

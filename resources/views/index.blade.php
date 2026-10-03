@@ -1086,12 +1086,12 @@
                 </div>
 
                 <div style="display:grid;grid-template-columns:1fr;gap:24px;" class="fade-up" id="berita-grid">
-                    {{-- Main Featured Article --}}
+                    {{-- Berita Terbaru --}}
                     @foreach ($artikels->take(4) as $artikel)
                         <a href="{{ route('pusat-karir.detail-artikel', $artikel->slug) }}" class="block group">
                             <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
-                                @if ($artikel->image)
-                                    <img src="{{ asset('storage/' . $artikel->image) }}" alt="{{ $artikel->title }}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                @if ($artikel->display_image)
+                                    <img src="{{ $artikel->display_image }}" alt="{{ $artikel->title }}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 @endif
                                 <div class="p-5">
                                     <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{{ $artikel->title }}</h3>

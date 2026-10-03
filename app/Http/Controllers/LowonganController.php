@@ -13,6 +13,8 @@ use App\Models\TracerMitraAlumnus;
 use App\Models\TracerSetting;
 use App\Models\TracerStatusLulusan;
 use App\Models\Webinar;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -527,6 +529,26 @@ class LowonganController extends Controller
 
         return redirect()->route('pusat-karir.study-tracer')
             ->with('success', 'Terima kasih! Data kuesioner Anda telah tersimpan.');
+    }
+
+    public function unduhBukti(string $registrationCode)
+    {
+        $application = MagangApplication::with('lowongan')
+            ->where('registration_code', $registrationCode)
+            ->firstOrFail();
+
+        $options = new Options;
+        $options->set('isHtml5ParserEnabled', true);
+
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml(view('pusat-karir.bukti-lamaran-pdf', compact('application'))->render());
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => "attachment; filename=\"bukti-{$application->registration_code}.pdf\"",
+        ]);
     }
 
     protected function generateRegistrationCode(string $companyShort): string

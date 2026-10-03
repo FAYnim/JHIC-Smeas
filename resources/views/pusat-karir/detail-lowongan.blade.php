@@ -1400,9 +1400,10 @@
                         Konfirmasi ke WhatsApp Pokja
                     </a>
 
-                    <button type="button" class="success-download-btn">
+                    <a href="{{ route('pusat-karir.bukti-lamar', $lamaran['registration_code']) }}"
+                        class="success-download-btn" style="display: block; text-align: center; text-decoration: none;">
                         Unduh Bukti Pengajuan (PDF)
-                    </button>
+                    </a>
                 </div>
             </div>
         @endif

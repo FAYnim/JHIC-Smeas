@@ -11,7 +11,6 @@ use App\Models\Guru;
 use App\Models\Lowongan;
 use App\Models\MitraPerusahaan;
 use App\Models\Pengumuman;
-use App\Models\Setting;
 use App\Models\StrukturOrganisasi;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +20,7 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')-
 
 Route::get('/', function () {
     $artikels = Artikel::latest('published_at')->take(4)->get();
+
     return view('index', compact('artikels'));
 })->name('beranda');
 
@@ -57,8 +57,13 @@ Route::get('/jurusan', function () {
     return view('jurusan.index', compact('totalLowongan', 'totalAlumni', 'totalMitra'));
 })->name('jurusan');
 
-Route::get('/jurusan/{slug}', function ($slug) {
-    return view("jurusan.{$slug}");
+Route::get('/jurusan/{slug}', function (string $slug) {
+    $view = "jurusan.{$slug}";
+    if (! view()->exists($view)) {
+        abort(404);
+    }
+
+    return view($view);
 })->name('jurusan.detail');
 
 Route::get('/informasi', function () {

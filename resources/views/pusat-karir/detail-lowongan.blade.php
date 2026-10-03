@@ -1402,9 +1402,6 @@
                         </a>
                     @endif
 
-                    <button type="button" class="success-download-btn">
-                        Unduh Bukti Pengajuan (PDF)
-                    </button>
                 </div>
             </div>
         @endif
@@ -1489,7 +1486,7 @@
         <div class="section-tabs" role="tablist">
             <button type="button" class="section-tab active" data-tab="peluang" role="tab"
                 aria-selected="true">
-                Peluang & Lowongan Aktif (2)
+                Peluang & Lowongan Aktif (1)
             </button>
             <button type="button" class="section-tab" data-tab="info" role="tab" aria-selected="false">
                 Informasi Kemitraan & Dokumen
@@ -1505,9 +1502,8 @@
 
                     <!-- Filter Buttons -->
                     <div class="filter-row" style="margin-top: 1.25rem;">
-                        <button class="filter-btn active" data-filter="all">Semua (2)</button>
+                        <button class="filter-btn active" data-filter="all">Semua (1)</button>
                         <button class="filter-btn" data-filter="pkl">Magang PKL Siswa (1)</button>
-                        <button class="filter-btn" data-filter="loker">Loker BKK Alumni (1)</button>
                     </div>
 
                     <!-- Job Card 1 — Magang PKL -->
@@ -1565,54 +1561,6 @@
                             </div>
                             <a href="{{ route('pusat-karir.lamar', $lowongan->slug) }}" class="card-action-btn">
                                 Lihat & Ajukan Magang →
-                            </a>
-                        </div>
-                    </div>
-
-
-
-                        <div class="job-card-top">
-                            <div>
-                                <h2>Junior NOC & Network Maintenance Engineer</h2>
-                                <p class="job-sub-text">Status: Kontrak Kerja (PKWT 1 Tahun) • Target Jurusan: <strong
-                                        style="color:#1d4ed8;">SIJA, TJA, & TKJ</strong></p>
-                            </div>
-                            <button class="bookmark-btn" title="Simpan">
-                                <svg width="16" height="16" fill="none" stroke="currentColor"
-                                    stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="salary-text">Rp 4.700.000 - Rp 5.500.000 / bln</div>
-
-                        <div class="job-meta-row">
-                            <span class="job-meta-item">
-                                <svg viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Full-time On-site
-                            </span>
-                            <span class="job-meta-item">
-                                <svg viewBox="0 0 20 20" fill="currentColor">
-                                    <path
-                                        d="M10.75 10.818a4.5 4.5 0 01-6.364-6.364L8.05 0.793a4.5 4.5 0 016.364 0l.222.222" />
-                                    <path d="M10 13a8 8 0 100-16 8 8 0 000 16z" />
-                                </svg>
-                                BPJS TK & Jenjang Karir
-                            </span>
-                        </div>
-
-                        <div class="job-footer-row">
-                            <div class="deadline-text">
-                                Tenggat Lamaran: <strong>30 Oktober 2026</strong>
-                            </div>
-                            <a href="{{ route('pusat-karir.katalog-lowongan') }}" class="card-action-btn">
-                                Lihat Detail Loker →
                             </a>
                         </div>
                     </div>
@@ -1769,64 +1717,28 @@
                         <p style="font-size: 0.8rem; color: #64748b; margin: -0.5rem 0 1rem;">Berkas resmi yang dapat
                             diunduh oleh siswa, wali murid, dan bapak/ibu guru pengampu</p>
 
-                        <div class="docs-grid">
-                            <div class="doc-card">
-                                <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="doc-card-name">Silabus_Kelas_Industri_Telkom_2028.pdf</span>
-                                <span class="doc-card-dl"><svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                        <path
-                                            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                    </svg></span>
+                        @if ($lowongan->dokumen)
+                            <div class="docs-grid">
+                                @foreach ($lowongan->dokumen as $doc)
+                                    <div class="doc-card">
+                                        <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="doc-card-name">{{ basename($doc) }}</span>
+                                        <a href="{{ asset('storage/' . $doc) }}" download class="doc-card-dl">
+                                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                                <path
+                                                    d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
+                                                <path
+                                                    d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
-                            <div class="doc-card">
-                                <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="doc-card-name">Tata_Tertib_dan_K3_Praktik_Industri.pdf</span>
-                                <span class="doc-card-dl"><svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                        <path
-                                            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                    </svg></span>
-                            </div>
-                            <div class="doc-card">
-                                <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="doc-card-name">Format_Surat_Izin_Ortu_Telkom.docx</span>
-                                <span class="doc-card-dl"><svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                        <path
-                                            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                    </svg></span>
-                            </div>
-                            <div class="doc-card">
-                                <svg class="doc-card-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="doc-card-name">Skema_Uji_Kompetensi_Kejuruan_DTI.pdf</span>
-                                <span class="doc-card-dl"><svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                        <path
-                                            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                    </svg></span>
-                            </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
 
@@ -1929,7 +1841,7 @@
             </div>
             <div class="cta-actions">
                 <a href="{{ route('pusat-karir.katalog-mitra') }}" class="cta-btn-primary">
-                    Hubungi Pokja Hubungan Industri →
+                    Lihat Mitra Industri →
                 </a>
                 @if ($lowongan->dokumen)
                     <a href="{{ asset('storage/' . $lowongan->dokumen[0]) }}" download class="cta-btn-secondary">

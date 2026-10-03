@@ -245,7 +245,7 @@
                 </p>
 
                 <!-- Search Bar -->
-                <form class="hero-search-bar" action="#" method="GET" id="hero-search-form">
+                <form class="hero-search-bar" action="{{ route('pusat-karir.katalog-lowongan') }}" method="GET" id="hero-search-form">
                     <input type="text" name="q" placeholder="Cari perusahaan, posisi, atau tempat magang..."
                         autocomplete="off">
                     <button type="submit" aria-label="Cari">

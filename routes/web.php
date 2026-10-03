@@ -116,7 +116,7 @@ Route::post('/blud/{slug}/laporkan', [BludController::class, 'storeLaporkan'])
 
 // SPMB Routes
 Route::get('/spmb', [SpmbController::class, 'index'])->name('spmb.index');
-Route::get('/spmb/login', [SpmbController::class, 'index'])->name('spmb.login-page');
+Route::get('/spmb/login', fn () => redirect()->route('spmb.index'));
 Route::post('/spmb/login', [SpmbController::class, 'login'])->name('spmb.login');
 
 Route::get('/spmb/dashboard', [SpmbController::class, 'dashboard'])->name('spmb.dashboard');

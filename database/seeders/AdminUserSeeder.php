@@ -15,6 +15,7 @@ class AdminUserSeeder extends Seeder
             ['name' => 'BKK Pusat Karir', 'email' => 'bkk@smkn1.surabaya.sch.id', 'role' => User::ROLE_BKK],
             ['name' => 'Humas Sekolah', 'email' => 'humas@smkn1.surabaya.sch.id', 'role' => User::ROLE_HUMAS],
             ['name' => 'Panitia SPMB', 'email' => 'spmb@smkn1.surabaya.sch.id', 'role' => User::ROLE_SPMB],
+            ['name' => 'Staf BLUD', 'email' => 'blud@smkn1.surabaya.sch.id', 'role' => User::ROLE_BLUD],
         ];
 
         foreach ($accounts as $account) {

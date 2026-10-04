@@ -67,23 +67,50 @@
                     rgba(2, 20, 48, 0.78) 100%);
         }
 
-        .blud-hero__title {
+        .blud-hero__content {
             position: absolute;
             left: 0;
             right: 0;
             bottom: 0;
             padding: 1.5rem 1.25rem 1.75rem;
             color: #fff;
+            max-width: 90rem;
+            margin-inline: auto;
+            z-index: 1;
+        }
+
+        .blud-hero__title {
             font-weight: 800;
             font-size: clamp(1.75rem, 4.2vw, 2.75rem);
             line-height: 1.15;
             letter-spacing: -0.02em;
-            max-width: 90rem;
-            margin-inline: auto;
+        }
+
+        .blud-hero__subtitle {
+            margin-top: 0.5rem;
+            font-size: clamp(0.95rem, 1.6vw, 1.125rem);
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 48rem;
+        }
+
+        .blud-hero__cta {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.65rem 1.4rem;
+            border-radius: 9999px;
+            background: #fff;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: background 0.15s ease;
+        }
+
+        .blud-hero__cta:hover {
+            background: #e2e8f0;
         }
 
         @media (min-width: 768px) {
-            .blud-hero__title {
+            .blud-hero__content {
                 padding: 2rem 2rem 2.25rem;
             }
         }
@@ -269,12 +296,7 @@
 
     <main class="flex-grow">
         {{-- Hero banner --}}
-        <section class="blud-hero" aria-label="Banner layanan unggulan">
-            <img src="https://placehold.co/1600x560/0f172a/94a3b8?text=Jasa+Pentest+Website"
-                alt="Jasa Pentest Website" width="1600" height="560">
-            <div class="blud-hero__overlay"></div>
-            <h1 class="blud-hero__title">Jasa Pentest Website</h1>
-        </section>
+        @include('blud.partials.hero')
 
         {{-- Search --}}
         <section class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10">

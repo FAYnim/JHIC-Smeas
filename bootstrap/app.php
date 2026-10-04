@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => EnsureRole::class,
             'spmb.auth' => SpmbAuthMiddleware::class,
         ]);
+        $middleware->redirectUsersTo(fn (): string => route('admin.dashboard'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

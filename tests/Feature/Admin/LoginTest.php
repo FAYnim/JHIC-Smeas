@@ -15,6 +15,22 @@ class LoginTest extends TestCase
         $this->get(route('login'))->assertOk();
     }
 
+    public function test_authenticated_user_is_redirected_from_login_to_admin(): void
+    {
+        $bkk = User::factory()->bkk()->create();
+
+        $this->actingAs($bkk)
+            ->get(route('login'))
+            ->assertRedirect(route('admin.dashboard'));
+
+        $this->actingAs($bkk)
+            ->post(route('login.store'), [
+                'email' => $bkk->email,
+                'password' => 'password',
+            ])
+            ->assertRedirect(route('admin.dashboard'));
+    }
+
     public function test_user_can_login_with_valid_credentials(): void
     {
         $bkk = User::factory()->bkk()->create([

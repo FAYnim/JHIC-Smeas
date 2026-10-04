@@ -24,7 +24,7 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')-
 Route::get('/', function () {
     $artikels = Artikel::latest('published_at')->take(4)->get();
     $gurus = Guru::where('kategori', 'guru')->where('is_active', true)
-        ->orderBy('urutan')->limit(4)->get();
+        ->orderBy('urutan')->limit(12)->get();
     $gurusCount = Guru::where('is_active', true)->count();
     $prakata = [
         'nama' => Setting::get('profil.prakata_nama', 'Dr. Drs. Anton Sujarwo, M.Pd.'),

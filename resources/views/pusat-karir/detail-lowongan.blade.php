@@ -1639,8 +1639,13 @@
                         <h3 class="docs-card-title">Dokumen & Silabus Kemitraan</h3>
                         <p class="docs-card-sub">Unduh materi acuan resmi sebelum mendaftar.</p>
 
-                        @if ($lowongan->dokumen)
+                        @if ($lowongan->dokumen && count($lowongan->dokumen) > 0)
                             @foreach ($lowongan->dokumen as $doc)
+                                @php
+                                    $docName = is_array($doc) ? ($doc['name'] ?? 'Dokumen') : basename($doc);
+                                    $docDesc = is_array($doc) ? ($doc['desc'] ?? 'Dokumen Pendukung') : 'Dokumen Pendukung';
+                                    $docPath = is_array($doc) ? ($doc['name'] ?? '') : $doc;
+                                @endphp
                                 <div class="doc-download-item">
                                     <div class="doc-download-left">
                                         <svg class="doc-file-icon" viewBox="0 0 20 20" fill="currentColor">
@@ -1649,11 +1654,11 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                         <div>
-                                            <div class="doc-file-name">{{ $doc['name'] }}</div>
-                                            <div class="doc-file-size">{{ $doc['desc'] }}</div>
+                                            <div class="doc-file-name">{{ $docName }}</div>
+                                            <div class="doc-file-size">{{ $docDesc }}</div>
                                         </div>
                                     </div>
-                                    <a href="{{ asset('storage/' . $doc['name']) }}" download class="doc-unduh-btn">
+                                    <a href="{{ asset('storage/' . $docPath) }}" download class="doc-unduh-btn">
                                         Unduh
                                         <svg viewBox="0 0 20 20" fill="currentColor">
                                             <path
@@ -1663,40 +1668,31 @@
                                         </svg>
                                     </a>
                                 </div>
-                            </div>
-                            <a aria-disabled="true" tabindex="-1" title="Dokumen belum tersedia" class="doc-unduh-btn">
-                                Unduh
-                                <svg viewBox="0 0 20 20" fill="currentColor">
-                                    <path
-                                        d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                    <path
-                                        d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                </svg>
-                            </a>
-                        </div>
-
-                        <div class="doc-download-item">
-                            <div class="doc-download-left">
-                                <svg class="doc-file-icon" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <div>
-                                    <div class="doc-file-name">Format_Surat_Izin_Ortu_Telkom.d...</div>
-                                    <div class="doc-file-size">Template Pokja PKL (450 KB)</div>
+                            @endforeach
+                        @else
+                            <div class="doc-download-item">
+                                <div class="doc-download-left">
+                                    <svg class="doc-file-icon" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <div>
+                                        <div class="doc-file-name">Dokumen Informasi Magang</div>
+                                        <div class="doc-file-size">Belum ada dokumen yang diunggah</div>
+                                    </div>
                                 </div>
+                                <a aria-disabled="true" tabindex="-1" title="Dokumen belum tersedia" class="doc-unduh-btn">
+                                    Unduh
+                                    <svg viewBox="0 0 20 20" fill="currentColor">
+                                        <path
+                                            d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
+                                        <path
+                                            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
+                                    </svg>
+                                </a>
                             </div>
-                            <a aria-disabled="true" tabindex="-1" title="Dokumen belum tersedia" class="doc-unduh-btn">
-                                Unduh
-                                <svg viewBox="0 0 20 20" fill="currentColor">
-                                    <path
-                                        d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-                                    <path
-                                        d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                                </svg>
-                            </a>
-                        </div>
+                        @endif
                     </div>
 
                 </aside>

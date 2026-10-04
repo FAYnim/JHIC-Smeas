@@ -30,8 +30,10 @@
 
             {{-- Logo --}}
             <a href="{{ $logoUrl }}" class="flex items-center group">
-                <img src="{{ asset('images/logo-smkn1.png') }}" alt="Logo SMKN 1 Surabaya"
-                    class="h-11 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105">
+                <img src="{{ asset('images/logo-smkn1.webp') }}" alt="Logo SMKN 1 Surabaya"
+                    width="230" height="82"
+                    class="h-11 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                    fetchpriority="high">
             </a>
 
             {{-- Desktop Nav --}}

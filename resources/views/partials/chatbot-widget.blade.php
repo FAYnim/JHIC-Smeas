@@ -66,7 +66,7 @@
         <!-- Header -->
         <header class="flex items-center gap-3 bg-gradient-to-r from-[#013572] to-[#024089] px-4 py-3.5 text-white shrink-0">
             <div class="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-white/30 shrink-0">
-                <img src="{{ asset('images/smeas-ai-bot.svg') }}" alt="" class="w-full h-full object-cover">
+                <img src="{{ asset('images/smeas-ai-bot.svg') }}" alt="" width="40" height="40" loading="lazy" class="w-full h-full object-cover">
                 <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-[#013572]"></span>
             </div>
             <div class="flex-1 min-w-0">
@@ -92,7 +92,7 @@
         <!-- Messages Area -->
         <div id="smeas-ai-messages" class="flex-1 space-y-3.5 overflow-y-auto bg-slate-50/90 p-4" aria-live="polite">
             <div class="flex items-start gap-2.5">
-                <img src="{{ asset('images/smeas-ai-bot.svg') }}" alt="" class="h-7 w-7 rounded-full shrink-0 mt-0.5 shadow-sm">
+                <img src="{{ asset('images/smeas-ai-bot.svg') }}" alt="" width="28" height="28" loading="lazy" class="h-7 w-7 rounded-full shrink-0 mt-0.5 shadow-sm">
                 <div class="max-w-[85%] rounded-2xl rounded-tl-sm bg-[#024089] px-4 py-2.5 text-sm text-white shadow-sm leading-relaxed">
                     Halo! Saya <strong>Smeas.Ai</strong>, asisten virtual SMKN 1 Surabaya. Ada yang bisa saya bantu seputar jurusan, SPMB, magang, atau informasi sekolah?
                 </div>
@@ -123,7 +123,7 @@
         class="group flex items-center gap-3 bg-white text-slate-800 rounded-full pl-2 pr-5 py-2 shadow-2xl border border-blue-100 hover:shadow-blue-500/30 hover:border-blue-300 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 cursor-pointer"
         aria-label="Buka Chat Smeas.Ai" aria-expanded="false" title="Tanya Smeas.Ai">
         <div class="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-blue-500/30 shadow-inner shrink-0">
-            <img src="{{ asset('images/smeas-ai-bot.svg') }}" alt="Smeas.Ai" class="w-full h-full object-cover">
+            <img src="{{ asset('images/smeas-ai-bot.svg') }}" alt="Smeas.Ai" width="48" height="48" class="w-full h-full object-cover">
             <!-- Pulsing Online Badge -->
             <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
             <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-400 animate-ping opacity-75"></span>

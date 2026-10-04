@@ -6,11 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pusat Karir SMKN 1 Surabaya</title>
 
-    <!-- Google Fonts -->
+    <!-- Preload Critical Hero Background -->
+    <link rel="preload" as="image" href="{{ asset('images/smkn1.webp') }}" type="image/webp" fetchpriority="high">
+
+    <!-- Google Fonts (Non-render-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    </noscript>
 
     <!-- Vite Styles & Scripts with Fallback -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -21,7 +31,7 @@
 
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         /* Navbar hover underline effect */
@@ -230,7 +240,7 @@
             <!-- Background Image (placeholder, ganti src saat asset tersedia) -->
             <div class="hero-section__bg">
                 <!-- background sementara -->
-                <img src="{{ asset('images/smkn1.png') }}" alt="Background Pusat Karir">
+                <img src="{{ asset('images/smkn1.webp') }}" alt="Background Pusat Karir" width="1280" height="598" fetchpriority="high">
             </div>
 
             <!-- Dark Overlay -->

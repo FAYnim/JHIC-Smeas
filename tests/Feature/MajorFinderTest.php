@@ -62,4 +62,15 @@ class MajorFinderTest extends TestCase
         $this->assertStringContainsString('Budi', $analysis);
         $this->assertStringContainsString('Rekayasa Perangkat Lunak', $analysis);
     }
+
+    public function test_view_renders_questions_and_majors_data(): void
+    {
+        $response = $this->get(route('temukan-jurusan'));
+
+        $response->assertStatus(200);
+        $response->assertSee('Saya sangat menikmati aktivitas yang melibatkan analisis angka');
+        $response->assertSee('Rekayasa Perangkat Lunak');
+        $response->assertSee('Teknik Komputer dan Jaringan');
+        $response->assertSee('Desain Komunikasi Visual');
+    }
 }

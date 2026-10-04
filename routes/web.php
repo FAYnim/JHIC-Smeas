@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BludController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\SpmbController;
 use App\Models\Alumni;
@@ -162,3 +163,11 @@ Route::middleware('auth')
 if (app()->runningUnitTests()) {
     require __DIR__.'/testing.php';
 }
+
+Route::prefix('api/chatbot')->group(function () {
+    Route::post('/message', [ChatbotController::class, 'sendMessage'])
+        ->middleware('throttle:15,1')
+        ->name('chatbot.message');
+    Route::post('/reset', [ChatbotController::class, 'resetSession'])
+        ->name('chatbot.reset');
+});

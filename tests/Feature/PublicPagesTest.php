@@ -101,12 +101,12 @@ class PublicPagesTest extends TestCase
         $response->assertSee('Akademik Test Unik');
     }
 
-    public function test_beranda_search_form_targets_jurusan(): void
+    public function test_beranda_major_finder_section_links_to_temukan_jurusan(): void
     {
         $response = $this->get(route('beranda'));
 
         $response->assertOk();
-        $response->assertSee('action="'.route('jurusan').'"', false);
-        $response->assertSee('name="q"', false);
+        $response->assertSee(route('temukan-jurusan'));
+        $response->assertSee('Bingung Memilih Jurusan yang Tepat di SMEAS?');
     }
 }

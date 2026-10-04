@@ -413,21 +413,6 @@
 
             {{-- ==================== STATE 1: INTRO CARD ==================== --}}
             <div id="state-intro" class="smeas-glass-card p-6 md:p-12 fade-in">
-                <div class="flex flex-wrap items-center gap-3 mb-6">
-                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-blue-50 text-blue-900 border border-blue-200">
-                        <svg class="w-4 h-4 text-amber-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                        </svg>
-                        Smeas AI Major Finder
-                    </span>
-                    <span class="text-xs text-slate-600 font-semibold bg-slate-100 px-3 py-1.5 rounded-full inline-flex items-center gap-1.5">
-                        <svg class="w-3.5 h-3.5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                        </svg>
-                        <span>15 Pertanyaan • ±3 Menit</span>
-                    </span>
-                </div>
-
                 <h1 class="text-2xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-4 tracking-tight">
                     Temukan Jurusan Impianmu di SMKN 1 Surabaya
                 </h1>
@@ -501,13 +486,8 @@
                             <span>Soal Sebelumnya</span>
                         </button>
 
-                        <div class="flex items-center gap-2">
-                            <span id="question-category-pill" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-bold">
-                                {{-- Injected via JS --}}
-                            </span>
-                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-900 border border-blue-100 rounded-full text-xs font-extrabold">
-                                <span id="question-counter">Pertanyaan 1 dari 15</span>
-                            </div>
+                        <div class="text-xs font-extrabold text-blue-950">
+                            <span id="question-counter">Pertanyaan 1 dari 15</span>
                         </div>
 
                         <span id="progress-percent" class="text-xs md:text-sm font-black text-amber-600">7%</span>
@@ -656,12 +636,6 @@
                 
                 {{-- Greeting Header --}}
                 <div class="text-center mb-6">
-                    <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-200 mb-2">
-                        <svg class="w-3.5 h-3.5 text-amber-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
-                        </svg>
-                        <span>Analisis Minat & Bakat Selesai</span>
-                    </span>
                     <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
                         Hai <span id="res-greeting-name" class="text-blue-900">Sobat SMEAS</span>, Ini Rekomendasi Jurusanmu!
                     </h2>
@@ -677,30 +651,26 @@
                     <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
                     <div class="relative z-10">
-                        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/15 backdrop-blur border border-white/20 text-yellow-300">
-                                <svg class="w-4 h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
-                                </svg>
-                                <span>Rekomendasi Juara #1</span>
-                            </span>
-                            <div class="text-right">
+                        <div class="flex items-start justify-between gap-4 mb-5">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-xs font-extrabold uppercase tracking-widest text-amber-400">
+                                        Rekomendasi Utama
+                                    </span>
+                                    <span class="text-white/40 text-xs">•</span>
+                                    <span id="res-top-code" class="text-xs font-bold text-blue-200 uppercase tracking-wider">RPL</span>
+                                </div>
+                                <h3 id="res-top-name" class="text-2xl md:text-4xl font-black tracking-tight text-white mb-2">
+                                    Rekayasa Perangkat Lunak
+                                </h3>
+                                <p id="res-top-career" class="text-blue-100 text-xs md:text-sm font-medium leading-relaxed max-w-2xl">
+                                    Software Developer, Web Engineer, Mobile App Creator
+                                </p>
+                            </div>
+                            <div class="text-right flex-shrink-0">
                                 <span id="res-top-score" class="text-4xl md:text-5xl font-black text-amber-400">95%</span>
                                 <span class="block text-[11px] font-semibold text-blue-200 uppercase tracking-wider">Kecocokan</span>
                             </div>
-                        </div>
-
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2.5 mb-2">
-                                <span id="res-top-code" class="inline-block px-2.5 py-1 bg-amber-400 text-blue-950 font-black rounded-md text-xs tracking-wider">RPL</span>
-                                <span class="text-xs text-blue-200 font-semibold">Kompetensi Keahlian Unggulan</span>
-                            </div>
-                            <h3 id="res-top-name" class="text-2xl md:text-4xl font-black tracking-tight text-white mb-2.5">
-                                Rekayasa Perangkat Lunak
-                            </h3>
-                            <p id="res-top-career" class="text-blue-100 text-xs md:text-sm font-medium leading-relaxed max-w-2xl">
-                                Software Developer, Web Engineer, Mobile App Creator
-                            </p>
                         </div>
 
                         <div class="pt-5 border-t border-white/10 flex flex-wrap items-center gap-3.5 no-print">
@@ -721,22 +691,16 @@
 
                 {{-- AI Personal Insight Card --}}
                 <div class="smeas-glass-card p-6 md:p-8">
-                    <div class="flex items-center justify-between gap-4 mb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-900 shadow-sm">
-                                <svg class="w-5 h-5 text-blue-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-extrabold text-slate-900 text-base md:text-lg">Analisis Personal Smeas.Ai</h4>
-                                <p class="text-xs text-slate-400 font-medium">Konsultan Bimbingan Karir Resmi SMKN 1 Surabaya</p>
-                            </div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-900 shadow-sm">
+                            <svg class="w-5 h-5 text-blue-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>
+                            </svg>
                         </div>
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                            AI Online
-                        </span>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base md:text-lg">Analisis Personal Smeas.Ai</h4>
+                            <p class="text-xs text-slate-400 font-medium">Konsultan Bimbingan Karir Resmi SMKN 1 Surabaya</p>
+                        </div>
                     </div>
 
                     {{-- Skeleton Loader saat AJAX memuat --}}
@@ -753,16 +717,11 @@
 
                 {{-- Ranked Breakdown: 9 Majors --}}
                 <div class="smeas-glass-card p-6 md:p-8">
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
-                        <div>
-                            <h4 class="font-extrabold text-slate-900 text-base md:text-lg">
-                                Ranking Probabilitas 9 Kejuruan SMKN 1 Surabaya
-                            </h4>
-                            <p class="text-xs text-slate-400 font-medium mt-0.5">Pemetaan menyeluruh berdasarkan skor kecocokan minatmu</p>
-                        </div>
-                        <span class="text-xs font-bold text-blue-900 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-                            9 Kompetensi Keahlian
-                        </span>
+                    <div class="mb-6">
+                        <h4 class="font-extrabold text-slate-900 text-base md:text-lg">
+                            Ranking Probabilitas 9 Kejuruan SMKN 1 Surabaya
+                        </h4>
+                        <p class="text-xs text-slate-400 font-medium mt-0.5">Pemetaan menyeluruh berdasarkan skor kecocokan minatmu</p>
                     </div>
 
                     <div id="ranked-majors-list" class="space-y-3.5">
@@ -1096,13 +1055,18 @@
 
             // Top #1 Match
             const top = results[0];
-            document.getElementById('res-top-score').textContent = `${top.score}%`;
-            document.getElementById('res-top-code').textContent = top.code;
-            document.getElementById('res-top-name').textContent = top.name;
-            document.getElementById('res-top-career').textContent = top.career;
-            document.getElementById('res-top-link').href = `/jurusan/${top.slug}`;
+            const elScore = document.getElementById('res-top-score');
+            if (elScore) elScore.textContent = `${top.score}%`;
+            const elCode = document.getElementById('res-top-code');
+            if (elCode) elCode.textContent = top.code;
+            const elName = document.getElementById('res-top-name');
+            if (elName) elName.textContent = top.name;
+            const elCareer = document.getElementById('res-top-career');
+            if (elCareer) elCareer.textContent = top.career;
+            const elLink = document.getElementById('res-top-link');
+            if (elLink) elLink.href = `/jurusan/${top.slug}`;
 
-            // Render all 9 majors breakdown with podium styling (Lucide icons instead of emojis)
+            // Render all 9 majors breakdown cleanly without decorative pill badges
             const listEl = document.getElementById('ranked-majors-list');
             listEl.innerHTML = '';
 
@@ -1110,23 +1074,19 @@
                 const rankNum = idx + 1;
                 let barColor = 'bg-slate-400';
                 let badgeBg = 'bg-slate-100 text-slate-700 border border-slate-200';
-                let podiumTag = '';
                 let borderHighlight = 'border-slate-100 bg-slate-50/60 hover:border-slate-300';
                 
                 if (rankNum === 1) {
                     barColor = 'bg-amber-400';
                     badgeBg = 'bg-amber-400 text-blue-950 font-black';
-                    podiumTag = `<span class="inline-flex items-center gap-1 text-[11px] font-extrabold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">${getLucideSvg('trophy', 'w-3 h-3 text-amber-500')} Juara 1</span>`;
                     borderHighlight = 'border-amber-200 bg-amber-50/30 hover:border-amber-300 shadow-sm';
                 } else if (rankNum === 2) {
                     barColor = 'bg-blue-600';
                     badgeBg = 'bg-blue-600 text-white font-bold';
-                    podiumTag = `<span class="inline-flex items-center gap-1 text-[11px] font-extrabold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full">${getLucideSvg('medal', 'w-3 h-3 text-blue-600')} Peringkat 2</span>`;
                     borderHighlight = 'border-blue-100 bg-blue-50/20 hover:border-blue-200';
                 } else if (rankNum === 3) {
                     barColor = 'bg-teal-500';
                     badgeBg = 'bg-teal-500 text-white font-bold';
-                    podiumTag = `<span class="inline-flex items-center gap-1 text-[11px] font-extrabold text-teal-700 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded-full">${getLucideSvg('award', 'w-3 h-3 text-teal-600')} Peringkat 3</span>`;
                     borderHighlight = 'border-teal-100 bg-teal-50/20 hover:border-teal-200';
                 }
 
@@ -1135,14 +1095,13 @@
                 itemRow.innerHTML = `
                     <div class="flex items-center justify-between gap-3 mb-2.5">
                         <div class="flex items-center gap-3">
-                            <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs ${badgeBg}">
+                            <span class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${badgeBg}">
                                 ${rankNum}
                             </span>
                             <div>
                                 <div class="flex items-center gap-2 flex-wrap">
                                     <span class="font-bold text-slate-900 text-sm md:text-base">${item.name}</span>
-                                    <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-slate-200 text-slate-700">${item.code}</span>
-                                    ${podiumTag}
+                                    <span class="text-xs font-semibold text-slate-400">(${item.code})</span>
                                 </div>
                                 <div class="text-[11px] text-slate-400 font-medium hidden sm:block">${item.career}</div>
                             </div>
@@ -1154,7 +1113,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
+                    <div class="w-full h-2 bg-slate-200/80 rounded-full overflow-hidden">
                         <div class="h-full ${barColor} rounded-full transition-all duration-700 ease-out" style="width: ${item.score}%"></div>
                     </div>
                 `;

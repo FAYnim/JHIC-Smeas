@@ -15,7 +15,7 @@ class UpdateStrukturOrganisasiRequest extends FormRequest
     {
         return [
             'nama' => ['required', 'string', 'max:255'],
-            'kategori' => ['required', 'in:wakil,bagian'],
+            'kategori' => ['required', 'in:kepala,wakil,bagian'],
             'jabatan' => ['nullable', 'string', 'max:255'],
             'nip' => ['nullable', 'string', 'max:100'],
             'bidang' => ['nullable', 'string', 'max:255'],

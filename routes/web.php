@@ -39,10 +39,11 @@ Route::get('/visi-misi', function () {
 })->name('visi-misi');
 
 Route::get('/struktur-organisasi', function () {
+    $kepala = StrukturOrganisasi::where('kategori', 'kepala')->orderBy('urutan')->first();
     $wakil = StrukturOrganisasi::where('kategori', 'wakil')->orderBy('urutan')->get();
     $bagian = StrukturOrganisasi::where('kategori', 'bagian')->orderBy('urutan')->get();
 
-    return view('struktur-organisasi', compact('wakil', 'bagian'));
+    return view('struktur-organisasi', compact('kepala', 'wakil', 'bagian'));
 })->name('struktur-organisasi');
 
 Route::get('/guru-dan-tenaga-kependidikan', function () {

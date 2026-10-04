@@ -9,6 +9,11 @@ class StrukturOrganisasiSeeder extends Seeder
 {
     public function run(): void
     {
+        StrukturOrganisasi::updateOrCreate(
+            ['kategori' => 'kepala'],
+            ['nama' => 'Drs. H. Bambang Wijanarko, M.M.', 'jabatan' => 'Kepala Sekolah', 'nip' => '19660415 199203 1 004', 'urutan' => 1]
+        );
+
         $wakils = [
             ['nama' => 'Dra. Hj. Siti Aminah, M.M.', 'jabatan' => 'Wakil Kepala Sekolah', 'bidang' => 'Kurikulum', 'nip' => '19670520 199303 2 003', 'kategori' => 'wakil', 'urutan' => 1],
             ['nama' => 'Drs. H. Agus Supriyadi, M.Pd.', 'jabatan' => 'Wakil Kepala Sekolah', 'bidang' => 'Kesiswaan', 'nip' => '19680115 199303 1 005', 'kategori' => 'wakil', 'urutan' => 2],

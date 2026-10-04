@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BludController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\LowonganController;
+use App\Http\Controllers\MajorFinderController;
 use App\Http\Controllers\SpmbController;
 use App\Models\Alumni;
 use App\Models\Artikel;
@@ -79,6 +80,11 @@ Route::get('/jurusan/{slug}', function (string $slug) {
 
     return view($view);
 })->name('jurusan.detail');
+
+Route::get('/temukan-jurusan', [MajorFinderController::class, 'index'])->name('temukan-jurusan');
+Route::post('/temukan-jurusan/analisis', [MajorFinderController::class, 'analisis'])
+    ->middleware('throttle:20,1')
+    ->name('temukan-jurusan.analisis');
 
 Route::get('/informasi', function () {
     $artikels = Artikel::where('kategori', 'berita')->latest('published_at')->limit(6)->get();

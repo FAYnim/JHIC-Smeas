@@ -65,13 +65,41 @@
             object-fit: cover;
             object-position: center;
             filter: blur(8px);
+            transform: scale(1.12);
+            opacity: 0;
+            z-index: 1;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+            will-change: opacity, transform;
+        }
+
+        /* Layer gambar sebelumnya yang tetap tampil di bawah gambar baru */
+        .hero-bg-image.is-prev {
+            opacity: 1;
+            z-index: 1;
             transform: scale(1.05);
+        }
+
+        /* Gambar aktif yang fade-in di layer atas */
+        .hero-bg-image.is-active {
+            opacity: 1;
+            z-index: 2;
+            transform: scale(1.05);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-bg-image,
+            .hero-bg-image.is-prev,
+            .hero-bg-image.is-active {
+                transform: scale(1.05) !important;
+                transition: none !important;
+            }
         }
 
         .hero-bg-overlay {
             position: absolute;
             inset: 0;
             background: rgba(0, 0, 0, 0.45);
+            z-index: 3;
         }
 
         /* ===== Photo Cards (side by side with gap) ===== */
@@ -601,8 +629,10 @@
 
         {{-- ==================== HERO SECTION ==================== --}}
         <section class="hero-section">
-            {{-- Blurred Background Image --}}
-            <img src="{{ asset('images/smkn1.png') }}" alt="Gedung SMKN 1 Surabaya" class="hero-bg-image">
+            {{-- Blurred Background Images (crossfade slideshow) --}}
+            <img src="{{ asset('images/mpls.JPG') }}" alt="Kegiatan MPLS SMKN 1 Surabaya" class="hero-bg-image is-active">
+            <img src="{{ asset('images/mpls%202.JPG') }}" alt="Kegiatan MPLS SMKN 1 Surabaya" class="hero-bg-image" decoding="async" aria-hidden="true">
+            <img src="{{ asset('images/lks.png') }}" alt="Lomba Kompetensi Siswa SMKN 1 Surabaya" class="hero-bg-image" decoding="async" aria-hidden="true">
             {{-- Dark overlay --}}
             <div class="hero-bg-overlay"></div>
 
@@ -1308,6 +1338,39 @@
             });
 
             fadeEls.forEach(el => observer.observe(el));
+
+            // ===== Hero Background Slideshow =====
+            const heroBgImages = document.querySelectorAll('.hero-section .hero-bg-image');
+            if (heroBgImages.length > 1) {
+                let currentIndex = 0;
+                const displayDuration = 4500; // ganti tiap 4.5 detik
+                const transitionDuration = 1500; // durasi transisi 1.5 detik
+
+                setInterval(function() {
+                    if (document.hidden) return;
+
+                    const prevIndex = currentIndex;
+                    currentIndex = (currentIndex + 1) % heroBgImages.length;
+
+                    // Tandai gambar sebelumnya agar tetap menyala di layer bawah
+                    heroBgImages.forEach((img, idx) => {
+                        img.classList.remove('is-active');
+                        if (idx === prevIndex) {
+                            img.classList.add('is-prev');
+                        } else {
+                            img.classList.remove('is-prev');
+                        }
+                    });
+
+                    // Aktifkan gambar baru di layer atas (z-index 2) untuk transisi halus
+                    heroBgImages[currentIndex].classList.add('is-active');
+
+                    // Hapus status is-prev setelah transisi fade selesai
+                    setTimeout(() => {
+                        heroBgImages[prevIndex].classList.remove('is-prev');
+                    }, transitionDuration);
+                }, displayDuration);
+            }
         });
     </script>
 

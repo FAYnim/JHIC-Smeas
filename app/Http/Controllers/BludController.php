@@ -24,7 +24,15 @@ class BludController extends Controller
 
         $produkBluds = $query->get();
 
-        return view('blud.index', compact('produkBluds'));
+        // Sort stabil: prioritas rating > penilaian_count > created_at
+        // (primary diterapkan terakhir).
+        $hero = $produkBluds
+            ->sortByDesc('created_at')
+            ->sortByDesc('penilaian_count')
+            ->sortByDesc('rating')
+            ->first();
+
+        return view('blud.index', compact('produkBluds', 'hero'));
     }
 
     public function detail(string $slug): View

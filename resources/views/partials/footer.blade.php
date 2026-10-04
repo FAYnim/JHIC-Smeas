@@ -93,6 +93,34 @@
 
         </div>
 
+        {{-- Support Logos --}}
+        <div class="py-8 border-t border-white/10">
+            <p class="text-center text-xs font-bold uppercase tracking-widest text-blue-200/70 mb-5">
+                Didukung Oleh
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+                <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
+                    <img src="{{ asset('images/logo-jhic.webp') }}" alt="JHIC" class="h-10 w-auto object-contain">
+                </div>
+                <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
+                    <img src="{{ asset('images/logo-jagoan-hosting.webp') }}" alt="Jagoan Hosting"
+                        class="h-10 w-auto object-contain">
+                </div>
+                <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
+                    <img src="{{ asset('images/logo-komdigi.webp') }}" alt="KOMDIGI"
+                        class="h-10 w-auto object-contain">
+                </div>
+                <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
+                    <img src="{{ asset('images/logo-garuda-spark.webp') }}" alt="Garuda Spark"
+                        class="h-10 w-auto object-contain">
+                </div>
+                <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
+                    <img src="{{ asset('images/logo-ngalup.webp') }}" alt="NGALUP.co"
+                        class="h-10 w-auto object-contain">
+                </div>
+            </div>
+        </div>
+
         {{-- Bottom Copyright Strip --}}
         <div class="pt-8 border-t border-white/10 text-center text-xs text-blue-200/70 font-medium">
             &copy;{{ date('Y') }} | SMKN 1 Surabaya

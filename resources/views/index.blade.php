@@ -1009,52 +1009,49 @@
             </div>
         </section>
 
-        {{-- ==================== TEMUKAN JURUSANMU ==================== --}}
+        {{-- ==================== TEMUKAN JURUSANMU (AI MAJOR FINDER) ==================== --}}
         <section style="padding:64px 0 80px;background:#f8fafc;">
             <div style="max-width:1280px;margin:0 auto;padding:0 16px;">
-                <div style="text-align:center;margin-bottom:40px;" class="fade-up">
-                    <h2
-                        style="font-size:clamp(1.75rem, 4vw, 2.25rem);font-weight:800;color:#0f172a;line-height:1.3;margin-bottom:16px;">
-                        Temukan Jurusanmu,<br>Buka Peluang Karirmu
-                    </h2>
+                <div class="fade-up" style="background:linear-gradient(135deg, #024089 0%, #001938 100%);border-radius:24px;padding:48px 32px;color:#fff;box-shadow:0 20px 40px -15px rgba(2,64,137,0.3);position:relative;overflow:hidden;">
+                    {{-- Decorative background glow --}}
+                    <div style="position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:rgba(245,158,11,0.15);border-radius:50%;filter:blur(50px);pointer-events:none;"></div>
+                    <div style="position:absolute;bottom:-40px;left:-40px;width:200px;height:200px;background:rgba(59,130,246,0.2);border-radius:50%;filter:blur(40px);pointer-events:none;"></div>
 
-                    {{-- Search icon --}}
-                    <div style="display:flex;justify-content:center;margin-bottom:32px;">
-                        <div
-                            style="width:64px;height:64px;border-radius:50%;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:center;">
-                            <svg style="width:28px;height:28px;color:#024089;" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
+                    <div style="position:relative;z-index:1;max-width:760px;margin:0 auto;text-align:center;">
+                        {{-- AI Badges --}}
+                        <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);padding:6px 16px;border-radius:9999px;margin-bottom:20px;">
+                            <span style="font-size:0.8rem;font-weight:700;color:#fde047;display:inline-flex;align-items:center;gap:6px;">
+                                <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                AI-Powered Recommendation
+                            </span>
+                            <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">•</span>
+                            <span style="color:#e2e8f0;font-size:0.8rem;">15 Pertanyaan • ±3 Menit</span>
+                        </div>
+
+                        {{-- Title & Subtitle --}}
+                        <h2 style="font-size:clamp(1.75rem, 4vw, 2.5rem);font-weight:800;color:#fff;line-height:1.25;margin-bottom:16px;letter-spacing:-0.02em;">
+                            Bingung Memilih Jurusan yang Tepat di SMEAS?
+                        </h2>
+                        <p style="font-size:clamp(0.95rem, 2vw, 1.1rem);color:#cbd5e1;line-height:1.6;margin-bottom:32px;">
+                            Ikuti simulasi kuesioner probabilitas cerdas untuk memetakan bakat, minat, dan potensi karirmu secara akurat di 9 bidang keahlian vokasi SMKN 1 Surabaya.
+                        </p>
+
+                        {{-- Action Buttons --}}
+                        <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+                            <a href="{{ route('temukan-jurusan') }}"
+                                style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 36px;font-size:1rem;font-weight:700;color:#fff;background:#f59e0b;border-radius:12px;text-decoration:none;box-shadow:0 10px 20px -5px rgba(245,158,11,0.5);transition:all 0.3s ease;"
+                                onmouseover="this.style.background='#d97706';this.style.transform='translateY(-2px)'"
+                                onmouseout="this.style.background='#f59e0b';this.style.transform='translateY(0)'">
+                                Mulai Tes Minat & Bakat &rarr;
+                            </a>
+                            <a href="{{ route('jurusan') }}"
+                                style="display:inline-flex;align-items:center;justify-content:center;padding:16px 28px;font-size:0.95rem;font-weight:600;color:#fff;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);border-radius:12px;text-decoration:none;transition:all 0.3s ease;"
+                                onmouseover="this.style.background='rgba(255,255,255,0.2)'"
+                                onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                                Direktori 9 Jurusan
+                            </a>
                         </div>
                     </div>
-                </div>
-
-                {{-- Search Bar --}}
-                <div style="max-width:640px;margin:0 auto 32px;" class="fade-up">
-                    <form action="{{ route('jurusan') }}" method="GET" class="search-glow"
-                        style="display:flex;align-items:center;background:#fff;border-radius:12px;border:2px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.04);overflow:hidden;transition:all 0.3s ease;">
-                        <div style="padding:0 12px 0 20px;">
-                            <svg style="width:20px;height:20px;color:#94a3b8;" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-                        <input type="text" name="q" value="{{ request('q') }}"
-                            placeholder="Senang di JHIK, coba pengolahan di bawah ini"
-                            style="flex:1;padding:16px 16px 16px 0;font-size:0.875rem;color:#334155;border:none;outline:none;background:transparent;">
-                    </form>
-                </div>
-
-                {{-- CTA Button --}}
-                <div style="text-align:center;" class="fade-up">
-                    <a href="{{ route('jurusan') }}"
-                        style="display:inline-flex;align-items:center;justify-content:center;padding:14px 32px;font-size:0.875rem;font-weight:700;color:#fff;background:#f59e0b;border-radius:8px;text-decoration:none;box-shadow:0 4px 6px rgba(0,0,0,0.1);transition:all 0.3s ease;"
-                        onmouseover="this.style.background='#d97706'" onmouseout="this.style.background='#f59e0b'">
-                        Mulai Cari &rarr;
-                    </a>
                 </div>
             </div>
         </section>

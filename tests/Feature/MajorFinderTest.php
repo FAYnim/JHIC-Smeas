@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class MajorFinderTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_major_finder_page_is_accessible(): void
     {
         $response = $this->get(route('temukan-jurusan'));
@@ -72,5 +75,15 @@ class MajorFinderTest extends TestCase
         $response->assertSee('Rekayasa Perangkat Lunak');
         $response->assertSee('Teknik Komputer dan Jaringan');
         $response->assertSee('Desain Komunikasi Visual');
+    }
+
+    public function test_landing_page_displays_ai_major_finder_showcase(): void
+    {
+        $response = $this->get(route('beranda'));
+
+        $response->assertStatus(200);
+        $response->assertSee(route('temukan-jurusan'));
+        $response->assertSee('AI-Powered Recommendation');
+        $response->assertSee('Mulai Tes Minat & Bakat', false);
     }
 }

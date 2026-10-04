@@ -207,3 +207,5 @@
         }
     });
 </script>
+
+@include('partials.chatbot-widget')

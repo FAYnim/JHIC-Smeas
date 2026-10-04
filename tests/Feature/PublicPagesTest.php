@@ -107,6 +107,6 @@ class PublicPagesTest extends TestCase
 
         $response->assertOk();
         $response->assertSee(route('temukan-jurusan'));
-        $response->assertSee('AI-Powered Recommendation');
+        $response->assertSee('Bingung Memilih Jurusan yang Tepat di SMEAS?');
     }
 }

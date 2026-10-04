@@ -62,7 +62,7 @@
             border: 1.5px solid rgba(2, 64, 137, 0.12);
             border-left: 6px solid var(--color-smeas-primary);
             border-radius: 22px;
-            padding: 32px 28px;
+            padding: 30px 28px;
             margin-bottom: 28px;
             position: relative;
             overflow: hidden;
@@ -415,13 +415,16 @@
             <div id="state-intro" class="smeas-glass-card p-6 md:p-12 fade-in">
                 <div class="flex flex-wrap items-center gap-3 mb-6">
                     <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-blue-50 text-blue-900 border border-blue-200">
-                        <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                        <svg class="w-4 h-4 text-amber-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                         </svg>
                         Smeas AI Major Finder
                     </span>
-                    <span class="text-xs text-slate-500 font-semibold bg-slate-100 px-3 py-1.5 rounded-full">
-                        ⏱️ 15 Pertanyaan • ±3 Menit
+                    <span class="text-xs text-slate-600 font-semibold bg-slate-100 px-3 py-1.5 rounded-full inline-flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <span>15 Pertanyaan • ±3 Menit</span>
                     </span>
                 </div>
 
@@ -435,17 +438,29 @@
                 {{-- 3 Value Points --}}
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                     <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
-                        <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center font-bold text-sm mb-3">1</div>
+                        <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center font-bold text-sm mb-3">
+                            <svg class="w-4 h-4 text-blue-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/>
+                            </svg>
+                        </div>
                         <h4 class="font-bold text-slate-900 text-sm mb-1">15 Pernyataan Cepat</h4>
                         <p class="text-slate-500 text-xs leading-relaxed">Cukup pilih skala Sangat Tidak Setuju (STS) hingga Sangat Setuju (SS).</p>
                     </div>
                     <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
-                        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-sm mb-3">2</div>
+                        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-sm mb-3">
+                            <svg class="w-4 h-4 text-amber-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>
+                            </svg>
+                        </div>
                         <h4 class="font-bold text-slate-900 text-sm mb-1">Matriks 9 Kejuruan</h4>
                         <p class="text-slate-500 text-xs leading-relaxed">Algoritma probabilitas memetakan responmu ke seluruh jurusan vokasi.</p>
                     </div>
                     <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
-                        <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold text-sm mb-3">3</div>
+                        <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold text-sm mb-3">
+                            <svg class="w-4 h-4 text-emerald-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+                            </svg>
+                        </div>
                         <h4 class="font-bold text-slate-900 text-sm mb-1">Analisis Personal AI</h4>
                         <p class="text-slate-500 text-xs leading-relaxed">Dapatkan narasi bimbingan karir masa depan eksklusif dari Smeas.Ai.</p>
                     </div>
@@ -480,15 +495,15 @@
                     <div class="flex items-center justify-between gap-4 mb-3">
                         <button type="button" id="btn-back" onclick="prevQuestion()"
                             class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-900 hover:bg-slate-100 transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6"/>
                             </svg>
                             <span>Soal Sebelumnya</span>
                         </button>
 
                         <div class="flex items-center gap-2">
-                            <span id="question-category-pill" class="hidden sm:inline-flex items-center gap-1 px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-bold">
-                                📊 Analisis Finansial
+                            <span id="question-category-pill" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-bold">
+                                {{-- Injected via JS --}}
                             </span>
                             <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-900 border border-blue-100 rounded-full text-xs font-extrabold">
                                 <span id="question-counter">Pertanyaan 1 dari 15</span>
@@ -506,9 +521,11 @@
 
                 {{-- Question Statement Card --}}
                 <div class="question-statement-box">
-                    <div class="inline-flex items-center gap-2 text-xs font-extrabold text-blue-900 uppercase tracking-wider mb-2.5">
-                        <span id="question-icon-badge" class="text-base">📊</span>
-                        <span id="question-category-label">Pernyataan Kuesioner:</span>
+                    <div class="flex items-center gap-2.5 text-xs font-extrabold text-blue-900 uppercase tracking-wider mb-3">
+                        <div id="question-icon-badge" class="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 flex items-center justify-center flex-shrink-0">
+                            {{-- Injected via JS --}}
+                        </div>
+                        <span id="question-category-label">Pernyataan Kuesioner</span>
                     </div>
                     <h2 id="question-text" class="question-text-title statement-anim">
                         Saya sangat menikmati aktivitas yang melibatkan analisis angka, pencatatan data keuangan, atau audit laporan secara teliti.
@@ -522,7 +539,10 @@
                         <span>Sangat Tidak Setuju</span>
                     </div>
                     <div class="spectrum-mid-hint">
-                        <span>💡 Tekan angka <strong>1 - 5</strong> di keyboard atau klik di bawah:</span>
+                        <svg class="w-3.5 h-3.5 text-slate-400 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/>
+                        </svg>
+                        <span>Tekan angka <strong>1 - 5</strong> di keyboard atau klik di bawah:</span>
                     </div>
                     <div class="spectrum-right">
                         <span>Sangat Setuju</span>
@@ -598,16 +618,21 @@
                         <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px] font-bold text-slate-600">←</kbd>
                         <span>Panah Kiri untuk kembali</span>
                     </span>
-                    <span>
-                        ✨ <em>Pilihanmu otomatis lanjut ke nomor berikutnya</em>
+                    <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5 text-amber-500 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="M2 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="M12 22v-4"/><path d="m19.07 19.07-2.83-2.83"/><path d="M22 12h-4"/><path d="m19.07 4.93-2.83 2.83"/>
+                        </svg>
+                        <em>Pilihanmu otomatis lanjut ke nomor berikutnya</em>
                     </span>
                 </div>
             </div>
 
             {{-- ==================== STATE 3: CALCULATING TRANSITION ==================== --}}
             <div id="state-evaluating" class="hidden smeas-glass-card p-12 text-center fade-in">
-                <div class="w-20 h-20 mx-auto rounded-full bg-[#024089] text-amber-400 flex items-center justify-center text-3xl pulse-scanner mb-6 shadow-xl">
-                    🤖
+                <div class="w-20 h-20 mx-auto rounded-full bg-[#024089] text-amber-400 flex items-center justify-center pulse-scanner mb-6 shadow-xl">
+                    <svg class="w-10 h-10 text-amber-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>
+                    </svg>
                 </div>
                 <h3 class="text-2xl font-extrabold text-slate-900 mb-2">Menganalisis Pola Minat & Bakatmu...</h3>
                 <p class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed mb-6">
@@ -631,8 +656,11 @@
                 
                 {{-- Greeting Header --}}
                 <div class="text-center mb-6">
-                    <span class="inline-block px-4 py-1.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-200 mb-2">
-                        🎉 Analisis Minat & Bakat Selesai
+                    <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-200 mb-2">
+                        <svg class="w-3.5 h-3.5 text-amber-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+                        </svg>
+                        <span>Analisis Minat & Bakat Selesai</span>
                     </span>
                     <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
                         Hai <span id="res-greeting-name" class="text-blue-900">Sobat SMEAS</span>, Ini Rekomendasi Jurusanmu!
@@ -651,7 +679,10 @@
                     <div class="relative z-10">
                         <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
                             <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/15 backdrop-blur border border-white/20 text-yellow-300">
-                                🏆 Rekomendasi Juara #1
+                                <svg class="w-4 h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                                </svg>
+                                <span>Rekomendasi Juara #1</span>
                             </span>
                             <div class="text-right">
                                 <span id="res-top-score" class="text-4xl md:text-5xl font-black text-amber-400">95%</span>
@@ -692,8 +723,10 @@
                 <div class="smeas-glass-card p-6 md:p-8">
                     <div class="flex items-center justify-between gap-4 mb-4">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-xl shadow-sm">
-                                🤖
+                            <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-900 shadow-sm">
+                                <svg class="w-5 h-5 text-blue-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>
+                                </svg>
                             </div>
                             <div>
                                 <h4 class="font-extrabold text-slate-900 text-base md:text-lg">Analisis Personal Smeas.Ai</h4>
@@ -757,22 +790,25 @@
 
                         <button type="button" onclick="copyResultLink()"
                             class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/10 transition-all cursor-pointer">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
                             </svg>
                             <span id="btn-copy-text">Salin Tautan</span>
                         </button>
 
                         <button type="button" onclick="window.print()"
                             class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white font-semibold text-sm border border-slate-700 transition-all cursor-pointer" title="Cetak atau Simpan PDF">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect width="12" height="8" x="6" y="14" rx="1"/>
                             </svg>
                             <span>Cetak</span>
                         </button>
 
                         <button type="button" onclick="resetQuiz()"
                             class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-transparent hover:bg-white/5 text-slate-400 hover:text-white font-semibold text-sm border border-slate-800 transition-all cursor-pointer">
+                            <svg class="w-4 h-4 mr-1 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+                            </svg>
                             <span>Ulangi Tes</span>
                         </button>
                     </div>
@@ -830,6 +866,33 @@
         const analysisUrl = "{{ route('temukan-jurusan.analisis') }}";
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+        // Lucide SVG Icons Library
+        const LUCIDE_ICONS = {
+            'bar-chart-3': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>',
+            'handshake': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l1.5 1.5a1 1 0 0 0 1.5 0L8 12"/><path d="M2 14h2"/></svg>',
+            'folder-check': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="m9 13 2 2 4-4"/></svg>',
+            'package': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>',
+            'code-2': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>',
+            'cpu': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>',
+            'palette': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>',
+            'clapperboard': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>',
+            'concierge-bell': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="M3 20a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1Z"/><path d="M20 16a8 8 0 1 0-16 0"/><path d="M12 4v4"/><path d="M10 4h4"/></svg>',
+            'calculator': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>',
+            'shopping-bag': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+            'mail': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
+            'terminal': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>',
+            'wrench': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+            'sparkles': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>',
+            'trophy': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>',
+            'medal': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="m15.4 17.4 3.6 4.6-4-1-4 1 3.6-4.6"/><circle cx="12" cy="8" r="6"/></svg>',
+            'award': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{CLASS}"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.747.468L12 19.497l-4.245 2.387a.5.5 0 0 1-.747-.468l1.515-8.526"/><circle cx="12" cy="7" r="5"/></svg>'
+        };
+
+        function getLucideSvg(name, classes = 'w-4 h-4') {
+            const template = LUCIDE_ICONS[name] || LUCIDE_ICONS['sparkles'];
+            return template.replace('{CLASS}', classes);
+        }
+
         let currentQuestionIndex = 0;
         let userAnswers = {}; // { questionId: 1..5 }
         let studentName = '';
@@ -877,10 +940,10 @@
 
             if (q.category) {
                 if (catPill) {
-                    catPill.textContent = `${q.icon || '📌'} ${q.category}`;
+                    catPill.innerHTML = `${getLucideSvg(q.icon, 'w-3.5 h-3.5 text-blue-900 inline')} <span>${q.category}</span>`;
                 }
                 if (iconBadge) {
-                    iconBadge.textContent = q.icon || '💬';
+                    iconBadge.innerHTML = getLucideSvg(q.icon, 'w-4 h-4 text-blue-900');
                 }
                 if (catLabel) {
                     catLabel.textContent = q.category;
@@ -1039,7 +1102,7 @@
             document.getElementById('res-top-career').textContent = top.career;
             document.getElementById('res-top-link').href = `/jurusan/${top.slug}`;
 
-            // Render all 9 majors breakdown with podium styling
+            // Render all 9 majors breakdown with podium styling (Lucide icons instead of emojis)
             const listEl = document.getElementById('ranked-majors-list');
             listEl.innerHTML = '';
 
@@ -1053,17 +1116,17 @@
                 if (rankNum === 1) {
                     barColor = 'bg-amber-400';
                     badgeBg = 'bg-amber-400 text-blue-950 font-black';
-                    podiumTag = '<span class="text-[11px] font-extrabold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">🥇 Juara 1</span>';
+                    podiumTag = `<span class="inline-flex items-center gap-1 text-[11px] font-extrabold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">${getLucideSvg('trophy', 'w-3 h-3 text-amber-500')} Juara 1</span>`;
                     borderHighlight = 'border-amber-200 bg-amber-50/30 hover:border-amber-300 shadow-sm';
                 } else if (rankNum === 2) {
                     barColor = 'bg-blue-600';
                     badgeBg = 'bg-blue-600 text-white font-bold';
-                    podiumTag = '<span class="text-[11px] font-extrabold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full">🥈 Peringkat 2</span>';
+                    podiumTag = `<span class="inline-flex items-center gap-1 text-[11px] font-extrabold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full">${getLucideSvg('medal', 'w-3 h-3 text-blue-600')} Peringkat 2</span>`;
                     borderHighlight = 'border-blue-100 bg-blue-50/20 hover:border-blue-200';
                 } else if (rankNum === 3) {
                     barColor = 'bg-teal-500';
                     badgeBg = 'bg-teal-500 text-white font-bold';
-                    podiumTag = '<span class="text-[11px] font-extrabold text-teal-700 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded-full">🥉 Peringkat 3</span>';
+                    podiumTag = `<span class="inline-flex items-center gap-1 text-[11px] font-extrabold text-teal-700 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded-full">${getLucideSvg('award', 'w-3 h-3 text-teal-600')} Peringkat 3</span>`;
                     borderHighlight = 'border-teal-100 bg-teal-50/20 hover:border-teal-200';
                 }
 
@@ -1153,7 +1216,7 @@
             const top3 = lastRankedResults[2];
 
             const message = `Halo! Saya (${name}) baru saja mengikuti tes minat & bakat di Smeas AI Major Finder SMKN 1 Surabaya.\n\n` +
-                `🏆 Hasil Rekomendasi Jurusan Terbaik Saya:\n` +
+                `Hasil Rekomendasi Jurusan Terbaik Saya:\n` +
                 `1. ${top1.name} (${top1.score}% Cocok)\n` +
                 `2. ${top2.name} (${top2.score}% Cocok)\n` +
                 `3. ${top3.name} (${top3.score}% Cocok)\n\n` +

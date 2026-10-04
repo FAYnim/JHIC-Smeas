@@ -57,7 +57,7 @@ class MajorFinderController extends Controller
                 'primary' => 'akuntansi',
                 'secondary' => 'manajemen-perkantoran',
                 'category' => 'Analisis Finansial & Data',
-                'icon' => '📊',
+                'icon' => 'bar-chart-3',
             ],
             [
                 'id' => 2,
@@ -65,7 +65,7 @@ class MajorFinderController extends Controller
                 'primary' => 'bisnis-daring-dan-pemasaran',
                 'secondary' => 'perhotelan',
                 'category' => 'Pemasaran & Negosiasi Bisnis',
-                'icon' => '🤝',
+                'icon' => 'handshake',
             ],
             [
                 'id' => 3,
@@ -73,7 +73,7 @@ class MajorFinderController extends Controller
                 'primary' => 'manajemen-perkantoran',
                 'secondary' => 'manajemen-logistik',
                 'category' => 'Administrasi & Keteraturan Kerja',
-                'icon' => '📁',
+                'icon' => 'folder-check',
             ],
             [
                 'id' => 4,
@@ -81,7 +81,7 @@ class MajorFinderController extends Controller
                 'primary' => 'manajemen-logistik',
                 'secondary' => null,
                 'category' => 'Logistik & Distribusi Barang',
-                'icon' => '📦',
+                'icon' => 'package',
             ],
             [
                 'id' => 5,
@@ -89,7 +89,7 @@ class MajorFinderController extends Controller
                 'primary' => 'rekayasa-perangkat-lunak',
                 'secondary' => null,
                 'category' => 'Rekayasa Coding & Software',
-                'icon' => '💻',
+                'icon' => 'code-2',
             ],
             [
                 'id' => 6,
@@ -97,7 +97,7 @@ class MajorFinderController extends Controller
                 'primary' => 'teknik-komputer-dan-jaringan',
                 'secondary' => null,
                 'category' => 'Hardware & Infrastruktur Jaringan',
-                'icon' => '⚡',
+                'icon' => 'cpu',
             ],
             [
                 'id' => 7,
@@ -105,7 +105,7 @@ class MajorFinderController extends Controller
                 'primary' => 'desain-komunikasi-visual',
                 'secondary' => null,
                 'category' => 'Kreativitas & Ilustrasi Visual',
-                'icon' => '🎨',
+                'icon' => 'palette',
             ],
             [
                 'id' => 8,
@@ -113,7 +113,7 @@ class MajorFinderController extends Controller
                 'primary' => 'produksi-siaran-program-pertelevisian',
                 'secondary' => null,
                 'category' => 'Broadcasting & Produksi Media',
-                'icon' => '🎬',
+                'icon' => 'clapperboard',
             ],
             [
                 'id' => 9,
@@ -121,7 +121,7 @@ class MajorFinderController extends Controller
                 'primary' => 'perhotelan',
                 'secondary' => 'manajemen-perkantoran',
                 'category' => 'Hospitality & Pelayanan Tamu',
-                'icon' => '🏨',
+                'icon' => 'concierge-bell',
             ],
             [
                 'id' => 10,
@@ -129,7 +129,7 @@ class MajorFinderController extends Controller
                 'primary' => 'akuntansi',
                 'secondary' => 'manajemen-logistik',
                 'category' => 'Akurasi Angka & Regulasi',
-                'icon' => '🔢',
+                'icon' => 'calculator',
             ],
             [
                 'id' => 11,
@@ -137,7 +137,7 @@ class MajorFinderController extends Controller
                 'primary' => 'bisnis-daring-dan-pemasaran',
                 'secondary' => 'desain-komunikasi-visual',
                 'category' => 'E-Commerce & Media Digital',
-                'icon' => '📱',
+                'icon' => 'shopping-bag',
             ],
             [
                 'id' => 12,
@@ -145,7 +145,7 @@ class MajorFinderController extends Controller
                 'primary' => 'manajemen-perkantoran',
                 'secondary' => null,
                 'category' => 'Korespondensi & Tata Kelola Kantor',
-                'icon' => '✉️',
+                'icon' => 'mail',
             ],
             [
                 'id' => 13,
@@ -153,7 +153,7 @@ class MajorFinderController extends Controller
                 'primary' => 'rekayasa-perangkat-lunak',
                 'secondary' => 'teknik-komputer-dan-jaringan',
                 'category' => 'Problem Solving & Logika Sistem',
-                'icon' => '🧩',
+                'icon' => 'terminal',
             ],
             [
                 'id' => 14,
@@ -161,7 +161,7 @@ class MajorFinderController extends Controller
                 'primary' => 'teknik-komputer-dan-jaringan',
                 'secondary' => null,
                 'category' => 'Teknisi Jaringan & Solusi Lapangan',
-                'icon' => '🔧',
+                'icon' => 'wrench',
             ],
             [
                 'id' => 15,
@@ -169,7 +169,7 @@ class MajorFinderController extends Controller
                 'primary' => 'desain-komunikasi-visual',
                 'secondary' => 'produksi-siaran-program-pertelevisian',
                 'category' => 'Karya Seni Digital & Branding',
-                'icon' => '✨',
+                'icon' => 'sparkles',
             ],
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Services\MajorFinder\MajorAnalysisService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -53,7 +54,7 @@ class MajorFinderTest extends TestCase
 
     public function test_service_generates_personalized_analysis(): void
     {
-        $service = app(\App\Services\MajorFinder\MajorAnalysisService::class);
+        $service = app(MajorAnalysisService::class);
         $analysis = $service->generate(
             nama: 'Budi',
             topMajor: ['name' => 'Rekayasa Perangkat Lunak', 'score' => 95],
@@ -83,7 +84,7 @@ class MajorFinderTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee(route('temukan-jurusan'));
-        $response->assertSee('AI-Powered Recommendation');
+        $response->assertSee('Bingung Memilih Jurusan yang Tepat di SMEAS?');
         $response->assertSee('Mulai Tes Minat & Bakat', false);
     }
 }

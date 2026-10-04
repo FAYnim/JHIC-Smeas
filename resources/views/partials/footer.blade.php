@@ -100,23 +100,19 @@
             </p>
             <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
                 <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
-                    <img src="{{ asset('images/logo-jhic.webp') }}" alt="JHIC" class="h-10 w-auto object-contain">
+                    <img src="{{ asset('images/logo-jhic.webp') }}" alt="JHIC" width="120" height="40" loading="lazy" decoding="async" class="h-10 w-auto object-contain">
                 </div>
                 <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
-                    <img src="{{ asset('images/logo-jagoan-hosting.webp') }}" alt="Jagoan Hosting"
-                        class="h-10 w-auto object-contain">
+                    <img src="{{ asset('images/logo-jagoan-hosting.webp') }}" alt="Jagoan Hosting" width="127" height="40" loading="lazy" decoding="async" class="h-10 w-auto object-contain">
                 </div>
                 <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
-                    <img src="{{ asset('images/logo-komdigi.webp') }}" alt="KOMDIGI"
-                        class="h-10 w-auto object-contain">
+                    <img src="{{ asset('images/logo-komdigi.webp') }}" alt="KOMDIGI" width="55" height="40" loading="lazy" decoding="async" class="h-10 w-auto object-contain">
                 </div>
                 <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
-                    <img src="{{ asset('images/logo-garuda-spark.webp') }}" alt="Garuda Spark"
-                        class="h-10 w-auto object-contain">
+                    <img src="{{ asset('images/logo-garuda-spark.webp') }}" alt="Garuda Spark" width="73" height="40" loading="lazy" decoding="async" class="h-10 w-auto object-contain">
                 </div>
                 <div class="bg-white rounded-xl px-4 py-2 h-14 flex items-center justify-center">
-                    <img src="{{ asset('images/logo-ngalup.webp') }}" alt="NGALUP.co"
-                        class="h-10 w-auto object-contain">
+                    <img src="{{ asset('images/logo-ngalup.webp') }}" alt="NGALUP.co" width="150" height="40" loading="lazy" decoding="async" class="h-10 w-auto object-contain">
                 </div>
             </div>
         </div>

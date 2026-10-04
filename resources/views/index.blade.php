@@ -8,12 +8,21 @@
     <meta name="description"
         content="SMK Negeri 1 Surabaya - Sekolah Kejuruan terbaik di Surabaya. Membentuk lulusan berkarakter, kompeten, dan siap bersaing di kancah nasional maupun global.">
 
-    <!-- Google Fonts -->
+    <!-- Preload Critical LCP Image -->
+    <link rel="preload" as="image" href="{{ asset('images/mpls.webp') }}" type="image/webp" fetchpriority="high">
+
+    <!-- Google Fonts (Non-render-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    </noscript>
 
     <!-- Vite Styles & Scripts with Fallback -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -24,7 +33,7 @@
 
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         /* Navbar hover underline effect */
@@ -630,9 +639,9 @@
         {{-- ==================== HERO SECTION ==================== --}}
         <section class="hero-section">
             {{-- Blurred Background Images (crossfade slideshow) --}}
-            <img src="{{ asset('images/mpls.JPG') }}" alt="Kegiatan MPLS SMKN 1 Surabaya" class="hero-bg-image is-active">
-            <img src="{{ asset('images/mpls%202.JPG') }}" alt="Kegiatan MPLS SMKN 1 Surabaya" class="hero-bg-image" decoding="async" aria-hidden="true">
-            <img src="{{ asset('images/lks.png') }}" alt="Lomba Kompetensi Siswa SMKN 1 Surabaya" class="hero-bg-image" decoding="async" aria-hidden="true">
+            <img src="{{ asset('images/mpls.webp') }}" alt="Kegiatan MPLS SMKN 1 Surabaya" class="hero-bg-image is-active" fetchpriority="high" width="960" height="540">
+            <img src="{{ asset('images/mpls%202.webp') }}" alt="Kegiatan MPLS SMKN 1 Surabaya" class="hero-bg-image" loading="lazy" decoding="async" aria-hidden="true" width="960" height="540">
+            <img src="{{ asset('images/lks.webp') }}" alt="Lomba Kompetensi Siswa SMKN 1 Surabaya" class="hero-bg-image" loading="lazy" decoding="async" aria-hidden="true" width="730" height="298">
             {{-- Dark overlay --}}
             <div class="hero-bg-overlay"></div>
 
@@ -676,10 +685,10 @@
                     <div class="order-2 md:order-2 flex justify-center md:justify-end">
                         <div class="hero-photos-wrapper">
                             <div class="hero-photo-card hero-photo-card-1">
-                                <img src="{{ asset('images/image 4.png') }}" alt="Siswa SMKN 1 Surabaya berprestasi">
+                                <img src="{{ asset('images/image 4.webp') }}" alt="Siswa SMKN 1 Surabaya berprestasi" width="218" height="341">
                             </div>
                             <div class="hero-photo-card hero-photo-card-2">
-                                <img src="{{ asset('images/image 5.png') }}" alt="Siswa SMKN 1 Surabaya">
+                                <img src="{{ asset('images/image 5.webp') }}" alt="Siswa SMKN 1 Surabaya" width="218" height="348">
                             </div>
                         </div>
                     </div>
@@ -712,7 +721,14 @@
 
                     {{-- Right Column: Headmaster Photo --}}
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                        <img src="{{ asset($prakata['foto']) }}" alt="{{ $prakata['nama'] }}"
+                        @php
+                            $prakataFotoWebp = preg_match('/\.(png|jpg|jpeg)$/i', $prakata['foto']) 
+                                ? preg_replace('/\.(png|jpg|jpeg)$/i', '.webp', $prakata['foto']) 
+                                : $prakata['foto'];
+                            $prakataFotoSrc = file_exists(public_path($prakataFotoWebp)) ? $prakataFotoWebp : $prakata['foto'];
+                        @endphp
+                        <img src="{{ asset($prakataFotoSrc) }}" alt="{{ $prakata['nama'] }}"
+                            loading="lazy" decoding="async" width="260" height="333"
                             style="width:260px; max-width:100%; height:auto; display:block;">
                         <p
                             style="margin-top:12px; font-size:0.95rem; font-weight:700; color:#0b192c; text-align:center;">
@@ -732,7 +748,8 @@
                         {{-- Student Monochrome Photo --}}
                         <div
                             style="transform:rotate(-4deg); border-radius:16px; overflow:hidden; box-shadow:0 14px 32px rgba(0,0,0,0.14); width:290px; max-width:100%; background:#fff; border:4px solid #ffffff;">
-                            <img src="{{ asset('images/image 7.png') }}" alt="Siswa SMKN 1 Surabaya"
+                            <img src="{{ asset('images/image 7.webp') }}" alt="Siswa SMKN 1 Surabaya"
+                                loading="lazy" decoding="async" width="371" height="455"
                                 style="width:100%; height:auto; display:block; filter:grayscale(100%);">
                         </div>
 
@@ -760,7 +777,7 @@
                     {{-- Right: Star Vector Background + 3 Tilted Cards --}}
                     <div class="stat-cards-wrapper">
                         {{-- Group 159 Background --}}
-                        <img src="{{ asset('images/Group 159.png') }}" alt="Decorative Star" class="stat-star-bg">
+                        <img src="{{ asset('images/Group 159.webp') }}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="380" height="440" class="stat-star-bg">
 
                         {{-- Card 1: 9 Jurusan --}}
                         <div class="stat-card stat-card-1">
@@ -975,6 +992,7 @@
                                     style="position:relative;width:280px;height:340px;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1);margin-bottom:16px;background:linear-gradient(135deg,#1a8cff,#024089);">
                                     @if ($guru->foto_url)
                                         <img src="{{ $guru->foto_url }}" alt="{{ $guru->nama }}"
+                                            loading="lazy" decoding="async" width="280" height="340"
                                             style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s ease;">
                                     @else
                                         <div
@@ -1043,7 +1061,7 @@
             <div style="max-width:1280px;margin:0 auto;padding:0 16px;">
                 <div class="pk-hero fade-up">
                     <div class="pk-hero__bg">
-                        <img src="{{ asset('images/smkn1.png') }}" alt="Background Pusat Karir">
+                        <img src="{{ asset('images/smkn1.webp') }}" alt="Background Pusat Karir" loading="lazy" decoding="async" width="1280" height="598">
                     </div>
                     <div class="pk-hero__overlay"></div>
                     <div class="pk-hero__content">
@@ -1093,6 +1111,7 @@
                                 class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow h-full flex flex-col">
                                 @if ($artikel->display_image)
                                     <img src="{{ $artikel->display_image }}" alt="{{ $artikel->title }}"
+                                        loading="lazy" decoding="async" width="300" height="192"
                                         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 @endif
                                 <div class="p-5 flex-1 flex flex-col justify-between">

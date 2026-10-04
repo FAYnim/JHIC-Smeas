@@ -44,7 +44,7 @@ class MitraCrudTest extends TestCase
             'description' => 'Perusahaan software house mitra SMKN 1 Surabaya',
             'website' => 'https://teknomaju.example.com',
             'is_mou_active' => '1',
-            'mou_until' => now()->addYears(2)->format('Y-m-d'),
+            'mou_until_year' => now()->addYears(2)->year,
             'kemitraan_sejak' => 2021,
             'programs' => "Tempat PKL Resmi\nKelas Industri",
             'narahubung_nama' => 'Hendra Setiawan',
@@ -64,6 +64,22 @@ class MitraCrudTest extends TestCase
         $this->assertNotNull($mitra->logo_path);
         Storage::disk('public')->assertExists($mitra->logo_path);
         $this->assertContains('Tempat PKL Resmi', $mitra->programs);
+        $this->assertSame(now()->addYears(2)->year.'-12-31', $mitra->mou_until->format('Y-m-d'));
+    }
+
+    public function test_store_rejects_invalid_mou_year(): void
+    {
+        $bkk = User::factory()->bkk()->create();
+
+        $response = $this->actingAs($bkk)->post(route('admin.mitra.store'), [
+            'name' => 'PT Tahun Salah',
+            'short_name' => 'TahunSalah',
+            'sector' => 'Retail',
+            'city' => 'Surabaya',
+            'mou_until_year' => 12,
+        ]);
+
+        $response->assertSessionHasErrors(['mou_until_year']);
     }
 
     public function test_bkk_user_can_update_mitra(): void
@@ -114,18 +130,19 @@ class MitraCrudTest extends TestCase
     {
         $bkk = User::factory()->bkk()->create();
 
-        $response = $this->actingAs($bkk)->post(route('admin.mitra.store'), [
-            'name' => 'PT Uji Validasi',
-            'short_name' => str_repeat('X', 60),
-            'sector' => str_repeat('Y', 150),
-            'city' => 'Surabaya',
-            'website' => 'bukan-url-valid',
-            'kemitraan_sejak' => 1900,
-        ]);
+        $response = $this->actingAs($bkk)
+            ->from(route('admin.mitra.create'))
+            ->followingRedirects()
+            ->post(route('admin.mitra.store'), [
+                'name' => 'PT Uji Validasi',
+                'short_name' => str_repeat('X', 60),
+                'sector' => str_repeat('Y', 150),
+                'city' => 'Surabaya',
+                'website' => 'bukan-url-valid',
+                'kemitraan_sejak' => 1900,
+            ]);
 
-        $response->assertSessionHasErrors(['short_name', 'sector', 'website', 'kemitraan_sejak']);
-
-        $response = $this->actingAs($bkk)->get(route('admin.mitra.create'));
         $response->assertSee('URL tidak valid');
+        $response->assertSee('Tahun kemitraan minimal 1950.');
     }
 }

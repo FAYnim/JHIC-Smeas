@@ -92,6 +92,11 @@ class MitraController extends Controller
 
         $data['is_mou_active'] = $request->boolean('is_mou_active');
 
+        if (array_key_exists('mou_until_year', $data)) {
+            $data['mou_until'] = filled($data['mou_until_year']) ? $data['mou_until_year'].'-12-31' : null;
+            unset($data['mou_until_year']);
+        }
+
         return $data;
     }
 

@@ -27,6 +27,7 @@ Tidak ada migration, tidak ada tabel baru, tidak ada kolom baru.
 ## Keputusan Desain
 
 1. **Sumber data**: otomatis, tanpa flag admin. Ranking: `rating DESC, penilaian_count DESC, created_at DESC`.
+1a. **Hero diturunkan dari koleksi `$produkBluds`** (bukan query terpisah) — zero query tambahan, search-aware: `?q=` nihil → hero ikut hilang, konsisten dengan `test_blud_index_search_filters_products_backend`.
 2. **Konten banner**: gambar galeri produk, judul + subjudul, CTA link ke detail produk. Tanpa harga.
 3. **Pendekatan**: query di `BludController::index()` + partial baru. Bukan method model (YAGNI — satu pemakaian), bukan logika di Blade.
 
@@ -35,20 +36,20 @@ Tidak ada migration, tidak ada tabel baru, tidak ada kolom baru.
 ```
 GET /blud
   └─ BludController::index()
-       ├─ $query produk published (existing, untuk daftar/search)
-       ├─ $hero = ProdukBlud::where('is_published', true)
-       │      ->with('galeri')
-       │      ->orderByDesc('rating')
-       │      ->orderByDesc('penilaian_count')
-       │      ->orderByDesc('created_at')
+       ├─ $query produk published + filter search (existing)
+       ├─ $produkBluds = $query->get()
+       ├─ $hero = $produkBluds                  ← sort stabil berurutan:
+       │      ->sortByDesc('created_at')          (tertiary)
+       │      ->sortByDesc('penilaian_count')     (secondary)
+       │      ->sortByDesc('rating')              (primary)
        │      ->first()
        └─ view('blud.index', compact('produkBluds', 'hero'))
 
 index.blade.php
-  └─ @include('blud.partials.hero', ['hero' => $hero])   ← menggantikan blok hardcoded 272-276
+  └─ @include('blud.partials.hero')   ← menggantikan blok hardcoded 272-276
 ```
 
-Query hero terpisah dari `$produkBluds` agar hero selalu mencerminkan seluruh katalog published, bukan hasil filter pencarian (`?q=`).
+Hero berasal dari koleksi yang sudah di-fetch (tanpa query tambahan) dan mengikuti filter pencarian — saat `?q=` tidak menemukan apa pun, `$hero = null` dan banner tidak dirender. Urutan `sortByDesc` dibalik dari prioritas karena sort stabil: primary diterapkan terakhir.
 
 ## Komponen: `resources/views/blud/partials/hero.blade.php`
 
@@ -65,6 +66,7 @@ Query hero terpisah dari `$produkBluds` agar hero selalu mencerminkan seluruh ka
 | Kasus | Perilaku |
 |---|---|
 | Tidak ada produk published | `$hero = null`, section banner hilang, empty state lama tetap jalan |
+| Pencarian `?q=` tidak menemukan apa pun | `$hero = null`, banner ikut hilang (search-aware) |
 | Rating tie | Tiebreak `penilaian_count` → `created_at`; deterministik |
 | Produk hero di-unpublish | Otomatis gugur, produk berikutnya naik tanpa aksi admin |
 | Galeri kosong | Placeholder placehold.co |

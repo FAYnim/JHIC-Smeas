@@ -1285,7 +1285,7 @@
         }
 
         /* ===== Responsive ===== */
-        @media (max-width: 1024px) {
+        @media (max-width: 767px) {
             .detail-layout {
                 grid-template-columns: 1fr;
             }

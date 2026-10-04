@@ -141,7 +141,7 @@
                         </div>
                         <h2
                             class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#023775] leading-snug lg:leading-tight">
-                            Terwujudnya SMK Negeri 1 Surabaya Yang Berkarakter Dan Unggul.
+                            {{ $visi ?? 'Terwujudnya SMK Negeri 1 Surabaya Yang Berkarakter Dan Unggul.' }}
                         </h2>
                     </div>
                 </div>
@@ -156,6 +156,9 @@
                     </h2>
                     <p class="text-sm text-slate-500 font-medium">Langkah strategis dalam merealisasikan visi SMK Negeri
                         1 Surabaya</p>
+                    @if (!empty($misi))
+                        <p class="text-sm font-semibold text-slate-700 mt-2">{{ $misi }}</p>
+                    @endif
                 </div>
             </div>
 

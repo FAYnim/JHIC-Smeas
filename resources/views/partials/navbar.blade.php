@@ -35,13 +35,13 @@
             </a>
 
             {{-- Desktop Nav --}}
-            <nav class="hidden md:flex items-center gap-7" aria-label="Main navigation">
+            <nav class="hidden md:flex items-center gap-3 lg:gap-7" aria-label="Main navigation">
                 @foreach ($navLinks as $link)
                     @if ($link['key'] === 'profil')
                         {{-- Dropdown Profil --}}
                         <div class="relative" id="desktop-profil-dropdown">
                             <button type="button" id="desktop-profil-btn" aria-expanded="false"
-                                class="nav-hover-link text-sm {{ $isActive($link['key']) ? 'font-bold text-slate-900 border-b-2 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900' }} transition-colors py-2 inline-flex items-center gap-1 cursor-pointer">
+                                class="nav-hover-link text-xs lg:text-sm {{ $isActive($link['key']) ? 'font-bold text-slate-900 border-b-2 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900' }} transition-colors py-2 inline-flex items-center gap-1 cursor-pointer">
                                 {{ $link['label'] }}
                                 <svg class="w-3.5 h-3.5 transition-transform duration-200" id="desktop-profil-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -59,7 +59,7 @@
                         </div>
                     @else
                         <a href="{{ $link['url'] }}"
-                            class="nav-hover-link text-sm {{ $isActive($link['key']) ? 'font-bold text-slate-900 border-b-2 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900' }} transition-colors py-2">
+                            class="nav-hover-link text-xs lg:text-sm {{ $isActive($link['key']) ? 'font-bold text-slate-900 border-b-2 border-amber-400' : 'font-semibold text-slate-600 hover:text-slate-900' }} transition-colors py-2">
                             {{ $link['label'] }}
                         </a>
                     @endif
@@ -68,12 +68,12 @@
                 {{-- SPMB Button --}}
                 @if ($spmbClickable)
                     <a href="{{ route('spmb.index') }}"
-                        class="ml-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg shadow-sm hover:shadow transition-all duration-200">
+                        class="ml-1 lg:ml-2 inline-flex items-center justify-center px-4 lg:px-5 py-2 lg:py-2.5 text-xs lg:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg shadow-sm hover:shadow transition-all duration-200">
                         SPMB
                     </a>
                 @else
                     <span
-                        class="ml-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-white bg-blue-800 rounded-lg shadow-sm cursor-default">
+                        class="ml-1 lg:ml-2 inline-flex items-center justify-center px-4 lg:px-5 py-2 lg:py-2.5 text-xs lg:text-sm font-bold text-white bg-blue-800 rounded-lg shadow-sm cursor-default">
                         SPMB
                     </span>
                 @endif

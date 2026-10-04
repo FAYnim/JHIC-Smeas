@@ -35,7 +35,10 @@ Route::get('/', function () {
 })->name('beranda');
 
 Route::get('/visi-misi', function () {
-    return view('visi-misi');
+    $visi = Setting::get('profil.visi', 'Terwujudnya SMK Negeri 1 Surabaya Yang Berkarakter Dan Unggul.');
+    $misi = Setting::get('profil.misi', null);
+
+    return view('visi-misi', compact('visi', 'misi'));
 })->name('visi-misi');
 
 Route::get('/struktur-organisasi', function () {

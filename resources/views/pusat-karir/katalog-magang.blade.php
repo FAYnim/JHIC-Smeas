@@ -84,7 +84,7 @@
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
     @include('partials.navbar', ['activePage' => 'pusat-karir'])
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -278,9 +278,7 @@
         </div>
     </main>
 
-    <footer class="w-full bg-blue-700 text-white text-center py-4 text-sm font-semibold">
-        Dibuat dengan <span class="text-red-500">❤️</span> oleh Chicken Noodles Team
-    </footer>
+    @include('partials.footer')
 </body>
 
 </html>

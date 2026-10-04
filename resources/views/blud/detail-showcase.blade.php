@@ -266,11 +266,8 @@
         </div>
     </main>
 
-    <footer class="w-full bg-blue-700 text-white text-center py-4 text-sm font-semibold mt-auto">
-        Dibuat dengan <span class="text-red-500">❤️</span> oleh Chicken Noodles Team
-    </footer>
-
-    @include('blud.partials.modal-penawaran-laporkan', ['produk' => $produk])
+    @include('partials.footer')
+@include('blud.partials.modal-penawaran-laporkan', ['produk' => $produk])
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

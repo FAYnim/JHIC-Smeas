@@ -779,46 +779,8 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-[#024089] text-white pt-12 pb-8 border-t border-blue-900 mt-12 no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div class="md:col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo SMKN 1 Surabaya" class="h-10 w-auto">
-                        <div>
-                            <span class="font-extrabold text-base tracking-wide block">SMK NEGERI 1 SURABAYA</span>
-                            <span class="text-xs text-blue-200">Pusat Keunggulan Vokasi & Karir Masa Depan</span>
-                        </div>
-                    </div>
-                    <p class="text-xs text-blue-200/90 leading-relaxed max-w-sm mb-4">
-                        Membentuk lulusan berakhlak mulia, kompeten, berdaya saing global, dan siap kerja di dunia usaha serta industri.
-                    </p>
-                </div>
-                <div>
-                    <h5 class="font-bold text-sm mb-3 text-amber-400">Navigasi Utama</h5>
-                    <ul class="space-y-2 text-xs text-blue-100">
-                        <li><a href="{{ route('beranda') }}" class="hover:text-amber-400 transition-colors">&bull; Beranda</a></li>
-                        <li><a href="{{ route('jurusan') }}" class="hover:text-amber-400 transition-colors">&bull; 9 Bidang Kejuruan</a></li>
-                        <li><a href="{{ route('pusat-karir.index') }}" class="hover:text-amber-400 transition-colors">&bull; Pusat Karir & Lowongan</a></li>
-                        <li><a href="{{ route('spmb.index') }}" class="hover:text-amber-400 transition-colors">&bull; Pendaftaran Siswa Baru (SPMB)</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-bold text-sm mb-3 text-amber-400">Kontak Sekolah</h5>
-                    <p class="text-xs text-blue-100/90 leading-relaxed">
-                        Jl. Smea No. 4, Wonokromo, Surabaya, Jawa Timur 60243<br>
-                        Telepon: (031) 8292038<br>
-                        Email: info@smkn1surabaya.sch.id
-                    </p>
-                </div>
-            </div>
-            <div class="pt-6 border-t border-white/10 text-center text-xs text-blue-200/70 font-medium">
-                &copy; {{ date('Y') }} SMK Negeri 1 Surabaya. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    {{-- Script Engine --}}
+    @include('partials.footer')
+{{-- Script Engine --}}
     <script>
         const questions = @json($questions);
         const majorsData = @json($majors);

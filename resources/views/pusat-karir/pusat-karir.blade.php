@@ -221,7 +221,7 @@
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
     @include('partials.navbar', ['activePage' => 'pusat-karir'])
 
     <!-- ===== Hero Section ===== -->
@@ -1000,11 +1000,8 @@
     </main>
 
     <!-- Footer Banner -->
-    <footer class="w-full bg-blue-700 text-white text-center py-4 text-sm font-semibold">
-        Dibuat dengan <span class="text-red-500">❤️</span> oleh Chicken Noodles Team
-    </footer>
-
-    <!-- Mobile Menu Toggle Script -->
+    @include('partials.footer')
+<!-- Mobile Menu Toggle Script -->
     <script>
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');

@@ -17,7 +17,10 @@ class StrukturOrganisasiController extends Controller
 
     public function index(Request $request): View
     {
-        $wakil = StrukturOrganisasi::where('kategori', 'wakil')->orderBy('urutan')->get();
+        $wakil = StrukturOrganisasi::whereIn('kategori', ['kepala', 'wakil'])
+            ->orderByRaw("CASE WHEN kategori = 'kepala' THEN 0 ELSE 1 END")
+            ->orderBy('urutan')
+            ->get();
         $bagian = StrukturOrganisasi::where('kategori', 'bagian')->orderBy('urutan')->get();
 
         return view('admin.humas.struktur.index', compact('wakil', 'bagian'));

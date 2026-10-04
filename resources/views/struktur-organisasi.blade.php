@@ -129,22 +129,32 @@
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 md:-mt-20 z-10 pb-20">
 
             {{-- Kepala Sekolah --}}
+            @if ($kepala)
             <section class="bg-white rounded-2xl md:rounded-3xl shadow-[0_15px_40px_-10px_rgba(2,64,137,0.12)] border border-slate-100 p-6 sm:p-8 lg:p-12 mb-8">
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-28 h-28 rounded-full bg-gradient-to-br from-[#024089] to-[#013572] flex items-center justify-center shadow-lg shadow-blue-600/20 mb-5 ring-4 ring-amber-400/30">
-                        <svg class="w-14 h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-                    </div>
+                    @if ($kepala->foto_url)
+                        <div class="w-28 h-28 rounded-full overflow-hidden shadow-lg shadow-blue-600/20 mb-5 ring-4 ring-amber-400/30">
+                            <img src="{{ $kepala->foto_url }}" alt="{{ $kepala->nama }}" class="w-full h-full object-cover">
+                        </div>
+                    @else
+                        <div class="w-28 h-28 rounded-full bg-gradient-to-br from-[#024089] to-[#013572] flex items-center justify-center shadow-lg shadow-blue-600/20 mb-5 ring-4 ring-amber-400/30">
+                            <svg class="w-14 h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                    @endif
                     <div class="inline-block px-3 py-1 rounded-full bg-amber-400 text-slate-900 text-xs font-extrabold uppercase tracking-wider mb-3">
-                        Kepala Sekolah
+                        {{ $kepala->jabatan ?: 'Kepala Sekolah' }}
                     </div>
                     <h2 class="text-xl sm:text-2xl font-extrabold text-[#023775] mb-1">
-                        Drs. H. Bambang Wijanarko, M.M.
+                        {{ $kepala->nama }}
                     </h2>
-                    <p class="text-sm text-slate-500 font-medium">NIP. 19660415 199203 1 004</p>
+                    @if ($kepala->nip)
+                        <p class="text-sm text-slate-500 font-medium">NIP. {{ $kepala->nip }}</p>
+                    @endif
                 </div>
             </section>
+            @endif
 
             {{-- Wakil Kepala Sekolah --}}
             <div class="flex items-center gap-4 mb-8">

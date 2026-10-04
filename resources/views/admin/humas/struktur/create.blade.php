@@ -21,6 +21,7 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Kategori *</label>
                     <select name="kategori" required class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:border-blue-500 focus:outline-hidden @error('kategori') border-red-500 @enderror">
+                        <option value="kepala" @selected(old('kategori') === 'kepala')>Kepala Sekolah</option>
                         <option value="wakil" @selected(old('kategori') === 'wakil')>Wakil Kepala Sekolah</option>
                         <option value="bagian" @selected(old('kategori') === 'bagian')>Unit Kerja / Bagian</option>
                     </select>

@@ -12,6 +12,16 @@ class ProdukBlud extends Model
 
     public const TIPE_KUSTOM = 'kustom';
 
+    public const KATEGORI = [
+        'Kuliner',
+        'Desain',
+        'Jasa Keuangan',
+        'Jasa Teknis',
+        'Software / Aplikasi',
+        'Fashion & Kriya',
+        'Lainnya',
+    ];
+
     protected $fillable = [
         'slug',
         'tipe',

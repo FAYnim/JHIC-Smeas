@@ -28,6 +28,9 @@
                 <a href="{{ route('admin.produk-blud.index') }}" class="text-xs font-bold text-slate-500 hover:text-slate-700">Reset</a>
             @endif
         </form>
+        <a href="{{ route('admin.produk-blud.create') }}" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700">
+            + Tambah Produk
+        </a>
     </div>
 
     @if (session('success'))
@@ -86,11 +89,27 @@
                             </form>
                         </td>
                         <td class="px-4 py-3 text-right">
-                            <a href="{{ route('blud.detail', $produk->slug) }}" target="_blank"
-                                class="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline">
-                                Lihat
-                                <x-lucide-external-link class="w-3.5 h-3.5" />
-                            </a>
+                            <div class="flex items-center justify-end gap-2">
+                                <a href="{{ route('blud.detail', $produk->slug) }}" target="_blank" rel="noopener"
+                                    title="Lihat di halaman publik" aria-label="Lihat produk {{ $produk->title }}"
+                                    class="rounded-lg bg-blue-50 p-2 text-blue-600 hover:bg-blue-100">
+                                    <x-lucide-external-link class="w-4 h-4" />
+                                </a>
+                                <a href="{{ route('admin.produk-blud.edit', $produk) }}"
+                                    title="Edit produk" aria-label="Edit produk {{ $produk->title }}"
+                                    class="rounded-lg bg-slate-100 p-2 text-slate-600 hover:bg-slate-200">
+                                    <x-lucide-pencil class="w-4 h-4" />
+                                </a>
+                                <form action="{{ route('admin.produk-blud.destroy', $produk) }}" method="POST"
+                                    onsubmit="return confirm('Hapus produk ini beserta galeri, komentar, dan penawarannya?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" title="Hapus produk" aria-label="Hapus produk {{ $produk->title }}"
+                                        class="rounded-lg bg-red-50 p-2 text-red-600 hover:bg-red-100">
+                                        <x-lucide-trash-2 class="w-4 h-4" />
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

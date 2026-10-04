@@ -77,6 +77,11 @@ Route::middleware('role:spmb')->group(function () {
 
 Route::middleware('role:blud')->group(function () {
     Route::get('produk-blud', [ProdukBludController::class, 'index'])->name('produk-blud.index');
+    Route::get('produk-blud/create', [ProdukBludController::class, 'create'])->name('produk-blud.create');
+    Route::post('produk-blud', [ProdukBludController::class, 'store'])->name('produk-blud.store');
+    Route::get('produk-blud/{produkBlud}/edit', [ProdukBludController::class, 'edit'])->name('produk-blud.edit');
+    Route::put('produk-blud/{produkBlud}', [ProdukBludController::class, 'update'])->name('produk-blud.update');
+    Route::delete('produk-blud/{produkBlud}', [ProdukBludController::class, 'destroy'])->name('produk-blud.destroy');
     Route::patch('produk-blud/{produkBlud}/toggle-publish', [ProdukBludController::class, 'togglePublish'])->name('produk-blud.toggle-publish');
 
     Route::get('pesanan-blud', [PesananController::class, 'index'])->name('pesanan-blud.index');

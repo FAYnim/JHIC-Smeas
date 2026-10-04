@@ -1010,48 +1010,30 @@
         </section>
 
         {{-- ==================== TEMUKAN JURUSANMU (AI MAJOR FINDER) ==================== --}}
-        <section style="padding:64px 0 80px;background:#f8fafc;">
-            <div style="max-width:1280px;margin:0 auto;padding:0 16px;">
-                <div class="fade-up" style="background:linear-gradient(135deg, #024089 0%, #001938 100%);border-radius:24px;padding:48px 32px;color:#fff;box-shadow:0 20px 40px -15px rgba(2,64,137,0.3);position:relative;overflow:hidden;">
-                    {{-- Decorative background glow --}}
-                    <div style="position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:rgba(245,158,11,0.15);border-radius:50%;filter:blur(50px);pointer-events:none;"></div>
-                    <div style="position:absolute;bottom:-40px;left:-40px;width:200px;height:200px;background:rgba(59,130,246,0.2);border-radius:50%;filter:blur(40px);pointer-events:none;"></div>
+        <section style="padding:64px 0 72px;background:#f8fafc;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+            <div style="max-width:840px;margin:0 auto;padding:0 16px;text-align:center;" class="fade-up">
+                {{-- Title & Subtitle --}}
+                <h2 style="font-size:clamp(1.75rem, 4vw, 2.35rem);font-weight:800;color:#0f172a;line-height:1.25;margin-bottom:16px;letter-spacing:-0.02em;">
+                    Bingung Memilih Jurusan yang Tepat di SMEAS?
+                </h2>
+                <p style="font-size:clamp(0.95rem, 2vw, 1.05rem);color:#64748b;line-height:1.65;margin-bottom:32px;max-width:680px;margin-left:auto;margin-right:auto;">
+                    Ikuti simulasi kuesioner probabilitas cerdas untuk memetakan bakat, minat, dan potensi karirmu secara akurat di 9 bidang keahlian vokasi SMKN 1 Surabaya.
+                </p>
 
-                    <div style="position:relative;z-index:1;max-width:760px;margin:0 auto;text-align:center;">
-                        {{-- AI Badges --}}
-                        <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);padding:6px 16px;border-radius:9999px;margin-bottom:20px;">
-                            <span style="font-size:0.8rem;font-weight:700;color:#fde047;display:inline-flex;align-items:center;gap:6px;">
-                                <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                                AI-Powered Recommendation
-                            </span>
-                            <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">•</span>
-                            <span style="color:#e2e8f0;font-size:0.8rem;">15 Pertanyaan • ±3 Menit</span>
-                        </div>
-
-                        {{-- Title & Subtitle --}}
-                        <h2 style="font-size:clamp(1.75rem, 4vw, 2.5rem);font-weight:800;color:#fff;line-height:1.25;margin-bottom:16px;letter-spacing:-0.02em;">
-                            Bingung Memilih Jurusan yang Tepat di SMEAS?
-                        </h2>
-                        <p style="font-size:clamp(0.95rem, 2vw, 1.1rem);color:#cbd5e1;line-height:1.6;margin-bottom:32px;">
-                            Ikuti simulasi kuesioner probabilitas cerdas untuk memetakan bakat, minat, dan potensi karirmu secara akurat di 9 bidang keahlian vokasi SMKN 1 Surabaya.
-                        </p>
-
-                        {{-- Action Buttons --}}
-                        <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
-                            <a href="{{ route('temukan-jurusan') }}"
-                                style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 36px;font-size:1rem;font-weight:700;color:#fff;background:#f59e0b;border-radius:12px;text-decoration:none;box-shadow:0 10px 20px -5px rgba(245,158,11,0.5);transition:all 0.3s ease;"
-                                onmouseover="this.style.background='#d97706';this.style.transform='translateY(-2px)'"
-                                onmouseout="this.style.background='#f59e0b';this.style.transform='translateY(0)'">
-                                Mulai Tes Minat & Bakat &rarr;
-                            </a>
-                            <a href="{{ route('jurusan') }}"
-                                style="display:inline-flex;align-items:center;justify-content:center;padding:16px 28px;font-size:0.95rem;font-weight:600;color:#fff;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);border-radius:12px;text-decoration:none;transition:all 0.3s ease;"
-                                onmouseover="this.style.background='rgba(255,255,255,0.2)'"
-                                onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-                                Direktori 9 Jurusan
-                            </a>
-                        </div>
-                    </div>
+                {{-- Action Buttons --}}
+                <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+                    <a href="{{ route('temukan-jurusan') }}"
+                        style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 36px;font-size:1rem;font-weight:700;color:#fff;background:#f59e0b;border-radius:12px;text-decoration:none;box-shadow:0 10px 20px -5px rgba(245,158,11,0.4);transition:all 0.3s ease;"
+                        onmouseover="this.style.background='#d97706';this.style.transform='translateY(-2px)'"
+                        onmouseout="this.style.background='#f59e0b';this.style.transform='translateY(0)'">
+                        Mulai Tes Minat & Bakat &rarr;
+                    </a>
+                    <a href="{{ route('jurusan') }}"
+                        style="display:inline-flex;align-items:center;justify-content:center;padding:16px 28px;font-size:0.95rem;font-weight:600;color:#334155;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:12px;text-decoration:none;transition:all 0.3s ease;box-shadow:0 1px 3px rgba(0,0,0,0.05);"
+                        onmouseover="this.style.background='#f8fafc';this.style.borderColor='#94a3b8';this.style.color='#0f172a'"
+                        onmouseout="this.style.background='#ffffff';this.style.borderColor='#cbd5e1';this.style.color='#334155'">
+                        Direktori 9 Jurusan
+                    </a>
                 </div>
             </div>
         </section>

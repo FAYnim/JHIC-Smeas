@@ -682,7 +682,7 @@
                     </div>
 
                     {{-- Right Column: Photo Cards (side by side with gap) --}}
-                    <div class="order-2 md:order-2 flex justify-center md:justify-end">
+                    <div class="hidden md:flex order-2 md:order-2 justify-center md:justify-end">
                         <div class="hero-photos-wrapper">
                             <div class="hero-photo-card hero-photo-card-1">
                                 <img src="{{ asset('images/image 4.webp') }}" alt="Siswa SMKN 1 Surabaya berprestasi" width="218" height="341">

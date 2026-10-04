@@ -142,72 +142,100 @@
 </header>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Mobile menu toggle
-        const btn    = document.getElementById('mobile-menu-btn');
-        const menu   = document.getElementById('mobile-menu');
-        const iconOn = document.getElementById('menu-icon-open');
-        const iconOf = document.getElementById('menu-icon-close');
-        if (btn && menu) {
-            btn.addEventListener('click', () => {
-                const open = menu.classList.toggle('hidden');
-                if (iconOn) iconOn.classList.toggle('hidden', !open);
-                if (iconOf) iconOf.classList.toggle('hidden', open);
-                btn.setAttribute('aria-expanded', String(!open));
-            });
-        }
+    (() => {
+        function initNavbar() {
+            // Mobile menu toggle
+            const btn    = document.getElementById('mobile-menu-btn');
+            const menu   = document.getElementById('mobile-menu');
+            const iconOn = document.getElementById('menu-icon-open');
+            const iconOf = document.getElementById('menu-icon-close');
 
-        // Desktop Profil dropdown (hover)
-        const ddWrap  = document.getElementById('desktop-profil-dropdown');
-        const ddMenu  = document.getElementById('desktop-profil-menu');
-        const ddChev  = document.getElementById('desktop-profil-chevron');
-        const ddBtn   = document.getElementById('desktop-profil-btn');
-        if (ddWrap && ddMenu) {
-            let hideTimer;
-            ddWrap.addEventListener('mouseenter', () => {
-                clearTimeout(hideTimer);
-                ddMenu.classList.remove('hidden', 'opacity-0', '-translate-y-1');
-                ddMenu.classList.add('opacity-100', 'translate-y-0');
-                if (ddChev) ddChev.classList.add('rotate-180');
-                ddBtn.setAttribute('aria-expanded', 'true');
-            });
-            ddWrap.addEventListener('mouseleave', () => {
-                hideTimer = setTimeout(() => {
-                    ddMenu.classList.add('hidden', 'opacity-0', '-translate-y-1');
-                    ddMenu.classList.remove('opacity-100', 'translate-y-0');
-                    if (ddChev) ddChev.classList.remove('rotate-180');
-                    ddBtn.setAttribute('aria-expanded', 'false');
-                }, 120);
-            });
-        }
+            if (btn && menu && !btn.dataset.navbarInitialized) {
+                btn.dataset.navbarInitialized = 'true';
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const isHidden = menu.classList.contains('hidden');
+                    if (isHidden) {
+                        menu.classList.remove('hidden');
+                        if (iconOn) iconOn.classList.add('hidden');
+                        if (iconOf) iconOf.classList.remove('hidden');
+                        btn.setAttribute('aria-expanded', 'true');
+                    } else {
+                        menu.classList.add('hidden');
+                        if (iconOn) iconOn.classList.remove('hidden');
+                        if (iconOf) iconOf.classList.add('hidden');
+                        btn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
 
-        if (ddBtn && ddMenu) {
-            ddBtn.addEventListener('click', () => {
-                const isOpen = !ddMenu.classList.contains('hidden');
-                if (isOpen) {
-                    ddMenu.classList.add('hidden', 'opacity-0', '-translate-y-1');
-                    ddMenu.classList.remove('opacity-100', 'translate-y-0');
-                    ddBtn.setAttribute('aria-expanded', 'false');
-                } else {
+            // Desktop Profil dropdown
+            const ddWrap = document.getElementById('desktop-profil-dropdown');
+            const ddMenu = document.getElementById('desktop-profil-menu');
+            const ddChev = document.getElementById('desktop-profil-chevron');
+            const ddBtn  = document.getElementById('desktop-profil-btn');
+
+            if (ddWrap && ddMenu && !ddWrap.dataset.navbarInitialized) {
+                ddWrap.dataset.navbarInitialized = 'true';
+                let hideTimer;
+                ddWrap.addEventListener('mouseenter', () => {
+                    clearTimeout(hideTimer);
                     ddMenu.classList.remove('hidden', 'opacity-0', '-translate-y-1');
                     ddMenu.classList.add('opacity-100', 'translate-y-0');
-                    ddBtn.setAttribute('aria-expanded', 'true');
-                }
-            });
+                    if (ddChev) ddChev.classList.add('rotate-180');
+                    if (ddBtn) ddBtn.setAttribute('aria-expanded', 'true');
+                });
+                ddWrap.addEventListener('mouseleave', () => {
+                    hideTimer = setTimeout(() => {
+                        ddMenu.classList.add('hidden', 'opacity-0', '-translate-y-1');
+                        ddMenu.classList.remove('opacity-100', 'translate-y-0');
+                        if (ddChev) ddChev.classList.remove('rotate-180');
+                        if (ddBtn) ddBtn.setAttribute('aria-expanded', 'false');
+                    }, 120);
+                });
+            }
+
+            if (ddBtn && ddMenu && !ddBtn.dataset.navbarClickInitialized) {
+                ddBtn.dataset.navbarClickInitialized = 'true';
+                ddBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const isOpen = !ddMenu.classList.contains('hidden');
+                    if (isOpen) {
+                        ddMenu.classList.add('hidden', 'opacity-0', '-translate-y-1');
+                        ddMenu.classList.remove('opacity-100', 'translate-y-0');
+                        if (ddChev) ddChev.classList.remove('rotate-180');
+                        ddBtn.setAttribute('aria-expanded', 'false');
+                    } else {
+                        ddMenu.classList.remove('hidden', 'opacity-0', '-translate-y-1');
+                        ddMenu.classList.add('opacity-100', 'translate-y-0');
+                        if (ddChev) ddChev.classList.add('rotate-180');
+                        ddBtn.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            }
+
+            // Mobile Profil dropdown
+            const mToggle = document.querySelector('[data-mobile-profil-toggle]');
+            const mMenu   = document.querySelector('[data-mobile-profil-menu]');
+            const mChev   = document.querySelector('[data-mobile-profil-chevron]');
+
+            if (mToggle && mMenu && !mToggle.dataset.navbarInitialized) {
+                mToggle.dataset.navbarInitialized = 'true';
+                mToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    mMenu.classList.toggle('hidden');
+                    if (mChev) mChev.classList.toggle('rotate-180');
+                    mToggle.setAttribute('aria-expanded', String(!mMenu.classList.contains('hidden')));
+                });
+            }
         }
 
-        // Mobile Profil dropdown (tap)
-        const mToggle = document.querySelector('[data-mobile-profil-toggle]');
-        const mMenu   = document.querySelector('[data-mobile-profil-menu]');
-        const mChev   = document.querySelector('[data-mobile-profil-chevron]');
-        if (mToggle && mMenu) {
-            mToggle.addEventListener('click', () => {
-                mMenu.classList.toggle('hidden');
-                if (mChev) mChev.classList.toggle('rotate-180');
-                mToggle.setAttribute('aria-expanded', String(!mMenu.classList.contains('hidden')));
-            });
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initNavbar);
+        } else {
+            initNavbar();
         }
-    });
+    })();
 </script>
 
 @include('partials.chatbot-widget')

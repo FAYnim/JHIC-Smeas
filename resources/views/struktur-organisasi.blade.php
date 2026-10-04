@@ -149,9 +149,6 @@
                     <h2 class="text-xl sm:text-2xl font-extrabold text-[#023775] mb-1">
                         {{ $kepala->nama }}
                     </h2>
-                    @if ($kepala->nip)
-                        <p class="text-sm text-slate-500 font-medium">NIP. {{ $kepala->nip }}</p>
-                    @endif
                 </div>
             </section>
             @endif
@@ -189,9 +186,6 @@
                         <h3 class="text-sm font-extrabold text-[#023775] mb-1 leading-snug">
                             {{ $item->nama }}
                         </h3>
-                        @if ($item->nip)
-                            <p class="text-[11px] text-slate-400 font-medium">NIP. {{ $item->nip }}</p>
-                        @endif
                     </div>
                 @endforeach
             </section>

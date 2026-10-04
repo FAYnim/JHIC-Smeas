@@ -228,37 +228,24 @@
                             </div>
                         </div>
 
-                        {{-- Jam Belajar + Bantuan --}}
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="rounded-xl border border-slate-200/80 bg-white overflow-hidden">
-                                <div class="px-4 sm:px-5 py-4 border-b border-slate-100">
-                                    <h3 class="text-sm sm:text-base font-bold text-slate-900">Jam Belajar</h3>
-                                </div>
-                                <div class="divide-y divide-slate-100">
-                                    <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3">
-                                        <span class="text-xs sm:text-sm font-semibold text-slate-700">Senin–Kamis</span>
-                                        <span class="text-xs sm:text-sm text-slate-500">07.00 – 15.00</span>
-                                    </div>
-                                    <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3">
-                                        <span class="text-xs sm:text-sm font-semibold text-slate-700">Jumat</span>
-                                        <span class="text-xs sm:text-sm text-slate-500">07.00 – 14.00</span>
-                                    </div>
-                                    <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3">
-                                        <span class="text-xs sm:text-sm font-semibold text-slate-700">Sabtu (menyesuaikan)</span>
-                                        <span class="text-xs sm:text-sm text-slate-500">Kegiatan Ekstrakurikuler</span>
-                                    </div>
-                                </div>
+                        {{-- Jam Belajar --}}
+                        <div class="rounded-xl border border-slate-200/80 bg-white overflow-hidden">
+                            <div class="px-4 sm:px-5 py-4 border-b border-slate-100">
+                                <h3 class="text-sm sm:text-base font-bold text-slate-900">Jam Belajar</h3>
                             </div>
-
-                            <div class="bg-[#024089] rounded-xl p-5 text-white flex flex-col shadow-[0_10px_28px_-8px_rgba(2,64,137,0.35)]">
-                                <h3 class="text-sm sm:text-base font-bold text-amber-400 mb-2">Butuh Bantuan?</h3>
-                                <p class="text-xs sm:text-sm text-blue-100/90 leading-relaxed mb-5 flex-1">
-                                    Tanyakan kepada SMEAS.AI untuk informasi lengkap seputar jadwal pembelajaran.
-                                </p>
-                                <a href="https://smeas.smkn1sch.sch.id" target="_blank"
-                                    class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-[#024089] text-sm font-bold shadow-sm transition-colors self-start">
-                                    SMEAS.AI
-                                </a>
+                            <div class="divide-y divide-slate-100">
+                                <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3">
+                                    <span class="text-xs sm:text-sm font-semibold text-slate-700">Senin–Kamis</span>
+                                    <span class="text-xs sm:text-sm text-slate-500">07.00 – 15.00</span>
+                                </div>
+                                <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3">
+                                    <span class="text-xs sm:text-sm font-semibold text-slate-700">Jumat</span>
+                                    <span class="text-xs sm:text-sm text-slate-500">07.00 – 14.00</span>
+                                </div>
+                                <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3">
+                                    <span class="text-xs sm:text-sm font-semibold text-slate-700">Sabtu (menyesuaikan)</span>
+                                    <span class="text-xs sm:text-sm text-slate-500">Kegiatan Ekstrakurikuler</span>
+                                </div>
                             </div>
                         </div>
 

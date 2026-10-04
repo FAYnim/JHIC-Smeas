@@ -21,7 +21,7 @@
 <body class="min-h-screen flex items-center justify-center bg-slate-100 antialiased">
     <div class="w-full max-w-md px-4">
         <div class="text-center mb-8">
-            <img src="{{ asset('images/smkn1-logo-white-transparent.png') }}" alt="Logo SMKN 1 Surabaya"
+            <img src="{{ asset('images/logo-smkn1.webp') }}" alt="Logo SMKN 1 Surabaya"
                 class="h-20 mx-auto object-contain">
             <h1 class="mt-4 text-2xl font-extrabold text-slate-900">Panel Admin</h1>
             <p class="text-sm font-medium text-slate-500 mt-1">SMKN 1 Surabaya — Pusat Karir</p>

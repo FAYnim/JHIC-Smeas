@@ -190,7 +190,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             .hero-section__bg {
                 width: 100%;
                 left: 0;

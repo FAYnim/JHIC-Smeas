@@ -77,14 +77,14 @@
         /* ===== Photo Cards (side by side with gap) ===== */
         .hero-photos-wrapper {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            flex-direction: row;
+            gap: 12px;
             align-items: center;
+            justify-content: center;
         }
 
         @media (min-width: 640px) {
             .hero-photos-wrapper {
-                flex-direction: row;
                 gap: 24px;
             }
         }
@@ -111,13 +111,25 @@
         }
 
         .hero-photo-card-1 {
-            width: 200px;
-            height: 280px;
+            width: 140px;
+            height: 195px;
         }
 
         .hero-photo-card-2 {
-            width: 180px;
-            height: 260px;
+            width: 125px;
+            height: 180px;
+        }
+
+        @media (min-width: 480px) {
+            .hero-photo-card-1 {
+                width: 180px;
+                height: 250px;
+            }
+
+            .hero-photo-card-2 {
+                width: 160px;
+                height: 230px;
+            }
         }
 
         @media (min-width: 640px) {
@@ -438,7 +450,7 @@
             align-items: center;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 768px) {
             .prakata-top-grid {
                 grid-template-columns: 1fr 320px;
                 gap: 48px;
@@ -461,7 +473,7 @@
             gap: 48px;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 768px) {
             .prakata-bottom-container {
                 flex-direction: row;
                 justify-content: space-between;
@@ -532,13 +544,14 @@
             z-index: 2;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 767px) {
             .stat-cards-wrapper {
                 height: auto;
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 16px;
                 justify-content: center;
+                padding: 16px 0;
             }
 
             .stat-star-bg {
@@ -551,8 +564,8 @@
                 left: auto !important;
                 right: auto !important;
                 transform: rotate(0deg) !important;
-                width: 130px !important;
-                height: 130px !important;
+                width: 140px !important;
+                height: 140px !important;
             }
 
             .stat-card-inner {
@@ -580,12 +593,11 @@
             <div class="hero-bg-overlay"></div>
 
             {{-- Content --}}
-            <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:80px 24px 88px;">
-                <div style="display:grid;grid-template-columns:1fr;gap:40px;align-items:center;"
-                    class="lg:!grid-cols-2 lg:!gap-64px">
+            <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-14 md:py-20 lg:py-24">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
 
                     {{-- Left Column: Text + CTAs --}}
-                    <div style="order:2;" class="lg:!order-1">
+                    <div class="order-1 md:order-1">
                         <h1
                             style="font-size:clamp(2.25rem, 5vw, 3.5rem);font-weight:800;letter-spacing:-0.02em;color:#fff;margin-bottom:24px;line-height:1.1;">
                             SMKN 1 SURABAYA
@@ -617,7 +629,7 @@
                     </div>
 
                     {{-- Right Column: Photo Cards (side by side with gap) --}}
-                    <div style="order:1;display:flex;justify-content:center;" class="lg:!order-2 lg:!justify-end">
+                    <div class="order-2 md:order-2 flex justify-center md:justify-end">
                         <div class="hero-photos-wrapper">
                             <div class="hero-photo-card hero-photo-card-1">
                                 <img src="{{ asset('images/image 4.png') }}" alt="Siswa SMKN 1 Surabaya berprestasi">
@@ -1046,17 +1058,19 @@
                     </h2>
                 </div>
 
-                <div style="display:grid;grid-template-columns:1fr;gap:24px;" class="fade-up" id="berita-grid">
+                <div class="fade-up grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="berita-grid">
                     {{-- Berita Terbaru --}}
                     @forelse ($artikels->take(4) as $artikel)
                         <a href="{{ route('pusat-karir.detail-artikel', $artikel->slug) }}" class="block group">
-                            <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                            <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow h-full flex flex-col">
                                 @if ($artikel->display_image)
                                     <img src="{{ $artikel->display_image }}" alt="{{ $artikel->title }}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 @endif
-                                <div class="p-5">
-                                    <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{{ $artikel->title }}</h3>
-                                    <p class="text-sm text-slate-500 mt-2">{{ $artikel->excerpt ?? Str::limit(strip_tags($artikel->content), 120) }}</p>
+                                <div class="p-5 flex-1 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{{ $artikel->title }}</h3>
+                                        <p class="text-sm text-slate-500 mt-2">{{ $artikel->excerpt ?? Str::limit(strip_tags($artikel->content), 120) }}</p>
+                                    </div>
                                 </div>
                             </article>
                         </a>
@@ -1080,10 +1094,10 @@
     {{-- ==================== FOOTER ==================== --}}
     <footer style="background:#023775;color:#fff;padding:48px 0 32px;border-top:1px solid rgba(30,58,138,0.6);">
         <div style="max-width:1280px;margin:0 auto;padding:0 16px;">
-            <div style="display:grid;grid-template-columns:1fr;gap:32px;margin-bottom:48px;" id="footer-grid">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12" id="footer-grid">
 
                 {{-- Column 1: Map --}}
-                <div
+                <div class="md:col-span-4"
                     style="background:rgba(255,255,255,0.05);padding:8px;border-radius:16px;border:1px solid rgba(255,255,255,0.1);">
                     <div
                         style="position:relative;width:100%;height:224px;border-radius:12px;overflow:hidden;background:#e2e8f0;border:1px solid rgba(255,255,255,0.1);">
@@ -1107,7 +1121,7 @@
                 </div>
 
                 {{-- Column 2: Tentang Kami --}}
-                <div style="font-size:0.875rem;line-height:1.7;color:rgba(191,219,254,0.9);">
+                <div class="md:col-span-5" style="font-size:0.875rem;line-height:1.7;color:rgba(191,219,254,0.9);">
                     <h3
                         style="font-size:1.5rem;font-weight:800;color:#fbbf24;margin-bottom:16px;letter-spacing:-0.02em;">
                         Tentang Kami
@@ -1149,7 +1163,7 @@
                 </div>
 
                 {{-- Column 3: Jelajahi Smeas --}}
-                <div style="border-left:2px solid #fbbf24;padding-left:24px;">
+                <div class="md:col-span-3 border-l-2 border-amber-400 pl-6">
                     <h3
                         style="font-size:1.5rem;font-weight:800;color:#fbbf24;margin-bottom:16px;letter-spacing:-0.02em;">
                         Jelajahi Smeas

@@ -1,0 +1,126 @@
+- generic [active] [ref=f160e1]:
+  - banner [ref=f160e2]:
+    - generic [ref=f160e4]:
+      - link [ref=f160e5] [cursor=pointer]:
+        - /url: http://localhost:8000
+        - img "Logo SMKN 1 Surabaya" [ref=f160e6]
+      - navigation "Main navigation" [ref=f160e7]:
+        - link "Beranda" [ref=f160e8] [cursor=pointer]:
+          - /url: http://localhost:8000
+        - button "Profil" [ref=f160e10] [cursor=pointer]
+        - link "Jurusan" [ref=f160e13] [cursor=pointer]:
+          - /url: http://localhost:8000/jurusan
+        - link "Informasi" [ref=f160e14] [cursor=pointer]:
+          - /url: http://localhost:8000/informasi
+        - link "Pusat Karir" [ref=f160e15] [cursor=pointer]:
+          - /url: http://localhost:8000/pusat-karir
+        - link "BLUD" [ref=f160e16] [cursor=pointer]:
+          - /url: http://localhost:8000/blud
+        - link "SPMB" [ref=f160e17] [cursor=pointer]:
+          - /url: http://localhost:8000/spmb
+  - button "Buka Chat Smeas.Ai" [ref=f160e18] [cursor=pointer]:
+    - img "Smeas.Ai" [ref=f160e20]
+  - main [ref=f160e23]:
+    - generic [ref=f160e24]:
+      - img "Background Pusat Karir" [ref=f160e26]
+      - generic [ref=f160e28]:
+        - heading "Pusat Karir SMKN 1 Surabaya" [level=1] [ref=f160e29]
+        - paragraph [ref=f160e30]: Temukan lowongan kerja, magang, dan peluang karier terbaik untuk alumni dan siswa SMKN 1 Surabaya.
+        - generic [ref=f160e31]:
+          - textbox "Cari perusahaan, posisi, atau tempat magang..." [ref=f160e32]
+          - button "Cari" [ref=f160e33] [cursor=pointer]
+    - generic [ref=f160e36]:
+      - heading "Peluang Unggulan" [level=2] [ref=f160e37]
+      - generic [ref=f160e39]:
+        - generic [ref=f160e40]:
+          - generic [ref=f160e44]:
+            - heading "PT Telkom Indonesia (Regional Jawa Timur)" [level=3] [ref=f160e45]
+            - paragraph [ref=f160e46]: Software Engineer Intern (PKL)
+            - paragraph [ref=f160e47]: Surabaya, Jatim
+          - generic [ref=f160e48]:
+            - button "Simpan lowongan" [ref=f160e49]
+            - generic [ref=f160e52]: Lowongan
+        - link "Lihat Detail & Ajukan" [ref=f160e54] [cursor=pointer]:
+          - /url: http://localhost:8000/pusat-karir/telkom-software-engineer-intern
+    - generic [ref=f160e55]:
+      - heading "Jelajahi" [level=2] [ref=f160e56]
+      - generic [ref=f160e57]:
+        - link [ref=f160e58] [cursor=pointer]:
+          - /url: http://localhost:8000/pusat-karir/magang
+          - heading "Magang/Internship" [level=3] [ref=f160e62]
+          - paragraph [ref=f160e63]: 0 program
+        - link [ref=f160e64] [cursor=pointer]:
+          - /url: http://localhost:8000/pusat-karir/lowongan
+          - heading "Lowongan Kerja" [level=3] [ref=f160e68]
+          - paragraph [ref=f160e69]: 1 lowongan
+        - link [ref=f160e70] [cursor=pointer]:
+          - /url: http://localhost:8000/pusat-karir/mitra
+          - heading "Mitra Perusahaan" [level=3] [ref=f160e74]
+          - paragraph [ref=f160e75]: 0 mitra
+        - link [ref=f160e76] [cursor=pointer]:
+          - /url: "#bimbingan-karir"
+          - heading "Bimbingan Karir" [level=3] [ref=f160e80]
+          - paragraph [ref=f160e81]: 0 materi
+        - link [ref=f160e82] [cursor=pointer]:
+          - /url: http://localhost:8000/pusat-karir/study-tracer
+          - heading "Study Tracer" [level=3] [ref=f160e86]
+          - paragraph [ref=f160e87]: 1 program
+      - generic [ref=f160e88]:
+        - generic [ref=f160e89]:
+          - generic [ref=f160e90]:
+            - heading "Lowongan Terbaru" [level=3] [ref=f160e91]
+            - link "Lihat semua" [ref=f160e92] [cursor=pointer]:
+              - /url: http://localhost:8000/pusat-karir/lowongan
+          - generic [ref=f160e94]:
+            - generic [ref=f160e97]:
+              - heading "Software Engineer Intern (PKL)" [level=4] [ref=f160e98]
+              - paragraph [ref=f160e99]: PT Telkom Indonesia (Regional Jawa Timur)
+              - paragraph [ref=f160e100]: Surabaya, Jatim
+              - generic [ref=f160e101]:
+                - generic [ref=f160e102]: 3 days ago
+                - generic [ref=f160e103]: Lowongan
+            - button "Simpan" [ref=f160e104]
+        - generic [ref=f160e107]:
+          - generic [ref=f160e108]:
+            - heading "Magang Terbaru" [level=3] [ref=f160e109]
+            - link "Lihat semua" [ref=f160e110] [cursor=pointer]:
+              - /url: http://localhost:8000/pusat-karir/magang
+          - generic [ref=f160e111]:
+            - paragraph [ref=f160e115]: Belum ada magang terbaru
+            - paragraph [ref=f160e116]: Data akan muncul setelah ditambahkan.
+        - generic [ref=f160e117]:
+          - generic [ref=f160e118]:
+            - heading "Artikel Terbaru" [level=3] [ref=f160e119]
+            - link "Lihat semua" [ref=f160e120] [cursor=pointer]:
+              - /url: http://localhost:8000/pusat-karir/artikel
+          - generic [ref=f160e121]:
+            - paragraph [ref=f160e125]: Belum ada artikel terbaru
+            - paragraph [ref=f160e126]: Data akan muncul setelah ditambahkan.
+    - generic [ref=f160e127]:
+      - heading "Bimbingan Karir" [level=2] [ref=f160e128]
+      - generic [ref=f160e129]:
+        - button "Semua" [ref=f160e130]
+        - button "Tips CV" [ref=f160e133]
+        - button "Tips Interview" [ref=f160e136]
+        - button "Roadmap Karir" [ref=f160e139]
+        - button "Webinar" [ref=f160e142]
+        - button "Sertifikasi" [ref=f160e145]
+      - generic [ref=f160e148]:
+        - generic [ref=f160e153]:
+          - heading "Persiapkan Karir, Raih Masa Depan" [level=3] [ref=f160e154]: Persiapkan Karir,Raih Masa Depan
+          - link "Mulai Belajar" [ref=f160e155] [cursor=pointer]:
+            - /url: http://localhost:8000/pusat-karir/artikel
+        - generic [ref=f160e159]:
+          - paragraph [ref=f160e163]: Belum ada webinar
+          - paragraph [ref=f160e164]: Webinar akan ditampilkan di sini setelah dicantumkan melalui dashboard.
+      - generic [ref=f160e165]:
+        - heading "Katalog Bimbingan" [level=3] [ref=f160e167]
+        - generic [ref=f160e168]:
+          - paragraph [ref=f160e169]: Belum ada katalog bimbingan
+          - paragraph [ref=f160e170]: Katalog akan ditampilkan di sini setelah dicantumkan melalui dashboard.
+    - generic [ref=f160e171]:
+      - heading "Sumber Rekomendasi" [level=2] [ref=f160e172]
+      - generic [ref=f160e173]:
+        - paragraph [ref=f160e177]: Belum ada sumber rekomendasi
+        - paragraph [ref=f160e178]: Sumber rekomendasi akan ditampilkan di sini setelah dicantumkan melalui dashboard.
+  - contentinfo [ref=f160e179]: Dibuat dengan ❤️ oleh Chicken Noodles Team

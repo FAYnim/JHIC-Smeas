@@ -1,0 +1,158 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link [ref=e5] [cursor=pointer]:
+        - /url: http://localhost:8000
+        - img "Logo SMKN 1 Surabaya" [ref=e6]
+      - button "Toggle Navigation" [ref=e8]
+  - button "Buka Chat Smeas.Ai" [ref=e10] [cursor=pointer]:
+    - img "Smeas.Ai" [ref=e12]
+  - main [ref=e15]:
+    - generic [ref=e16]:
+      - img "Gedung SMKN 1 Surabaya" [ref=e17]
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - heading "SMKN 1 SURABAYA" [level=1] [ref=e22]
+          - paragraph [ref=e23]: “Tidak ada ahli yang langsung jago dari lahir. Semua profesional berawal dari yang namanya ‘salah coba’, ‘perbaiki’, lalu ‘biasa’.”
+          - generic [ref=e24]:
+            - link "Daftar SPMB" [ref=e25] [cursor=pointer]:
+              - /url: http://localhost:8000/spmb
+            - link "Tentang kami →" [ref=e26] [cursor=pointer]:
+              - /url: http://localhost:8000/visi-misi
+        - generic [ref=e28]:
+          - img "Siswa SMKN 1 Surabaya berprestasi" [ref=e30]
+          - img "Siswa SMKN 1 Surabaya" [ref=e32]
+    - generic [ref=e33]:
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - heading "Prakata kepala sekolah" [level=2] [ref=e37]
+          - generic [ref=e38]:
+            - text: “
+            - blockquote [ref=e39]:
+              - paragraph [ref=e40]: Era globalisasi membawa perubahan yang cepat dalam berbagai aspek kehidupan. Oleh karena itu, pendidikan memiliki peran penting dalam menyiapkan sumber daya manusia yang mampu menghadapi perubahan tersebut. Sekolah perlu memiliki arah pengembangan yang jelas dan berkelanjutan, sekaligus mampu menyesuaikan diri dengan kebutuhan dan permasalahan masyarakat saat ini.
+            - text: ”
+        - generic [ref=e41]:
+          - img "Dr. Drs. Anton Sujarwo, M.Pd." [ref=e42]
+          - paragraph [ref=e43]: Dr. Drs. Anton Sujarwo, M.Pd.
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - img "Siswa SMKN 1 Surabaya" [ref=e48]
+          - generic [ref=e49]:
+            - link "@semkanisanet" [ref=e50] [cursor=pointer]:
+              - /url: https://instagram.com/semkanisanet
+            - link "@smkn1sby.official" [ref=e53] [cursor=pointer]:
+              - /url: https://instagram.com/smkn1sby.official
+        - generic [ref=e56]:
+          - img "Decorative Star"
+          - generic [ref=e58]:
+            - generic [ref=e59]: "9"
+            - generic [ref=e60]: Jurusan
+          - generic [ref=e62]:
+            - generic [ref=e63]: "0"
+            - generic [ref=e64]: Pengajar
+          - generic [ref=e66]:
+            - generic [ref=e67]: 1200+
+            - generic [ref=e68]: Siswa/Siswi
+    - generic [ref=e70]:
+      - heading [level=2] [ref=e72]:
+        - text: Kenapa harus
+        - generic [ref=e73]: SMKN 1Surabaya?
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - heading "Pilihan Jurusan Relevan dengan Industri" [level=3] [ref=e79]
+          - paragraph [ref=e80]: SMK Negeri 1 Surabaya menyediakan 9 keahlian mulai dari IT, multimedia, bisnis, hingga perhotelan yang disesuaikan dengan kebutuhan industri masa kini.
+        - generic [ref=e81]:
+          - heading "Lulus Berbekal Sertifikat Profesi BNSP" [level=3] [ref=e85]
+          - paragraph [ref=e86]: Lulusan dibekali sertifikat kompetensi nasional berlogo Garuda melalui program Uji Sertifikasi Keahlian sebagai bukti kelayakan kerja profesional.
+        - generic [ref=e87]:
+          - heading "Praktik Nyata Lewat Fasilitas Teaching Factory" [level=3] [ref=e91]
+          - paragraph [ref=e92]: Didukung laboratorium modern dan fasilitas Teaching Factory, siswa langsung belajar menangani proyek kerja riil berstandar industri.
+        - generic [ref=e93]:
+          - heading "Akses Penyaluran Kerja via BKK dan Mitra Industri" [level=3] [ref=e97]
+          - paragraph [ref=e98]: Melalui kerja sama dunia usaha, unit Bursa Kerja Khusus siap menjembatani siswa ke berbagai peluang magang dan rekrutmen kerja.
+        - generic [ref=e99]:
+          - heading "Tata Kelola Pendidikan Berstandar Mutu ISO" [level=3] [ref=e103]
+          - paragraph [ref=e104]: Tata kelola pendidikan dan pembelajaran berjalan terstruktur di bawah sistem manajemen mutu sertifikasi ISO.
+        - generic [ref=e105]:
+          - heading "Kultur Berprestasi di Lokasi yang Sangat Strategis" [level=3] [ref=e109]
+          - paragraph [ref=e110]: Sekolah ini rutin berprestasi di ajang Lomba Kompetensi Siswa (LKS) dan bertempat di kawasan Wonokromo yang mudah dijangkau transportasi umum.
+    - generic [ref=e112]:
+      - heading "Guru dan Tenaga Kependidikan" [level=2] [ref=e114]
+      - generic [ref=e115]:
+        - button "Sebelumnya" [ref=e116] [cursor=pointer]
+        - button "Selanjutnya" [ref=e119] [cursor=pointer]
+        - paragraph [ref=e123]: Belum ada data guru.
+      - link "Selengkapnya.." [ref=e125] [cursor=pointer]:
+        - /url: http://localhost:8000/guru-dan-tenaga-kependidikan
+    - generic [ref=e127]:
+      - heading "Temukan Jurusanmu, Buka Peluang Karirmu" [level=2] [ref=e129]: Temukan Jurusanmu,Buka Peluang Karirmu
+      - textbox "Senang di JHIK, coba pengolahan di bawah ini" [ref=e139]
+      - link "Mulai Cari →" [ref=e141] [cursor=pointer]:
+        - /url: http://localhost:8000/jurusan
+    - generic [ref=e144]:
+      - img "Background Pusat Karir" [ref=e146]
+      - generic [ref=e148]:
+        - heading "Pusat Karir SMKN 1 Surabaya" [level=2] [ref=e149]
+        - paragraph [ref=e150]: Temukan lowongan kerja, magang, dan peluang karier terbaik untuk alumni dan siswa SMKN 1 Surabaya.
+        - generic [ref=e151]:
+          - textbox "Cari perusahaan, posisi, atau tempat magang..." [ref=e152]
+          - button "Cari" [ref=e153] [cursor=pointer]
+        - generic [ref=e156]:
+          - link "Lowongan Kerja" [ref=e157] [cursor=pointer]:
+            - /url: http://localhost:8000/pusat-karir/lowongan
+          - link "Program Magang" [ref=e158] [cursor=pointer]:
+            - /url: http://localhost:8000/pusat-karir/magang
+          - link "Mitra DUDI" [ref=e159] [cursor=pointer]:
+            - /url: http://localhost:8000/pusat-karir/mitra
+    - generic [ref=e161]:
+      - heading "Berita SMKN 1 Surabaya" [level=2] [ref=e163]
+      - paragraph [ref=e165]: Belum ada berita.
+      - link "Lihat semua berita →" [ref=e167] [cursor=pointer]:
+        - /url: http://localhost:8000/informasi
+  - contentinfo [ref=e168]:
+    - generic [ref=e169]:
+      - generic [ref=e170]:
+        - generic [ref=e171]:
+          - iframe [ref=e173]
+          - generic [ref=e174]:
+            - generic [ref=e175]: Jl. Smea No. 4, Wonokromo, Surabaya
+            - link "Buka Peta →" [ref=e177] [cursor=pointer]:
+              - /url: https://maps.google.com/?q=SMK+Negeri+1+Surabaya
+        - generic [ref=e178]:
+          - heading "Tentang Kami" [level=3] [ref=e179]
+          - paragraph [ref=e180]: Sekolah Kejuruan di Surabaya, Jawa Timur yang berlokasi di Jl. Smea No. 4, Wonokromo Surabaya, SMK Negeri 1 Surabaya bertekad mencapai perbaikan yang berkesinambungan berdasarkan sistem manajemen mutu ISO 9001:2008.
+          - generic [ref=e181]:
+            - paragraph [ref=e182]:
+              - strong [ref=e183]: "Telp:"
+              - text: 031-8292038
+            - paragraph [ref=e184]:
+              - strong [ref=e185]: "FAX:"
+              - text: 031-8292039
+            - paragraph [ref=e186]:
+              - strong [ref=e187]: "Email:"
+              - link "info@smkn1-sby.sch.id" [ref=e188] [cursor=pointer]:
+                - /url: mailto:info@smkn1-sby.sch.id
+          - generic [ref=e189]:
+            - link "Instagram" [ref=e190] [cursor=pointer]:
+              - /url: https://instagram.com
+            - link "YouTube" [ref=e193] [cursor=pointer]:
+              - /url: https://youtube.com
+        - generic [ref=e196]:
+          - heading "Jelajahi Smeas" [level=3] [ref=e197]
+          - list [ref=e198]:
+            - listitem [ref=e199]:
+              - link "• Pusat Karir" [ref=e200] [cursor=pointer]:
+                - /url: http://localhost:8000/pusat-karir
+                - generic [ref=e201]: •
+                - text: Pusat Karir
+            - listitem [ref=e202]:
+              - link "• BLUD" [ref=e203] [cursor=pointer]:
+                - /url: http://localhost:8000/blud
+                - generic [ref=e204]: •
+                - text: BLUD
+            - listitem [ref=e205]:
+              - link "• PPDB / SPMB" [ref=e206] [cursor=pointer]:
+                - /url: http://localhost:8000/spmb
+                - generic [ref=e207]: •
+                - text: PPDB / SPMB
+      - generic [ref=e208]: ©2026 | SMKN 1 Surabaya

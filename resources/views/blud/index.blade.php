@@ -175,15 +175,18 @@
             position: relative;
             aspect-ratio: 1 / 0.92;
             background: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
+            flex: none;
+            min-height: 0;
         }
 
         .blud-card__media img {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
         }
 
         .blud-badge-major {
@@ -231,6 +234,10 @@
             font-weight: 700;
             color: #0f172a;
             line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .blud-card__desc {
@@ -245,7 +252,7 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            margin-top: 0.35rem;
+            margin-top: auto;
             padding: 0.55rem 0.75rem;
             border-radius: 0.4rem;
             background: #fbbf24;

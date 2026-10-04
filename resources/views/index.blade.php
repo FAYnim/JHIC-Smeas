@@ -168,12 +168,29 @@
             box-shadow: 0 12px 28px rgba(234, 179, 8, 0.45);
         }
 
-        .feature-card h3 { color: #fff !important; }
-        .feature-card p { color: rgba(255, 255, 255, 0.85) !important; }
-        .feature-card > div:first-child { background: rgba(255, 255, 255, 0.2) !important; }
-        .feature-card:hover h3 { color: #0b192c !important; }
-        .feature-card:hover p { color: rgba(11, 25, 44, 0.8) !important; }
-        .feature-card:hover > div:first-child { background: rgba(0, 0, 0, 0.15) !important; }
+        .feature-card h3 {
+            color: #fff !important;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.85) !important;
+        }
+
+        .feature-card>div:first-child {
+            background: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .feature-card:hover h3 {
+            color: #0b192c !important;
+        }
+
+        .feature-card:hover p {
+            color: rgba(11, 25, 44, 0.8) !important;
+        }
+
+        .feature-card:hover>div:first-child {
+            background: rgba(0, 0, 0, 0.15) !important;
+        }
 
         /* ===== Pusat Karir hero card (match pusat-karir page) ===== */
         .pk-hero {
@@ -213,12 +230,10 @@
                     #061d36 40%,
                     rgba(6, 29, 54, 0.85) 55%,
                     rgba(6, 29, 54, 0.4) 70%,
-                    rgba(6, 29, 54, 0) 88%
-                ),
+                    rgba(6, 29, 54, 0) 88%),
                 linear-gradient(0deg,
                     rgba(6, 29, 54, 0.4) 0%,
-                    rgba(6, 29, 54, 0) 25%
-                );
+                    rgba(6, 29, 54, 0) 25%);
         }
 
         .pk-hero__content {
@@ -337,10 +352,9 @@
 
             .pk-hero__overlay {
                 background: linear-gradient(180deg,
-                    #061d36 0%,
-                    rgba(6, 29, 54, 0.92) 65%,
-                    rgba(6, 29, 54, 0.75) 100%
-                );
+                        #061d36 0%,
+                        rgba(6, 29, 54, 0.92) 65%,
+                        rgba(6, 29, 54, 0.75) 100%);
             }
 
             .pk-hero__content {
@@ -769,8 +783,7 @@
                     class="fade-up">
 
                     {{-- Card 1 --}}
-                    <div class="feature-card"
-                        style="border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
+                    <div class="feature-card" style="border-radius:0;padding:28px 24px;border:none;box-shadow:none;">
                         <div
                             style="width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
                             <svg style="width:20px;height:20px;color:#fff;" fill="currentColor" viewBox="0 0 24 24">
@@ -778,7 +791,8 @@
                                     d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
                         </div>
-                        <h3 style="font-size:1.05rem;font-weight:800;color:#0b192c;margin-bottom:10px;line-height:1.3;">
+                        <h3
+                            style="font-size:1.05rem;font-weight:800;color:#0b192c;margin-bottom:10px;line-height:1.3;">
                             Pilihan Jurusan Relevan dengan Industri</h3>
                         <p style="font-size:0.875rem;color:rgba(11,25,44,0.8);line-height:1.6;">
                             SMK Negeri 1 Surabaya menyediakan 9 keahlian mulai dari IT, multimedia, bisnis, hingga
@@ -817,7 +831,8 @@
                         <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.3;">
                             Praktik Nyata Lewat Fasilitas Teaching Factory</h3>
                         <p style="font-size:0.875rem;color:rgba(255,255,255,0.85);line-height:1.6;">
-                            Didukung laboratorium modern dan fasilitas Teaching Factory, siswa langsung belajar menangani
+                            Didukung laboratorium modern dan fasilitas Teaching Factory, siswa langsung belajar
+                            menangani
                             proyek kerja riil berstandar industri.
                         </p>
                     </div>
@@ -941,10 +956,12 @@
                                     </div>
                                 </div>
                                 <p style="font-size:0.9rem;font-weight:700;color:#0f172a;">{{ $guru->nama }}</p>
-                                <p style="font-size:0.8rem;font-weight:500;color:#64748b;">{{ $guru->mapel ?? $guru->jabatan }}</p>
+                                <p style="font-size:0.8rem;font-weight:500;color:#64748b;">
+                                    {{ $guru->mapel ?? $guru->jabatan }}</p>
                             </div>
                         @empty
-                            <p style="flex:1;text-align:center;padding:48px 16px;font-size:0.9rem;color:#64748b;">Belum ada data guru.</p>
+                            <p style="flex:1;text-align:center;padding:48px 16px;font-size:0.9rem;color:#64748b;">Belum
+                                ada data guru.</p>
                         @endforelse
 
                     </div>
@@ -1027,9 +1044,10 @@
                             untuk alumni dan siswa SMKN 1 Surabaya.
                         </p>
 
-                        <form class="pk-hero__search" action="{{ route('pusat-karir.katalog-lowongan') }}" method="GET">
-                            <input type="text" name="q" placeholder="Cari perusahaan, posisi, atau tempat magang..."
-                                autocomplete="off">
+                        <form class="pk-hero__search" action="{{ route('pusat-karir.katalog-lowongan') }}"
+                            method="GET">
+                            <input type="text" name="q"
+                                placeholder="Cari perusahaan, posisi, atau tempat magang..." autocomplete="off">
                             <button type="submit" aria-label="Cari">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="2.5" stroke="currentColor">
@@ -1062,14 +1080,20 @@
                     {{-- Berita Terbaru --}}
                     @forelse ($artikels->take(4) as $artikel)
                         <a href="{{ route('pusat-karir.detail-artikel', $artikel->slug) }}" class="block group">
-                            <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow h-full flex flex-col">
+                            <article
+                                class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow h-full flex flex-col">
                                 @if ($artikel->display_image)
-                                    <img src="{{ $artikel->display_image }}" alt="{{ $artikel->title }}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                    <img src="{{ $artikel->display_image }}" alt="{{ $artikel->title }}"
+                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 @endif
                                 <div class="p-5 flex-1 flex flex-col justify-between">
                                     <div>
-                                        <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{{ $artikel->title }}</h3>
-                                        <p class="text-sm text-slate-500 mt-2">{{ $artikel->excerpt ?? Str::limit(strip_tags($artikel->content), 120) }}</p>
+                                        <h3
+                                            class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                                            {{ $artikel->title }}</h3>
+                                        <p class="text-sm text-slate-500 mt-2">
+                                            {{ $artikel->excerpt ?? Str::limit(strip_tags($artikel->content), 120) }}
+                                        </p>
                                     </div>
                                 </div>
                             </article>
@@ -1091,70 +1115,66 @@
 
     </main>
 
-    {{-- ==================== FOOTER ==================== --}}
-    <footer style="background:#023775;color:#fff;padding:48px 0 32px;border-top:1px solid rgba(30,58,138,0.6);">
-        <div style="max-width:1280px;margin:0 auto;padding:0 16px;">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12" id="footer-grid">
+    {{-- ==================== RICH FOOTER (SMEAS IDENTITY) ==================== --}}
+    <footer class="bg-[#023775] text-white pt-12 sm:pt-16 pb-8 border-t border-blue-900/60 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start mb-12">
 
-                {{-- Column 1: Map --}}
-                <div class="md:col-span-4"
-                    style="background:rgba(255,255,255,0.05);padding:8px;border-radius:16px;border:1px solid rgba(255,255,255,0.1);">
+                {{-- Column 1: Map Vector Box / Location Visual --}}
+                <div class="md:col-span-4 bg-white/5 p-2 rounded-2xl border border-white/10 backdrop-blur-xs">
                     <div
-                        style="position:relative;width:100%;height:224px;border-radius:12px;overflow:hidden;background:#e2e8f0;border:1px solid rgba(255,255,255,0.1);">
+                        class="relative w-full h-56 rounded-xl overflow-hidden bg-slate-200 border border-white/10 group">
+                        {{-- Interactive Google Maps Embed with SMEAS location --}}
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.391219278278!2d112.73646547585098!3d-7.309880892698264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb9e5030e4ef%3A0x6b4ef84a73fc5268!2sSMK%20Negeri%201%20Surabaya!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid"
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Lokasi SMK Negeri 1 Surabaya"></iframe>
+                            referrerpolicy="no-referrer-when-downgrade" title="Lokasi SMK Negeri 1 Surabaya"
+                            class="w-full h-full filter saturate-90 contrast-105 group-hover:saturate-100 transition-all duration-300">
+                        </iframe>
                     </div>
-                    <div
-                        style="padding:10px 8px 4px;display:flex;align-items:center;justify-content:space-between;font-size:0.75rem;color:rgba(191,219,254,0.8);">
-                        <span style="display:inline-flex;align-items:center;gap:6px;font-weight:500;">
-                            <span
-                                style="width:8px;height:8px;border-radius:50%;background:#34d399;display:inline-block;"></span>
+                    <div class="px-2 pt-2.5 pb-1 flex items-center justify-between text-xs text-blue-200/80">
+                        <span class="inline-flex items-center gap-1.5 font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                             Jl. Smea No. 4, Wonokromo, Surabaya
                         </span>
                         <a href="https://maps.google.com/?q=SMK+Negeri+1+Surabaya" target="_blank"
-                            rel="noopener noreferrer" style="color:#fbbf24;text-decoration:none;font-weight:700;">
+                            rel="noopener noreferrer" class="text-amber-400 hover:underline font-bold">
                             Buka Peta &rarr;
                         </a>
                     </div>
                 </div>
 
                 {{-- Column 2: Tentang Kami --}}
-                <div class="md:col-span-5" style="font-size:0.875rem;line-height:1.7;color:rgba(191,219,254,0.9);">
-                    <h3
-                        style="font-size:1.5rem;font-weight:800;color:#fbbf24;margin-bottom:16px;letter-spacing:-0.02em;">
+                <div class="md:col-span-5 text-sm leading-relaxed text-blue-100/90">
+                    <h3 class="text-2xl font-extrabold text-amber-400 mb-4 tracking-tight">
                         Tentang Kami
                     </h3>
-                    <p style="margin-bottom:16px;text-align:justify;">
+                    <p class="mb-4 text-justify">
                         Sekolah Kejuruan di Surabaya, Jawa Timur yang berlokasi di Jl. Smea No. 4, Wonokromo Surabaya,
                         SMK Negeri 1 Surabaya bertekad mencapai perbaikan yang berkesinambungan berdasarkan sistem
                         manajemen mutu ISO 9001:2008.
                     </p>
-                    <div style="font-size:0.75rem;color:rgba(191,219,254,0.9);margin-bottom:20px;">
-                        <p style="margin-bottom:6px;"><strong style="color:#fff;">Telp:</strong> 031-8292038</p>
-                        <p style="margin-bottom:6px;"><strong style="color:#fff;">FAX:</strong> 031-8292039</p>
-                        <p><strong style="color:#fff;">Email:</strong> <a href="mailto:info@smkn1-sby.sch.id"
-                                style="color:#fcd34d;text-decoration:none;">info@smkn1-sby.sch.id</a></p>
+                    <div class="space-y-1.5 text-xs text-blue-200/90 mb-5">
+                        <p><strong class="text-white">Telp:</strong> 031-8292038</p>
+                        <p><strong class="text-white">FAX:</strong> 031-8292039</p>
+                        <p><strong class="text-white">Email:</strong> <a href="mailto:info@smkn1-sby.sch.id"
+                                class="text-amber-300 hover:underline">info@smkn1-sby.sch.id</a></p>
                     </div>
 
                     {{-- Social Media Icons --}}
-                    <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="flex items-center gap-3">
                         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                            aria-label="Instagram"
-                            style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:all 0.3s;"
-                            onmouseover="this.style.background='#fbbf24';this.style.color='#0f172a'"
-                            onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.color='#fff'">
-                            <svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24">
+                            aria-label="Instagram SMKN 1 Surabaya"
+                            class="w-9 h-9 rounded-lg bg-white/10 hover:bg-amber-400 hover:text-slate-950 transition-all flex items-center justify-center text-white">
+                            <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                             </svg>
                         </a>
-                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
-                            style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:all 0.3s;"
-                            onmouseover="this.style.background='#fbbf24';this.style.color='#0f172a'"
-                            onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.color='#fff'">
-                            <svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24">
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
+                            aria-label="YouTube SMKN 1 Surabaya"
+                            class="w-9 h-9 rounded-lg bg-white/10 hover:bg-amber-400 hover:text-slate-950 transition-all flex items-center justify-center text-white">
+                            <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                             </svg>
@@ -1162,35 +1182,28 @@
                     </div>
                 </div>
 
-                {{-- Column 3: Jelajahi Smeas --}}
-                <div class="md:col-span-3 border-l-2 border-amber-400 pl-6">
-                    <h3
-                        style="font-size:1.5rem;font-weight:800;color:#fbbf24;margin-bottom:16px;letter-spacing:-0.02em;">
+                {{-- Column 3: Jelajahi Smeas with Gold Vertical Accent Border --}}
+                <div class="md:col-span-3 border-l-2 border-amber-400 pl-6 sm:pl-8 py-1">
+                    <h3 class="text-2xl font-extrabold text-amber-400 mb-4 tracking-tight">
                         Jelajahi Smeas
                     </h3>
-                    <ul style="list-style:none;padding:0;margin:0;">
-                        <li style="margin-bottom:12px;">
+                    <ul class="space-y-3 text-sm font-semibold text-blue-100">
+                        <li>
                             <a href="{{ route('pusat-karir.index') }}"
-                                style="display:inline-flex;align-items:center;gap:8px;font-size:0.875rem;font-weight:600;color:rgba(219,234,254,1);text-decoration:none;transition:color 0.3s;"
-                                onmouseover="this.style.color='#fbbf24'"
-                                onmouseout="this.style.color='rgba(219,234,254,1)'">
-                                <span style="color:#fbbf24;">&bull;</span> Pusat Karir
+                                class="hover:text-amber-400 transition-colors inline-flex items-center gap-2">
+                                <span class="text-amber-400">&bull;</span> Pusat Karir
                             </a>
                         </li>
-                        <li style="margin-bottom:12px;">
+                        <li>
                             <a href="{{ route('blud.index') }}"
-                                style="display:inline-flex;align-items:center;gap:8px;font-size:0.875rem;font-weight:600;color:rgba(219,234,254,1);text-decoration:none;transition:color 0.3s;"
-                                onmouseover="this.style.color='#fbbf24'"
-                                onmouseout="this.style.color='rgba(219,234,254,1)'">
-                                <span style="color:#fbbf24;">&bull;</span> BLUD
+                                class="hover:text-amber-400 transition-colors inline-flex items-center gap-2">
+                                <span class="text-amber-400">&bull;</span> BLUD
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('spmb.index') }}"
-                                style="display:inline-flex;align-items:center;gap:8px;font-size:0.875rem;font-weight:600;color:rgba(219,234,254,1);text-decoration:none;transition:color 0.3s;"
-                                onmouseover="this.style.color='#fbbf24'"
-                                onmouseout="this.style.color='rgba(219,234,254,1)'">
-                                <span style="color:#fbbf24;">&bull;</span> PPDB / SPMB
+                                class="hover:text-amber-400 transition-colors inline-flex items-center gap-2">
+                                <span class="text-amber-400">&bull;</span> PPDB / SPMB
                             </a>
                         </li>
                     </ul>
@@ -1198,13 +1211,13 @@
 
             </div>
 
-            {{-- Bottom Copyright --}}
-            <div
-                style="padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);text-align:center;font-size:0.75rem;color:rgba(191,219,254,0.7);font-weight:500;">
+            {{-- Bottom Copyright Strip --}}
+            <div class="pt-8 border-t border-white/10 text-center text-xs text-blue-200/70 font-medium">
                 &copy;{{ date('Y') }} | SMKN 1 Surabaya
             </div>
         </div>
     </footer>
+
 
     {{-- ==================== SCRIPTS ==================== --}}
     <script>

@@ -27,7 +27,7 @@ class CalonSiswaController extends Controller
         }
 
         if ($request->filled('search')) {
-            $search = $request->query('search');
+            $search = like_escape($request->query('search'));
             $query->where(function ($q) use ($search) {
                 $q->where('nama_lengkap', 'like', "%{$search}%")
                     ->orWhere('nisn', 'like', "%{$search}%")

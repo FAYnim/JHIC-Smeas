@@ -22,7 +22,7 @@ class TracerController extends Controller
         // Data Alumni
         $alumniQuery = Alumni::query()->latest();
         if ($request->filled('q_alumni')) {
-            $q = $request->string('q_alumni')->toString();
+            $q = like_escape($request->string('q_alumni')->toString());
             $alumniQuery->where(function ($builder) use ($q) {
                 $builder->where('nama', 'like', "%{$q}%")
                     ->orWhere('nisn', 'like', "%{$q}%")
@@ -37,7 +37,7 @@ class TracerController extends Controller
         // Data Kuesioner
         $kuesionerQuery = KuesionerTracer::query()->latest();
         if ($request->filled('q_kuesioner')) {
-            $qk = $request->string('q_kuesioner')->toString();
+            $qk = like_escape($request->string('q_kuesioner')->toString());
             $kuesionerQuery->where(function ($builder) use ($qk) {
                 $builder->where('nama', 'like', "%{$qk}%")
                     ->orWhere('nisn', 'like', "%{$qk}%")

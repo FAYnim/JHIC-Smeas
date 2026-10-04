@@ -18,7 +18,7 @@ class PengumumanController extends Controller
         $query = Pengumuman::query()->latest();
 
         if ($request->filled('search')) {
-            $query->where('judul', 'like', "%{$request->query('search')}%");
+            $query->where('judul', 'like', '%'.like_escape($request->query('search')).'%');
         }
 
         $pengumumans = $query->paginate(15)->withQueryString();

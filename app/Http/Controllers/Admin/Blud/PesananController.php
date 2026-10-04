@@ -15,7 +15,7 @@ class PesananController extends Controller
     public function index(Request $request): View
     {
         $status = $request->query('status');
-        $search = trim((string) $request->query('q', ''));
+        $search = like_escape(trim((string) $request->query('q', '')));
 
         $pesanans = ProdukBludPenawaran::with('produk')
             ->when(

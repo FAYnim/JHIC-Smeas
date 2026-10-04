@@ -177,7 +177,7 @@
     </style>
 </head>
 
-<body class="antialiased">
+<body class="antialiased flex flex-col min-h-screen">
     @include('partials.navbar', [
         'activePage'    => '',
         'spmbClickable' => false,
@@ -212,6 +212,8 @@
             </form>
         </section>
     </main>
+
+    @include('partials.footer')
 
     <!-- Mobile Menu Toggle Script -->
     <script>

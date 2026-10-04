@@ -270,26 +270,15 @@
         .btn-batal:hover {
             background: #f8fafc;
         }
-
-        /* Footer */
-        .site-footer {
-            background: #1d4ed8;
-            color: #ffffff;
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-top: 4rem;
-        }
     </style>
 </head>
 
-<body>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
 
     @include('partials.navbar', ['activePage' => 'pusat-karir'])
 
     <!-- Main Container -->
-    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1">
 
         <!-- Breadcrumbs -->
         <nav class="flex items-center text-xs gap-1.5 mb-4 flex-wrap" aria-label="Breadcrumb">
@@ -452,11 +441,8 @@
     </main>
 
     <!-- Footer Bar -->
-    <footer class="site-footer">
-        Dibuat oleh Chicken Noodles Team
-    </footer>
-
-    <!-- Interactive JS for Verification Simulation -->
+    @include('partials.footer')
+<!-- Interactive JS for Verification Simulation -->
     <script>
         const nisnInput = document.getElementById('nisn');
         const verifiedBox = document.getElementById('verified-box');

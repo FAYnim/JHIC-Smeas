@@ -1273,17 +1273,6 @@
             cursor: pointer;
         }
 
-        /* ===== Footer ===== */
-        .site-footer {
-            background: #1d4ed8;
-            color: #ffffff;
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-top: 3rem;
-        }
-
         /* ===== Responsive ===== */
         @media (max-width: 767px) {
             .detail-layout {
@@ -1340,12 +1329,12 @@
     </style>
 </head>
 
-<body>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
 
     @include('partials.navbar', ['activePage' => 'pusat-karir'])
 
     <!-- ========== Main Content ========== -->
-    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1">
 
         <!-- Breadcrumbs -->
         <nav class="flex items-center text-xs gap-1.5 mb-4 flex-wrap" aria-label="Breadcrumb">
@@ -1857,11 +1846,8 @@
     </main>
 
     <!-- Footer Bar -->
-    <footer class="site-footer">
-        Dibuat dengan <span style="color:#ef4444;">❤️</span> oleh Chicken Noodles Team
-    </footer>
-
-    <!-- ===== Scripts ===== -->
+    @include('partials.footer')
+<!-- ===== Scripts ===== -->
     <script>
         // Tab switching
         const tabBtns = document.querySelectorAll('.section-tab');

@@ -17,8 +17,9 @@ class FaqController extends Controller
         $query = Faq::query()->orderBy('urutan');
 
         if ($request->filled('search')) {
-            $query->where('pertanyaan', 'like', "%{$request->query('search')}%")
-                ->orWhere('jawaban', 'like', "%{$request->query('search')}%");
+            $search = like_escape($request->query('search'));
+            $query->where('pertanyaan', 'like', "%{$search}%")
+                ->orWhere('jawaban', 'like', "%{$search}%");
         }
 
         $faqs = $query->paginate(15)->withQueryString();

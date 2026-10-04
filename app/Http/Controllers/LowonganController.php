@@ -233,7 +233,7 @@ class LowonganController extends Controller
         $query = Lowongan::where('jenis', 'lowongan');
 
         if ($request->filled('q')) {
-            $q = $request->string('q')->toString();
+            $q = like_escape($request->string('q')->toString());
             $query->where(function ($builder) use ($q) {
                 $builder->where('title', 'like', "%{$q}%")
                     ->orWhere('company_name', 'like', "%{$q}%");
@@ -321,7 +321,7 @@ class LowonganController extends Controller
         $query = Lowongan::where('jenis', 'magang');
 
         if ($request->filled('q')) {
-            $q = $request->string('q')->toString();
+            $q = like_escape($request->string('q')->toString());
             $query->where(function ($builder) use ($q) {
                 $builder->where('title', 'like', "%{$q}%")
                     ->orWhere('company_name', 'like', "%{$q}%");
@@ -332,7 +332,7 @@ class LowonganController extends Controller
         if (is_array($selectedJurusan)) {
             $query->where(function ($builder) use ($selectedJurusan) {
                 foreach ($selectedJurusan as $j) {
-                    $builder->orWhere('jurusan', 'like', '%'.$j.'%');
+                    $builder->orWhere('jurusan', 'like', '%'.like_escape($j).'%');
                 }
             });
         }
@@ -340,7 +340,7 @@ class LowonganController extends Controller
         $skema = $request->input('skema');
         if ($skema) {
             $query->where(function ($builder) use ($skema) {
-                $builder->where('metode_kerja', 'like', '%'.$skema.'%')
+                $builder->where('metode_kerja', 'like', '%'.like_escape($skema).'%')
                     ->orWhere('metode_kerja', 'like', '%Hybrid%');
                 if (str_contains(strtolower($skema), 'on-site')) {
                     $builder->orWhere('metode_kerja', 'like', '%On-site%');
@@ -350,14 +350,14 @@ class LowonganController extends Controller
 
         $durasi = $request->input('durasi');
         if ($durasi) {
-            $query->where('durasi_pelaksanaan', 'like', '%'.Str::before($durasi, ' ').'%');
+            $query->where('durasi_pelaksanaan', 'like', '%'.like_escape(Str::before($durasi, ' ')).'%');
         }
 
         $selectedFasilitas = $request->input('fasilitas');
         if (is_array($selectedFasilitas)) {
             $query->where(function ($builder) use ($selectedFasilitas) {
                 foreach ($selectedFasilitas as $f) {
-                    $builder->orWhere('benefits', 'like', '%'.$f.'%');
+                    $builder->orWhere('benefits', 'like', '%'.like_escape($f).'%');
                 }
             });
         }
@@ -392,7 +392,7 @@ class LowonganController extends Controller
         $query = MitraPerusahaan::query();
 
         if ($request->filled('q')) {
-            $q = $request->string('q')->toString();
+            $q = like_escape($request->string('q')->toString());
             $query->where(function ($builder) use ($q) {
                 $builder->where('name', 'like', "%{$q}%")
                     ->orWhere('city', 'like', "%{$q}%");
@@ -406,7 +406,7 @@ class LowonganController extends Controller
 
         $program = $request->input('program');
         if ($program) {
-            $query->where('programs', 'like', '%'.$program.'%');
+            $query->where('programs', 'like', '%'.like_escape($program).'%');
         }
 
         $mitras = $query->latest()->paginate(6)->withQueryString();

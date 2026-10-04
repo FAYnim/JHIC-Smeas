@@ -21,7 +21,7 @@ class MitraController extends Controller
         $query = MitraPerusahaan::query()->latest();
 
         if ($request->filled('q')) {
-            $q = $request->string('q')->toString();
+            $q = like_escape($request->string('q')->toString());
             $query->where(function ($builder) use ($q) {
                 $builder->where('name', 'like', "%{$q}%")
                     ->orWhere('sector', 'like', "%{$q}%")

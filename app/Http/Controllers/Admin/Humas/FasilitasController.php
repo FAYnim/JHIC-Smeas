@@ -24,7 +24,7 @@ class FasilitasController extends Controller
         }
 
         if ($request->filled('q')) {
-            $q = $request->string('q')->toString();
+            $q = like_escape($request->string('q')->toString());
             $query->where(function ($builder) use ($q) {
                 $builder->where('nama', 'like', "%{$q}%")
                     ->orWhere('deskripsi', 'like', "%{$q}%");

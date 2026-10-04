@@ -16,7 +16,7 @@ class BludController extends Controller
             ->orderByDesc('created_at');
 
         if ($request->filled('q')) {
-            $q = $request->string('q')->toString();
+            $q = like_escape($request->string('q')->toString());
             $query->where(fn ($b) => $b->where('title', 'like', "%{$q}%")
                 ->orWhere('jurusan_nama', 'like', "%{$q}%")
                 ->orWhere('deskripsi', 'like', "%{$q}%"));

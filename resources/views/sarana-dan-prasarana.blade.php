@@ -82,7 +82,7 @@
 
     <main class="flex-grow">
         {{-- HERO --}}
-        <section class="relative bg-gradient-to-br from-[#024089] via-[#0452b0] to-[#013572] text-white pt-14 pb-28 md:pt-20 md:pb-36 overflow-hidden hero-banner-pattern">
+        <section class="relative bg-gradient-to-br from-[#024089] via-[#0452b0] to-[#013572] text-white pt-14 pb-14 md:pt-20 md:pb-20 overflow-hidden hero-banner-pattern">
             <div class="absolute inset-0 grid-pattern-overlay pointer-events-none"></div>
             <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-amber-400/10 rounded-full blur-2xl pointer-events-none"></div>
@@ -101,7 +101,7 @@
         </section>
 
         {{-- CONTENT --}}
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 md:-mt-20 z-10 pb-20">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-14 pb-20">
 
             {{-- Fasilitas Pembelajaran --}}
             <div class="flex items-center gap-4 mb-8">

@@ -22,7 +22,7 @@ class AdminMenu
             'label' => 'Dashboard',
             'route' => 'admin.dashboard',
             'icon' => 'layout-grid',
-            'roles' => [User::ROLE_ADMIN, User::ROLE_BKK, User::ROLE_HUMAS, User::ROLE_SPMB],
+            'roles' => [User::ROLE_ADMIN, User::ROLE_BKK, User::ROLE_HUMAS, User::ROLE_SPMB, User::ROLE_BLUD],
         ],
         [
             'group' => 'Umum',
@@ -124,17 +124,24 @@ class AdminMenu
         ],
         [
             'group' => 'BLUD',
+            'label' => 'Pesanan BLUD',
+            'route' => 'admin.pesanan-blud.index',
+            'icon' => 'shopping-cart',
+            'roles' => [User::ROLE_ADMIN, User::ROLE_BLUD],
+        ],
+        [
+            'group' => 'BLUD',
             'label' => 'Produk BLUD',
             'route' => 'admin.produk-blud.index',
             'icon' => 'shopping-bag',
-            'roles' => [User::ROLE_ADMIN],
+            'roles' => [User::ROLE_ADMIN, User::ROLE_BLUD],
         ],
         [
             'group' => 'BLUD',
             'label' => 'Moderasi BLUD',
             'route' => 'admin.moderasi-blud.index',
             'icon' => 'flag',
-            'roles' => [User::ROLE_ADMIN],
+            'roles' => [User::ROLE_ADMIN, User::ROLE_BLUD],
         ],
         [
             'group' => 'Sistem',

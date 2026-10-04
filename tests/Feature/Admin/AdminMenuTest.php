@@ -13,7 +13,7 @@ class AdminMenuTest extends TestCase
 
     public function test_every_role_sees_the_dashboard_item(): void
     {
-        foreach ([User::ROLE_ADMIN, User::ROLE_BKK, User::ROLE_HUMAS, User::ROLE_SPMB] as $role) {
+        foreach ([User::ROLE_ADMIN, User::ROLE_BKK, User::ROLE_HUMAS, User::ROLE_SPMB, User::ROLE_BLUD] as $role) {
             $items = AdminMenu::itemsFor(User::factory()->create(['role' => $role]));
 
             $this->assertSame('admin.dashboard', $items[0]['route'], "Role {$role} harus punya dashboard.");

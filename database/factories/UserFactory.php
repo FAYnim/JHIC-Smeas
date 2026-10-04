@@ -78,4 +78,11 @@ class UserFactory extends Factory
             'role' => User::ROLE_SPMB,
         ]);
     }
+
+    public function blud(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => User::ROLE_BLUD,
+        ]);
+    }
 }

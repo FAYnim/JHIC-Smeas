@@ -5,7 +5,6 @@ namespace Tests\Feature\Admin\Blud;
 use App\Models\ProdukBlud;
 use App\Models\ProdukBludKomentar;
 use App\Models\ProdukBludLaporkan;
-use App\Models\ProdukBludPenawaran;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -26,7 +25,7 @@ class ModerasiAdminTest extends TestCase
         $this->spmbUser = User::factory()->create(['role' => User::ROLE_SPMB]);
     }
 
-    public function test_only_admin_can_access_moderasi_blud(): void
+    public function test_only_blud_staff_and_admin_can_access_moderasi_blud(): void
     {
         $responseGuest = $this->get(route('admin.moderasi-blud.index'));
         $responseGuest->assertRedirect(route('login'));
@@ -64,33 +63,6 @@ class ModerasiAdminTest extends TestCase
         $this->assertDatabaseMissing('produk_blud_komentars', ['id' => $komentar->id]);
     }
 
-    public function test_admin_can_view_and_delete_penawaran(): void
-    {
-        $produk = ProdukBlud::create([
-            'slug' => 'produk-sample-2',
-            'tipe' => ProdukBlud::TIPE_KUSTOM,
-            'title' => 'Sample Kustom 2',
-            'jurusan_nama' => 'DKV',
-            'jurusan_slug' => 'dkv',
-            'deskripsi' => 'Deskripsi',
-        ]);
-
-        $penawaran = ProdukBludPenawaran::create([
-            'produk_blud_id' => $produk->id,
-            'nama' => 'Budi Client',
-            'kontak' => '0812345678',
-            'pesan' => 'Saya ingin pesan 50 kaos',
-        ]);
-
-        $response = $this->actingAs($this->adminUser)->get(route('admin.moderasi-blud.index', ['tab' => 'penawaran']));
-        $response->assertOk();
-        $response->assertSee('Saya ingin pesan 50 kaos');
-
-        $deleteResponse = $this->actingAs($this->adminUser)->delete(route('admin.moderasi-blud.destroy-penawaran', $penawaran));
-        $deleteResponse->assertRedirect();
-        $this->assertDatabaseMissing('produk_blud_penawarans', ['id' => $penawaran->id]);
-    }
-
     public function test_admin_can_view_and_delete_laporan(): void
     {
         $produk = ProdukBlud::create([
@@ -115,5 +87,88 @@ class ModerasiAdminTest extends TestCase
         $deleteResponse = $this->actingAs($this->adminUser)->delete(route('admin.moderasi-blud.destroy-laporan', $laporan));
         $deleteResponse->assertRedirect();
         $this->assertDatabaseMissing('produk_blud_laporans', ['id' => $laporan->id]);
+    }
+
+    public function test_blud_user_can_mark_laporan_as_handled_with_note(): void
+    {
+        $blud = User::factory()->blud()->create();
+        $produk = ProdukBlud::create([
+            'slug' => 'produk-sample-4',
+            'tipe' => ProdukBlud::TIPE_SHOWCASE,
+            'title' => 'Sample Produk 4',
+            'jurusan_nama' => 'AK',
+            'jurusan_slug' => 'ak',
+            'deskripsi' => 'Deskripsi',
+        ]);
+        $laporan = ProdukBludLaporkan::create([
+            'produk_blud_id' => $produk->id,
+            'kategori' => 'Spam',
+            'deskripsi' => 'x',
+        ]);
+
+        $this->actingAs($blud)
+            ->patch(route('admin.moderasi-blud.tindak-lanjut-laporan', $laporan), [
+                'catatan_internal' => 'Sudah diperiksa, produk aman.',
+            ])
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('produk_blud_laporans', [
+            'id' => $laporan->id,
+            'status' => 'ditindaklanjuti',
+            'catatan_internal' => 'Sudah diperiksa, produk aman.',
+            'ditangani_oleh' => $blud->id,
+        ]);
+        $this->assertNotNull($laporan->fresh()->ditangani_at);
+    }
+
+    public function test_blud_user_can_mark_komentar_as_handled(): void
+    {
+        $blud = User::factory()->blud()->create();
+        $produk = ProdukBlud::create([
+            'slug' => 'produk-sample-5',
+            'tipe' => ProdukBlud::TIPE_SHOWCASE,
+            'title' => 'Sample Produk 5',
+            'jurusan_nama' => 'AK',
+            'jurusan_slug' => 'ak',
+            'deskripsi' => 'Deskripsi',
+        ]);
+        $komentar = ProdukBludKomentar::create([
+            'produk_blud_id' => $produk->id,
+            'nama' => 'Pengunjung',
+            'komentar' => 'Bagus',
+        ]);
+
+        $this->actingAs($blud)
+            ->patch(route('admin.moderasi-blud.tindak-lanjut-komentar', $komentar))
+            ->assertRedirect();
+
+        $this->assertSame('ditindaklanjuti', $komentar->fresh()->status);
+    }
+
+    public function test_unhandled_laporan_is_listed_first(): void
+    {
+        $produk = ProdukBlud::create([
+            'slug' => 'produk-sample-6',
+            'tipe' => ProdukBlud::TIPE_SHOWCASE,
+            'title' => 'Sample Produk 6',
+            'jurusan_nama' => 'AK',
+            'jurusan_slug' => 'ak',
+            'deskripsi' => 'Deskripsi',
+        ]);
+        ProdukBludLaporkan::create([
+            'produk_blud_id' => $produk->id,
+            'kategori' => 'Laporan Lama Selesai',
+            'deskripsi' => 'x',
+            'status' => 'ditindaklanjuti',
+        ]);
+        ProdukBludLaporkan::create([
+            'produk_blud_id' => $produk->id,
+            'kategori' => 'Laporan Baru Belum',
+            'deskripsi' => 'x',
+        ]);
+
+        $this->actingAs($this->adminUser)
+            ->get(route('admin.moderasi-blud.index', ['tab' => 'laporan']))
+            ->assertSeeInOrder(['Laporan Baru Belum', 'Laporan Lama Selesai']);
     }
 }

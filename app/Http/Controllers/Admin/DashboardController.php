@@ -10,6 +10,9 @@ use App\Models\Lowongan;
 use App\Models\MagangApplication;
 use App\Models\MitraPerusahaan;
 use App\Models\ProdukBlud;
+use App\Models\ProdukBludKomentar;
+use App\Models\ProdukBludLaporkan;
+use App\Models\ProdukBludPenawaran;
 use App\Models\User;
 use App\Models\Webinar;
 use Illuminate\Contracts\View\View;
@@ -31,6 +34,12 @@ class DashboardController extends Controller
                 : collect(),
             'recentCalonSiswa' => $this->canSeeSpmb($user)
                 ? CalonSiswa::query()->latest()->limit(5)->get()
+                : collect(),
+            'recentPesanans' => $this->canSeeBlud($user)
+                ? ProdukBludPenawaran::with('produk')->where('status', ProdukBludPenawaran::STATUS_BARU)->latest()->limit(5)->get()
+                : collect(),
+            'pendingLaporans' => $this->canSeeBlud($user)
+                ? ProdukBludLaporkan::with('produk')->where('status', ProdukBludLaporkan::STATUS_BARU)->latest()->limit(5)->get()
                 : collect(),
         ]);
     }
@@ -99,18 +108,39 @@ class DashboardController extends Controller
             ];
         }
 
+        if ($this->canSeeBlud($user)) {
+            $stats[] = [
+                'label' => 'Pesanan Baru',
+                'value' => ProdukBludPenawaran::query()->where('status', ProdukBludPenawaran::STATUS_BARU)->count(),
+                'icon' => 'shopping-cart',
+                'tone' => 'amber',
+            ];
+            $stats[] = [
+                'label' => 'Laporan Belum Ditangani',
+                'value' => ProdukBludLaporkan::query()->where('status', ProdukBludLaporkan::STATUS_BARU)->count(),
+                'icon' => 'flag',
+                'tone' => 'violet',
+            ];
+            $stats[] = [
+                'label' => 'Komentar Baru',
+                'value' => ProdukBludKomentar::query()->where('status', ProdukBludKomentar::STATUS_BARU)->count(),
+                'icon' => 'message-square',
+                'tone' => 'emerald',
+            ];
+            $stats[] = [
+                'label' => 'Total Produk',
+                'value' => ProdukBlud::query()->count(),
+                'icon' => 'shopping-bag',
+                'tone' => 'blue',
+            ];
+        }
+
         if ($user->isAdmin()) {
             $stats[] = [
                 'label' => 'Total Pengguna',
                 'value' => User::query()->count(),
                 'icon' => 'shield',
                 'tone' => 'violet',
-            ];
-            $stats[] = [
-                'label' => 'Produk BLUD',
-                'value' => ProdukBlud::query()->count(),
-                'icon' => 'shopping-bag',
-                'tone' => 'blue',
             ];
         }
 
@@ -130,5 +160,10 @@ class DashboardController extends Controller
     protected function canSeeSpmb(User $user): bool
     {
         return $user->hasRole([User::ROLE_SPMB]);
+    }
+
+    protected function canSeeBlud(User $user): bool
+    {
+        return $user->hasRole([User::ROLE_BLUD]);
     }
 }

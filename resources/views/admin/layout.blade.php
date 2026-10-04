@@ -215,6 +215,9 @@
                                 @case('shopping-bag')
                                     <x-lucide-shopping-bag />
                                 @break
+                                @case('shopping-cart')
+                                    <x-lucide-shopping-cart />
+                                @break
                                 @case('flag')
                                     <x-lucide-flag />
                                 @break

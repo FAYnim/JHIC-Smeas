@@ -19,6 +19,7 @@ class AdminUserSeederTest extends TestCase
         $this->assertDatabaseHas('users', ['email' => 'bkk@smkn1.surabaya.sch.id', 'role' => 'bkk']);
         $this->assertDatabaseHas('users', ['email' => 'humas@smkn1.surabaya.sch.id', 'role' => 'humas']);
         $this->assertDatabaseHas('users', ['email' => 'spmb@smkn1.surabaya.sch.id', 'role' => 'spmb']);
+        $this->assertDatabaseHas('users', ['email' => 'blud@smkn1.surabaya.sch.id', 'role' => 'blud']);
     }
 
     public function test_seeder_is_idempotent(): void
@@ -26,7 +27,7 @@ class AdminUserSeederTest extends TestCase
         $this->seed(AdminUserSeeder::class);
         $this->seed(AdminUserSeeder::class);
 
-        $this->assertSame(4, User::query()->count());
+        $this->assertSame(5, User::query()->count());
     }
 
     public function test_seeded_account_can_authenticate(): void

@@ -36,6 +36,7 @@ class UserController extends Controller
             User::ROLE_BKK => 'BKK (Pusat Karir)',
             User::ROLE_HUMAS => 'Humas (Profil Sekolah)',
             User::ROLE_SPMB => 'Panitia SPMB',
+            User::ROLE_BLUD => 'Staf BLUD',
         ];
 
         return view('admin.users.index', compact('users', 'roles'));
@@ -48,6 +49,7 @@ class UserController extends Controller
             User::ROLE_BKK => 'BKK (Pusat Karir)',
             User::ROLE_HUMAS => 'Humas (Profil Sekolah)',
             User::ROLE_SPMB => 'Panitia SPMB',
+            User::ROLE_BLUD => 'Staf BLUD',
         ];
 
         return view('admin.users.create', compact('roles'));
@@ -71,6 +73,7 @@ class UserController extends Controller
             User::ROLE_BKK => 'BKK (Pusat Karir)',
             User::ROLE_HUMAS => 'Humas (Profil Sekolah)',
             User::ROLE_SPMB => 'Panitia SPMB',
+            User::ROLE_BLUD => 'Staf BLUD',
         ];
 
         return view('admin.users.edit', compact('user', 'roles'));

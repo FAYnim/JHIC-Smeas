@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\MajorFinder\MajorAnalysisService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class MajorFinderController extends Controller
 {
+    public function __construct(
+        protected MajorAnalysisService $analysisService
+    ) {}
+
     public function index(): View
     {
         $questions = $this->getQuestions();
@@ -27,15 +32,16 @@ class MajorFinderController extends Controller
             'highlights' => ['nullable', 'array'],
         ]);
 
-        $nama = ! empty($validated['nama']) ? trim($validated['nama']) : 'Sobat SMEAS';
-        $topName = $validated['top_major']['name'];
-        $topScore = $validated['top_major']['score'];
-
-        $fallbackText = "Halo {$nama}! Berdasarkan analisis minat dan gaya berpikirmu, kamu memiliki potensi luar biasa pada bidang {$topName} dengan tingkat kecocokan mencapai {$topScore}%. Kemampuan logika, ketelitian, dan motivasimu sangat sejalan dengan kurikulum vokasi unggulan di SMKN 1 Surabaya. Jangan ragu untuk memperdalam potensimu dan jadilah profesional muda berprestasi bersama kami!";
+        $analysis = $this->analysisService->generate(
+            nama: $validated['nama'] ?? '',
+            topMajor: $validated['top_major'],
+            alternatives: $validated['alternatives'] ?? [],
+            highlights: $validated['highlights'] ?? []
+        );
 
         return response()->json([
             'success' => true,
-            'analysis' => $fallbackText,
+            'analysis' => $analysis,
         ]);
     }
 

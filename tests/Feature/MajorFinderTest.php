@@ -47,4 +47,19 @@ class MajorFinderTest extends TestCase
         $this->assertTrue($response->json('success'));
         $this->assertNotEmpty($response->json('analysis'));
     }
+
+    public function test_service_generates_personalized_analysis(): void
+    {
+        $service = app(\App\Services\MajorFinder\MajorAnalysisService::class);
+        $analysis = $service->generate(
+            nama: 'Budi',
+            topMajor: ['name' => 'Rekayasa Perangkat Lunak', 'score' => 95],
+            alternatives: [['name' => 'Teknik Komputer dan Jaringan', 'score' => 80]],
+            highlights: ['coding', 'debugging']
+        );
+
+        $this->assertNotEmpty($analysis);
+        $this->assertStringContainsString('Budi', $analysis);
+        $this->assertStringContainsString('Rekayasa Perangkat Lunak', $analysis);
+    }
 }
